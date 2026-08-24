@@ -1,0 +1,66 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function staffDoc() {
+      return get(/databases/$(database)/documents/staff/$(request.auth.uid));
+    }
+
+    function role() {
+      return staffDoc().data.role;
+    }
+
+    function isActiveStaff() {
+      return signedIn() && staffDoc().data.active == true;
+    }
+
+    function isControl() {
+      return isActiveStaff() && role() == 'control';
+    }
+
+    function isManagement() {
+      return isActiveStaff() && role() == 'management';
+    }
+
+    function isTeacher() {
+      return isActiveStaff() && role() == 'teacher';
+    }
+
+    function teacherHasClass(className) {
+      return isTeacher() && className in staffDoc().data.assignedClasses;
+    }
+
+    match /staff/{uid} {
+      allow read: if isControl() || (isActiveStaff() && request.auth.uid == uid);
+      allow create, update, delete: if isControl();
+    }
+
+    match /students/{id} {
+      allow read: if isControl() || isManagement() ||
+        (isTeacher() && resource.data.class in staffDoc().data.assignedClasses);
+      allow create, update, delete: if isControl() || isManagement();
+    }
+
+    match /results/{id} {
+      allow read: if isControl() || isManagement() ||
+        (isTeacher() && resource.data.class in staffDoc().data.assignedClasses);
+      allow create, update, delete: if isControl() || isManagement() ||
+        (isTeacher() && request.resource.data.class in staffDoc().data.assignedClasses);
+    }
+
+    match /teacherAssignments/{id} {
+      allow read: if isControl() || isManagement() ||
+        (isTeacher() && resource.data.teacherUid == request.auth.uid);
+      allow create, update, delete: if isControl() || isManagement();
+    }
+
+    match /schoolEnquiries/{id} {
+      allow create: if true;
+      allow read, update, delete: if isControl() || isManagement();
+    }
+  }
+}

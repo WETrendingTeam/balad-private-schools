@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BALAD Staff Login</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  min-height:100vh;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f8f6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px
+}
+
+.login-card{
+  width:100%;
+  max-width:430px;
+  background:#fff;
+  border-radius:22px;
+  padding:35px 28px;
+  box-shadow:0 10px 35px rgba(0,0,0,.08)
+}
+
+.logo{
+  text-align:center;
+  margin-bottom:25px
+}
+
+.logo h1{
+  color:#075c46;
+  font-size:27px;
+  margin:0 0 6px
+}
+
+.logo p{
+  color:#666;
+  font-size:14px
+}
+
+h2{
+  color:#222;
+  font-size:27px;
+  margin:0 0 8px
+}
+
+.intro{
+  color:#666;
+  line-height:1.5;
+  margin-bottom:25px
+}
+
+label{
+  display:block;
+  font-size:16px;
+  color:#333;
+  margin-bottom:8px;
+  font-weight:600
+}
+
+input{
+  width:100%;
+  padding:15px;
+  border:1px solid #d9e4df;
+  border-radius:12px;
+  font-size:16px;
+  margin-bottom:20px;
+  outline:none
+}
+
+input:focus{
+  border-color:#075c46
+}
+
+button{
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:12px;
+  background:#e32629;
+  color:#fff;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed
+}
+
+#message{
+  margin-top:18px;
+  padding:12px;
+  border-radius:10px;
+  display:none;
+  font-size:14px;
+  line-height:1.4;
+  text-align:center
+}
+
+.success{
+  display:block!important;
+  background:#e8f7ef;
+  color:#075c46
+}
+
+.error{
+  display:block!important;
+  background:#fdecec;
+  color:#b42323
+}
+
+.footer{
+  text-align:center;
+  margin-top:25px;
+  color:#777;
+  font-size:13px
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-card">
+
+  <div class="logo">
+    <h1>BALAD PRIVATE SCHOOLS</h1>
+    <p>Staff Management System</p>
+  </div>
+
+  <h2>Staff Login</h2>
+
+  <p class="intro">
+    Sign in using the staff access code and password assigned by the school.
+  </p>
+
+  <form id="loginForm">
+
+    <label for="username">Staff Login Code</label>
+    <input
+      id="username"
+      autocomplete="username"
+      placeholder="Enter your staff code"
+      required
+    >
+
+    <label for="password">Password</label>
+    <input
+      id="password"
+      type="password"
+      autocomplete="current-password"
+      placeholder="Enter password"
+      required
+    >
+
+    <button id="loginButton" type="submit">
+      Login
+    </button>
+
+  </form>
+
+  <div id="message"></div>
+
+  <div class="footer">
+    © <span id="year"></span> BALAD Private Schools. All Rights Reserved.
+  </div>
+
+</div>
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =========================================================
+   BALAD FIREBASE
+========================================================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCLU7CdFlCrLxGzRo0Z0PQOQ-6Y91ccj-M",
+  authDomain: "projectb-wetrending-space.firebaseapp.com",
+  projectId: "projectb-wetrending-space",
+  storageBucket: "projectb-wetrending-space.firebasestorage.app",
+  messagingSenderId: "106348539335",
+  appId: "1:106348539335:web:50ec676ce6d424a82c3de2"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const form = document.getElementById("loginForm");
+const codeInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const button = document.getElementById("loginButton");
+const messageBox = document.getElementById("message");
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+function showMessage(text, type) {
+  messageBox.textContent = text;
+  messageBox.className = type || "";
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function login(event) {
+
+  event.preventDefault();
+
+  const loginCode =
+    codeInput.value.trim().toUpperCase();
+
+  const password =
+    passwordInput.value;
+
+  if (!loginCode || !password) {
+    showMessage(
+      "Enter your staff code and password.",
+      "error"
+    );
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Logging in...";
+
+  showMessage(
+    "Checking staff access...",
+    "success"
+  );
+
+  try {
+
+    /*
+     * IMPORTANT:
+     * BALAD staff codes use the internal Firebase
+     * email format:
+     *
+     * BAL002
+     * becomes
+     * bal002@staff.balad.local
+     */
+
+    const email =
+      loginCode.toLowerCase() +
+      "@staff.balad.local";
+
+
+    /* -----------------------------------------------------
+       Firebase login
+    ----------------------------------------------------- */
+
+    const credential =
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+    /* -----------------------------------------------------
+       Get staff profile
+    ----------------------------------------------------- */
+
+    const staffRef =
+      doc(
+        db,
+        "staff",
+        credential.user.uid
+      );
+
+    const staffSnap =
+      await getDoc(staffRef);
+
+
+    if (!staffSnap.exists()) {
+
+      await signOut(auth);
+
+      throw new Error(
+        "Staff profile not found. Contact Control."
+      );
+    }
+
+
+    const profile =
+      staffSnap.data();
+
+
+    /* -----------------------------------------------------
+       Check active status
+    ----------------------------------------------------- */
+
+    if (profile.active !== true) {
+
+      await signOut(auth);
+
+      throw new Error(
+        "This staff account is inactive. Contact Control."
+      );
+    }
+
+
+    /* -----------------------------------------------------
+       Check staff role
+    ----------------------------------------------------- */
+
+    const role =
+      String(
+        profile.role || ""
+      ).toLowerCase();
+
+
+    if (
+      !["teacher","management","other"].includes(role)
+    ) {
+
+      await signOut(auth);
+
+      throw new Error(
+        "This account does not have Staff Dashboard access."
+      );
+    }
+
+
+    /* -----------------------------------------------------
+       Save staff session information
+    ----------------------------------------------------- */
+
+    const token =
+      await credential.user.getIdToken(true);
+
+    sessionStorage.setItem(
+      "baladStaffUid",
+      credential.user.uid
+    );
+
+    sessionStorage.setItem(
+      "baladStaffIdToken",
+      token
+    );
+
+    sessionStorage.setItem(
+      "baladStaffRole",
+      profile.role || ""
+    );
+
+    sessionStorage.setItem(
+      "baladStaffName",
+      profile.name ||
+      profile.loginCode ||
+      loginCode
+    );
+
+    sessionStorage.setItem(
+      "baladStaffLoginCode",
+      profile.loginCode ||
+      loginCode
+    );
+
+    sessionStorage.setItem(
+      "baladStaffVerified",
+      "true"
+    );
+
+
+    /* -----------------------------------------------------
+       Success
+    ----------------------------------------------------- */
+
+    showMessage(
+      "Login successful. Opening your dashboard...",
+      "success"
+    );
+
+    setTimeout(
+      () => {
+        window.location.href =
+          "staff-dashboard.html";
+      },
+      500
+    );
+
+  }
+
+  catch(error) {
+
+    console.error(
+      "BALAD Staff Login Error:",
+      error
+    );
+
+    const firebaseCode =
+      error?.code || "";
+
+    let message =
+      error?.message ||
+      "Unable to sign in.";
+
+
+    if (
+      firebaseCode.includes("invalid-credential") ||
+      firebaseCode.includes("user-not-found") ||
+      firebaseCode.includes("wrong-password")
+    ) {
+
+      message =
+        "Staff code or password is incorrect.";
+    }
+
+    else if (
+      firebaseCode.includes("invalid-email")
+    ) {
+
+      message =
+        "Invalid staff login code.";
+    }
+
+    else if (
+      firebaseCode.includes("user-disabled")
+    ) {
+
+      message =
+        "This Firebase account has been disabled.";
+    }
+
+    else if (
+      firebaseCode.includes("network-request-failed")
+    ) {
+
+      message =
+        "Unable to reach Firebase. Check your internet connection.";
+    }
+
+    else if (
+      error?.name === "TypeError" &&
+      /Failed to fetch/i.test(
+        error?.message || ""
+      )
+    ) {
+
+      message =
+        "Unable to connect to Firebase. Make sure this page is being opened from your hosted BALAD website.";
+    }
+
+
+    showMessage(
+      message,
+      "error"
+    );
+
+    button.disabled = false;
+    button.textContent = "Login";
+  }
+}
+
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+form.addEventListener(
+  "submit",
+  login
+);
+
+
+/*
+ * Also allow Enter from either field.
+ * The form submit handler handles it automatically.
+ */
+
+
+/* =========================================================
+   IMPORTANT:
+   DO NOT AUTO-LOGIN FROM AN EXISTING CONTROL SESSION.
+   
+   We deliberately do NOT use onAuthStateChanged here.
+   
+   Staff must enter their own staff code and password.
+========================================================= */
+
+</script>
+
+</body>
+</html>

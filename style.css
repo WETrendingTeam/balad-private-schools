@@ -2909,3 +2909,233 @@ body.album-open{overflow:hidden;}
   .result-signin-card h2{font-size:24px;}
   .result-signin-btn{width:100%;}
 }
+
+
+/* =========================================================
+   BALAD NAVIGATION FINAL FIX — MOBILE / NARROW SCREENS
+   Uses the existing checkbox menu. No JavaScript required.
+   Breakpoint is intentionally 1100px so the full desktop
+   navigation is never squeezed into a narrow viewport.
+   ========================================================= */
+
+@media (max-width:1100px){
+  header{
+    position:relative;
+    z-index:3000;
+    padding:8px 14px;
+    gap:12px;
+  }
+
+  header .logo{
+    flex:1 1 auto;
+    min-width:0;
+  }
+
+  header .logo img{
+    width:62px;
+    height:62px;
+    flex:0 0 62px;
+  }
+
+  header .school-name{
+    min-width:0;
+  }
+
+  header .school-name h2{
+    font-size:18px;
+    line-height:1.08;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  header .school-name p{
+    font-size:9px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  header .school-name small{
+    font-size:9px;
+  }
+
+  .menu-toggle{
+    position:absolute;
+    width:1px;
+    height:1px;
+    opacity:0;
+    pointer-events:none;
+  }
+
+  .menu-btn{
+    display:flex !important;
+    width:46px;
+    height:46px;
+    min-width:46px;
+    flex:0 0 46px;
+    align-items:center;
+    justify-content:center;
+    margin:0;
+    padding:0;
+    border:0;
+    border-radius:8px;
+    background:transparent;
+    color:var(--green);
+    font-size:31px;
+    line-height:1;
+    cursor:pointer;
+    position:relative;
+    z-index:3201;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .menu-btn .menu-icon-open,
+  .menu-btn .menu-icon-close{
+    pointer-events:none;
+  }
+
+  .menu-btn .menu-icon-close{
+    display:none;
+  }
+
+  .menu-toggle:checked + .menu-btn .menu-icon-open{
+    display:none;
+  }
+
+  .menu-toggle:checked + .menu-btn .menu-icon-close{
+    display:block;
+  }
+
+  header nav#balad-main-nav{
+    display:none !important;
+    position:fixed;
+    inset:0;
+    z-index:3100;
+    width:100%;
+    height:100dvh;
+    margin:0;
+    padding:96px 8% 40px;
+    background:#fff;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    gap:0;
+    overflow-y:auto;
+    box-shadow:none;
+  }
+
+  .menu-toggle:checked ~ nav#balad-main-nav{
+    display:flex !important;
+  }
+
+  header nav#balad-main-nav > a{
+    display:flex;
+    align-items:center;
+    min-height:58px;
+    padding:13px 0;
+    border-bottom:1px solid var(--line);
+    color:#303a36;
+    font-size:18px;
+    font-weight:600;
+    white-space:normal;
+    position:relative;
+    z-index:3102;
+    pointer-events:auto;
+  }
+
+  header nav#balad-main-nav > a:first-child,
+  header nav#balad-main-nav > a.active{
+    color:var(--green);
+  }
+
+  header nav#balad-main-nav > a.active:after,
+  header nav#balad-main-nav > a:hover:after{
+    display:none;
+  }
+
+  /* Academic dropdown inside the mobile menu */
+  header nav#balad-main-nav .academic-nav{
+    width:100%;
+    border-bottom:1px solid var(--line);
+  }
+
+  header nav#balad-main-nav .academic-nav summary{
+    min-height:58px;
+    padding:13px 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color:#303a36;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    list-style:none;
+  }
+
+  header nav#balad-main-nav .academic-nav summary::-webkit-details-marker{
+    display:none;
+  }
+
+  header nav#balad-main-nav .academic-nav summary::after{
+    content:"＋";
+    color:var(--green);
+    font-size:22px;
+    line-height:1;
+  }
+
+  header nav#balad-main-nav .academic-nav[open] summary::after{
+    content:"−";
+  }
+
+  header nav#balad-main-nav .academic-submenu{
+    position:static;
+    width:100%;
+    min-width:0;
+    padding:0 0 6px 16px;
+    background:#f4f8f1;
+    border:0;
+    box-shadow:none;
+  }
+
+  header nav#balad-main-nav .academic-submenu a{
+    display:flex;
+    align-items:center;
+    min-height:48px;
+    padding:10px 12px;
+    border-bottom:1px solid var(--line);
+    color:#3b4842;
+    font-size:16px;
+    font-weight:500;
+    white-space:normal;
+  }
+
+  body:has(.menu-toggle:checked){
+    overflow:hidden;
+  }
+}
+
+@media (max-width:430px){
+  header .school-name h2{
+    font-size:15px;
+  }
+
+  header .school-name p{
+    display:none;
+  }
+
+  header .school-name small{
+    font-size:8px;
+  }
+
+  header nav#balad-main-nav{
+    padding-left:7%;
+    padding-right:7%;
+  }
+
+  header nav#balad-main-nav > a,
+  header nav#balad-main-nav .academic-nav summary{
+    font-size:17px;
+  }
+}
+

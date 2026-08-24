@@ -1,0 +1,2911 @@
+/* BALAD PRIVATE SCHOOLS — V7 FINAL RESPONSIVE DESIGN */
+:root{--green:#086b49;--green-dark:#064c36;--red:#d62828;--red-dark:#b91c1c;--ink:#1e2a26;--muted:#5d6662;--soft:#f4f8f6;--line:#dfe8e4;--white:#fff;--shadow:0 10px 30px rgba(7,65,45,.09);--radius:18px;--max:1240px}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff;line-height:1.55;overflow-x:hidden}a{text-decoration:none;color:inherit}img{display:block;max-width:100%}.container{width:min(94%,var(--max));margin-inline:auto}section{padding:52px 0}.announcement-bar{height:38px;background:var(--green-dark);color:#fff;overflow:hidden;font-size:13px;font-weight:700;display:flex;align-items:center}.announcement-track{white-space:nowrap;animation:marquee 24s linear infinite;padding-left:100%}@keyframes marquee{to{transform:translateX(-100%)}}
+header{position:relative;z-index:50;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 4px 16px rgba(0,0,0,.04);display:flex;align-items:center;justify-content:space-between;padding:12px max(3%,40px);gap:24px}.logo{display:flex;align-items:center;gap:14px;min-width:0}.logo img{width:82px;height:82px;object-fit:contain}.school-name{min-width:0}.school-name h2{font-size:28px;color:var(--green);line-height:1.05;white-space:nowrap}.school-name p{font-size:12px;margin-top:6px;color:#444;white-space:nowrap}.school-name small{display:block;color:var(--red);font-style:italic;margin-top:3px;font-size:12px}nav{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:700;color:#24332d}nav a{padding:10px 0;position:relative}nav a.active,nav a:hover{color:var(--red)}nav a.active:after,nav a:hover:after{content:"";position:absolute;left:0;right:0;bottom:3px;height:2px;background:var(--red)}.menu-btn{display:none;border:0;background:transparent;color:var(--green);font-size:30px;cursor:pointer}
+.hero{width:min(94%,1100px);margin:22px auto 0;padding:0;aspect-ratio:1/0.66;min-height:0;border-radius:20px;overflow:hidden;background:linear-gradient(90deg,rgba(0,73,48,.86) 0%,rgba(0,73,48,.55) 46%,rgba(0,73,48,.14) 100%),url('school.jpg') center/cover no-repeat;box-shadow:var(--shadow);display:flex;align-items:center}.hero-overlay{width:100%;height:100%;display:flex;align-items:center}.hero-content{padding:6%;max-width:620px;color:#fff}.hero-content h4{font-size:18px;letter-spacing:3px;margin-bottom:8px}.hero-content h1{font-size:clamp(38px,5vw,72px);line-height:1.02;margin-bottom:18px}.hero-content .motto{font-size:20px;line-height:1.5;color:#fff;max-width:560px}.hero-buttons{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}.btn{display:inline-flex;justify-content:center;align-items:center;padding:14px 25px;border-radius:40px;background:var(--red);color:#fff;font-weight:800;border:2px solid var(--red)}.btn-secondary{background:transparent;border-color:#fff}.btn:hover{transform:translateY(-2px)}
+.quick-actions{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;padding-top:18px}.action-btn{min-height:62px;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;gap:8px;color:var(--green);font-weight:800;background:#fff}.action-btn:hover{border-color:var(--green)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-top:22px}.stat-box{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);text-align:center;padding:22px 14px;min-height:145px;display:flex;flex-direction:column;align-items:center;justify-content:center}.stat-icon{font-size:28px;margin-bottom:6px}.stat-box h2{color:var(--green);font-size:34px;line-height:1;margin-bottom:8px}.stat-box p{font-weight:700;color:var(--muted);font-size:14px}
+.vision-mission{display:grid;grid-template-columns:1fr 1fr;gap:18px}.vm-card,.choose-card,.announcement-card,.school-card,.contact-item{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.vm-card{padding:26px}.vm-card h3,.choose-card h3,.school-card h3,.announcement-card h3,.contact-item h3{color:var(--green);margin-bottom:8px}.vm-card p,.choose-card p,.school-card p,.announcement-card p,.contact-item p{color:var(--muted);font-size:14px}
+.our-schools{background:var(--soft)}.section-header{text-align:center;margin-bottom:24px}.section-header h2,.why-choose h2,.latest-announcements h2,.gallery-section h2,.contact h2{color:var(--green);font-size:29px;margin-bottom:7px}.section-header p{color:var(--muted);font-size:15px}.schools-container{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}.school-card{padding:22px 16px;min-height:215px}.school-card h3{font-size:18px}.school-card p{font-size:13px}.why-choose{background:#fff}.choose-container{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}.choose-card{padding:22px 16px;min-height:180px}.choose-card h3{font-size:17px}.latest-announcements{background:var(--soft)}.announcement-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.announcement-card{padding:20px;min-height:175px}.announcement-card h3{font-size:17px}.announcement-btn{display:inline-block;color:var(--red);font-weight:800;margin-top:12px;font-size:13px}.gallery-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.gallery-item{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow)}.gallery-item img{width:100%;height:145px;object-fit:cover}.gallery-item p{text-align:center;padding:8px;font-weight:700;color:var(--green);font-size:12px}.gallery-btn{display:block;width:max-content;margin:20px auto 0;background:var(--red);color:#fff;padding:11px 24px;border-radius:30px;font-weight:800}.admissions{padding:45px 0;background:#fbf8ef}.admission-content{width:min(92%,850px);margin:auto;text-align:center;color:var(--green)}.admission-content h2{font-size:30px;margin-bottom:8px;color:var(--green)}.admission-content p{color:var(--muted);margin-bottom:18px}.admission-btn{display:inline-block;background:var(--red);color:#fff;padding:12px 28px;border-radius:30px;font-weight:800}.contact-container{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.contact-item{text-align:center;padding:24px}.contact-item span{font-size:28px}.contact-item h3{margin-top:5px}
+footer{background:var(--green-dark);color:#fff;padding:34px max(3%,40px) 14px}.footer-inner{width:min(94%,var(--max));margin:auto;display:grid;grid-template-columns:2fr 1fr 1.5fr;gap:35px}.footer-inner>div{display:flex;flex-direction:column;gap:6px}.footer-inner strong{font-size:17px;color:#fff}.footer-inner span,.footer-inner a{color:rgba(255,255,255,.82);font-size:13px}.footer-inner em{color:#fff;font-size:12px}.footer-bottom{width:min(94%,var(--max));margin:25px auto 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.15);text-align:center;color:rgba(255,255,255,.7);font-size:12px}
+.page-hero{margin:0;background:linear-gradient(120deg,var(--green-dark),var(--green));padding:55px 20px;text-align:center;color:#fff}.page-overlay{max-width:900px;margin:auto}.page-overlay h1{font-size:clamp(32px,4vw,52px);margin-bottom:8px}.page-overlay p{color:#fff;max-width:780px;margin:auto}.team-navigation{text-align:center}.team-buttons{display:flex;justify-content:center;gap:12px;margin-top:16px}.team-btn{padding:10px 22px;border-radius:30px;background:var(--green);color:#fff;font-weight:800}.team-btn:not(.active){background:#fff;color:var(--green);border:1px solid var(--green)}.team-section{padding:35px 0}.team-section>.container>h2{text-align:center;color:var(--green);font-size:28px}.team-subtitle{text-align:center;color:var(--muted);max-width:780px;margin:0 auto 25px;font-size:14px}.proprietor-wrap{display:flex;justify-content:center;margin-bottom:18px}.proprietor-card{width:310px}.management-row{display:grid;gap:16px;margin-bottom:16px}.principal-head-row{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px;margin-inline:auto}.three-management-row{grid-template-columns:repeat(3,minmax(0,1fr));max-width:1040px;margin-inline:auto}.management-card,.teacher-card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--green);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);text-align:center;min-width:0}.management-card .staff-photo,.teacher-card .staff-photo{width:100%;height:190px;object-fit:cover}.proprietor-card .staff-photo{height:auto;aspect-ratio:1/1;object-fit:cover}.team-card-content{padding:14px}.team-card-content h3{font-size:16px;line-height:1.25;color:var(--green);margin-bottom:6px}.team-card-content p{font-size:12px;color:var(--muted);margin:5px 0}.position{color:var(--red)!important;font-weight:800!important}.staff-placeholder{margin:14px 14px 0;height:150px;border-radius:12px;background:#e8f3ef;color:var(--green);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900}.staff-category{margin-top:35px}.staff-category>h3{color:var(--green);font-size:22px;margin-bottom:12px}.teachers-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.teacher-card .staff-photo,.teacher-card .staff-placeholder{height:145px}.teacher-card .staff-placeholder{margin:10px 10px 0}.teacher-card .team-card-content{padding:10px}.teacher-card .team-card-content h3{font-size:13px}.teacher-card .team-card-content p{font-size:10px}.teachers-section{background:var(--soft)}
+/* Existing pages */.history-container,.proprietor-container,.contact-wrapper{width:min(94%,var(--max));margin:auto}.history-container{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}.history-image img{width:100%;aspect-ratio:1.2/1;object-fit:cover;border-radius:18px;box-shadow:var(--shadow)}.values-grid,.facilities-grid,.requirements-grid,.process-grid,.news-grid,.contact-grid{width:min(94%,var(--max));margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.value-card,.facility-card,.requirement-card,.process-card,.news-card,.contact-card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:20px}.gallery-section .gallery-grid{width:min(94%,var(--max));margin:auto}.featured-news,.latest-news,.enquiry-section,.admission-requirements,.admission-process,.core-values{width:min(94%,var(--max));margin:auto}.featured-news-card{display:grid;grid-template-columns:1fr 1fr;width:min(94%,1000px);margin:auto;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}.featured-news-card img{width:100%;height:100%;object-fit:cover}.featured-news-content{padding:30px}.form-group{margin-bottom:14px}.form-group label{display:block;font-weight:700;margin-bottom:5px}.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px}.enquiry-form{max-width:760px;margin:20px auto;padding:25px;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+/* Results */.result-portal .container{max-width:1100px}.result-role-note{background:#edf7f2;border-left:4px solid var(--green);padding:15px;border-radius:8px;margin-bottom:20px}.result-school-tabs{display:flex;gap:10px;justify-content:center;margin-bottom:20px}.result-school-tab{border:1px solid var(--green);background:#fff;color:var(--green);padding:10px 20px;border-radius:25px;font-weight:800}.result-school-tab.active{background:var(--green);color:#fff}.result-school-panel{display:none}.result-school-panel.active{display:block}.result-class-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:15px}.result-class-card{padding:18px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:var(--shadow);color:var(--green);text-align:left}.result-class-card span{display:block;color:var(--muted);font-size:12px;margin-top:4px}.result-student-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.result-student-card,.role-card,.result-login{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff;box-shadow:var(--shadow)}.result-avatar{width:42px;height:42px;border-radius:50%;background:#e8f3ef;color:var(--green);display:grid;place-items:center;font-weight:900}.role-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.result-login{max-width:520px;margin:auto}.result-login input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;margin:6px 0 14px}.result-login button{background:var(--red);color:#fff;border:0;border-radius:25px;padding:11px 22px;font-weight:800}
+
+
+@media(max-width:1000px){nav{gap:14px;font-size:12px}.school-name h2{font-size:23px}.schools-container,.choose-container{grid-template-columns:repeat(5,1fr)}.gallery-grid{grid-template-columns:repeat(3,1fr)}.teachers-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.announcement-grid{grid-template-columns:repeat(2,1fr)}.footer-inner{grid-template-columns:1fr 1fr 1fr}}
+
+
+@media(max-width:760px){.announcement-bar{font-size:11px}.announcement-track{animation-duration:18s}header{padding:8px 14px}.logo img{width:62px;height:62px}.school-name h2{font-size:16px}.school-name p{font-size:9px}.school-name small{font-size:9px}.menu-btn{display:block}nav{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;align-items:stretch;padding:14px 22px;gap:4px;box-shadow:0 10px 20px rgba(0,0,0,.12)}nav.active{display:flex}nav a{padding:11px 0}.hero{width:94%;aspect-ratio:1/1;margin-top:14px;border-radius:16px}.hero-content{padding:8%;max-width:100%}.hero-content h4{font-size:13px}.hero-content h1{font-size:40px}.hero-content .motto{font-size:15px}.hero-buttons{gap:9px}.btn{padding:11px 17px;font-size:13px}.quick-actions{grid-template-columns:repeat(5,1fr);gap:7px;padding-top:12px}.action-btn{min-height:56px;flex-direction:column;font-size:18px;border-radius:10px}.action-btn span{font-size:9px}.stats{grid-template-columns:repeat(4,1fr);gap:7px;padding-top:15px}.stat-box{min-height:115px;padding:12px 5px;border-radius:14px}.stat-icon{font-size:20px}.stat-box h2{font-size:25px}.stat-box p{font-size:10px}.vision-mission{grid-template-columns:1fr}.schools-container{grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.school-card{min-height:190px;padding:14px 8px}.school-card h3{font-size:12px}.school-card p{font-size:9px}.section-header h2,.why-choose h2,.latest-announcements h2,.gallery-section h2,.contact h2{font-size:24px}.choose-container{grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.choose-card{min-height:160px;padding:12px 8px}.choose-card h3{font-size:11px}.choose-card p{font-size:9px}.announcement-grid{grid-template-columns:repeat(2,1fr)}.announcement-card{min-height:165px;padding:14px}.announcement-card h3{font-size:13px}.announcement-card p{font-size:10px}.gallery-grid,.home-gallery{grid-template-columns:repeat(3,1fr)}.gallery-item img{height:100px}.contact-container{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr;gap:20px}.footer-inner div{align-items:center;text-align:center}.principal-head-row{grid-template-columns:repeat(2,minmax(0,1fr))}.three-management-row{grid-template-columns:repeat(3,minmax(0,1fr))}.management-card .staff-photo{height:150px}.staff-placeholder{height:120px}.teachers-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.teacher-card .staff-photo,.teacher-card .staff-placeholder{height:90px}.teacher-card .team-card-content{padding:7px 4px}.teacher-card .team-card-content h3{font-size:9px}.teacher-card .team-card-content p{font-size:7px}.team-section{padding:30px 0}.result-class-grid{grid-template-columns:repeat(2,1fr)}.result-student-grid,.role-cards{grid-template-columns:1fr}.featured-news-card{grid-template-columns:1fr}.history-container{grid-template-columns:1fr}.values-grid,.facilities-grid,.requirements-grid,.process-grid,.news-grid,.contact-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:430px){.school-name p{display:none}.school-name h2{font-size:15px}.hero-content h1{font-size:34px}.hero-content .motto{font-size:13px}.quick-actions{gap:4px}.action-btn{font-size:16px}.action-btn span{font-size:8px}.stats{gap:4px}.stat-box{min-height:105px}.stat-box h2{font-size:22px}.stat-box p{font-size:9px}.schools-container,.choose-container{grid-template-columns:repeat(5,minmax(0,1fr));overflow:visible}.school-card,.choose-card{min-height:175px}.school-card h3,.choose-card h3{font-size:10px}.school-card p,.choose-card p{font-size:8px}.three-management-row{gap:6px}.management-card .team-card-content{padding:8px 4px}.management-card .team-card-content h3{font-size:10px}.management-card .team-card-content p{font-size:8px}.teachers-grid{gap:4px}.teacher-card .team-card-content h3{font-size:8px}.teacher-card .team-card-content p{font-size:6.5px}}
+
+/* =========================================================
+   BALAD APPROVED VISUAL CORRECTIONS
+   Homepage + first three management cards only
+   ========================================================= */
+
+/* Homepage: no shortcut icon row; stats sit directly below hero */
+.home-page .stats{
+  margin-top: 0;
+  padding-top: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.home-page .stat-box{
+  aspect-ratio: 1 / .88;
+  min-height: 0;
+  padding: 18px 12px;
+  border-radius: 14px;
+}
+.home-page .stat-box h2{font-size:32px;margin-bottom:8px}
+.home-page .stat-box p{font-size:13px;line-height:1.35}
+
+/* Homepage educational + why sections match the supplied sample */
+.home-page .our-schools,
+.home-page .why-choose{
+  background:var(--green-dark);
+  color:#fff;
+  margin-top:34px;
+  padding:38px 0;
+}
+.home-page .our-schools .section-header,
+.home-page .why-choose .section-header{
+  margin-bottom:22px;
+}
+.home-page .our-schools .section-header h2,
+.home-page .why-choose .section-header h2{
+  color:#fff;
+  font-size:29px;
+}
+.home-page .our-schools .section-header p,
+.home-page .why-choose .section-header p{
+  color:#fff;
+  max-width:720px;
+  margin:auto;
+}
+.home-page .schools-container,
+.home-page .choose-container{
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:10px;
+}
+.home-page .school-card,
+.home-page .choose-card{
+  position:relative;
+  min-height:54px;
+  height:54px;
+  padding:0 42px 0 17px;
+  display:flex;
+  align-items:center;
+  background:#fff;
+  border:0;
+  border-radius:11px;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+.home-page .school-card h3,
+.home-page .choose-card h3{
+  color:var(--green);
+  font-size:15px;
+  line-height:1.2;
+  margin:0;
+}
+.home-page .school-card p,
+.home-page .choose-card p{display:none}
+.home-page .card-arrow{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  width:23px;
+  height:23px;
+  border:1px solid #65716c;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#34423c;
+  font-size:19px;
+  line-height:1;
+}
+.home-page .why-choose{
+  margin-top:20px;
+}
+
+/* First three management cards: sample-like arrangement */
+.team-page .proprietor-card{}
+.team-section#management .proprietor-wrap{
+  margin-bottom:20px;
+}
+.team-section#management .proprietor-card{
+  width:min(100%,680px);
+}
+.team-section#management .proprietor-card .staff-photo{
+  width:100%;
+  height:300px;
+  aspect-ratio:auto;
+  object-fit:contain;
+  object-position:center;
+  background:#fff;
+}
+.team-section#management .principal-head-row{
+  width:min(100%,760px);
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+.team-section#management .principal-head-row .management-card{
+  min-height:0;
+}
+.team-section#management .principal-head-row .staff-photo,
+.team-section#management .principal-head-row .staff-placeholder{
+  height:245px;
+}
+.team-section#management .principal-head-row .staff-photo{
+  object-fit:contain;
+  object-position:center;
+  background:#fff;
+}
+.team-section#management .principal-head-row .staff-placeholder{
+  margin:0;
+  border-radius:0;
+  background:#eef6f2;
+}
+.team-section#management .management-card{
+  border-radius:17px;
+}
+.team-section#management .team-card-content{
+  padding:14px 16px 18px;
+}
+.team-section#management .team-card-content h3{
+  font-size:16px;
+}
+.team-section#management .team-card-content p{
+  font-size:12px;
+}
+
+/* Do not alter the rest of the team page. */
+@media(max-width:760px){
+  .home-page .stats{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:7px;
+    padding-top:14px;
+  }
+  .home-page .stat-box{
+    aspect-ratio:1 / .92;
+    padding:10px 4px;
+    border-radius:11px;
+  }
+  .home-page .stat-box h2{font-size:23px}
+  .home-page .stat-box p{font-size:9px}
+  .home-page .our-schools,
+  .home-page .why-choose{
+    padding:30px 0;
+  }
+  .home-page .our-schools .section-header h2,
+  .home-page .why-choose .section-header h2{
+    font-size:23px;
+  }
+  .home-page .schools-container,
+  .home-page .choose-container{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .home-page .school-card,
+  .home-page .choose-card{
+    height:48px;
+    min-height:48px;
+  }
+  .home-page .school-card h3,
+  .home-page .choose-card h3{
+    font-size:14px;
+  }
+
+  .team-section#management .proprietor-card{
+    width:100%;
+  }
+  .team-section#management .proprietor-card .staff-photo{
+    height:250px;
+  }
+  .team-section#management .principal-head-row{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+  .team-section#management .principal-head-row .staff-photo,
+  .team-section#management .principal-head-row .staff-placeholder{
+    height:175px;
+  }
+}
+@media(max-width:430px){
+  .team-section#management .proprietor-card .staff-photo{
+    height:225px;
+  }
+  .team-section#management .principal-head-row .staff-photo,
+  .team-section#management .principal-head-row .staff-placeholder{
+    height:150px;
+  }
+}
+
+/* =========================================================
+   BALAD CORRECTION PATCH
+   Only fixes navigation reliability, missing section cards,
+   and the three management cards requested.
+   ========================================================= */
+
+/* Reliable mobile navigation */
+@media (max-width:760px){
+  header{position:relative}
+  .menu-btn{
+    display:block;
+    position:relative;
+    z-index:60;
+    flex:0 0 auto;
+    min-width:44px;
+    min-height:44px;
+    padding:6px 9px;
+    border-radius:10px;
+    background:#fff;
+    color:var(--green);
+    font-size:28px;
+    line-height:1;
+  }
+  header nav.active{
+    display:flex !important;
+    z-index:55;
+  }
+}
+
+/* Shared, even card treatment for the existing inner-page sections */
+.history-text,
+.proprietor-content,
+.facilities,
+.academic,
+.admission-requirements,
+.admission-process,
+.faq-section,
+.latest-news,
+.upcoming-events,
+.news-cta,
+.enquiry-section,
+.quick-contact{
+  width:min(94%,var(--max));
+  margin-inline:auto;
+}
+
+.proprietor-container{
+  display:grid;
+  grid-template-columns:minmax(220px,360px) 1fr;
+  gap:28px;
+  align-items:center;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:24px;
+}
+
+.proprietor-image img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+.facilities{
+  padding:0;
+}
+.facilities h2,
+.academic h2,
+.admission-requirements h2,
+.admission-process h2,
+.faq-section h2,
+.latest-news h2,
+.upcoming-events h2,
+.news-cta h2,
+.enquiry-section h2,
+.quick-contact h2{
+  color:var(--green);
+  font-size:29px;
+  margin-bottom:8px;
+}
+
+.facilities-subtitle,
+.academic-subtitle,
+.requirements-subtitle,
+.process-subtitle,
+.enquiry-subtitle{
+  color:var(--muted);
+  margin-bottom:22px;
+}
+
+.facilities-grid,
+.academic-grid,
+.requirements-grid,
+.process-grid{
+  display:grid;
+  gap:16px;
+  width:100%;
+}
+
+.facilities-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.academic-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.requirements-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.process-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.facility-card,
+.academic-card,
+.requirement-card,
+.process-step,
+.news-card,
+.quick-contact-card,
+.faq-item{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+
+.facility-card,
+.academic-card,
+.requirement-card,
+.process-step{
+  padding:20px;
+  min-height:145px;
+}
+
+.facility-card,
+.academic-card,
+.requirement-card,
+.process-step,
+.news-card,
+.quick-contact-card{
+  display:flex;
+  flex-direction:column;
+}
+
+.facility-card h3,
+.academic-card h3,
+.requirement-card h3,
+.process-step h3,
+.news-card h3,
+.quick-contact-card h3{
+  color:var(--green);
+  margin-bottom:8px;
+  line-height:1.3;
+}
+
+.facility-card p,
+.academic-card p,
+.requirement-card p,
+.process-step p,
+.news-card p,
+.quick-contact-card p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.academic{
+  padding-top:0;
+}
+.academic-card{
+  min-height:160px;
+}
+
+.about-cta{
+  width:min(94%,var(--max));
+  margin:35px auto 0;
+  padding:30px;
+  background:var(--green-dark);
+  color:#fff;
+  border-radius:18px;
+  box-shadow:var(--shadow);
+}
+.about-cta h2{color:#fff}
+.about-cta p{color:#fff;max-width:760px}
+
+/* Admissions cards */
+.admission-requirements > .admission-requirements{
+  width:100%;
+  margin:0;
+}
+.requirement-card{
+  min-height:120px;
+  justify-content:center;
+}
+.process-step{
+  min-height:170px;
+}
+.faq-container{
+  display:grid;
+  gap:12px;
+}
+.faq-item{
+  overflow:hidden;
+}
+.faq-question{
+  width:100%;
+  border:0;
+  background:#fff;
+  padding:16px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  text-align:left;
+  color:var(--green);
+  font:inherit;
+  font-weight:800;
+  cursor:pointer;
+}
+.faq-answer{
+  display:none;
+  padding:0 18px 16px;
+  color:var(--muted);
+}
+.faq-item.active .faq-answer{display:block}
+.faq-item.active .faq-icon::after{content:"−"}
+.faq-icon::after{content:"+";font-size:20px}
+
+/* News cards */
+.latest-news{
+  padding-top:35px;
+}
+.news-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.news-card{
+  overflow:hidden;
+  padding:0;
+  min-height:100%;
+}
+.news-card img{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+}
+.news-content{
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+.news-content a{
+  margin-top:auto;
+  padding-top:12px;
+  color:var(--red);
+  font-weight:800;
+}
+
+/* Contact cards */
+.enquiry-section{
+  padding-bottom:20px;
+}
+.enquiry-form{
+  background:#fff;
+}
+.quick-contact{
+  padding-top:35px;
+}
+.quick-contact-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+.quick-contact-card{
+  padding:22px;
+  min-height:135px;
+}
+.quick-contact-card h3{
+  font-size:18px;
+}
+
+/* Team: keep the rest of the page intact and only resize the first three cards */
+.team-section#management .proprietor-card{
+  width:min(100%,500px);
+}
+.team-section#management .proprietor-card .staff-photo{
+  height:220px;
+  aspect-ratio:auto;
+  object-fit:contain;
+  background:#fff;
+}
+.team-section#management .principal-head-row{
+  width:min(100%,700px);
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.team-section#management .principal-head-row .management-card{
+  width:100%;
+}
+.team-section#management .principal-head-row .staff-photo,
+.team-section#management .principal-head-row .staff-placeholder{
+  height:185px;
+}
+.team-section#management .team-card-content h3{
+  font-size:16px;
+}
+.team-section#management .team-card-content p{
+  font-size:12px;
+}
+
+@media(max-width:760px){
+  .proprietor-container{
+    grid-template-columns:1fr;
+  }
+
+  .facilities-grid,
+  .requirements-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .academic-grid,
+  .process-grid,
+  .news-grid,
+  .quick-contact-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .facility-card,
+  .academic-card,
+  .requirement-card,
+  .process-step{
+    min-height:145px;
+    padding:16px;
+  }
+
+  .news-card img{
+    height:170px;
+  }
+
+  .team-section#management .proprietor-card{
+    width:min(100%,520px);
+  }
+
+  .team-section#management .proprietor-card .staff-photo{
+    height:210px;
+  }
+
+  .team-section#management .principal-head-row{
+    width:100%;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+
+  .team-section#management .principal-head-row .staff-photo,
+  .team-section#management .principal-head-row .staff-placeholder{
+    height:150px;
+  }
+}
+
+@media(max-width:430px){
+  .facilities-grid,
+  .requirements-grid,
+  .academic-grid,
+  .process-grid,
+  .news-grid,
+  .quick-contact-grid{
+    grid-template-columns:1fr;
+  }
+
+  .team-section#management .proprietor-card{
+    width:100%;
+  }
+
+  .team-section#management .proprietor-card .staff-photo{
+    height:190px;
+  }
+
+  .team-section#management .principal-head-row{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .team-section#management .principal-head-row .staff-photo,
+  .team-section#management .principal-head-row .staff-placeholder{
+    height:135px;
+  }
+
+  .team-section#management .team-card-content{
+    padding:12px 8px 14px;
+  }
+
+  .team-section#management .team-card-content h3{
+    font-size:12px;
+  }
+
+  .team-section#management .team-card-content p{
+    font-size:9px;
+  }
+}
+/* FIX MOBILE NAVIGATION */
+header {
+  position: relative;
+  z-index: 1000;
+}
+
+header nav {
+  z-index: 1001;
+}
+
+header nav a {
+  position: relative;
+  z-index: 1002;
+  pointer-events: auto;
+}
+/* =========================================================
+   BALAD MOBILE MENU + HOMEPAGE WAEC RESULTS
+   Only the requested menu and homepage results update.
+   ========================================================= */
+
+/* Keep the existing header and hero unchanged. */
+@media (max-width:760px){
+  .menu-btn{
+    display:block;
+    position:relative;
+    z-index:2101;
+    width:46px;
+    height:46px;
+    min-width:46px;
+    padding:0;
+    border:0;
+    border-radius:8px;
+    background:transparent;
+    color:var(--green);
+    font-size:31px;
+    line-height:46px;
+    text-align:center;
+  }
+
+  /* Landmark-style full mobile menu */
+  header nav{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:2100;
+    width:100%;
+    height:100dvh;
+    margin:0;
+    padding:86px 10% 40px;
+    background:#fff;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    gap:0;
+    overflow-y:auto;
+    box-shadow:none;
+  }
+
+  header nav.active{
+    display:flex !important;
+  }
+
+  header nav a{
+    display:flex;
+    align-items:center;
+    min-height:62px;
+    padding:14px 0;
+    border-bottom:2px solid var(--line);
+    color:#303a36;
+    font-size:20px;
+    font-weight:500;
+  }
+
+  header nav a:first-child{
+    color:var(--green);
+  }
+
+  header nav a.active{
+    color:var(--green);
+  }
+
+  header nav a.active:after,
+  header nav a:hover:after{
+    display:none;
+  }
+
+  body.menu-open{
+    overflow:hidden;
+  }
+}
+
+/* Homepage WAEC results section */
+.home-waec-results{
+  background:#fbf8ef;
+  padding:52px 0;
+  margin-top:0;
+}
+
+.home-waec-results .section-header{
+  margin-bottom:26px;
+}
+
+.home-waec-results .section-header h2{
+  color:var(--green);
+  font-size:30px;
+  margin-bottom:7px;
+}
+
+.home-waec-results .section-header p{
+  color:var(--muted);
+  max-width:650px;
+  margin:auto;
+}
+
+.waec-results-grid{
+  width:min(94%,1000px);
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+
+.waec-result-card{
+  min-height:92px;
+  padding:16px 20px;
+  background:#fff;
+  border:2px solid #fff;
+  border-radius:12px;
+  color:var(--green);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  box-shadow:var(--shadow);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.waec-result-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(0,0,0,.14);
+}
+
+.waec-result-card span{
+  font-size:24px;
+  line-height:1;
+  font-weight:900;
+  margin-bottom:7px;
+}
+
+.waec-result-card strong{
+  font-size:14px;
+  letter-spacing:1.5px;
+}
+
+@media(max-width:760px){
+  .home-waec-results{
+    padding:38px 0;
+  }
+
+  .home-waec-results .section-header h2{
+    font-size:24px;
+  }
+
+  .home-waec-results .section-header p{
+    font-size:13px;
+  }
+
+  .waec-results-grid{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  .waec-result-card{
+    min-height:70px;
+    flex-direction:row;
+    justify-content:flex-start;
+    gap:12px;
+    padding:13px 18px;
+    text-align:left;
+  }
+
+  .waec-result-card span{
+    min-width:60px;
+    margin-bottom:0;
+    font-size:21px;
+  }
+
+  .waec-result-card strong{
+    font-size:13px;
+  }
+}
+
+
+/* =========================================================
+   BALAD FINAL MOBILE MENU + FOOTER SECTIONS
+   The mobile menu is CSS-controlled so it does not depend on
+   JavaScript, browser module support, or cached click handlers.
+   ========================================================= */
+
+.menu-toggle{
+  position:absolute;
+  width:1px;
+  height:1px;
+  opacity:0;
+  pointer-events:none;
+}
+
+.menu-btn .menu-icon-close{display:none}
+
+@media(max-width:760px){
+  header{
+    position:relative;
+    z-index:3000;
+  }
+
+  .menu-btn{
+    display:flex !important;
+    width:46px;
+    height:46px;
+    min-width:46px;
+    flex:0 0 46px;
+    align-items:center;
+    justify-content:center;
+    margin:0;
+    padding:0;
+    border:0;
+    border-radius:8px;
+    background:transparent;
+    color:var(--green);
+    font-size:31px;
+    line-height:1;
+    cursor:pointer;
+    position:relative;
+    z-index:3201;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .menu-btn .menu-icon-open,
+  .menu-btn .menu-icon-close{pointer-events:none}
+
+  .menu-toggle:checked + .menu-btn .menu-icon-open{display:none}
+  .menu-toggle:checked + .menu-btn .menu-icon-close{display:block}
+
+  header nav#balad-main-nav{
+    display:none !important;
+    position:fixed;
+    inset:0;
+    z-index:3100;
+    width:100%;
+    height:100dvh;
+    margin:0;
+    padding:104px 10% 40px;
+    background:#fff;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    gap:0;
+    overflow-y:auto;
+    box-shadow:none;
+  }
+
+  .menu-toggle:checked ~ nav#balad-main-nav{
+    display:flex !important;
+  }
+
+  header nav#balad-main-nav a{
+    display:flex;
+    align-items:center;
+    min-height:64px;
+    padding:14px 0;
+    border-bottom:2px solid var(--line);
+    color:#303a36;
+    font-size:20px;
+    font-weight:500;
+    position:relative;
+    z-index:3102;
+    pointer-events:auto;
+  }
+
+  header nav#balad-main-nav a:first-child,
+  header nav#balad-main-nav a.active{
+    color:var(--green);
+  }
+
+  header nav#balad-main-nav a.active:after,
+  header nav#balad-main-nav a:hover:after{
+    display:none;
+  }
+}
+
+/* End-of-page footer: three clearly separated sections. */
+footer{
+  padding:42px max(3%,40px) 16px;
+}
+
+.footer-inner{
+  align-items:stretch;
+}
+
+.footer-inner > div{
+  padding:18px 20px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:16px;
+  background:rgba(0,0,0,.08);
+  min-height:145px;
+}
+
+.footer-inner > div + div{
+  border-left:1px solid rgba(255,255,255,.18);
+}
+
+.footer-inner > div:first-child strong,
+.footer-inner > div:nth-child(2) strong,
+.footer-inner > div:nth-child(3) strong{
+  margin-bottom:4px;
+}
+
+@media(max-width:760px){
+  footer{
+    padding:30px 16px 14px;
+  }
+
+  .footer-inner{
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+  }
+
+  .footer-inner > div{
+    min-height:0;
+    padding:20px 18px;
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:14px;
+    background:rgba(0,0,0,.10);
+  }
+
+  .footer-inner > div + div{
+    border-left:1px solid rgba(255,255,255,.22);
+  }
+
+  .footer-inner > div strong{
+    font-size:17px;
+  }
+
+  .footer-inner > div span,
+  .footer-inner > div a,
+  .footer-inner > div em{
+    font-size:13px;
+    line-height:1.55;
+  }
+}
+
+
+/* Admissions page compact mobile layout */
+.admission-requirements,
+.admission-process{
+  padding-top:18px;
+  padding-bottom:18px;
+}
+
+.admission-requirements h2,
+.admission-process h2{
+  margin-bottom:5px;
+}
+
+.requirements-subtitle,
+.process-subtitle{
+  margin-bottom:12px;
+}
+
+.admission-requirements .requirements-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+
+.admission-requirements .requirement-card{
+  min-height:82px;
+  padding:12px 13px;
+  justify-content:center;
+  border-radius:12px;
+  box-shadow:none;
+}
+
+.admission-requirements .requirement-card h3{
+  font-size:13px;
+  margin:0;
+}
+
+.admission-requirements .requirement-card p{
+  font-size:10px;
+  margin:3px 0 0;
+}
+
+.admission-process .process-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+
+.admission-process .process-step{
+  min-height:105px;
+  padding:13px 14px;
+  border-radius:12px;
+  box-shadow:none;
+}
+
+.admission-process .process-step h3{
+  font-size:14px;
+  margin-bottom:5px;
+}
+
+.admission-process .process-step p{
+  font-size:11px;
+  line-height:1.45;
+  margin:0;
+}
+
+/* Admissions CTA: compact card, separate from the FAQ */
+.admission-cta{
+  width:min(94%,var(--max));
+  margin:20px auto 30px;
+  padding:24px 22px;
+  background:#fbf8ef;
+  border:1px solid #dbe8e1;
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+
+.admission-cta h2{
+  color:var(--green);
+  font-size:25px;
+  margin:0 0 8px;
+}
+
+.admission-cta p{
+  color:var(--muted);
+  max-width:680px;
+  margin:0 auto 14px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.admission-cta .cta-btn{
+  display:inline-block;
+  background:var(--red);
+  color:#fff;
+  padding:10px 20px;
+  border-radius:25px;
+  font-weight:800;
+  font-size:13px;
+}
+
+@media(max-width:760px){
+  .admission-requirements,
+  .admission-process{
+    padding-top:12px;
+    padding-bottom:12px;
+  }
+
+  .admission-requirements h2,
+  .admission-process h2{
+    font-size:22px;
+  }
+
+  .requirements-subtitle,
+  .process-subtitle{
+    font-size:11px;
+    line-height:1.4;
+    margin-bottom:9px;
+  }
+
+  .admission-requirements .requirements-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+
+  .admission-requirements .requirement-card{
+    min-height:66px;
+    padding:9px 10px;
+  }
+
+  .admission-requirements .requirement-card h3{
+    font-size:11px;
+    line-height:1.25;
+  }
+
+  .admission-requirements .requirement-card p{
+    font-size:9px;
+  }
+
+  .admission-process .process-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+
+  .admission-process .process-step{
+    min-height:86px;
+    padding:10px;
+  }
+
+  .admission-process .process-step h3{
+    font-size:12px;
+    line-height:1.25;
+    margin-bottom:4px;
+  }
+
+  .admission-process .process-step p{
+    font-size:9px;
+    line-height:1.35;
+  }
+
+  .admission-cta{
+    margin:16px auto 22px;
+    padding:18px 15px;
+    border-radius:15px;
+  }
+
+  .admission-cta h2{
+    font-size:21px;
+  }
+
+  .admission-cta p{
+    font-size:11px;
+  }
+}
+
+/* ==========================================================
+   COLLEGE STAFF DEPARTMENTS — COMPACT MOBILE DIRECTORY
+   Management and Nursery & Primary remain unchanged.
+========================================================== */
+
+.department-title{
+    display:inline-block;
+    margin:0 0 20px;
+    padding:10px 18px;
+    border-radius:999px;
+    background:var(--primary);
+    color:#fff;
+    font-size:1rem;
+    letter-spacing:.4px;
+}
+
+.college-staff-category{
+    margin-top:38px;
+}
+
+.college-staff-category:first-child{
+    margin-top:30px;
+}
+
+.department-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.department-grid .teacher-card{
+    border-radius:14px;
+    box-shadow:var(--shadow-sm);
+}
+
+.department-grid .staff-photo,
+.department-grid .staff-placeholder{
+    width:100%;
+    height:190px;
+}
+
+.department-grid .staff-placeholder{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--cream);
+    color:var(--primary);
+    font-size:2rem;
+    font-weight:700;
+}
+
+.department-grid .team-card-content{
+    padding:17px 15px;
+}
+
+.department-grid .team-card-content h3{
+    font-size:1.05rem;
+    margin-bottom:5px;
+}
+
+.department-grid .team-card-content p{
+    font-size:.82rem;
+    line-height:1.45;
+    margin-bottom:10px;
+}
+
+.linkedin-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    margin-top:4px;
+    padding:7px 12px;
+    border-radius:8px;
+    background:#0A66C2;
+    color:#fff !important;
+    font-size:.78rem;
+    font-weight:700;
+}
+
+.linkedin-btn:hover{
+    transform:translateY(-2px);
+    opacity:.92;
+}
+
+@media(max-width:992px){
+    .department-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:768px){
+    .college-staff-category{
+        margin-top:28px;
+    }
+
+    .department-title{
+        margin-bottom:14px;
+        font-size:.82rem;
+        padding:8px 12px;
+    }
+
+    .department-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .department-grid .staff-photo,
+    .department-grid .staff-placeholder{
+        height:135px;
+    }
+
+    .department-grid .team-card-content{
+        padding:12px 10px;
+    }
+
+    .department-grid .team-card-content h3{
+        font-size:.9rem;
+    }
+
+    .department-grid .team-card-content p{
+        font-size:.72rem;
+    }
+
+    .linkedin-btn{
+        padding:6px 9px;
+        font-size:.68rem;
+    }
+}
+
+/* ==========================================================
+   BALAD TEAM / ABOUT SLIDER / FACILITIES UPDATE
+========================================================== */
+.team-title-strip{padding:34px 0 24px;text-align:center;background:#fff}.team-title-strip h1{color:var(--green);font-size:34px;margin-bottom:4px}.team-title-strip p{color:var(--muted);font-size:14px}.department-section{padding:16px 0 28px;background:#fff}.department-section + .department-section{padding-top:0}.department-title{display:flex;align-items:center;gap:9px;margin:0 0 12px;color:var(--green);font-size:18px;font-weight:800}.department-title span{font-size:19px}.department-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.department-grid .teacher-card{border-radius:12px;border-top:3px solid var(--green);box-shadow:0 5px 18px rgba(7,65,45,.07)}.department-grid .staff-photo,.department-grid .staff-placeholder{height:150px}.department-grid .staff-placeholder{margin:8px 8px 0;border-radius:9px;background:#f2f5f3;color:var(--green);display:grid;place-items:center;font-size:24px}.department-grid .team-card-content{padding:9px 8px 10px}.department-grid .team-card-content h3{font-size:12px;margin-bottom:3px}.department-grid .team-card-content p{font-size:9px;line-height:1.3;margin:3px 0}.department-grid .position{font-size:8px!important}.department-grid .linkedin-btn{margin-top:5px;padding:5px 8px;border-radius:7px;font-size:9px}.primary-team{background:var(--soft);padding:30px 0}.primary-team h2,.management-team h2{text-align:center;color:var(--green);font-size:24px;margin-bottom:14px}.primary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.primary-grid .team-card{border-radius:12px;border-top:3px solid var(--green)}.primary-grid .staff-placeholder{height:105px;margin:8px}.primary-grid .team-card-content{padding:8px}.primary-grid h3{font-size:11px}.primary-grid p{font-size:8px}.management-team{padding:30px 0;background:#fff}.management-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.management-grid .team-card{border-radius:12px;border-top:3px solid var(--green)}.management-grid .staff-placeholder{height:100px;margin:8px}.management-grid .team-card-content{padding:8px}.management-grid h3{font-size:11px}.management-grid p{font-size:8px}.management-grid .linkedin-btn{margin-top:4px;padding:5px 8px;font-size:9px}.about-vision-mission{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding-top:32px;padding-bottom:18px}.about-vision-mission .vm-card{display:flex;gap:16px;align-items:flex-start;padding:20px}.vm-icon{width:54px;height:54px;flex:0 0 54px;border-radius:50%;background:var(--green-dark);color:#fff;display:grid;place-items:center;font-size:21px}.about-vision-mission .vm-card h3{color:var(--green);margin-bottom:4px}.about-vision-mission .vm-card p{font-size:13px;color:var(--muted)}.about-slider{width:min(94%,var(--max));height:390px;margin:10px auto 30px;border-radius:20px;overflow:hidden;position:relative;box-shadow:var(--shadow);background:#123}.about-slides{height:100%;position:relative}.about-slide{position:absolute;inset:0;display:flex;align-items:center;padding:8%;color:#fff;background-size:cover;background-position:center;opacity:0;animation:aboutSlide 20s infinite}.about-slide:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,76,54,.9),rgba(4,76,54,.35),rgba(4,76,54,.1))}.about-slide>div{position:relative;max-width:650px;z-index:1}.about-slide span{font-size:13px;letter-spacing:2px;font-weight:800}.about-slide h1{font-size:clamp(30px,5vw,56px);line-height:1.05;margin:10px 0}.about-slide p{font-size:17px;max-width:560px}.slide-one{background-image:url('school.jpg');animation-delay:0s}.slide-two{background-image:url('images/science-lab1.jpg');animation-delay:5s}.slide-three{background-image:url('images/sports3.jpg');animation-delay:10s}.slide-four{background-image:url('images/school-building2.jpg');animation-delay:15s}@keyframes aboutSlide{0%,22%{opacity:1}25%,97%{opacity:0}100%{opacity:1}}.slider-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:5}.slider-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7)}.facility-home-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:10px 18px;border-radius:24px;font-weight:800;margin:18px auto 0}.facilities-page .facility-home-btn{margin-top:18px}.facility-page-title{padding:55px 0 35px;text-align:center;background:var(--soft)}.facility-page-title .eyebrow{font-size:12px;letter-spacing:2px;color:var(--green);font-weight:800}.facility-page-title h1{font-size:42px;color:var(--green);margin:5px 0}.facility-page-title>div>p:not(.eyebrow){color:var(--muted);max-width:650px;margin:auto}.facility-gallery{padding:35px 0 50px}.facility-page-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.facility-page-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}.facility-page-card img{width:100%;height:210px;object-fit:cover}.facility-page-card-body{padding:16px}.facility-page-card-body h2{color:var(--green);font-size:18px;margin-bottom:6px}.facility-page-card-body p{color:var(--muted);font-size:13px}.facilities-page footer{margin-top:20px}@media(max-width:760px){.team-title-strip{padding:24px 0 16px}.team-title-strip h1{font-size:28px}.department-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.department-title{font-size:13px;margin-bottom:8px}.department-grid .staff-photo,.department-grid .staff-placeholder{height:92px}.department-grid .staff-placeholder{margin:5px;font-size:18px}.department-grid .team-card-content{padding:6px 4px}.department-grid .team-card-content h3{font-size:8.5px}.department-grid .team-card-content p{font-size:6.5px}.department-grid .linkedin-btn{padding:4px 5px;font-size:6.5px}.primary-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.primary-grid .staff-placeholder{height:75px;margin:5px}.primary-grid .team-card-content{padding:5px 3px}.primary-grid h3{font-size:8px}.primary-grid p{font-size:6px}.management-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.management-grid .staff-placeholder{height:72px;margin:5px}.management-grid .team-card-content{padding:5px 3px}.management-grid h3{font-size:8px}.management-grid p{font-size:6px}.management-grid .linkedin-btn{font-size:6px;padding:4px 5px}.about-vision-mission{grid-template-columns:1fr;padding-top:20px}.about-slider{height:300px;border-radius:14px}.about-slide{padding:8%}.about-slide h1{font-size:32px}.about-slide p{font-size:13px}.facility-page-title{padding:35px 0 25px}.facility-page-title h1{font-size:32px}.facility-page-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.facility-page-card img{height:130px}.facility-page-card-body{padding:9px}.facility-page-card-body h2{font-size:12px}.facility-page-card-body p{font-size:9px}}@media(max-width:430px){.department-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.department-grid .staff-photo,.department-grid .staff-placeholder{height:82px}.department-title{font-size:11px}.facility-page-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.about-slide span{font-size:9px}.about-slide h1{font-size:27px}.about-slide p{font-size:12px}}
+
+
+/* ==========================================================
+   FINAL TEAM + ABOUT CORRECTIONS
+========================================================== */
+
+/* Management comes first: two wider heads centered, then three below */
+.management-heads{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(260px,380px));
+  justify-content:center;
+  gap:18px;
+  max-width:820px;
+  margin:0 auto 18px;
+}
+.management-three{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  max-width:900px;
+  margin:0 auto;
+}
+.management-heads .management-card{
+  width:100%;
+}
+.management-three .management-card{
+  width:100%;
+}
+
+/* Teaching staff cards: subject only, no repeated Teaching Staff label */
+.department-grid .position,
+.primary-grid .position{
+  display:none !important;
+}
+
+/* Primary section: 20 compact cards */
+.primary-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.primary-grid .team-card{
+  min-width:0;
+}
+
+/* About: remove the vision/mission cards completely */
+.about-page .about-vision-mission{
+  display:none !important;
+}
+
+/* Proprietor section styled like a clean welcome-message feature */
+.proprietor-message{
+  padding:56px 0 70px;
+  background:#fff;
+}
+.proprietor-container{
+  width:min(94%,var(--max));
+  margin:0 auto;
+  display:block;
+  background:#fff;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  padding:0;
+}
+.proprietor-content{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+}
+.proprietor-content h2{
+  color:var(--green);
+  font-size:clamp(32px,4.5vw,58px);
+  line-height:1.1;
+  margin-bottom:32px;
+}
+.proprietor-content .proprietor-quote{
+  border-left:8px solid var(--green);
+  padding:4px 0 4px 28px;
+  margin:0 0 32px;
+  color:#a72d2d;
+  font-size:clamp(20px,2.2vw,30px);
+  line-height:1.5;
+  font-style:italic;
+}
+.proprietor-content > p:not(.proprietor-quote):not(.signature){
+  color:var(--muted);
+  font-size:clamp(16px,1.5vw,21px);
+  line-height:1.7;
+  margin-bottom:28px;
+}
+.proprietor-content .signature{
+  color:#a72d2d;
+  font-size:18px;
+  line-height:1.7;
+  margin-top:34px;
+}
+.proprietor-content .signature strong{
+  color:#a72d2d;
+}
+
+@media(max-width:760px){
+  .management-heads{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+  .management-three{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:6px;
+  }
+  .management-heads .staff-placeholder{
+    height:105px;
+  }
+  .management-three .staff-placeholder{
+    height:75px;
+  }
+  .management-heads .team-card-content,
+  .management-three .team-card-content{
+    padding:7px 5px;
+  }
+  .management-heads h3,
+  .management-three h3{
+    font-size:9px;
+  }
+  .management-heads p,
+  .management-three p{
+    font-size:7px;
+  }
+  .management-heads .linkedin-btn,
+  .management-three .linkedin-btn{
+    font-size:6.5px;
+    padding:4px 5px;
+  }
+  .primary-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+  .proprietor-message{
+    padding:34px 0 45px;
+  }
+  .proprietor-content h2{
+    font-size:32px;
+    margin-bottom:24px;
+  }
+  .proprietor-content .proprietor-quote{
+    border-left-width:6px;
+    padding-left:18px;
+    font-size:20px;
+    margin-bottom:24px;
+  }
+  .proprietor-content > p:not(.proprietor-quote):not(.signature){
+    font-size:16px;
+    line-height:1.65;
+    margin-bottom:22px;
+  }
+  .proprietor-content .signature{
+    font-size:16px;
+    margin-top:26px;
+  }
+}
+
+
+/* ==========================================================
+   BALAD FINAL REQUESTED UPDATES
+========================================================== */
+/* Academic menu toggle */
+.academic-nav{position:relative;display:block}
+.academic-nav summary{list-style:none;cursor:pointer;padding:8px 0;color:inherit;font:inherit;white-space:nowrap}
+.academic-nav summary::-webkit-details-marker{display:none}
+.academic-nav summary::after{content:'▾';font-size:10px;margin-left:7px}
+.academic-nav[open] summary::after{content:'▴'}
+.academic-nav.is-active summary{color:var(--green)}
+.academic-submenu{position:absolute;top:100%;left:0;min-width:170px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px;box-shadow:0 12px 28px rgba(7,65,45,.12);z-index:3300}
+.academic-submenu a{display:block!important;padding:10px 12px!important;border-radius:8px;color:var(--green)!important;white-space:nowrap}
+.academic-submenu a:hover{background:var(--soft)}
+/* Home highlight slider: larger, clean cream/light-green treatment */
+.home-highlight-slider{width:min(94%,1100px);height:430px;margin:26px auto 34px;border-radius:24px;overflow:hidden;position:relative;box-shadow:0 14px 35px rgba(7,65,45,.10);background:#eef5e8;border:1px solid #dbe7d7}
+.home-highlight-slider .about-slide{color:var(--green);background-size:cover;background-position:center}
+.home-highlight-slider .about-slide:before{background:linear-gradient(90deg,rgba(245,247,231,.94),rgba(239,246,232,.70),rgba(239,246,232,.25))}
+.home-highlight-slider .about-slide>div{max-width:650px}
+.home-highlight-slider .about-slide span{color:var(--green);font-size:13px;letter-spacing:2px;font-weight:800}
+.home-highlight-slider .about-slide h1{color:var(--green);font-size:clamp(34px,5vw,58px)}
+.home-highlight-slider .about-slide p{color:#4f5c55;font-size:18px}
+.home-highlight-slider .slider-dots span{background:rgba(5,105,72,.55)}
+/* Make Why Choose and Latest Announcements visibly different */
+.home-page .why-choose{background:#edf4e8;padding:42px 0}
+.home-page .why-choose .section-header h2{color:var(--green)}
+.home-page .why-choose .section-header p{color:#5c6862}
+.home-page .why-choose .choose-card{background:#fffdf8;color:var(--green);border:1px solid #dce7d8}
+.home-page .latest-announcements{background:#f8f1df;padding:42px 0}
+.home-page .latest-announcements .section-header h2{color:var(--green)}
+.home-page .latest-announcements .section-header p{color:#5c6862}
+.home-page .latest-announcements .announcement-card{background:#eef6ec;border:1px solid #d7e6d3}
+/* Team navigation */
+.team-section-nav{display:flex;justify-content:center;gap:10px;margin:18px auto 4px}
+.team-section-nav a{display:inline-flex;align-items:center;justify-content:center;min-width:120px;padding:10px 22px;border:2px solid var(--green);border-radius:30px;color:var(--green);font-weight:800;background:#fff}
+.team-section-nav a.active,.team-section-nav a:hover{background:var(--green);color:#fff}
+/* Three cards across for both College and Primary */
+.primary-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+/* Academic content pages */
+.academic-page-hero{padding:55px 0 40px;background:#edf4e8;text-align:center}
+.academic-page-hero .eyebrow{font-size:12px;letter-spacing:2px;color:var(--green);font-weight:800}
+.academic-page-hero h1{color:var(--green);font-size:42px;margin:8px 0}
+.academic-page-hero>div>p:last-child{color:#5c6862;max-width:700px;margin:auto;font-size:16px;line-height:1.7}
+.academic-info-section{padding:40px 0 60px;background:#fffdf8}
+.academic-info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.academic-info-card{background:#fff;border:1px solid #dbe7d7;border-radius:18px;padding:24px;box-shadow:0 8px 22px rgba(7,65,45,.07)}
+.academic-info-card h2{color:var(--green);font-size:19px;margin-bottom:8px}
+.academic-info-card p{color:#5c6862;font-size:14px;line-height:1.6}
+@media(max-width:760px){
+  .academic-nav{width:100%}
+  .academic-nav summary{min-height:64px;padding:14px 0;border-bottom:2px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-size:20px;font-weight:500}
+  .academic-submenu{position:static;min-width:0;border:0;border-radius:0;box-shadow:none;background:#f4f8f1;padding:4px 12px 8px}
+  .academic-submenu a{min-height:48px!important;padding:10px 12px!important;border-bottom:1px solid var(--line)!important;font-size:17px!important}
+  .home-highlight-slider{height:340px;margin-top:20px;border-radius:18px}
+  .home-highlight-slider .about-slide{padding:8%}
+  .home-highlight-slider .about-slide h1{font-size:32px}
+  .home-highlight-slider .about-slide p{font-size:13px;max-width:85%}
+  .team-section-nav{margin:12px auto 2px}
+  .team-section-nav a{min-width:105px;padding:9px 16px}
+  .primary-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px}
+  .academic-info-grid{grid-template-columns:1fr}
+  .academic-page-hero{padding:38px 0 30px}
+  .academic-page-hero h1{font-size:32px}
+}
+@media(max-width:430px){
+  .home-highlight-slider{height:300px}
+  .home-highlight-slider .about-slide h1{font-size:27px}
+  .home-highlight-slider .about-slide p{font-size:12px}
+}
+
+/* BALAD UPDATE — 17 AUG 2026 */
+/* College + Primary: exactly 3 cards across, including phone view. */
+.department-grid, .primary-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;}
+.department-grid .staff-photo, .department-grid .staff-placeholder{height:210px !important;object-fit:cover;}
+.department-grid .staff-photo{display:block;width:100%;}
+.primary-grid .staff-photo, .primary-grid .staff-placeholder{height:145px !important;object-fit:cover;}
+/* Give college photos much more visual weight before the text. */
+.department-grid .team-card-content{padding:11px 9px 13px !important;}
+.department-grid .team-card-content h3{font-size:12px !important;}
+.department-grid .team-card-content p{font-size:8.5px !important;}
+/* LinkedIn removed from all staff cards. */
+.linkedin-btn{display:none !important;}
+/* Management photo cards */
+.management-heads .staff-photo{height:230px !important;object-fit:cover;}
+.management-three .staff-photo{height:190px !important;object-fit:cover;}
+.management-three .staff-placeholder{height:190px !important;}
+/* Home moving hero: deeper Balad green, but not black. */
+.home-highlight-slider{background:linear-gradient(135deg,#075c46 0%,#0a6f52 52%,#0b7a5b 100%) !important;border:1px solid rgba(7,92,70,.25);}
+.home-highlight-slider .about-slide:before{background:linear-gradient(90deg,rgba(4,73,54,.90),rgba(7,92,70,.62),rgba(10,111,82,.30)) !important;}
+.home-highlight-slider .about-slide{color:#fff !important;}
+.home-highlight-slider .about-slide span,.home-highlight-slider .about-slide h1,.home-highlight-slider .about-slide p{color:#fff !important;text-shadow:0 1px 2px rgba(0,0,0,.18);}
+/* Results login feedback should always be visible while troubleshooting. */
+.result-login #loginStatus{min-height:24px;font-weight:700;color:var(--green);}
+@media(max-width:768px){
+  .department-grid,.primary-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:7px !important;}
+  .department-grid .staff-photo,.department-grid .staff-placeholder{height:145px !important;}
+  .primary-grid .staff-photo,.primary-grid .staff-placeholder{height:105px !important;}
+  .department-grid .team-card-content{padding:7px 5px 9px !important;}
+  .department-grid .team-card-content h3{font-size:9px !important;}
+  .department-grid .team-card-content p{font-size:6.8px !important;}
+  .primary-grid .team-card-content{padding:6px 4px !important;}
+  .primary-grid h3{font-size:8.5px !important;}
+  .primary-grid p{font-size:6.5px !important;}
+  .management-heads .staff-photo{height:175px !important;}
+  .management-three .staff-photo,.management-three .staff-placeholder{height:135px !important;}
+}
+@media(max-width:430px){
+  .department-grid,.primary-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:5px !important;}
+  .department-grid .staff-photo,.department-grid .staff-placeholder{height:125px !important;}
+  .primary-grid .staff-photo,.primary-grid .staff-placeholder{height:92px !important;}
+  .department-grid .team-card-content h3{font-size:8px !important;}
+  .department-grid .team-card-content p{font-size:6.2px !important;}
+}
+
+/* ==========================================================
+   BALAD TODAY'S UPDATES — 18 AUG 2026
+========================================================== */
+.home-highlight-slider{
+  height:520px;
+  width:min(96%,1180px);
+  margin:34px auto 46px;
+  border-radius:28px;
+  background:linear-gradient(135deg,#07533e 0%,#086b49 48%,#0b805f 100%) !important;
+}
+.home-highlight-slider .about-slide:before{
+  background:linear-gradient(90deg,rgba(2,55,40,.92),rgba(5,93,67,.72),rgba(8,122,91,.28)) !important;
+}
+.home-highlight-slider .about-slide h1{font-size:clamp(40px,5.5vw,70px)!important}
+.home-highlight-slider .about-slide p{font-size:20px!important;max-width:600px}
+.student-talent-section{background:#f7f3e5;padding:48px 0}
+.talent-video-card{position:relative;min-height:360px;border-radius:24px;overflow:hidden;background:#0a5f45;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
+.talent-video-card video{width:100%;height:100%;min-height:360px;object-fit:cover;display:block}
+.talent-video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#fff;background:linear-gradient(135deg,rgba(5,79,57,.88),rgba(10,119,87,.72));pointer-events:none;text-align:center;padding:20px}
+.talent-video-placeholder strong{font-size:28px}.talent-video-placeholder span{font-size:15px}
+.our-schools{order:initial}
+.home-page .our-schools{background:#07533e;color:#fff;padding:50px 0}
+.home-page .our-schools .section-header h2,.home-page .our-schools .section-header p{color:#fff}
+.home-page .our-schools .school-card{background:#fffdf8;color:var(--green);border-color:#dce7d8}
+.admission-student-gallery{background:#f7f3e5}
+.admission-gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.admission-gallery-grid figure{background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+.admission-gallery-grid img{width:100%;height:280px;object-fit:cover}.admission-gallery-grid figcaption{padding:14px 16px;color:var(--green);font-weight:800}
+.academic-feature-image{padding:44px 0;background:#edf4e8}
+.academic-feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.academic-feature-grid img{width:100%;height:340px;object-fit:cover;border-radius:22px;box-shadow:var(--shadow)}
+.academic-feature-grid h2{color:var(--green);font-size:32px;margin:6px 0 12px}.academic-feature-grid p:last-child{color:#5c6862;font-size:16px;line-height:1.7}
+.team-hero-slider{width:min(96%,1180px);height:460px;margin:30px auto 48px;border-radius:28px;overflow:hidden;position:relative;background:#07533e;box-shadow:var(--shadow)}
+.team-hero-track{height:100%;display:flex;width:300%;animation:teamHero 15s infinite}
+.team-hero-slide{width:33.333%;height:100%;flex:none;background-size:cover;background-position:center;position:relative;display:flex;align-items:center}
+.team-hero-slide:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,62,45,.94),rgba(5,95,69,.65),rgba(5,95,69,.15))}
+.team-hero-slide>div{position:relative;z-index:1;color:#fff;padding:7%;max-width:700px}.team-hero-slide span{font-size:13px;letter-spacing:3px;font-weight:800}.team-hero-slide h1{font-size:clamp(38px,5vw,66px);line-height:1.05;margin:10px 0 16px}.team-hero-slide p{font-size:19px;line-height:1.6}
+.team-hero-dots{position:absolute;bottom:18px;left:0;right:0;text-align:center;z-index:2}.team-hero-dots span{display:inline-block;width:11px;height:11px;border-radius:50%;background:#fff;margin:0 5px;opacity:.75}
+@keyframes teamHero{0%,28%{transform:translateX(0)}33%,61%{transform:translateX(-33.333%)}66%,94%{transform:translateX(-66.666%)}100%{transform:translateX(0)}}
+.waec-banner{padding:70px 0;background:linear-gradient(135deg,#064c36,#0a7658);color:#fff;text-align:center}.waec-banner h1{font-size:clamp(36px,5vw,62px);margin:8px 0}.waec-banner p:last-child{max-width:720px;margin:auto;font-size:18px}
+.waec-summary{padding:60px 0;background:#f7f3e5}.waec-summary-card{background:#fff;border-radius:24px;padding:42px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;box-shadow:var(--shadow)}.waec-label{color:var(--green);font-size:12px;font-weight:800;letter-spacing:2px}.waec-summary h2{color:var(--green);font-size:34px;margin:8px 0}.waec-summary p{color:var(--muted);line-height:1.7;margin-bottom:22px}.waec-years{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.waec-years div{padding:22px;border-radius:16px;background:#edf4e8;color:var(--green);font-weight:900;text-align:center;font-size:24px}.waec-years strong{display:block;font-size:11px;letter-spacing:2px;margin-top:4px}
+footer{background:#064c36!important;color:#fff!important}.footer-bottom{color:#fff!important}.footer-bottom a{color:#fff;text-decoration:underline;font-weight:800}
+@media(max-width:760px){
+ .home-highlight-slider{height:410px;margin:24px auto 34px}.home-highlight-slider .about-slide h1{font-size:34px!important}.home-highlight-slider .about-slide p{font-size:14px!important}
+ .talent-video-card,.talent-video-card video{min-height:260px}
+ .talent-video-placeholder strong{font-size:22px}
+ .admission-gallery-grid,.academic-feature-grid,.waec-summary-card{grid-template-columns:1fr}
+ .admission-gallery-grid img{height:220px}.academic-feature-grid img{height:250px}
+ .team-hero-slider{height:390px;margin-top:20px}.team-hero-slide h1{font-size:34px}.team-hero-slide p{font-size:14px}
+ .waec-banner{padding:48px 20px}.waec-summary-card{padding:25px}.waec-summary h2{font-size:28px}
+}
+
+
+/* ==========================================================
+   CURRENT VISUAL CORRECTIONS — 18 AUG 2026
+========================================================== */
+/* Keep bundled images/logos visible and give the optional dashboard media a safe fallback. */
+img[data-media-key]{background:transparent;}
+
+/* Home: hero + Why Choose are one clean container. */
+.home-hero-why-container{
+  width:min(96%,1180px);
+  margin:34px auto 42px;
+  background:#f4efe3;
+  border:1px solid #e4ddce;
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 14px 36px rgba(34,45,39,.10);
+}
+.home-hero-why-container .home-highlight-slider{
+  width:100%;
+  margin:0;
+  height:500px;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  background:#263b35 !important;
+}
+.home-hero-why-container .home-highlight-slider .about-slide:before{
+  background:linear-gradient(90deg,rgba(24,31,29,.78),rgba(35,45,42,.52),rgba(35,45,42,.16)) !important;
+}
+.home-hero-why-container .home-highlight-slider .about-slide span,
+.home-hero-why-container .home-highlight-slider .about-slide h1,
+.home-hero-why-container .home-highlight-slider .about-slide p{
+  color:#fff !important;
+  text-shadow:0 2px 8px rgba(0,0,0,.34);
+}
+.home-hero-why-container .why-choose{
+  margin:0 !important;
+  padding:42px 0 46px !important;
+  background:#f4efe3 !important;
+  color:#26352f;
+}
+.home-hero-why-container .why-choose .section-header h2{color:#17664d !important;}
+.home-hero-why-container .why-choose .section-header p{color:#5c655f !important;}
+.home-hero-why-container .why-choose .choose-card{
+  background:#fffdf8 !important;
+  color:#17664d !important;
+  border:1px solid #e2dccc !important;
+  box-shadow:0 6px 16px rgba(34,45,39,.07);
+}
+
+/* Compact WAEC call-to-action on Home; detailed results live on the dedicated page. */
+.home-waec-results{background:#fffaf0 !important;padding:30px 0 !important;}
+.waec-home-card{
+  width:min(94%,900px);
+  margin:auto;
+  background:#fff;
+  border:1px solid #e4ddce;
+  border-radius:18px;
+  padding:24px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  box-shadow:0 8px 22px rgba(34,45,39,.07);
+}
+.waec-home-card .eyebrow{font-size:11px;letter-spacing:2px;color:#17664d;font-weight:800;}
+.waec-home-card h2{color:#17664d;margin:6px 0 7px;font-size:24px;}
+.waec-home-card p{color:#626a65;margin:0;line-height:1.55;}
+.waec-home-btn{flex:0 0 auto;background:#17664d;color:#fff;padding:12px 20px;border-radius:24px;font-weight:800;white-space:nowrap;}
+
+/* Non-home page hero cards: use neutral editorial tones instead of solid green. */
+.page-hero,
+.academic-page-hero,
+.waec-banner{
+  background:#f1eadc !important;
+  color:#1f302a !important;
+  border-bottom:1px solid #e3d9c7;
+}
+.page-hero .page-overlay h1,
+.page-hero .page-overlay p,
+.academic-page-hero h1,
+.academic-page-hero>div>p:last-child,
+.waec-banner h1,
+.waec-banner p:last-child{color:#1f302a !important;}
+.page-hero .page-overlay h1,
+.waec-banner h1{font-weight:850;}
+.academic-page-hero .eyebrow{color:#17664d !important;}
+
+/* Team hero: first thing on the page, with header + title + section navigation inside it. */
+.team-page{background:#fff;}
+.team-hero-shell{
+  position:relative;
+  min-height:700px;
+  overflow:hidden;
+  background:#27322f;
+  color:#fff;
+}
+.team-hero-shell:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg,rgba(22,29,27,.62) 0%,rgba(22,29,27,.22) 36%,rgba(22,29,27,.74) 100%),
+    url('images/teachers-day1.jpg') center/cover no-repeat;
+  z-index:0;
+}
+.team-hero-shell header{
+  position:relative;
+  z-index:10;
+  background:rgba(255,255,255,.94);
+  color:#1f302a;
+  border-bottom:1px solid rgba(255,255,255,.55);
+}
+.team-hero-shell header nav a{color:#1f302a;}
+.team-hero-shell header nav a.active{color:#17664d;}
+.team-hero-heading{
+  position:relative;
+  z-index:3;
+  width:min(90%,850px);
+  margin:42px auto 18px;
+  text-align:center;
+  text-shadow:0 2px 12px rgba(0,0,0,.42);
+}
+.team-hero-eyebrow{font-size:12px;letter-spacing:3px;font-weight:900;margin-bottom:8px;}
+.team-hero-heading h1{font-size:clamp(38px,5vw,68px);line-height:1.05;margin:0 0 14px;color:#fff;}
+.team-hero-heading>p:last-child{font-size:18px;line-height:1.55;max-width:760px;margin:auto;color:#fff;}
+.team-hero-shell .team-section-nav{position:relative;z-index:4;margin:24px auto 18px;}
+.team-hero-shell .team-section-nav a{background:rgba(255,255,255,.94);border-color:#fff;color:#17664d;}
+.team-hero-shell .team-section-nav a.active,.team-hero-shell .team-section-nav a:hover{background:#17664d;color:#fff;border-color:#17664d;}
+.team-hero-shell .team-hero-slider{
+  position:relative;
+  z-index:2;
+  width:min(92%,1180px);
+  height:360px;
+  margin:0 auto 34px;
+  border-radius:24px;
+  background:rgba(24,30,28,.55);
+  box-shadow:0 18px 42px rgba(0,0,0,.22);
+}
+.team-hero-shell .team-hero-slide:before{
+  background:linear-gradient(90deg,rgba(18,24,22,.80),rgba(18,24,22,.44),rgba(18,24,22,.12));
+}
+.team-hero-shell .team-hero-slide h2{font-size:clamp(32px,4.5vw,58px);line-height:1.05;margin:10px 0 14px;}
+.team-hero-shell .team-hero-slide p{color:#fff;max-width:620px;}
+.team-hero-shell .team-hero-dots span{background:#fff;}
+
+@media(max-width:760px){
+  .home-hero-why-container{width:94%;margin:22px auto 30px;border-radius:20px;}
+  .home-hero-why-container .home-highlight-slider{height:360px;}
+  .home-hero-why-container .why-choose{padding:30px 0 34px !important;}
+  .waec-home-card{flex-direction:column;align-items:flex-start;padding:20px;gap:16px;}
+  .waec-home-card h2{font-size:20px;}
+  .waec-home-btn{width:100%;text-align:center;}
+  .team-hero-shell{min-height:650px;}
+  .team-hero-shell header{background:rgba(255,255,255,.96);}
+  .team-hero-heading{margin:28px auto 14px;width:92%;}
+  .team-hero-heading h1{font-size:36px;}
+  .team-hero-heading>p:last-child{font-size:14px;}
+  .team-hero-shell .team-section-nav{margin:16px auto 14px;}
+  .team-hero-shell .team-hero-slider{height:310px;width:94%;margin-bottom:24px;border-radius:18px;}
+  .team-hero-shell .team-hero-slide h2{font-size:31px;}
+  .team-hero-shell .team-hero-slide p{font-size:13px;line-height:1.45;}
+}
+
+
+/* ==========================================================
+   FINAL CORRECTIONS — GALLERY / RESULTS / PAGE CONTROLS
+========================================================== */
+
+/* Universal navigation controls on every public page. */
+.site-back-button,
+.site-top-button{
+  position:fixed;
+  z-index:5000;
+  border:1px solid rgba(11,110,79,.16);
+  box-shadow:0 8px 22px rgba(25,45,37,.14);
+  font-family:Arial,Helvetica,sans-serif;
+  cursor:pointer;
+  transition:.25s ease;
+}
+.site-back-button{
+  top:92px;
+  left:18px;
+  min-height:38px;
+  padding:9px 14px;
+  border-radius:22px;
+  background:rgba(255,255,255,.94);
+  color:#0b6e4f;
+  font-weight:800;
+  backdrop-filter:blur(10px);
+}
+.site-back-button:hover{transform:translateX(-3px);}
+.site-top-button{
+  right:20px;
+  bottom:24px;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:#0b6e4f;
+  color:#fff;
+  font-size:24px;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(10px);
+}
+.site-top-button.show{opacity:1;visibility:visible;transform:translateY(0);}
+.site-top-button:hover{transform:translateY(-3px);background:#09563e;}
+
+/* Keep page heroes readable without making every hero a dark green block. */
+.page-hero,
+.academic-page-hero,
+.waec-banner{
+  background:#f1eadc !important;
+}
+.page-hero .page-overlay,
+.academic-page-hero .container,
+.waec-banner .container{position:relative;z-index:1;}
+
+/* Home: keep the hero and Why Choose section in one container. */
+.home-hero-why-container .why-choose .choose-container{
+  justify-content:center;
+  grid-template-columns:repeat(5,minmax(120px,1fr));
+  max-width:1050px;
+  margin-inline:auto;
+}
+.home-hero-why-container .why-choose .choose-card{
+  min-height:78px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+/* Home environment slide: lighter editorial treatment instead of another green card. */
+.home-hero-why-container .home-highlight-slider .slide-four:before{
+  background:linear-gradient(90deg,rgba(255,251,240,.90),rgba(255,251,240,.68),rgba(255,251,240,.18)) !important;
+}
+.home-hero-why-container .home-highlight-slider .slide-four > div{
+  color:#1f302a;
+  text-shadow:0 1px 5px rgba(255,255,255,.45);
+}
+.home-hero-why-container .home-highlight-slider .slide-four span,
+.home-hero-why-container .home-highlight-slider .slide-four h1,
+.home-hero-why-container .home-highlight-slider .slide-four p{
+  color:#1f302a !important;
+  text-shadow:none;
+}
+
+/* Student talent: clean square showcase, ready for a Control Dashboard video. */
+.student-talent-section{
+  background:#f7f3e5 !important;
+}
+.talent-video-card{
+  width:min(100%,520px);
+  aspect-ratio:1/1;
+  min-height:0;
+  margin:0 auto;
+  background:#fffdf8;
+  border:1px solid #e1ddcf;
+  border-radius:22px;
+}
+.talent-video-card video{
+  width:100%;
+  height:100%;
+  min-height:0;
+  object-fit:cover;
+}
+.talent-video-placeholder{
+  background:rgba(255,255,255,.92);
+  color:#17664d;
+  border:0;
+}
+.talent-video-placeholder strong{font-size:22px;}
+.talent-video-placeholder span{color:#5d6862;max-width:300px;line-height:1.5;}
+
+/* Admissions: the main admission card uses the school green with white inner cards. */
+.admission-requirements > .admission-requirements{
+  width:min(94%,1180px);
+  background:#0b6e4f;
+  color:#fff;
+  padding:32px;
+  border-radius:24px;
+  box-shadow:0 16px 34px rgba(11,110,79,.16);
+}
+.admission-requirements > .admission-requirements > h2,
+.admission-requirements > .admission-requirements > .requirements-subtitle{
+  color:#fff;
+}
+.admission-requirements .requirement-card{
+  background:#fffdf8;
+}
+.admission-process,
+.faq-section,
+.admission-student-gallery,
+.admission-cta{
+  background:#fff;
+}
+
+/* Curriculum / STEM main feature containers: green outer card, readable white text. */
+.academic-feature-image{
+  background:#0b6e4f !important;
+}
+.academic-feature-grid{
+  background:#0b6e4f;
+  padding:30px;
+  border-radius:24px;
+}
+.academic-feature-grid h1,
+.academic-feature-grid h2,
+.academic-feature-grid p,
+.academic-feature-grid .eyebrow{
+  color:#fff !important;
+}
+.academic-feature-grid img{
+  border-radius:18px;
+}
+
+/* Curriculum gets a fuller 4-part information layout without changing the copy. */
+.academic-info-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+}
+.academic-info-card{
+  min-height:170px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.academic-info-card:nth-child(1){background:#0b6e4f;color:#fff;}
+.academic-info-card:nth-child(1) h2,
+.academic-info-card:nth-child(1) p{color:#fff;}
+.academic-info-card:nth-child(n+2){background:#fffdf8;}
+
+/* STEM main container remains green while its information cards stay light. */
+body:has(.academic-page-hero h1) .academic-feature-grid{
+  box-shadow:0 14px 30px rgba(7,83,62,.18);
+}
+
+/* Result portal: green-white school selector and clean class cards. */
+.results-page-wrap{
+  width:min(94%,1180px);
+  margin:0 auto;
+  padding:28px 0 55px;
+}
+.result-role-note{
+  background:#0b6e4f !important;
+  color:#fff;
+  border:0 !important;
+  box-shadow:0 10px 24px rgba(11,110,79,.12);
+}
+.result-school-tabs{
+  background:#edf4e8;
+  width:max-content;
+  max-width:100%;
+  margin:0 auto 22px;
+  padding:6px;
+  border-radius:34px;
+}
+.result-school-tab{
+  min-width:180px;
+  padding:12px 24px;
+}
+.result-school-panel{
+  background:#fff;
+  border:1px solid #dce6e0;
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 10px 25px rgba(28,48,40,.07);
+  margin-bottom:18px;
+}
+.result-school-panel h2{color:#0b6e4f;}
+.result-class-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.result-class-btn{
+  border:1px solid #d5e1db;
+  background:#f7faf8;
+  color:#0b6e4f;
+  border-radius:14px;
+  padding:15px;
+  font-weight:800;
+  cursor:pointer;
+}
+.result-class-btn:hover{background:#0b6e4f;color:#fff;}
+#portalContent{
+  margin-top:20px;
+}
+.result-output-heading{
+  margin:0 0 12px;
+  color:#0b6e4f;
+}
+.result-student-card{
+  background:#fffdf8;
+}
+
+/* Result highlight: only 2024–2026 are shown. */
+.waec-summary-card{
+  background:#0b6e4f !important;
+  color:#fff;
+}
+.waec-summary-card h2,
+.waec-summary-card p,
+.waec-summary-card .waec-label{
+  color:#fff !important;
+}
+.waec-years div{
+  background:#fffdf8 !important;
+  color:#0b6e4f !important;
+  min-height:110px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.waec-years{
+  grid-template-columns:repeat(3,1fr);
+}
+
+/* Gallery album collection inspired by modern tour/photo album layouts. */
+.gallery-album-hero{
+  background:#fffdf8;
+  padding:54px 0 32px;
+  text-align:center;
+  border-bottom:1px solid #e8e2d5;
+}
+.gallery-album-hero .eyebrow,
+.album-location{
+  color:#0b6e4f;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+.gallery-album-hero h1{
+  color:#17231f;
+  font-size:clamp(36px,5vw,60px);
+  margin:5px 0 8px;
+}
+.gallery-album-hero p{
+  max-width:720px;
+  margin:auto;
+  color:#68716c;
+}
+.gallery-search-wrap{
+  width:min(100%,520px);
+  margin:24px auto 0;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid #dddfe0;
+  border-radius:30px;
+  background:#fff;
+  padding:0 16px;
+  box-shadow:0 4px 14px rgba(25,45,37,.05);
+}
+.gallery-search-wrap span{font-size:22px;color:#9aa29e;}
+.gallery-search-wrap input{
+  width:100%;
+  border:0;
+  outline:0;
+  padding:13px 0;
+  font-size:14px;
+  background:transparent;
+}
+.gallery-album-main{
+  background:#f8f9fa;
+  padding:30px 0 70px;
+}
+.album-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+  color:#65706b;
+}
+.album-toolbar strong{color:#17231f;}
+.album-reset{
+  border:1px solid #d6ded9;
+  background:#fff;
+  color:#0b6e4f;
+  padding:8px 14px;
+  border-radius:20px;
+  font-weight:800;
+}
+.album-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+}
+.album-card{
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(25,45,37,.08);
+  border:1px solid #e7e9e7;
+  transition:.25s ease;
+}
+.album-card:hover{transform:translateY(-4px);box-shadow:0 18px 32px rgba(25,45,37,.12);}
+.album-card[hidden]{display:none;}
+.album-cover{
+  width:100%;
+  height:310px;
+  border:0;
+  background:#fff;
+  padding:24px 26px 4px;
+  cursor:pointer;
+}
+.album-stack{
+  position:relative;
+  width:100%;
+  height:100%;
+}
+.album-stack img{
+  position:absolute;
+  width:78%;
+  height:78%;
+  left:11%;
+  top:8%;
+  object-fit:cover;
+  border-radius:15px;
+  box-shadow:0 12px 24px rgba(20,35,29,.16);
+  transition:.3s ease;
+}
+.album-stack img:nth-child(1){transform:rotate(-6deg) translateX(-20px);z-index:1;}
+.album-stack img:nth-child(2){transform:rotate(0deg);z-index:2;}
+.album-stack img:nth-child(3){transform:rotate(6deg) translateX(20px);z-index:3;}
+.album-card:hover .album-stack img:nth-child(1){transform:rotate(-8deg) translateX(-34px);}
+.album-card:hover .album-stack img:nth-child(3){transform:rotate(8deg) translateX(34px);}
+.album-meta{padding:16px 18px 18px;}
+.album-meta h2{font-size:21px;color:#17231f;margin:5px 0 3px;}
+.album-meta p{font-size:13px;color:#69726d;min-height:38px;}
+.album-count{
+  display:inline-block;
+  margin-top:8px;
+  color:#0b6e4f;
+  font-weight:900;
+  font-size:12px;
+}
+.album-modal{
+  position:fixed;
+  inset:0;
+  z-index:6000;
+}
+.album-modal[hidden]{display:none;}
+.album-modal-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(7,18,14,.72);
+  backdrop-filter:blur(5px);
+}
+.album-modal-panel{
+  position:relative;
+  width:min(94%,1000px);
+  max-height:88vh;
+  overflow:auto;
+  margin:6vh auto 0;
+  background:#fffdf8;
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 25px 70px rgba(0,0,0,.3);
+}
+.album-modal-panel h2{color:#17231f;margin:4px 0;}
+.album-modal-panel > p{color:#66716b;margin-bottom:18px;}
+.album-modal-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:50%;
+  background:#0b6e4f;
+  color:#fff;
+  font-size:25px;
+  cursor:pointer;
+}
+.album-photo-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.album-photo-grid figure{
+  margin:0;
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+}
+.album-photo-grid img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+}
+.album-photo-grid figcaption{
+  padding:7px 10px;
+  color:#0b6e4f;
+  font-weight:900;
+  font-size:11px;
+}
+body.album-open{overflow:hidden;}
+
+/* Footer: one consistent copyright/developer line. */
+.footer-bottom{
+  text-align:center !important;
+}
+.footer-developer{margin-left:8px;}
+.footer-developer a{
+  color:#fff !important;
+  text-decoration:underline !important;
+  font-weight:900;
+}
+
+@media(max-width:760px){
+  .site-back-button{top:82px;left:10px;padding:8px 11px;font-size:12px;}
+  .site-top-button{right:14px;bottom:18px;width:44px;height:44px;}
+  .home-hero-why-container .why-choose .choose-container{grid-template-columns:1fr 1fr;max-width:520px;}
+  .admission-requirements > .admission-requirements{padding:22px 16px;border-radius:20px;}
+  .academic-feature-grid{grid-template-columns:1fr;padding:22px;}
+  .academic-info-grid{grid-template-columns:1fr 1fr !important;}
+  .result-class-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .waec-years{grid-template-columns:1fr 1fr;}
+  .album-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+  .album-cover{height:240px;padding:18px 18px 4px;}
+  .album-meta{padding:12px;}
+  .album-meta h2{font-size:16px;}
+  .album-meta p{font-size:11px;}
+  .album-photo-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:430px){
+  .home-hero-why-container .why-choose .choose-container{grid-template-columns:1fr;}
+  .academic-info-grid{grid-template-columns:1fr !important;}
+  .result-class-grid{grid-template-columns:1fr;}
+  .waec-years{grid-template-columns:1fr;}
+  .album-grid{grid-template-columns:1fr;}
+  .album-cover{height:270px;}
+}
+
+
+/* Final button/card polish. */
+.btn,.cta-btn,.gallery-btn,.announcement-btn,.admission-btn,.waec-home-btn,.facility-home-btn{
+  box-shadow:0 6px 16px rgba(25,45,37,.12);
+}
+.announcement-btn,.cta-btn,.gallery-btn,.admission-btn{
+  border:1px solid rgba(155,34,38,.12);
+}
+
+/* Result portal header card: green-white, matching the requested school selector treatment. */
+.results-page .page-hero{
+  background:#0b6e4f !important;
+  padding:34px 20px;
+  border-bottom:0;
+}
+.results-page .page-overlay{
+  background:#fffdf8;
+  color:#1f302a;
+  padding:22px 26px;
+  border-radius:20px;
+  box-shadow:0 12px 28px rgba(5,55,39,.18);
+}
+.results-page .page-overlay h1,
+.results-page .page-overlay p{color:#1f302a !important;}
+.results-page .page-overlay h1{margin-bottom:6px;}
+
+/* Keep the Result Highlight page card distinctly green while the year cards stay white. */
+.waec-summary{background:#f7f3e5 !important;}
+
+
+/* ==========================================================
+   REQUESTED CORRECTIONS — WAEC RESULTS / TEAM NAV / CONTROL LOGIN
+   Only the requested visual and result-page changes.
+========================================================== */
+
+/* Control Dashboard login: keep the existing authentication untouched,
+   but make the login form stack cleanly on phones and desktop. */
+.control-login{
+  width:min(92%,560px);
+  padding:34px 32px;
+}
+.control-login h2{
+  font-size:32px;
+  line-height:1.15;
+}
+.control-login .control-muted{
+  font-size:16px;
+  line-height:1.55;
+  margin-bottom:24px;
+}
+.control-login label{
+  display:block;
+  margin:0 0 7px;
+  color:#26352f;
+  font-weight:800;
+}
+.control-login input{
+  display:block;
+  width:100%;
+  min-height:48px;
+  padding:12px 14px;
+  margin:0 0 17px;
+  border:1px solid #cfdcd6;
+  border-radius:10px;
+  background:#fff;
+  font-size:16px;
+}
+.control-login input:focus{
+  outline:2px solid rgba(11,110,79,.14);
+  border-color:#0b6e4f;
+}
+.control-login #login{
+  display:block;
+  width:100%;
+  min-height:48px;
+  margin-top:5px;
+  padding:12px 18px;
+  border:0;
+  border-radius:12px;
+  background:#0b6e4f;
+  color:#fff;
+  font-size:15px;
+  font-weight:800;
+  cursor:pointer;
+}
+.control-login #login:hover{background:#095c43;}
+
+/* Team page: place College / Primary buttons inside the hero slider,
+   at the lower position indicated by the supplied arrow. */
+.team-hero-shell .team-hero-slider{
+  margin-top:18px;
+}
+.team-hero-shell .team-hero-slider .team-section-nav{
+  position:absolute;
+  z-index:8;
+  left:0;
+  right:0;
+  bottom:58px;
+  margin:0 auto;
+  pointer-events:none;
+}
+.team-hero-shell .team-hero-slider .team-section-nav a{
+  pointer-events:auto;
+  min-width:120px;
+  box-shadow:0 8px 18px rgba(0,0,0,.18);
+}
+@media(max-width:760px){
+  .control-login{padding:28px 22px;margin:38px auto;}
+  .control-login h2{font-size:28px;}
+  .team-hero-shell .team-hero-slider .team-section-nav{
+    bottom:48px;
+  }
+  .team-hero-shell .team-hero-slider .team-section-nav a{
+    min-width:105px;
+    padding:9px 16px;
+  }
+}
+
+/* WAEC result year selector: clean, compact and clickable. */
+.waec-results-page .waec-banner{
+  padding:54px 20px 48px;
+}
+.waec-eyebrow{
+  margin:0 0 8px;
+  color:#17664d;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:3px;
+}
+.waec-results-page .waec-year-wrap{
+  background:#f7f3e5;
+  padding:42px 0 60px;
+}
+.waec-year-card{
+  width:min(94%,1050px);
+  margin:auto;
+  background:#fff;
+  border:1px solid #e1e5df;
+  border-radius:24px;
+  padding:34px;
+  box-shadow:0 12px 28px rgba(30,50,42,.08);
+}
+.waec-year-intro{
+  text-align:center;
+  max-width:720px;
+  margin:0 auto 26px;
+}
+.waec-year-intro h2{
+  margin:8px 0;
+  color:#17664d;
+  font-size:30px;
+}
+.waec-year-intro p{
+  color:#606a65;
+  line-height:1.6;
+}
+.waec-results-page .waec-years{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+.waec-results-page .waec-years a{
+  min-height:150px;
+  border-radius:18px;
+  background:#0b6e4f;
+  color:#fff;
+  text-decoration:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 18px rgba(11,110,79,.14);
+  transition:transform .2s ease,background .2s ease;
+}
+.waec-results-page .waec-years a:hover{
+  transform:translateY(-3px);
+  background:#095c43;
+}
+.waec-results-page .waec-years a span{
+  font-size:38px;
+  font-weight:900;
+}
+.waec-results-page .waec-years a strong{
+  margin-top:7px;
+  font-size:12px;
+  letter-spacing:3px;
+}
+
+/* Individual WAEC statistics page. */
+.waec-stat-page{
+  background:#f7f3e5;
+  padding:34px 0 65px;
+  min-height:60vh;
+}
+.waec-stat-top{
+  width:min(94%,1180px);
+  margin:0 auto 22px;
+}
+.waec-back-link{
+  display:inline-flex;
+  align-items:center;
+  margin-bottom:22px;
+  padding:9px 15px;
+  border:1px solid #d5e0da;
+  border-radius:22px;
+  background:#fff;
+  color:#0b6e4f;
+  font-weight:800;
+  text-decoration:none;
+  box-shadow:0 5px 14px rgba(30,50,42,.07);
+}
+.waec-stat-top h1{
+  margin:7px 0 5px;
+  color:#17392f;
+  font-size:clamp(28px,4vw,48px);
+  line-height:1.1;
+}
+.waec-stat-top p{color:#5f6863;margin:0;}
+.waec-published-result{
+  width:min(94%,1180px);
+  margin:auto;
+  background:#fff;
+  border:1px solid #dce5df;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(30,50,42,.09);
+  overflow:hidden;
+}
+.waec-stat-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:25px 26px;
+  background:#0b6e4f;
+  color:#fff;
+}
+.waec-stat-heading .waec-label{color:#dff3ea;}
+.waec-stat-heading h2{
+  margin:7px 0 0;
+  color:#fff;
+  font-size:clamp(18px,2.3vw,28px);
+  line-height:1.2;
+}
+.waec-session-badge{
+  flex:0 0 auto;
+  padding:10px 14px;
+  border-radius:22px;
+  background:#fff;
+  color:#0b6e4f;
+  font-size:12px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.waec-table-wrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.waec-stat-table{
+  width:100%;
+  min-width:980px;
+  border-collapse:collapse;
+  font-family:Georgia,"Times New Roman",serif;
+  color:#1f2925;
+  background:#fff;
+}
+.waec-stat-table th,
+.waec-stat-table td{
+  border:1px solid #aeb7b2;
+  padding:10px 9px;
+  text-align:center;
+  vertical-align:middle;
+}
+.waec-stat-table th{
+  background:#f1f3ef;
+  font-size:14px;
+  line-height:1.2;
+  font-weight:700;
+}
+.waec-stat-table td{
+  font-size:14px;
+}
+.waec-stat-table td.subject-name{
+  text-align:left;
+  font-weight:600;
+  min-width:180px;
+}
+.waec-stat-table tbody tr:nth-child(even){background:#fafbf9;}
+.waec-unavailable{
+  width:min(94%,760px);
+  margin:30px auto;
+  padding:34px;
+  text-align:center;
+  background:#fff;
+  border:1px solid #dce5df;
+  border-radius:22px;
+  box-shadow:0 12px 28px rgba(30,50,42,.08);
+}
+.waec-unavailable h2{color:#17664d;margin:8px 0;}
+.waec-unavailable p{color:#606a65;line-height:1.6;margin-bottom:20px;}
+@media(max-width:760px){
+  .waec-results-page .waec-year-wrap{padding:28px 0 45px;}
+  .waec-year-card{padding:23px 17px;border-radius:19px;}
+  .waec-year-intro h2{font-size:25px;}
+  .waec-results-page .waec-years{grid-template-columns:1fr;gap:12px;}
+  .waec-results-page .waec-years a{min-height:108px;}
+  .waec-results-page .waec-years a span{font-size:32px;}
+  .waec-stat-page{padding:25px 0 45px;}
+  .waec-stat-heading{align-items:flex-start;flex-direction:column;padding:20px 17px;}
+  .waec-stat-heading h2{font-size:20px;}
+  .waec-table-wrap{border-top:1px solid #dfe6e1;}
+  .waec-stat-table th,.waec-stat-table td{padding:8px 7px;font-size:12px;}
+  .waec-stat-table{min-width:950px;}
+  .waec-stat-table td.subject-name{min-width:170px;}
+}
+
+
+/* ==========================================================
+   WAEC RESULT CLEANUP — MOBILE FIT + CLEAN WHITE LAYOUT
+   Only affects the WAEC result pages.
+========================================================== */
+.waec-year-wrap,
+.waec-stat-page{
+  background:#fff;
+}
+
+.waec-year-card,
+.waec-published-result{
+  background:#fff;
+}
+
+.waec-year-card{
+  box-shadow:0 8px 22px rgba(30,50,42,.06);
+}
+
+.waec-stat-page{
+  min-height:60vh;
+}
+
+.waec-table-wrap{
+  overflow-x:hidden;
+}
+
+.waec-stat-table{
+  width:100%;
+  min-width:0;
+  table-layout:fixed;
+}
+
+.waec-stat-table th,
+.waec-stat-table td{
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+
+.waec-stat-table th:nth-child(1),
+.waec-stat-table td:nth-child(1){width:4%;}
+.waec-stat-table th:nth-child(2),
+.waec-stat-table td:nth-child(2){width:22%; text-align:left;}
+.waec-stat-table th:nth-child(n+3),
+.waec-stat-table td:nth-child(n+3){width:8.22%;}
+
+@media(max-width:760px){
+  .waec-year-wrap{
+    padding:24px 0 38px;
+  }
+
+  .waec-year-card{
+    width:min(94%,680px);
+    padding:20px 14px;
+    border-radius:16px;
+    box-shadow:0 6px 18px rgba(30,50,42,.05);
+  }
+
+  .waec-year-intro{
+    margin-bottom:20px;
+  }
+
+  .waec-year-intro h2{
+    font-size:24px;
+  }
+
+  .waec-year-intro p{
+    font-size:14px;
+  }
+
+  .waec-results-page .waec-years a{
+    min-height:96px;
+  }
+
+  .waec-stat-page{
+    padding:18px 0 38px;
+  }
+
+  .waec-stat-top{
+    width:min(94%,680px);
+    margin-bottom:16px;
+  }
+
+  .waec-back-link{
+    margin-bottom:14px;
+    padding:8px 13px;
+    font-size:13px;
+  }
+
+  .waec-stat-top h1{
+    font-size:28px;
+  }
+
+  .waec-stat-top p{
+    font-size:14px;
+  }
+
+  .waec-published-result{
+    width:min(96%,700px);
+    border-radius:16px;
+    box-shadow:0 7px 20px rgba(30,50,42,.06);
+  }
+
+  .waec-stat-heading{
+    padding:15px 13px;
+    gap:8px;
+  }
+
+  .waec-stat-heading h2{
+    font-size:16px;
+    line-height:1.15;
+  }
+
+  .waec-session-badge{
+    padding:7px 10px;
+    font-size:10px;
+  }
+
+  .waec-table-wrap{
+    overflow-x:hidden;
+  }
+
+  .waec-stat-table{
+    min-width:0;
+    width:100%;
+    table-layout:fixed;
+  }
+
+  .waec-stat-table th,
+  .waec-stat-table td{
+    padding:5px 2px;
+    font-size:8px;
+    line-height:1.15;
+  }
+
+  .waec-stat-table th{
+    font-size:7px;
+  }
+
+  .waec-stat-table td.subject-name{
+    min-width:0;
+    font-size:8px;
+    font-weight:700;
+  }
+}
+
+
+/* ==========================================================
+   LATEST REQUEST — HOME TALENT SHOWCASE / RESULTS SELECTORS
+========================================================== */
+
+/* Keep the cream Latest Announcements section separate from Talent Showcase. */
+.home-page .latest-announcements{
+  background:#f7f3e5;
+}
+.home-page .student-talent-section{
+  background:#fff !important;
+  padding:52px 0 58px;
+  border-top:1px solid #e6e0d2;
+  border-bottom:1px solid #e6e0d2;
+}
+.home-page .student-talent-section .section-header{
+  margin-bottom:24px;
+}
+.home-page .student-talent-section .section-header h2{
+  color:#0b6e4f;
+}
+.home-page .student-talent-section .section-header p{
+  color:#5d6862;
+}
+.talent-video-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
+  width:min(100%,1120px);
+  margin:0 auto;
+}
+.talent-video-card{
+  position:relative;
+  min-height:320px;
+  aspect-ratio:16/10;
+  overflow:hidden;
+  border-radius:20px;
+  background:#e8f3ef !important;
+  border:2px solid #c5ded3;
+  box-shadow:0 10px 25px rgba(11,110,79,.12);
+}
+.talent-video-card video{
+  width:100%;
+  height:100%;
+  min-height:0;
+  object-fit:cover;
+  display:block;
+  background:#dcebe4;
+}
+.talent-video-placeholder{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:24px;
+  text-align:center;
+  color:#0b6e4f;
+  background:rgba(232,243,239,.96);
+  pointer-events:none;
+}
+.talent-video-placeholder strong{
+  font-size:22px;
+  color:#0b6e4f;
+}
+.talent-video-placeholder span{
+  max-width:310px;
+  font-size:14px;
+  line-height:1.55;
+  color:#5d6862;
+}
+.talent-video-card video[src] + .talent-video-placeholder{
+  /* JS hides this after the real video reports loadeddata. */
+}
+@media(max-width:760px){
+  .home-page .student-talent-section{
+    padding:38px 0 44px;
+  }
+  .talent-video-grid{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .talent-video-card{
+    min-height:210px;
+    aspect-ratio:4/5;
+    border-radius:16px;
+  }
+  .talent-video-placeholder{
+    padding:14px 10px;
+  }
+  .talent-video-placeholder strong{
+    font-size:15px;
+  }
+  .talent-video-placeholder span{
+    font-size:11px;
+  }
+}
+@media(max-width:430px){
+  .talent-video-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .talent-video-card{
+    aspect-ratio:16/10;
+    min-height:230px;
+  }
+}
+
+/* School/class selectors: always usable and clearly separated. */
+.results-page-wrap .result-school-tabs{
+  position:relative;
+  z-index:20;
+}
+.results-page-wrap .result-school-tab{
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+.results-page-wrap .result-school-panel[hidden]{
+  display:none !important;
+}
+.results-page-wrap .result-class-grid{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.results-page-wrap .result-class-btn{
+  appearance:none;
+  -webkit-appearance:none;
+  width:100%;
+  min-height:56px;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+.results-page-wrap .result-class-btn.selected{
+  background:#0b6e4f;
+  color:#fff;
+  border-color:#0b6e4f;
+}
+@media(max-width:760px){
+  .results-page-wrap .result-class-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:430px){
+  .results-page-wrap .result-class-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+/* Academic menu wording: this is the school result portal, not WAEC. */
+.academic-submenu a[href="results.html"]{
+  white-space:nowrap;
+}
+
+
+/* Student Result Portal — use the working staff login page instead of an in-page login. */
+.results-page .staff-signin-nav{
+  background:var(--green);
+  color:#fff !important;
+  padding:8px 15px !important;
+  border-radius:999px;
+  font-weight:800;
+  margin-left:4px;
+}
+.results-page .staff-signin-nav:hover{background:var(--green-dark);color:#fff !important;}
+.result-signin-section{padding:34px 0 48px;}
+.result-signin-card{
+  max-width:760px;
+  margin:0 auto;
+  background:#fff;
+  border:1px solid #dbe7df;
+  border-radius:22px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(7,65,45,.08);
+}
+.result-signin-card .eyebrow{
+  display:block;
+  color:var(--green);
+  font-size:11px;
+  letter-spacing:2px;
+  font-weight:800;
+  margin-bottom:7px;
+}
+.result-signin-card h2{color:var(--green);margin:0 0 10px;}
+.result-signin-card p{color:var(--muted);max-width:610px;margin:0 auto 20px;line-height:1.6;}
+.result-signin-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:150px;
+  padding:12px 24px;
+  border-radius:999px;
+  background:var(--green);
+  color:#fff !important;
+  font-weight:800;
+  text-decoration:none;
+}
+.result-signin-btn:hover{background:var(--green-dark);}
+@media(max-width:760px){
+  .results-page .staff-signin-nav{margin-top:5px;text-align:center;}
+  .result-signin-card{padding:24px 18px;}
+  .result-signin-card h2{font-size:24px;}
+  .result-signin-btn{width:100%;}
+}

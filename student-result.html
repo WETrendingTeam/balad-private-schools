@@ -1,0 +1,1347 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Student Result | BALAD PRIVATE SCHOOLS</title>
+
+<style>
+
+body{
+margin:0;
+background:#ddd;
+font-family:Arial,Helvetica,sans-serif;
+color:#17221e;
+}
+
+.sheet{
+width:210mm;
+min-height:297mm;
+margin:20px auto;
+padding:10mm;
+background:#f7f0df;
+border:2px solid #075c43;
+box-sizing:border-box;
+}
+
+.header{
+display:grid;
+grid-template-columns:120px 1fr 100px;
+align-items:center;
+gap:10px;
+}
+
+.logo{
+width:100px;
+height:100px;
+object-fit:contain;
+}
+
+.passport{
+width:90px;
+height:105px;
+border:1px solid #777;
+object-fit:cover;
+}
+
+.school{
+text-align:center;
+}
+
+.school h1{
+margin:0;
+color:#075c43;
+font-size:30px;
+}
+
+.school p{
+margin:4px;
+font-size:12px;
+}
+
+.contact{
+font-size:10px;
+line-height:1.5;
+}
+
+.title{
+text-align:center;
+font-weight:bold;
+color:#075c43;
+margin:10px;
+}
+
+.info{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:5px 20px;
+border:1px solid #999;
+padding:8px;
+font-size:10px;
+}
+
+.info div{
+border-bottom:1px solid #aaa;
+padding:4px;
+}
+
+.section{
+margin-top:10px;
+background:#6d252d;
+color:white;
+padding:6px;
+font-weight:bold;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:8px;
+}
+
+th,
+td{
+border:1px solid #999;
+padding:4px;
+text-align:center;
+}
+
+.left{
+text-align:left;
+}
+
+.summary{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+width:100%;
+margin-top:8px;
+border:1px solid #999;
+}
+
+.summary-item{
+min-height:58px;
+padding:9px 8px;
+text-align:center;
+border-right:1px solid #999;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+.summary-item:last-child{
+border-right:none;
+}
+
+.summary-label{
+color:#075c43;
+font-size:9px;
+font-weight:800;
+margin-bottom:7px;
+}
+
+.summary-value{
+color:#17221e;
+font-size:14px;
+font-weight:800;
+}
+
+.assess{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:8px;
+margin-top:10px;
+width:100%;
+align-items:start;
+}
+
+.assess .box{
+width:auto;
+box-sizing:border-box;
+min-width:0;
+overflow:hidden;
+border:1px solid #999;
+padding:7px;
+font-size:9px;
+}
+
+.assess .box h3{
+margin:0 0 6px;
+font-size:10px;
+color:#17221e;
+font-weight:800;
+}
+
+.assess .box table{
+width:100%;
+table-layout:fixed;
+font-size:7px;
+}
+
+.assess .box th,
+.assess .box td{
+padding:3px 2px;
+line-height:1.15;
+}
+
+.assess .box th:first-child,
+.assess .box td:first-child{
+width:42%;
+}
+
+.remarks{
+display:block;
+width:80%;
+margin:15px auto 0;
+text-align:center;
+font-size:10px;
+}
+
+.remark{
+display:block;
+width:100%;
+margin:0 auto 15px;
+text-align:center;
+}
+
+.remark h3{
+color:#6d252d;
+font-size:11px;
+font-weight:800;
+margin:0 0 8px;
+text-align:center;
+}
+
+.remark p{
+color:#17221e;
+font-size:10px;
+font-weight:400;
+line-height:1.5;
+margin:0 auto;
+text-align:center;
+}
+
+.resumption{
+width:220px;
+margin:15px auto;
+border:1px solid #999;
+padding:6px;
+text-align:center;
+font-size:10px;
+}
+
+.principal-divider{
+width:45%;
+margin:22px auto 12px;
+border:0;
+border-top:1px solid #777;
+}
+
+.principal-signature{
+text-align:center;
+margin-top:0;
+}
+
+.signature-title{
+color:#075c43;
+font-size:10px;
+font-weight:800;
+margin-bottom:6px;
+}
+
+.signature-box{
+width:260px;
+height:55px;
+border:1px dashed #777;
+margin:0 auto 8px;
+}
+
+.principal-name{
+font-size:10px;
+font-weight:700;
+}
+
+.principal-name strong{
+display:block;
+font-size:12px;
+margin-top:3px;
+}
+
+.footer{
+border-top:1px solid #777;
+text-align:center;
+color:#075c43;
+font-size:9px;
+font-weight:400;
+margin-top:16px;
+padding-top:7px;
+}
+
+.loading{
+width:210mm;
+min-height:297mm;
+margin:20px auto;
+padding:60px 25px;
+background:#fff;
+box-sizing:border-box;
+text-align:center;
+}
+
+.loading h2{
+color:#075c43;
+}
+
+.loading p{
+color:#666;
+}
+
+.error{
+color:#a61d1d;
+background:#fdecec;
+padding:15px;
+border-radius:10px;
+max-width:500px;
+margin:20px auto;
+}
+
+@media print{
+
+body{
+background:#fff;
+}
+
+.sheet{
+margin:0;
+border:2px solid #075c43;
+}
+
+}
+
+@media(max-width:800px){
+
+.sheet,
+.loading{
+width:100%;
+margin:0;
+padding:15px;
+}
+
+.header{
+grid-template-columns:80px 1fr 70px;
+}
+
+.logo{
+width:70px;
+height:70px;
+}
+
+.passport{
+width:65px;
+height:80px;
+}
+
+.school h1{
+font-size:18px;
+}
+
+.assess{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div id="loadingScreen" class="loading">
+
+<h2>Loading Student Result</h2>
+
+<p id="loadingMessage">
+Verifying secure result access...
+</p>
+
+</div>
+
+
+<main
+id="resultSheet"
+class="sheet"
+style="display:none;">
+
+
+<div class="header">
+
+<img
+class="logo"
+src="logo.png"
+alt="School Logo">
+
+
+<div class="school">
+
+<h1>BALAD PRIVATE SCHOOLS</h1>
+
+<div class="contact">
+
+1, Obafemi Street, Abule Afa Bus-stop,
+Near Ori-Okuta Junction,<br>
+
+Off Isawo Road, Ikorodu, Lagos State.<br>
+
+Tel: 0706 477 1930, 0806 922 0087,
+0818 282 2521<br>
+
+Email: baladschools@gmail.com<br>
+
+Website: www.baladschools.com
+
+<p>
+<b>“Nothing But Success”</b>
+</p>
+
+<p>
+(English, French and Arabic Languages)
+</p>
+
+</div>
+
+</div>
+
+
+<img
+class="passport"
+id="studentPassport"
+src="passport.png"
+alt="Student Passport">
+
+</div>
+
+
+<div class="title">
+PROGRESS REPORT SHEET
+</div>
+
+
+<section class="info">
+
+<div>
+<b>SESSION:</b>
+<span id="session">—</span>
+</div>
+
+<div>
+<b>TERM:</b>
+<span id="term">—</span>
+</div>
+
+<div>
+<b>NAME OF STUDENT:</b>
+<span id="studentName">—</span>
+</div>
+
+<div>
+<b>NO. IN CLASS:</b>
+<span id="classNumber">—</span>
+</div>
+
+<div>
+<b>ADMISSION NO.:</b>
+<span id="admissionNumber">—</span>
+</div>
+
+<div>
+<b>CLASS:</b>
+<span id="studentClass">—</span>
+</div>
+
+<div>
+<b>NO. PRESENT / ABSENT:</b>
+<span id="attendanceCount">—</span>
+</div>
+
+<div>
+<b>ATTENDANCE:</b>
+<span id="attendance">—</span>
+</div>
+
+<div>
+<b>GENDER:</b>
+<span id="gender">—</span>
+</div>
+
+<div>
+<b>NEXT TERM BEGINS:</b>
+<span id="nextTerm">—</span>
+</div>
+
+</section>
+
+
+<div class="section">
+COGNITIVE — ACADEMIC PERFORMANCE
+</div>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>S/N</th>
+<th>SUBJECT</th>
+<th>CA<br>40</th>
+<th>EXAM<br>60</th>
+<th>TOTAL<br>100</th>
+<th>GRADE</th>
+<th>REMARK</th>
+<th>POSITION</th>
+<th>1ST TERM</th>
+<th>2ND TERM</th>
+<th>CUMULATIVE AVG</th>
+
+</tr>
+
+</thead>
+
+<tbody id="resultsBody">
+
+<tr>
+<td colspan="11">
+Loading results...
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+
+<div class="summary">
+
+<div class="summary-item">
+
+<div class="summary-label">
+TOTAL SCORE
+</div>
+
+<div
+class="summary-value"
+id="totalScore">
+—
+</div>
+
+</div>
+
+
+<div class="summary-item">
+
+<div class="summary-label">
+CURRENT AVERAGE
+</div>
+
+<div
+class="summary-value"
+id="currentAverage">
+—
+</div>
+
+</div>
+
+
+<div class="summary-item">
+
+<div class="summary-label">
+CUMULATIVE AVERAGE
+</div>
+
+<div
+class="summary-value"
+id="cumulativeAverage">
+—
+</div>
+
+</div>
+
+</div>
+
+
+<div class="assess">
+
+
+<div class="box">
+
+<h3>PSYCHOMOTOR SKILLS</h3>
+
+<table>
+
+<tr>
+<th class="left">Area</th>
+<th>5</th>
+<th>4</th>
+<th>3</th>
+<th>2</th>
+<th>1</th>
+</tr>
+
+<tbody id="psychomotorBody"></tbody>
+
+</table>
+
+</div>
+
+
+<div class="box">
+
+<h3>AFFECTIVE AREAS</h3>
+
+<table>
+
+<tr>
+<th class="left">Area</th>
+<th>5</th>
+<th>4</th>
+<th>3</th>
+<th>2</th>
+<th>1</th>
+</tr>
+
+<tbody id="affectiveBody"></tbody>
+
+</table>
+
+</div>
+
+
+<div class="box">
+
+<h3>GRADE SCALE</h3>
+
+<table>
+
+<tr>
+<th>Range</th>
+<th>Grade</th>
+<th>Remark</th>
+</tr>
+
+<tr>
+<td>75–100</td>
+<td>A</td>
+<td>Excellent</td>
+</tr>
+
+<tr>
+<td>65–74</td>
+<td>B</td>
+<td>Very Good</td>
+</tr>
+
+<tr>
+<td>55–64</td>
+<td>C</td>
+<td>Good</td>
+</tr>
+
+<tr>
+<td>45–54</td>
+<td>D</td>
+<td>Fair</td>
+</tr>
+
+<tr>
+<td>40–44</td>
+<td>E</td>
+<td>Pass</td>
+</tr>
+
+<tr>
+<td>Below 40</td>
+<td>F</td>
+<td>Needs Improvement</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div class="remarks">
+
+<div class="remark">
+
+<h3>
+Class Teacher's Remark:
+</h3>
+
+<p id="teacherRemark">
+—
+</p>
+
+</div>
+
+
+<div class="remark">
+
+<h3>
+Principal's Comment:
+</h3>
+
+<p id="principalComment">
+—
+</p>
+
+</div>
+
+</div>
+
+
+<div class="resumption">
+
+<b>Resumption Date:</b>
+
+<span id="resumptionDate">
+—
+</span>
+
+</div>
+
+
+<div class="principal">
+
+<hr class="principal-divider">
+
+<div class="principal-signature">
+
+<div class="signature-box"></div>
+
+<div class="principal-name">
+
+<strong>
+PRINCIPAL: USMAN OLATUNBOSUN
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+
+© BALAD PRIVATE SCHOOLS
+
+</div>
+
+
+</main>
+
+
+<script>
+
+const API_URL =
+"https://balad-staff-auth.6s9257wftb.workers.dev";
+
+
+/*
+========================================
+SECURE RESULT ACCESS
+========================================
+*/
+
+function getResultAccess(){
+
+const raw =
+sessionStorage.getItem("resultAccess");
+
+if(!raw){
+return null;
+}
+
+try{
+
+return JSON.parse(raw);
+
+}catch(error){
+
+return null;
+
+}
+
+}
+
+
+function showError(message){
+
+document.getElementById(
+"loadingMessage"
+).innerHTML =
+
+'<div class="error">' +
+message +
+'</div>';
+
+}
+
+
+async function loadSecureResult(){
+
+const access =
+getResultAccess();
+
+
+if(!access){
+
+showError(
+"Result access is required. Please return to the Student Result Portal and enter the student's Admission Number and Result Access Code."
+);
+
+return;
+
+}
+
+
+/*
+Check that the access token exists.
+*/
+
+if(!access.accessToken){
+
+showError(
+"Your result access session is invalid. Please request access again."
+);
+
+return;
+
+}
+
+
+try{
+
+
+/*
+========================================
+REQUEST RESULT FROM WORKER
+========================================
+*/
+
+const response =
+await fetch(
+API_URL + "/results",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+action:
+"get_student_results_by_access",
+
+accessToken:
+access.accessToken,
+
+studentRef:
+access.studentRef || ""
+
+})
+
+}
+);
+
+
+const data =
+await response.json();
+
+
+console.log(
+"Secure result response:",
+data
+);
+
+
+if(!response.ok || !data.success){
+
+sessionStorage.removeItem(
+"resultAccess"
+);
+
+showError(
+data.error ||
+"Unable to load this student's results. Please return to the Result Portal and try again."
+);
+
+return;
+
+}
+
+
+/*
+========================================
+DISPLAY ONLY RETURNED RESULT DATA
+========================================
+*/
+
+const student =
+data.student || {};
+
+const results =
+Array.isArray(data.results)
+? data.results
+: [];
+
+
+/*
+STUDENT INFORMATION
+*/
+
+document.getElementById(
+"studentName"
+).textContent =
+student.studentName || "—";
+
+
+document.getElementById(
+"admissionNumber"
+).textContent =
+student.admissionNumber || "—";
+
+
+document.getElementById(
+"studentClass"
+).textContent =
+student.className || "—";
+
+
+document.getElementById(
+"gender"
+).textContent =
+student.gender || "—";
+
+
+document.getElementById(
+"session"
+).textContent =
+data.session ||
+student.session ||
+"—";
+
+
+document.getElementById(
+"term"
+).textContent =
+data.term ||
+"—";
+
+
+document.getElementById(
+"classNumber"
+).textContent =
+student.classNumber || "—";
+
+
+document.getElementById(
+"attendanceCount"
+).textContent =
+student.attendanceCount || "—";
+
+
+document.getElementById(
+"attendance"
+).textContent =
+student.attendance || "—";
+
+
+document.getElementById(
+"nextTerm"
+).textContent =
+data.nextTerm ||
+"—";
+
+
+/*
+PASSPORT
+
+Only use one supplied by the secure
+Worker response.
+*/
+
+if(student.passport){
+
+document.getElementById(
+"studentPassport"
+).src =
+student.passport;
+
+}
+
+
+/*
+========================================
+RESULT TABLE
+========================================
+*/
+
+const resultsBody =
+document.getElementById(
+"resultsBody"
+);
+
+
+if(results.length === 0){
+
+resultsBody.innerHTML =
+"<tr><td colspan='11'>No result records available.</td></tr>";
+
+}else{
+
+resultsBody.innerHTML = "";
+
+let totalScore = 0;
+
+let cumulativeTotal = 0;
+
+let cumulativeCount = 0;
+
+
+results.forEach(
+(result,index)=>{
+
+const total =
+Number(result.total || 0);
+
+totalScore += total;
+
+
+if(
+result.cumulativeAverage !== undefined &&
+result.cumulativeAverage !== null &&
+result.cumulativeAverage !== ""
+){
+
+cumulativeTotal +=
+Number(result.cumulativeAverage);
+
+cumulativeCount++;
+
+}
+
+
+const row =
+document.createElement("tr");
+
+
+row.innerHTML = `
+
+<td>${index + 1}</td>
+
+<td class="left">
+${escapeHtml(result.subject || "")}
+</td>
+
+<td>${escapeHtml(result.ca ?? "")}</td>
+
+<td>${escapeHtml(result.exam ?? "")}</td>
+
+<td>${escapeHtml(total)}</td>
+
+<td>${escapeHtml(result.grade || "")}</td>
+
+<td>
+${escapeHtml(
+getRemark(total)
+)}
+</td>
+
+<td>
+${escapeHtml(
+result.position ?? "—"
+)}
+</td>
+
+<td>
+${escapeHtml(
+result.firstTerm ?? "—"
+)}
+</td>
+
+<td>
+${escapeHtml(
+result.secondTerm ?? "—"
+)}
+</td>
+
+<td>
+${escapeHtml(
+result.cumulativeAverage ?? "—"
+)}
+</td>
+
+`;
+
+
+resultsBody.appendChild(row);
+
+});
+
+
+/*
+SUMMARY
+*/
+
+document.getElementById(
+"totalScore"
+).textContent =
+totalScore +
+" / " +
+(results.length * 100);
+
+
+const average =
+results.length
+? totalScore / results.length
+: 0;
+
+
+document.getElementById(
+"currentAverage"
+).textContent =
+average.toFixed(1) + "%";
+
+
+if(cumulativeCount){
+
+document.getElementById(
+"cumulativeAverage"
+).textContent =
+(
+cumulativeTotal /
+cumulativeCount
+).toFixed(1) + "%";
+
+}else{
+
+document.getElementById(
+"cumulativeAverage"
+).textContent =
+"—";
+
+}
+
+}
+
+
+/*
+========================================
+ASSESSMENTS
+========================================
+*/
+
+renderAssessment(
+"psychomotorBody",
+data.psychomotor || []
+);
+
+
+renderAssessment(
+"affectiveBody",
+data.affective || []
+);
+
+
+/*
+========================================
+COMMENTS
+========================================
+*/
+
+document.getElementById(
+"teacherRemark"
+).textContent =
+data.teacherRemark ||
+"—";
+
+
+document.getElementById(
+"principalComment"
+).textContent =
+data.principalComment ||
+"—";
+
+
+document.getElementById(
+"resumptionDate"
+).textContent =
+data.resumptionDate ||
+"—";
+
+
+/*
+========================================
+SHOW RESULT
+========================================
+*/
+
+document.getElementById(
+"loadingScreen"
+).style.display =
+"none";
+
+
+document.getElementById(
+"resultSheet"
+).style.display =
+"block";
+
+
+}catch(error){
+
+console.error(
+"Secure result loading error:",
+error
+);
+
+showError(
+"Unable to connect to the result server. Please try again."
+);
+
+}
+
+}
+
+
+/*
+========================================
+HELPER FUNCTIONS
+========================================
+*/
+
+function escapeHtml(value){
+
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function getRemark(total){
+
+if(total >= 75){
+return "Excellent";
+}
+
+if(total >= 65){
+return "Very Good";
+}
+
+if(total >= 55){
+return "Good";
+}
+
+if(total >= 45){
+return "Fair";
+}
+
+if(total >= 40){
+return "Pass";
+}
+
+return "Needs Improvement";
+
+}
+
+
+function renderAssessment(
+elementId,
+items
+){
+
+const body =
+document.getElementById(
+elementId
+);
+
+
+if(!Array.isArray(items) || !items.length){
+
+body.innerHTML =
+"<tr><td colspan='6'>—</td></tr>";
+
+return;
+
+}
+
+
+body.innerHTML = "";
+
+
+items.forEach(item=>{
+
+const score =
+Number(item.score || 0);
+
+
+const row =
+document.createElement("tr");
+
+
+row.innerHTML = `
+
+<td class="left">
+${escapeHtml(
+item.area || "—"
+)}
+</td>
+
+<td>${score === 5 ? "✓" : ""}</td>
+
+<td>${score === 4 ? "✓" : ""}</td>
+
+<td>${score === 3 ? "✓" : ""}</td>
+
+<td>${score === 2 ? "✓" : ""}</td>
+
+<td>${score === 1 ? "✓" : ""}</td>
+
+`;
+
+
+body.appendChild(row);
+
+});
+
+}
+
+
+/*
+START
+*/
+
+loadSecureResult();
+
+</script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Result Portal | Balad Private Schools</title>
+
+<link rel="stylesheet" href="style.css">
+<script defer src="script.js?v=prototype"></script>
+
+<style>
+.results-prototype{
+  background:#f7f2e5;
+  min-height:70vh;
+  padding:42px 0 70px;
+}
+
+.results-shell{
+  max-width:1050px;
+  margin:auto;
+  padding:0 18px;
+}
+
+.portal-intro{
+  text-align:center;
+  max-width:720px;
+  margin:0 auto 30px;
+}
+
+.portal-intro .eyebrow{
+  color:#087052;
+  font-weight:800;
+  letter-spacing:2px;
+}
+
+.portal-intro h1{
+  color:#174438;
+  font-size:38px;
+  margin:8px 0;
+}
+
+.portal-intro p{
+  color:#66716c;
+  line-height:1.7;
+}
+
+.lookup-card{
+  max-width:600px;
+  margin:0 auto;
+  background:#fff;
+  border-radius:24px;
+  padding:30px;
+  box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
+.lookup-card h2{
+  color:#075c46;
+  margin:0 0 8px;
+}
+
+.lookup-card .help{
+  color:#68736e;
+  line-height:1.6;
+  margin-bottom:22px;
+}
+
+.lookup-card label{
+  display:block;
+  font-weight:800;
+  margin:15px 0 7px;
+  color:#263b34;
+}
+
+.lookup-card input{
+  width:100%;
+  padding:14px;
+  border:1px solid #ccdcd4;
+  border-radius:12px;
+  font-size:16px;
+  outline:none;
+}
+
+.lookup-card input:focus{
+  border-color:#075c46;
+}
+
+.lookup-card button{
+  margin-top:20px;
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:#e32629;
+  color:#fff;
+  font-weight:900;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.lookup-card button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.lookup-message{
+  margin-top:15px;
+  padding:12px;
+  border-radius:10px;
+  display:none;
+  line-height:1.5;
+}
+
+.lookup-message.error{
+  display:block;
+  background:#fdecec;
+  color:#a61d1d;
+}
+
+.lookup-message.success{
+  display:block;
+  background:#e8f7ef;
+  color:#075c46;
+}
+
+.security-note{
+  margin-top:20px;
+  padding:14px;
+  background:#f4f8f6;
+  border-radius:12px;
+  color:#56635d;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.staff-strip{
+  margin-top:28px;
+  text-align:center;
+  background:#075c46;
+  color:#fff;
+  border-radius:18px;
+  padding:20px;
+}
+
+.staff-strip a{
+  display:inline-block;
+  margin-top:10px;
+  background:#fff;
+  color:#075c46;
+  padding:10px 18px;
+  border-radius:10px;
+  font-weight:900;
+  text-decoration:none;
+}
+
+@media(max-width:700px){
+  .portal-intro h1{
+    font-size:30px;
+  }
+
+  .lookup-card{
+    padding:24px 18px;
+  }
+}
+</style>
+</head>
+
+<body class="results-page">
+
+<div class="announcement-bar">
+  <div class="announcement-track">
+    BALAD PRIVATE SCHOOLS • STUDENT RESULT PORTAL
+  </div>
+</div>
+
+<header>
+
+<div class="logo">
+
+<img
+  alt="Balad Private Schools Logo"
+  src="logo.png">
+
+<div class="school-name">
+
+<h2>BALAD PRIVATE SCHOOLS</h2>
+
+<p>
+Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre
+</p>
+
+<small>
+"Nothing but Success"
+</small>
+
+</div>
+</div>
+
+<input
+  class="menu-toggle"
+  id="balad-menu-toggle"
+  type="checkbox">
+
+<label
+  aria-label="Open menu"
+  class="menu-btn"
+  for="balad-menu-toggle">
+
+<span class="menu-icon-open">☰</span>
+<span class="menu-icon-close">×</span>
+
+</label>
+
+<nav id="balad-main-nav">
+
+<a href="about.html">About</a>
+
+<a href="admissions.html">Admissions</a>
+
+<details class="academic-nav is-active">
+
+<summary>Academic</summary>
+
+<div class="academic-submenu">
+
+<a href="curriculum.html">Curriculum</a>
+
+<a href="stem.html">STEM</a>
+
+<a class="active" href="results.html">
+Student Result Portal
+</a>
+
+</div>
+
+</details>
+
+<a href="team.html">Meet Our Team</a>
+
+<a href="facilities.html">Facilities</a>
+
+<a href="gallery.html">Gallery</a>
+
+<a href="news.html">News &amp; Events</a>
+
+<a href="contact.html">Contact</a>
+
+<a
+  class="staff-signin-nav"
+  href="staff/staff-login.html">
+  Sign In
+</a>
+
+<a href="control-login.html">
+  Control Dashboard
+</a>
+
+</nav>
+
+</header>
+
+
+<main class="results-prototype">
+
+<div class="results-shell">
+
+<div class="portal-intro">
+
+<span class="eyebrow">
+PARENT / GUARDIAN ACCESS
+</span>
+
+<h1>
+Student Result Portal
+</h1>
+
+<p>
+Enter the student's admission number and the
+unique result access code provided by the school.
+</p>
+
+</div>
+
+
+<section class="lookup-card">
+
+<h2>
+Access Student Results
+</h2>
+
+<p class="help">
+Use the admission number and result access code
+belonging to the same student. Successful
+verification will open that student's available
+result history only.
+</p>
+
+
+<label for="admissionNumber">
+Admission Number
+</label>
+
+<input
+  id="admissionNumber"
+  type="text"
+  placeholder="Enter admission number"
+  autocomplete="off">
+
+
+<label for="accessCode">
+Result Access Code
+</label>
+
+<input
+  id="accessCode"
+  type="password"
+  placeholder="Enter result access code"
+  autocomplete="off">
+
+
+<button
+  id="viewResult"
+  type="button">
+
+View Student Results
+
+</button>
+
+
+<div
+  id="lookupMessage"
+  class="lookup-message">
+</div>
+
+
+<div class="security-note">
+
+<strong>Privacy notice:</strong>
+This access is limited to the student's result
+records and result history. Student biodata,
+staff information, management settings and
+other students' records are not available through
+parent result access.
+
+</div>
+
+</section>
+
+
+<div class="staff-strip">
+
+<strong>Staff / Teacher?</strong>
+
+<br>
+
+Use the secure staff login to access your assigned
+school functions.
+
+<br>
+
+<a href="staff/staff-login.html">
+Sign In
+</a>
+
+</div>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="footer-bottom">
+
+© <span data-year></span>
+Balad Private Schools. All Rights Reserved.
+
+<span class="footer-developer">
+
+<p>
+Developed by
+<a
+  href="https://wa.me/2349164435249"
+  target="_blank"
+  rel="noopener">
+LADE
+</a>
+</p>
+
+</span>
+
+</div>
+
+</footer>
+
+
+<script>
+
+const API_URL =
+  "https://balad-staff-auth.6s9257wftb.workers.dev";
+
+
+document
+  .querySelector("[data-year]")
+  .textContent =
+  new Date().getFullYear();
+
+
+const admissionInput =
+  document.getElementById("admissionNumber");
+
+const accessCodeInput =
+  document.getElementById("accessCode");
+
+const viewButton =
+  document.getElementById("viewResult");
+
+const message =
+  document.getElementById("lookupMessage");
+
+
+function showMessage(text,type){
+
+  message.textContent = text;
+
+  message.className =
+    "lookup-message " + type;
+
+}
+
+
+viewButton.addEventListener(
+  "click",
+  async () => {
+
+    const admissionNumber =
+      admissionInput.value.trim();
+
+    const accessCode =
+      accessCodeInput.value.trim();
+
+
+    message.className =
+      "lookup-message";
+
+    message.textContent = "";
+
+
+    if(!admissionNumber){
+
+      showMessage(
+        "Please enter the student's admission number.",
+        "error"
+      );
+
+      admissionInput.focus();
+
+      return;
+    }
+
+
+    if(!accessCode){
+
+      showMessage(
+        "Please enter the student's result access code.",
+        "error"
+      );
+
+      accessCodeInput.focus();
+
+      return;
+    }
+
+
+    viewButton.disabled = true;
+
+    viewButton.textContent =
+      "Verifying access...";
+
+
+    showMessage(
+      "Verifying student result access...",
+      "success"
+    );
+
+
+    try{
+
+      const response =
+        await fetch(
+          API_URL + "/students",
+          {
+            method:"POST",
+
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
+
+            body:JSON.stringify({
+
+              action:"verify_student_result_access",
+
+              admissionNumber:
+                admissionNumber,
+
+              accessCode:
+                accessCode
+
+            })
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      console.log(
+        "Result access response:",
+        data
+      );
+
+
+      if(!response.ok || !data.success){
+
+        showMessage(
+          data.error ||
+          "Invalid admission number or result access code.",
+          "error"
+        );
+
+        viewButton.disabled = false;
+
+        viewButton.textContent =
+          "View Student Results";
+
+        return;
+      }
+
+
+      /*
+       * Store only the secure result-access
+       * reference returned by the Worker.
+       *
+       * No student biodata is placed here.
+       */
+
+      sessionStorage.removeItem(
+        "verifiedStudent"
+      );
+
+      sessionStorage.setItem(
+        "resultAccess",
+        JSON.stringify({
+
+          accessToken:
+            data.accessToken || "",
+
+          studentRef:
+            data.studentRef || "",
+
+          expiresAt:
+            data.expiresAt || ""
+
+        })
+      );
+
+
+      showMessage(
+        "Access verified. Opening student results...",
+        "success"
+      );
+
+
+      setTimeout(
+        () => {
+
+          location.href =
+            "student-result.html";
+
+        },
+        500
+      );
+
+
+    }catch(error){
+
+      console.error(
+        "Result access error:",
+        error
+      );
+
+
+      showMessage(
+        "Unable to connect to the result server. Please try again.",
+        "error"
+      );
+
+
+      viewButton.disabled = false;
+
+      viewButton.textContent =
+        "View Student Results";
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
+

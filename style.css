@@ -3139,3 +3139,143 @@ body.album-open{overflow:hidden;}
   }
 }
 
+
+/* =========================================================
+   BALAD NEW SCHOOL / CBT / ALUMNI PAGES
+   ========================================================= */
+.school-page,.cbt-centre-page,.alumni-page{background:#fffdf8;min-height:70vh}
+.new-page-hero{min-height:430px;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 20px;background:linear-gradient(135deg,rgba(6,76,54,.96),rgba(8,107,73,.78)),url('school.jpg') center/cover}
+.new-page-hero .hero-inner{width:min(94%,950px);color:#fff}
+.new-page-hero .eyebrow{letter-spacing:3px;font-weight:800;font-size:12px}
+.new-page-hero h1{font-size:clamp(40px,7vw,72px);margin:12px 0}
+.new-page-hero p{max-width:760px;margin:auto;line-height:1.8;font-size:17px}
+.leader-duo{width:min(94%,1120px);margin:-70px auto 0;position:relative;z-index:2;background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.leader-person{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center}
+.leader-person img,.leader-person .photo-placeholder{width:150px;height:185px;border-radius:16px;object-fit:cover;background:#edf4e8;border:2px dashed #b9d3c5;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--green);font-weight:800}
+.leader-person h3{color:var(--green);margin-bottom:5px}
+.leader-person p{color:var(--muted);line-height:1.6}
+.welcome-card,.facilities-wrap,.cbt-team-wrap,.alumni-community-wrap{width:min(94%,1120px);margin:48px auto 0}
+.welcome-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:34px;box-shadow:var(--shadow)}
+.welcome-card h2,.facilities-wrap h2,.cbt-team-wrap h2,.alumni-community-wrap h2{color:var(--green);font-size:32px;margin:5px 0 12px}
+.welcome-card p{color:var(--muted);line-height:1.85}
+.facility-proto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px}
+.facility-proto-card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.facility-proto-photo{height:190px;background:#edf4e8;border-bottom:1px dashed #b9d3c5;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--green);font-weight:800}
+.facility-proto-card h3,.facility-proto-card p{padding:0 18px}
+.facility-proto-card h3{color:var(--green);margin-top:18px}
+.facility-proto-card p{color:var(--muted);padding-bottom:18px}
+.cbt-director{width:min(94%,1120px);margin:-70px auto 0;position:relative;z-index:2;background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px;box-shadow:var(--shadow);display:grid;grid-template-columns:280px 1fr;gap:34px;align-items:center}
+.cbt-director .photo-placeholder{width:100%;aspect-ratio:4/5;background:#edf4e8;border:2px dashed #b9d3c5;border-radius:18px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--green);font-weight:800}
+.cbt-director h2{color:var(--green);margin:6px 0}.cbt-director p{color:var(--muted);line-height:1.8}
+.cbt-team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px}
+.cbt-team-card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.cbt-team-photo{height:220px;background:#edf4e8;border-bottom:1px dashed #b9d3c5;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--green);font-weight:800}
+.cbt-team-card h3,.cbt-team-card p{padding:0 16px}.cbt-team-card h3{color:var(--green);margin-top:14px}.cbt-team-card p{color:var(--muted);padding-bottom:16px}
+.alumni-video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:24px}
+.alumni-video-card{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.alumni-video-placeholder{aspect-ratio:16/9;background:#18241f;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800}
+.alumni-video-card h3,.alumni-video-card p{padding:0 20px}.alumni-video-card h3{color:var(--green);margin-top:18px}.alumni-video-card p{color:var(--muted);padding-bottom:18px}
+.alumni-community-wrap{background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px;box-shadow:var(--shadow)}
+.alumni-form{display:grid;gap:14px;margin-top:20px}.alumni-form input,.alumni-form textarea{width:100%;padding:14px;border:1px solid var(--line);border-radius:10px;font:inherit}.alumni-form textarea{min-height:140px}.alumni-btn{border:0;background:var(--green);color:#fff;padding:13px 20px;border-radius:10px;font-weight:800;cursor:pointer}
+.result-choice-page{background:#fffdf8;padding:60px 0 80px}.result-choice-grid{width:min(94%,1000px);margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}.result-choice-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:32px;box-shadow:var(--shadow)}.result-choice-card h2{color:var(--green)}.result-choice-card p{color:var(--muted);line-height:1.7}.result-choice-card a{display:inline-block;margin-top:12px;padding:12px 18px;border-radius:10px;background:var(--green);color:#fff;font-weight:800}
+@media(max-width:760px){
+ .leader-duo{margin:-38px auto 0;grid-template-columns:1fr;padding:20px}
+ .leader-person{grid-template-columns:120px 1fr}.leader-person img,.leader-person .photo-placeholder{width:120px;height:150px}
+ .facility-proto-grid,.cbt-team-grid,.result-choice-grid{grid-template-columns:1fr 1fr}
+ .alumni-video-grid{grid-template-columns:1fr}
+ .cbt-director{margin:-38px auto 0;grid-template-columns:1fr;padding:22px}
+ .cbt-director .photo-placeholder{max-width:260px;margin:auto}
+}
+@media(max-width:430px){
+ .facility-proto-grid,.cbt-team-grid,.result-choice-grid{grid-template-columns:1fr}
+ .leader-person{grid-template-columns:1fr;text-align:center}.leader-person img,.leader-person .photo-placeholder{margin:auto}
+}
+
+
+/* =========================================================
+   FINAL CORRECTIONS — SCHOOL LEADERS + MENU ACTION BUTTONS
+   ========================================================= */
+.leader-single{
+  width:min(94%,1120px);
+  margin:-70px auto 0;
+  position:relative;
+  z-index:2;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:32px;
+  box-shadow:var(--shadow);
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:34px;
+  align-items:center;
+}
+.leader-single-photo{
+  width:260px;
+  height:320px;
+  border-radius:18px;
+  object-fit:cover;
+  background:#edf4e8;
+  border:2px dashed #b9d3c5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--green);
+  font-weight:800;
+}
+.leader-single-copy h2{color:var(--green);margin:6px 0}
+.leader-single-copy p{color:var(--muted);line-height:1.7}
+.school-intro-card{margin-top:28px}
+
+/* Desktop + mobile: Login and Contact are deliberate boxed actions. */
+header nav#balad-main-nav > a.nav-login-button,
+header nav#balad-main-nav > a.nav-contact-button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:10px 18px;
+  border:2px solid var(--green);
+  border-radius:10px;
+  color:var(--green);
+  font-weight:800;
+  text-decoration:none;
+  box-sizing:border-box;
+}
+header nav#balad-main-nav > a.nav-contact-button{
+  margin-left:4px;
+}
+header nav#balad-main-nav > a.nav-login-button:hover,
+header nav#balad-main-nav > a.nav-contact-button:hover{
+  background:var(--green);
+  color:#fff;
+}
+
+@media(max-width:760px){
+  .leader-single{
+    margin:-38px auto 0;
+    grid-template-columns:1fr;
+    padding:22px;
+    text-align:center;
+  }
+  .leader-single-photo{
+    width:220px;
+    height:275px;
+    margin:0 auto;
+  }
+  header nav#balad-main-nav > a.nav-login-button,
+  header nav#balad-main-nav > a.nav-contact-button{
+    width:100%;
+    min-height:52px;
+    margin:14px 0 0;
+    padding:14px 18px;
+    border:2px solid var(--green);
+    border-radius:10px;
+    justify-content:center;
+    flex:0 0 auto;
+  }
+  header nav#balad-main-nav > a.nav-contact-button{
+    margin-top:12px;
+  }
+}

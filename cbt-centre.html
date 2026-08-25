@@ -5,11 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CBT Centre | Balad Private Schools</title>
   <link rel="stylesheet" href="style.css">
+
+<style>
+  /* =========================================================
+     CBT CENTRE — PAGE-SPECIFIC IMAGE STYLING
+     ========================================================= */
+
+  .cbt-centre-feature {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 40px;
+    align-items: center;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  .cbt-centre-feature img {
+    width: 100%;
+    height: 380px;
+    display: block;
+    object-fit: cover;
+  }
+
+  .cbt-centre-feature-content {
+    padding: 35px;
+  }
+
+  .cbt-centre-feature-content h2 {
+    margin: 8px 0 15px;
+  }
+
+
+  /* TEAM PHOTOS */
+
+  .cbt-team-photo {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    background: #f4f8f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cbt-team-photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
+
+
+  /* MOBILE */
+
+  @media (max-width: 760px) {
+
+    .cbt-centre-feature {
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin: 0 15px;
+    }
+
+    .cbt-centre-feature img {
+      height: 260px;
+    }
+
+    .cbt-centre-feature-content {
+      padding: 25px;
+    }
+
+    .cbt-team-photo {
+      height: 300px;
+    }
+  }
+
+
+  /* SMALL PHONES */
+
+  @media (max-width: 480px) {
+
+    .cbt-centre-feature img {
+      height: 220px;
+    }
+
+    .cbt-team-photo {
+      height: 260px;
+    }
+  }
+</style>
+
   <script defer src="script.js?v=5"></script>
   <script defer src="content-loader.js"></script>
 </head>
 
 <body>
+
 <header>
   <div class="logo">
     <img src="logo.png" alt="Balad Private Schools Logo" data-media-key="asset-logo-png">
@@ -21,6 +117,7 @@
   </div>
 
   <input class="menu-toggle" id="balad-menu-toggle" type="checkbox">
+
   <label class="menu-btn" for="balad-menu-toggle" aria-label="Open menu">
     <span class="menu-icon-open">☰</span>
     <span class="menu-icon-close">×</span>
@@ -60,12 +157,16 @@
   </nav>
 </header>
 
+
 <main class="cbt-centre-page">
 
+  <!-- CBT CENTRE HERO -->
   <section class="new-page-hero">
     <div class="hero-inner">
       <p class="eyebrow">BALAD PRIVATE SCHOOLS</p>
+
       <h1>CBT Centre</h1>
+
       <p>
         Balad Private Schools has JAMB, WAEC and NECO accredited CBT Centres
         located within the school premises.
@@ -73,11 +174,41 @@
     </div>
   </section>
 
+
+  <!-- CBT CENTRE IMAGE -->
   <section class="cbt-team-wrap">
+
+    <div class="cbt-centre-feature">
+      <img
+        src="images/cbt-centre.jpg"
+        alt="Balad Private Schools CBT Centre"
+      >
+
+      <div class="cbt-centre-feature-content">
+        <p class="eyebrow">OUR CBT CENTRE</p>
+
+        <h2>Modern CBT Facilities</h2>
+
+        <p>
+          Our CBT Centre provides a professional and reliable environment
+          for computer-based examinations, registrations and other
+          examination-related services.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- SERVICES -->
+  <section class="cbt-team-wrap">
+
     <p class="eyebrow">OUR CBT CENTRE SERVICES</p>
+
     <h2>CBT Centre Services</h2>
 
     <div class="cbt-team-grid">
+
       <article class="cbt-team-card">
         <h3>JAMB Registration</h3>
       </article>
@@ -113,42 +244,95 @@
       <article class="cbt-team-card">
         <h3>Sale of GCE Pins</h3>
       </article>
+
     </div>
+
   </section>
 
+
+  <!-- CBT CENTRE TEAM -->
   <section class="cbt-team-wrap">
+
     <p class="eyebrow">CBT CENTRE LEADERSHIP &amp; TEAM</p>
+
     <h2>Our CBT Centre Team</h2>
 
     <div class="cbt-team-grid">
 
+
+      <!-- ALHAJI BELLO -->
       <article class="cbt-team-card">
-        <div class="cbt-team-photo">PHOTO<br>PLACEHOLDER</div>
+
+        <div class="cbt-team-photo">
+          <img
+            src="images/bello-aliyu.jpg"
+            alt="Alhaji BELLO Aliyu Alade"
+          >
+        </div>
+
         <h3>Alhaji BELLO Aliyu Alade</h3>
+
         <p>Proprietor</p>
+
       </article>
 
+
+      <!-- MRS RUKAYAT -->
       <article class="cbt-team-card">
-        <div class="cbt-team-photo">PHOTO<br>PLACEHOLDER</div>
+
+        <div class="cbt-team-photo">
+          <img
+            src="images/rukayat-bello.jpg"
+            alt="Mrs Rukayat Abidemi BELLO"
+          >
+        </div>
+
         <h3>Mrs Rukayat Abidemi BELLO</h3>
+
         <p>Director CBT / Adviser on Education</p>
+
       </article>
 
+
+      <!-- KAREEM -->
       <article class="cbt-team-card">
-        <div class="cbt-team-photo">PHOTO<br>PLACEHOLDER</div>
+
+        <div class="cbt-team-photo">
+          <img
+            src="images/kareem-mukaila.jpg"
+            alt="Kareem Mukaila Gboyega"
+          >
+        </div>
+
         <h3>Kareem Mukaila Gboyega</h3>
+
         <p>Head of Dept CBT</p>
+
       </article>
 
+
+      <!-- EHIOSUN -->
       <article class="cbt-team-card">
-        <div class="cbt-team-photo">PHOTO<br>PLACEHOLDER</div>
+
+        <div class="cbt-team-photo">
+          <img
+            src="images/ehiosun-isreal.jpg"
+            alt="Ehiosun Isreal Egbosa"
+          >
+        </div>
+
         <h3>Ehiosun Isreal Egbosa</h3>
+
         <p>Head, Balad CBT Technical Team</p>
+
       </article>
+
 
     </div>
+
   </section>
 
 </main>
+
 </body>
 </html>

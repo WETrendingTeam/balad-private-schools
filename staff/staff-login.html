@@ -349,7 +349,7 @@ async function login(event) {
 
 
     if (
-      !["teacher","management","other"].includes(role)
+      !["teacher","class_teacher","management","other"].includes(role)
     ) {
 
       await signOut(auth);
@@ -398,6 +398,31 @@ async function login(event) {
     sessionStorage.setItem(
       "baladStaffVerified",
       "true"
+    );
+
+    sessionStorage.setItem(
+      "staffSession",
+      JSON.stringify({
+        uid: credential.user.uid,
+        accessToken: token,
+        name: profile.name || loginCode,
+        loginCode:
+          profile.loginCode || loginCode,
+        role: profile.role || "",
+        school: profile.school || "",
+        homeroom:
+          profile.homeroom ||
+          profile.classTeacherOf ||
+          "",
+        assignedClasses:
+          Array.isArray(profile.assignedClasses)
+            ? profile.assignedClasses
+            : [],
+        assignedSubjects:
+          Array.isArray(profile.assignedSubjects)
+            ? profile.assignedSubjects
+            : []
+      })
     );
 
 

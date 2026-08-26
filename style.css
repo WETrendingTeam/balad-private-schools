@@ -3193,89 +3193,103 @@ body.album-open{overflow:hidden;}
 
 
 /* =========================================================
-   FINAL CORRECTIONS — SCHOOL LEADERS + MENU ACTION BUTTONS
+   BALAD PRIVATE SCHOOLS — CBT CENTRE IMAGE STYLING
    ========================================================= */
-.leader-single{
-  width:min(94%,1120px);
-  margin:-70px auto 0;
-  position:relative;
-  z-index:2;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:32px;
-  box-shadow:var(--shadow);
-  display:grid;
-  grid-template-columns:260px 1fr;
-  gap:34px;
-  align-items:center;
-}
-.leader-single-photo{
-  width:260px;
-  height:320px;
-  border-radius:18px;
-  object-fit:cover;
-  background:#edf4e8;
-  border:2px dashed #b9d3c5;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:var(--green);
-  font-weight:800;
-}
-.leader-single-copy h2{color:var(--green);margin:6px 0}
-.leader-single-copy p{color:var(--muted);line-height:1.7}
-.school-intro-card{margin-top:28px}
 
-/* Desktop + mobile: Login and Contact are deliberate boxed actions. */
-header nav#balad-main-nav > a.nav-login-button,
-header nav#balad-main-nav > a.nav-contact-button{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:44px;
-  padding:10px 18px;
-  border:2px solid var(--green);
-  border-radius:10px;
-  color:var(--green);
-  font-weight:800;
-  text-decoration:none;
-  box-sizing:border-box;
-}
-header nav#balad-main-nav > a.nav-contact-button{
-  margin-left:4px;
-}
-header nav#balad-main-nav > a.nav-login-button:hover,
-header nav#balad-main-nav > a.nav-contact-button:hover{
-  background:var(--green);
-  color:#fff;
+/* Main CBT Centre Feature */
+.cbt-centre-feature {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: center;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-@media(max-width:760px){
-  .leader-single{
-    margin:-38px auto 0;
-    grid-template-columns:1fr;
-    padding:22px;
-    text-align:center;
-  }
-  .leader-single-photo{
-    width:220px;
-    height:275px;
-    margin:0 auto;
-  }
-  header nav#balad-main-nav > a.nav-login-button,
-  header nav#balad-main-nav > a.nav-contact-button{
-    width:100%;
-    min-height:52px;
-    margin:14px 0 0;
-    padding:14px 18px;
-    border:2px solid var(--green);
-    border-radius:10px;
-    justify-content:center;
-    flex:0 0 auto;
-  }
-  header nav#balad-main-nav > a.nav-contact-button{
-    margin-top:12px;
-  }
+.cbt-centre-feature img {
+  width: 100%;
+  height: 380px;
+  display: block;
+  object-fit: cover;
 }
+
+.cbt-centre-feature-content {
+  padding: 35px;
+}
+
+.cbt-centre-feature-content h2 {
+  margin: 8px 0 15px;
+}
+
+
+/* CBT Team Photos */
+.cbt-team-photo {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  background: #f4f8f6;
+}
+
+.cbt-team-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+}
+
+
+/* Keep team cards consistent */
+.cbt-team-card {
+  overflow: hidden;
+}
+
+
+/* Mobile */
+@media (max-width: 760px) {
+
+  .cbt-centre-feature {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 0 15px;
+  }
+
+  .cbt-centre-feature img {
+    height: 260px;
+  }
+
+  .cbt-centre-feature-content {
+    padding: 25px;
+  }
+
+  .cbt-team-photo {
+    height: 260px;
+  }
+
+}
+
+
+/* Small phones */
+@media (max-width: 480px) {
+
+  .cbt-centre-feature img {
+    height: 220px;
+  }
+
+  .cbt-team-photo {
+    height: 240px;
+  }
+
+}
+
+
+
+/* NAPPS / approval status */
+.school-status{display:block;margin-top:5px;font-size:11px;font-style:normal;font-weight:700;color:#075c43;line-height:1.35}
+@media(max-width:700px){.school-status{font-size:9px}}

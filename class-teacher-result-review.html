@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class Teacher Result Review | BALAD</title>
+<style>
+:root{
+  --green:#075c43;
+  --maroon:#6d252d;
+  --cream:#f7f0df;
+  --ink:#17221e;
+  --muted:#68736e;
+  --line:#d8d2c4;
+  --white:#fff;
+  --danger:#a61d1d;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#eef1ef;
+  color:var(--ink);
+  font-family:Arial,Helvetica,sans-serif;
+}
+header{
+  background:var(--white);
+  border-bottom:1px solid var(--line);
+  padding:16px 24px;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+.header-inner{
+  max-width:1250px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.brand img{
+  width:52px;
+  height:52px;
+  object-fit:contain;
+}
+.brand h1{
+  margin:0;
+  font-size:18px;
+  color:var(--green);
+}
+.brand p{
+  margin:3px 0 0;
+  color:var(--muted);
+  font-size:11px;
+}
+.teacher-badge{
+  text-align:right;
+  font-size:12px;
+}
+.teacher-badge strong{display:block;color:var(--green)}
+main{
+  max-width:1250px;
+  margin:28px auto;
+  padding:0 18px 50px;
+}
+.page-title{
+  margin-bottom:20px;
+}
+.eyebrow{
+  color:var(--maroon);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1.2px;
+  margin:0 0 6px;
+}
+h2{
+  margin:0;
+  color:var(--green);
+  font-size:28px;
+}
+.subtitle{
+  color:var(--muted);
+  margin:7px 0 0;
+  font-size:13px;
+}
+.control-card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px;
+  display:grid;
+  grid-template-columns:1.2fr 1fr auto;
+  gap:14px;
+  align-items:end;
+  margin-bottom:18px;
+}
+.field label{
+  display:block;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:6px;
+  color:var(--green);
+}
+.field select,.field input{
+  width:100%;
+  height:42px;
+  border:1px solid #c8cfc9;
+  border-radius:7px;
+  padding:0 11px;
+  background:#fff;
+  color:var(--ink);
+}
+button{
+  border:0;
+  border-radius:7px;
+  min-height:42px;
+  padding:0 18px;
+  font-weight:800;
+  cursor:pointer;
+}
+.primary{background:var(--green);color:white}
+.secondary{background:#eee9dc;color:var(--ink)}
+.danger{background:var(--maroon);color:white}
+button:disabled{opacity:.5;cursor:not-allowed}
+.status{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px 15px;
+  margin-bottom:18px;
+  display:none;
+  font-size:12px;
+}
+.status.show{display:block}
+.status.error{color:var(--danger);background:#fff5f5}
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:18px;
+}
+.stat{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:14px;
+}
+.stat span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.stat strong{
+  color:var(--green);
+  font-size:21px;
+}
+.review-card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+}
+.review-head{
+  padding:15px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  border-bottom:1px solid var(--line);
+}
+.review-head h3{
+  margin:0;
+  color:var(--green);
+  font-size:16px;
+}
+.review-head p{
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:11px;
+}
+.table-wrap{overflow:auto}
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1000px;
+  font-size:11px;
+}
+th,td{
+  border-bottom:1px solid #e2e2dd;
+  padding:9px 8px;
+  text-align:center;
+  white-space:nowrap;
+}
+th{
+  background:#f6f7f5;
+  color:var(--green);
+  font-size:10px;
+}
+td.name,th.name{text-align:left}
+.student-link{
+  color:var(--green);
+  font-weight:800;
+  cursor:pointer;
+}
+.good{color:var(--green);font-weight:800}
+.warn{color:#9a6500;font-weight:800}
+.bad{color:var(--danger);font-weight:800}
+.locked{
+  color:#777;
+  font-size:10px;
+}
+.empty{
+  padding:35px;
+  text-align:center;
+  color:var(--muted);
+}
+.actions{
+  padding:16px 18px;
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
+  border-top:1px solid var(--line);
+  background:#fbfbfa;
+}
+.note{
+  margin-top:12px;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.5;
+}
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-box{
+  width:min(850px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:white;
+  border-radius:12px;
+  padding:20px;
+}
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid var(--line);
+  padding-bottom:12px;
+  margin-bottom:15px;
+}
+.modal-head h3{margin:0;color:var(--green)}
+.close{
+  background:#eee;
+  width:38px;
+  min-height:38px;
+  padding:0;
+}
+.detail-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:15px;
+}
+.detail{
+  border:1px solid var(--line);
+  padding:8px;
+  font-size:11px;
+}
+.detail b{color:var(--green)}
+.detail-table{min-width:0}
+.detail-table th,.detail-table td{padding:7px}
+@media(max-width:800px){
+  .control-card{grid-template-columns:1fr}
+  .summary-grid{grid-template-columns:1fr 1fr}
+  .header-inner{align-items:flex-start}
+  .teacher-badge{display:none}
+}
+@media(max-width:500px){
+  .summary-grid{grid-template-columns:1fr}
+  main{padding:0 10px 35px}
+  header{padding:12px}
+  h2{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <img src="logo.png" alt="BALAD logo">
+      <div>
+        <h1>BALAD RESULT MANAGEMENT</h1>
+        <p>Class Teacher Result Review</p>
+      </div>
+    </div>
+    <div class="teacher-badge">
+      <strong id="teacherName">Class Teacher</strong>
+      <span id="teacherRole">Class Teacher Access</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-title">
+    <p class="eyebrow">RESULT MANAGEMENT</p>
+    <h2>Class Teacher Result Review</h2>
+    <p class="subtitle">
+      Review the complete results of your assigned class before the class result is finalized.
+    </p>
+  </section>
+
+  <section class="control-card">
+    <div class="field">
+      <label>ASSIGNED CLASS</label>
+      <select id="classSelect" disabled>
+        <option>Loading assigned class...</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>TERM</label>
+      <select id="termSelect">
+        <option>FIRST TERM</option>
+        <option>SECOND TERM</option>
+        <option>THIRD TERM</option>
+      </select>
+    </div>
+
+    <button class="primary" id="loadBtn">Load Class Result</button>
+  </section>
+
+  <div id="status" class="status"></div>
+
+  <section class="summary-grid">
+    <div class="stat">
+      <span>Students</span>
+      <strong id="studentCount">—</strong>
+    </div>
+    <div class="stat">
+      <span>Students Complete</span>
+      <strong id="completeCount">—</strong>
+    </div>
+    <div class="stat">
+      <span>Students With Missing Scores</span>
+      <strong id="missingCount">—</strong>
+    </div>
+    <div class="stat">
+      <span>Result Status</span>
+      <strong id="resultStatus">Not Loaded</strong>
+    </div>
+  </section>
+
+  <section class="review-card">
+    <div class="review-head">
+      <div>
+        <h3 id="classHeading">Class Result</h3>
+        <p id="reviewDescription">Load your assigned class to begin review.</p>
+      </div>
+      <button class="secondary" id="refreshBtn">Refresh</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>S/N</th>
+            <th class="name">STUDENT</th>
+            <th>ADMISSION NO.</th>
+            <th>SUBJECTS</th>
+            <th>COMPLETED</th>
+            <th>AVERAGE</th>
+            <th>STATUS</th>
+            <th>REVIEW</th>
+          </tr>
+        </thead>
+        <tbody id="classResultsBody">
+          <tr>
+            <td colspan="8" class="empty">
+              No class result loaded.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="actions">
+      <button class="secondary" id="previewBtn" disabled>Preview Final Result</button>
+      <button class="danger" id="finalizeBtn" disabled>Finalize Class Result</button>
+    </div>
+  </section>
+
+  <p class="note">
+    Subject teachers do not use this page to review the full class result.
+    Their access remains limited to entering and checking the calculation for their assigned subject.
+    Finalization should only be available to the class teacher after all required results are complete.
+  </p>
+</main>
+
+<div class="modal" id="studentModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalStudentName">Student Result</h3>
+      <button class="close" id="closeModal">×</button>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail"><b>Class:</b> <span id="modalClass">—</span></div>
+      <div class="detail"><b>Admission No.:</b> <span id="modalAdmission">—</span></div>
+      <div class="detail"><b>Term:</b> <span id="modalTerm">—</span></div>
+      <div class="detail"><b>Average:</b> <span id="modalAverage">—</span></div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="detail-table">
+        <thead>
+          <tr>
+            <th class="name">SUBJECT</th>
+            <th>CA</th>
+            <th>EXAM</th>
+            <th>TOTAL</th>
+            <th>GRADE</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody id="studentDetailBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+const API_URL =
+  "https://balad-staff-auth.6s9257wftb.workers.dev";
+
+/*
+  IMPORTANT:
+  This page intentionally does not create a second login system.
+  It reads the existing staff session and sends the existing access
+  token to the Worker.
+
+  The Worker actions used here are the dedicated review actions:
+    get_class_teacher_result_review
+    finalize_class_result
+
+  If those actions are not yet present in the Worker, the page will
+  show a clear message instead of pretending the class result loaded.
+*/
+
+function getSession(){
+  const keys = [
+    "staffSession",
+    "staffAuth",
+    "controlSession",
+    "authSession",
+    "staff"
+  ];
+
+  for(const key of keys){
+    const raw = sessionStorage.getItem(key);
+    if(!raw) continue;
+    try{
+      const value = JSON.parse(raw);
+      if(value) return value;
+    }catch(e){}
+  }
+
+  const token =
+    sessionStorage.getItem("baladStaffIdToken") ||
+    sessionStorage.getItem("baladControlIdToken") ||
+    "";
+
+  if(token){
+    return {
+      accessToken: token,
+      role: sessionStorage.getItem("baladStaffRole") || "",
+      name: sessionStorage.getItem("baladStaffName") || "",
+      loginCode:
+        sessionStorage.getItem("baladStaffLoginCode") || "",
+      assignedClasses: []
+    };
+  }
+
+  return null;
+}
+
+function getToken(session){
+  if(!session) return "";
+  return (
+    session.accessToken ||
+    session.idToken ||
+    session.token ||
+    session.id_token ||
+    ""
+  );
+}
+
+function setStatus(message,error=false){
+  const box=document.getElementById("status");
+  box.textContent=message;
+  box.className="status show" + (error ? " error" : "");
+}
+
+async function worker(action,payload={}){
+  const session=getSession();
+  const token=getToken(session);
+
+  const body={
+    action,
+    ...payload
+  };
+
+  const headers={
+    "Content-Type":"application/json"
+  };
+
+  if(token){
+    headers.Authorization="Bearer "+token;
+  }
+
+  const response=await fetch(API_URL,{
+    method:"POST",
+    headers,
+    body:JSON.stringify(body)
+  });
+
+  const data=await response.json().catch(()=>({}));
+
+  if(!response.ok || !data.success){
+    throw new Error(
+      data.error ||
+      data.message ||
+      "The result server could not complete this request."
+    );
+  }
+
+  return data;
+}
+
+function escapeHtml(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function getStudentId(student){
+  return (
+    student.studentId ||
+    student.id ||
+    student.uid ||
+    ""
+  );
+}
+
+function subjectRows(student){
+  return Array.isArray(student.results)
+    ? student.results
+    : Array.isArray(student.subjects)
+      ? student.subjects
+      : [];
+}
+
+function isComplete(student){
+  const rows=subjectRows(student);
+  if(!rows.length) return false;
+
+  return rows.every(item =>
+    item.ca !== undefined &&
+    item.ca !== "" &&
+    item.exam !== undefined &&
+    item.exam !== ""
+  );
+}
+
+function average(student){
+  const rows=subjectRows(student);
+  if(!rows.length) return 0;
+
+  let total=0;
+  let count=0;
+
+  rows.forEach(item=>{
+    const value=Number(
+      item.total ??
+      (Number(item.ca||0)+Number(item.exam||0))
+    );
+
+    if(!Number.isNaN(value)){
+      total+=value;
+      count++;
+    }
+  });
+
+  return count ? total/count : 0;
+}
+
+function renderStudents(students){
+  const body=document.getElementById("classResultsBody");
+
+  if(!students.length){
+    body.innerHTML=
+      `<tr><td colspan="8" class="empty">
+        No students/results were returned for this class.
+      </td></tr>`;
+    return;
+  }
+
+  body.innerHTML="";
+
+  students.forEach((student,index)=>{
+    const rows=subjectRows(student);
+    const complete=isComplete(student);
+    const avg=average(student);
+
+    const tr=document.createElement("tr");
+
+    tr.innerHTML=`
+      <td>${index+1}</td>
+      <td class="name">
+        <span class="student-link"
+          data-id="${escapeHtml(getStudentId(student))}">
+          ${escapeHtml(student.studentName || student.name || "Unnamed Student")}
+        </span>
+      </td>
+      <td>${escapeHtml(student.admissionNumber || "—")}</td>
+      <td>${rows.length}</td>
+      <td>${rows.filter(x => x.ca !== "" && x.exam !== "" && x.ca != null && x.exam != null).length} / ${rows.length}</td>
+      <td>${rows.length ? avg.toFixed(1) + "%" : "—"}</td>
+      <td class="${complete ? "good" : "warn"}">
+        ${complete ? "Complete" : "Incomplete"}
+      </td>
+      <td>
+        <button class="secondary review-student"
+          data-id="${escapeHtml(getStudentId(student))}"
+          style="min-height:32px;padding:0 10px;font-size:10px">
+          Review
+        </button>
+      </td>
+    `;
+
+    body.appendChild(tr);
+  });
+
+  body.querySelectorAll(".review-student,.student-link")
+    .forEach(el=>{
+      el.addEventListener("click",()=>{
+        openStudent(
+          students.find(
+            x=>String(getStudentId(x))===String(el.dataset.id)
+          )
+        );
+      });
+    });
+}
+
+function updateSummary(students,status){
+  const complete=students.filter(isComplete).length;
+
+  document.getElementById("studentCount").textContent=students.length;
+  document.getElementById("completeCount").textContent=complete;
+  document.getElementById("missingCount").textContent=
+    Math.max(0,students.length-complete);
+
+  document.getElementById("resultStatus").textContent=
+    status || "Review";
+
+  const canFinalize =
+    students.length > 0 &&
+    complete === students.length &&
+    String(status || "").toLowerCase() !== "finalized";
+
+  document.getElementById("finalizeBtn").disabled=!canFinalize;
+  document.getElementById("previewBtn").disabled=students.length===0;
+}
+
+let currentStudents=[];
+let currentClass="";
+let currentTerm="";
+let currentPayload=null;
+
+async function loadAssignedClass(){
+  try{
+    const session = getSession();
+
+    const role =
+      String(
+        session?.role ||
+        sessionStorage.getItem("baladStaffRole") ||
+        ""
+      ).toLowerCase();
+
+    if(role !== "class_teacher"){
+      throw new Error(
+        "Only a Class Teacher can open the full class result review."
+      );
+    }
+
+    let classes =
+      Array.isArray(session?.assignedClasses)
+        ? session.assignedClasses
+        : [];
+
+    if(!classes.length){
+      const raw =
+        sessionStorage.getItem("baladStaffAssignedClasses");
+
+      if(raw){
+        try{
+          classes = JSON.parse(raw);
+        }catch(e){}
+      }
+    }
+
+    if(!classes.length){
+      throw new Error(
+        "No Class Teacher class assignment was found in your staff session."
+      );
+    }
+
+    const select =
+      document.getElementById("classSelect");
+
+    select.innerHTML = "";
+
+    classes.forEach(item=>{
+      const name =
+        typeof item === "string"
+          ? item
+          : (
+              item.className ||
+              item.class ||
+              item.name ||
+              ""
+            );
+
+      if(!name) return;
+
+      const option =
+        document.createElement("option");
+
+      option.value = name;
+      option.textContent = name;
+
+      select.appendChild(option);
+    });
+
+    select.disabled =
+      select.options.length <= 1;
+
+    document.getElementById("teacherName").textContent =
+      session?.name ||
+      session?.staffName ||
+      sessionStorage.getItem("baladStaffName") ||
+      "Class Teacher";
+
+    if(!select.options.length){
+      throw new Error(
+        "No Class Teacher class assignment was found."
+      );
+    }
+
+    await loadClassResults();
+
+  }catch(error){
+    setStatus(
+      "Unable to load the Class Teacher assignment: " +
+      error.message,
+      true
+    );
+  }
+}
+
+async function loadClassResults(){
+  const className=
+    document.getElementById("classSelect").value;
+
+  const term=
+    document.getElementById("termSelect").value;
+
+  if(!className){
+    setStatus("No assigned class is available.",true);
+    return;
+  }
+
+  currentClass=className;
+  currentTerm=term;
+
+  setStatus("Loading the complete class result...");
+
+  try{
+    const data=await worker(
+      "get_class_teacher_result_review",
+      {
+        className,
+        term
+      }
+    );
+
+    currentPayload=data;
+
+    currentStudents =
+      data.students ||
+      data.results ||
+      [];
+
+    const status =
+      data.status ||
+      data.resultStatus ||
+      "Review";
+
+    document.getElementById("classHeading").textContent=
+      className + " — " + term;
+
+    document.getElementById("reviewDescription").textContent=
+      "Complete class result review. Subject teachers cannot access this full-class review.";
+
+    renderStudents(currentStudents);
+    updateSummary(currentStudents,status);
+
+    setStatus(
+      currentStudents.length +
+      " student result record(s) loaded."
+    );
+
+  }catch(error){
+    currentStudents=[];
+    renderStudents([]);
+    updateSummary([],"Not Loaded");
+
+    setStatus(
+      error.message,
+      true
+    );
+  }
+}
+
+function openStudent(student){
+  if(!student) return;
+
+  const rows=subjectRows(student);
+
+  document.getElementById("modalStudentName").textContent=
+    student.studentName || student.name || "Student Result";
+
+  document.getElementById("modalClass").textContent=
+    student.className || currentClass || "—";
+
+  document.getElementById("modalAdmission").textContent=
+    student.admissionNumber || "—";
+
+  document.getElementById("modalTerm").textContent=
+    currentTerm || "—";
+
+  document.getElementById("modalAverage").textContent=
+    rows.length ? average(student).toFixed(1)+"%" : "—";
+
+  const body=document.getElementById("studentDetailBody");
+
+  if(!rows.length){
+    body.innerHTML=
+      "<tr><td colspan='6'>No subject result records.</td></tr>";
+  }else{
+    body.innerHTML="";
+
+    rows.forEach(item=>{
+      const total =
+        Number(
+          item.total ??
+          (Number(item.ca||0)+Number(item.exam||0))
+        );
+
+      const complete =
+        item.ca !== undefined &&
+        item.ca !== "" &&
+        item.exam !== undefined &&
+        item.exam !== "";
+
+      const tr=document.createElement("tr");
+
+      tr.innerHTML=`
+        <td class="name">${escapeHtml(item.subject || "—")}</td>
+        <td>${escapeHtml(item.ca ?? "—")}</td>
+        <td>${escapeHtml(item.exam ?? "—")}</td>
+        <td>${Number.isNaN(total) ? "—" : total}</td>
+        <td>${escapeHtml(item.grade || "Auto")}</td>
+        <td class="${complete ? "good" : "warn"}">
+          ${complete ? "Complete" : "Missing Score"}
+        </td>
+      `;
+
+      body.appendChild(tr);
+    });
+  }
+
+  document.getElementById("studentModal").classList.add("open");
+}
+
+async function finalizeClass(){
+  if(!currentClass || !currentStudents.length) return;
+
+  const incomplete=currentStudents.filter(
+    student=>!isComplete(student)
+  );
+
+  if(incomplete.length){
+    setStatus(
+      "The class cannot be finalized because " +
+      incomplete.length +
+      " student result(s) still have missing scores.",
+      true
+    );
+    return;
+  }
+
+  const ok=confirm(
+    "Finalize this class result for " +
+    currentClass +
+    " — " +
+    currentTerm +
+    "?\n\n" +
+    "After finalization, the result becomes the completed class result used for student result access."
+  );
+
+  if(!ok) return;
+
+  const button=document.getElementById("finalizeBtn");
+  button.disabled=true;
+  button.textContent="Finalizing...";
+
+  try{
+    const data=await worker(
+      "finalize_class_result",
+      {
+        className:currentClass,
+        term:currentTerm
+      }
+    );
+
+    updateSummary(
+      currentStudents,
+      data.status || "Finalized"
+    );
+
+    setStatus(
+      "Class result finalized successfully."
+    );
+
+  }catch(error){
+    setStatus(
+      error.message,
+      true
+    );
+    button.disabled=false;
+  }finally{
+    button.textContent="Finalize Class Result";
+  }
+}
+
+document.getElementById("loadBtn")
+  .addEventListener("click",loadClassResults);
+
+document.getElementById("refreshBtn")
+  .addEventListener("click",loadClassResults);
+
+document.getElementById("finalizeBtn")
+  .addEventListener("click",finalizeClass);
+
+document.getElementById("closeModal")
+  .addEventListener("click",()=>{
+    document.getElementById("studentModal")
+      .classList.remove("open");
+  });
+
+document.getElementById("studentModal")
+  .addEventListener("click",event=>{
+    if(event.target.id==="studentModal"){
+      event.currentTarget.classList.remove("open");
+    }
+  });
+
+document.getElementById("previewBtn")
+  .addEventListener("click",()=>{
+    /*
+      Preview intentionally opens the existing result preview route
+      only when that route is connected. For now it sends the selected
+      class/term through sessionStorage so the existing preview page
+      can consume it without changing the result design.
+    */
+    sessionStorage.setItem(
+      "classResultPreview",
+      JSON.stringify({
+        className:currentClass,
+        term:currentTerm,
+        students:currentStudents
+      })
+    );
+
+    window.location.href="class-result-preview.html";
+  });
+
+(async function start(){
+  const session=getSession();
+
+  if(!session || !getToken(session)){
+    setStatus(
+      "Please sign in through the existing staff login before opening Class Teacher Result Review.",
+      true
+    );
+    return;
+  }
+
+  await loadAssignedClass();
+})();
+</script>
+</body>
+</html>

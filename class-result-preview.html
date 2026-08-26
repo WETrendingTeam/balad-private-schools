@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class Result Preview | BALAD</title>
+<style>
+body{margin:0;background:#ddd;font-family:Arial,Helvetica,sans-serif;color:#17221e}
+.toolbar{max-width:1100px;margin:18px auto;padding:0 16px;display:flex;gap:12px;align-items:center;justify-content:space-between}
+.toolbar select,.toolbar button{padding:10px 12px;border:1px solid #999;border-radius:7px;background:#fff}
+.toolbar button{cursor:pointer;background:#075c43;color:#fff;border:0}
+.sheet{width:210mm;min-height:297mm;margin:20px auto;padding:10mm;background:#f7f0df;border:2px solid #075c43;box-sizing:border-box}
+.header{display:grid;grid-template-columns:100px 1fr 90px;align-items:center;gap:10px}
+.logo{width:90px;height:90px;object-fit:contain}
+.school{text-align:center}.school h1{margin:0;color:#075c43;font-size:26px}.contact{font-size:9px;line-height:1.45}
+.passport{width:75px;height:90px;border:1px solid #777;object-fit:cover}
+.title{text-align:center;font-weight:bold;color:#075c43;margin:12px}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:5px 20px;border:1px solid #999;padding:8px;font-size:10px}
+.info div{border-bottom:1px solid #aaa;padding:4px}
+.section{margin-top:10px;background:#6d252d;color:#fff;padding:6px;font-weight:bold}
+table{width:100%;border-collapse:collapse;font-size:8px}
+th,td{border:1px solid #999;padding:4px;text-align:center}
+.left{text-align:left}
+.summary{display:grid;grid-template-columns:1fr 1fr 1fr;width:100%;margin-top:8px;border:1px solid #999}
+.summary-item{min-height:55px;padding:8px;border-right:1px solid #999;text-align:center}.summary-item:last-child{border-right:0}
+.summary-label{color:#075c43;font-size:9px;font-weight:800;margin-bottom:6px}.summary-value{font-size:14px;font-weight:800}
+.footer{border-top:1px solid #777;text-align:center;color:#075c43;font-size:9px;margin-top:16px;padding-top:7px}
+.empty{padding:50px;text-align:center}
+@media(max-width:800px){.sheet{width:100%;margin:0;padding:15px}.header{grid-template-columns:70px 1fr 65px}.logo{width:65px;height:65px}.passport{width:55px;height:70px}.school h1{font-size:17px}}
+@media print{body{background:#fff}.toolbar{display:none}.sheet{margin:0}}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <strong id="previewHeading">Class Result Preview</strong>
+  <div>
+    <select id="studentSelect"></select>
+    <button onclick="window.print()">Print Preview</button>
+    <button onclick="history.back()">Back</button>
+  </div>
+</div>
+<main class="sheet">
+  <div id="empty" class="empty">No class result preview is available.</div>
+  <div id="result" style="display:none">
+    <div class="header">
+      <img class="logo" src="logo.png" alt="School Logo">
+      <div class="school">
+        <h1 id="schoolName">BALAD COMPREHENSIVE COLLEGE</h1>
+        <div class="contact">
+          1, Obafemi Street, Abule Afa Bus-stop, Near Ori-Okuta Junction,<br>
+          Off Isawo Road, Ikorodu, Lagos State.<br>
+          Tel: 0706 477 1930, 0806 922 0087, 0818 282 2521<br>
+          Email: baladschools@gmail.com
+        </div>
+      </div>
+      <img class="passport" src="passport.png" alt="Student Passport">
+    </div>
+    <div class="title" id="reportTitle">PROGRESS REPORT SHEET</div>
+    <section class="info">
+      <div><b>SESSION:</b> <span id="session">—</span></div>
+      <div><b>TERM:</b> <span id="term">—</span></div>
+      <div><b>NAME OF STUDENT:</b> <span id="studentName">—</span></div>
+      <div><b>CLASS:</b> <span id="studentClass">—</span></div>
+      <div><b>ARM:</b> <span id="studentArm">—</span></div>
+      <div><b>DEPARTMENT:</b> <span id="studentDepartment">—</span></div>
+    </section>
+    <div class="section">COGNITIVE — ACADEMIC PERFORMANCE</div>
+    <table>
+      <thead><tr><th>S/N</th><th>SUBJECT</th><th>CA 40</th><th>EXAM 60</th><th>TOTAL 100</th><th>GRADE</th><th>REMARK</th></tr></thead>
+      <tbody id="resultsBody"></tbody>
+    </table>
+    <div class="summary">
+      <div class="summary-item"><div class="summary-label">TOTAL SCORE</div><div class="summary-value" id="totalScore">—</div></div>
+      <div class="summary-item"><div class="summary-label">CURRENT AVERAGE</div><div class="summary-value" id="currentAverage">—</div></div>
+      <div class="summary-item"><div class="summary-label">SUBJECTS</div><div class="summary-value" id="subjectCount">—</div></div>
+    </div>
+    <div class="footer" id="footer">© BALAD COMPREHENSIVE COLLEGE</div>
+  </div>
+</main>
+<script>
+const raw=sessionStorage.getItem("classResultPreview");
+let payload=null;
+try{payload=raw?JSON.parse(raw):null}catch(e){payload=null}
+const students=Array.isArray(payload?.students)?payload.students:[];
+const select=document.getElementById("studentSelect");
+const result=document.getElementById("result");
+const empty=document.getElementById("empty");
+
+function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+function render(){
+ const student=students[Number(select.value)||0];
+ if(!student)return;
+ const results=Array.isArray(student.results)?student.results:[];
+ const section=results[0]?.section || (/^JSS/i.test(student.className||"")?"junior":/^SS/i.test(student.className||"")?"senior":"primary");
+ const primary=section==="primary";
+ const school=primary?"BALAD NURSERY AND PRIMARY SCHOOLS":"BALAD COMPREHENSIVE COLLEGE";
+ document.getElementById("schoolName").textContent=school;
+ document.getElementById("footer").textContent="© "+school;
+ document.getElementById("reportTitle").textContent=
+   section==="primary"?"PROGRESS REPORT SHEET FOR NURSERY AND PRIMARY SCHOOL":
+   section==="junior"?"PROGRESS REPORT SHEET FOR JUNIOR SECONDARY SCHOOL":
+   "PROGRESS REPORT SHEET FOR SENIOR SECONDARY SCHOOL";
+ document.getElementById("session").textContent=results[0]?.session||payload.session||"—";
+ document.getElementById("term").textContent=payload.term||results[0]?.term||"—";
+ document.getElementById("studentName").textContent=student.studentName||"—";
+ document.getElementById("studentClass").textContent=student.className||"—";
+ document.getElementById("studentArm").textContent=student.arm||"—";
+ document.getElementById("studentDepartment").textContent=student.department||"—";
+ let total=0;
+ document.getElementById("resultsBody").innerHTML=results.map((x,i)=>{
+   const n=Number(x.total??((Number(x.ca)||0)+(Number(x.exam)||0))); total+=n;
+   return `<tr><td>${i+1}</td><td class="left">${esc(x.subject)}</td><td>${esc(x.ca)}</td><td>${esc(x.exam)}</td><td>${n}</td><td>${esc(x.grade)}</td><td>${esc(x.remark||"")}</td></tr>`;
+ }).join("") || "<tr><td colspan='7'>No subject results.</td></tr>";
+ document.getElementById("totalScore").textContent=total+" / "+(results.length*100);
+ document.getElementById("currentAverage").textContent=results.length?(total/results.length).toFixed(1)+"%":"—";
+ document.getElementById("subjectCount").textContent=results.length;
+}
+if(students.length){
+ empty.style.display="none"; result.style.display="block";
+ students.forEach((s,i)=>{const o=document.createElement("option");o.value=i;o.textContent=s.studentName||"Student "+(i+1);select.appendChild(o)});
+ select.addEventListener("change",render); render();
+}else{
+ select.style.display="none";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subject Result Entry | BALAD</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f7f6;font-family:Arial,Helvetica,sans-serif;color:#17221e}
+header{background:#075c43;color:#fff;padding:18px 22px}
+header h1{margin:0;font-size:22px}
+header p{margin:5px 0 0;font-size:13px;opacity:.9}
+.container{max-width:1100px;margin:25px auto;padding:0 16px}
+.card{background:#fff;border:1px solid #d8dfdc;border-radius:12px;padding:20px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}
+select,input{width:100%;padding:11px;border:1px solid #b9c5c0;border-radius:7px;font-size:14px;background:#fff}
+h2{margin:0 0 15px;color:#075c43;font-size:18px}
+.info{display:flex;gap:20px;flex-wrap:wrap;font-size:13px}
+.info strong{color:#075c43}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:700px}
+th,td{border:1px solid #d0d8d4;padding:9px;text-align:center;font-size:13px}
+th{background:#eef4f1;color:#075c43}
+td.name{text-align:left;font-weight:600}
+.score{width:90px;text-align:center}
+.total{font-weight:800}
+.grade{font-weight:800}
+button{border:0;border-radius:8px;padding:12px 18px;font-weight:700;cursor:pointer}
+.save{background:#075c43;color:white}
+.save:disabled{opacity:.6;cursor:not-allowed}
+.status{margin-top:12px;padding:11px;border-radius:7px;display:none;font-size:13px}
+.status.ok{display:block;background:#e8f6ee;color:#17663b}
+.status.error{display:block;background:#fdecec;color:#a61d1d}
+.note{font-size:12px;color:#65736e;line-height:1.5}
+.school-heading{margin:0 0 4px;color:#075c43;font-size:15px;font-weight:800}
+.school-subheading{margin:0;color:#65736e;font-size:12px}
+@media(max-width:650px){.controls{grid-template-columns:1fr}.container{margin-top:15px}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Subject Result Entry</h1>
+  <p>BALAD — Subject Teacher Workspace</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+  <h2>School, Class &amp; Subject</h2>
+
+  <div class="controls">
+    <div>
+      <label for="school">School / Section</label>
+      <select id="school">
+        <option value="">Choose school / section</option>
+        <option value="primary">BALAD NURSERY AND PRIMARY SCHOOLS</option>
+        <option value="junior">BALAD COMPREHENSIVE COLLEGE — JUNIOR SECONDARY</option>
+        <option value="senior">BALAD COMPREHENSIVE COLLEGE — SENIOR SECONDARY</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="className">Class</label>
+      <select id="className">
+        <option value="">Choose class</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="subject">Assigned Subject</label>
+      <select id="subject">
+        <option value="">Choose subject</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="term">Term</label>
+      <select id="term">
+        <option value="">Choose term</option>
+        <option value="first">First Term</option>
+        <option value="second">Second Term</option>
+        <option value="third">Third Term</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="schoolDescription" style="margin-top:15px;display:none">
+    <p class="school-heading" id="schoolHeading"></p>
+    <p class="school-subheading" id="schoolSubheading"></p>
+  </div>
+
+  <p class="note">
+    In the connected dashboard, these choices will be restricted to the teacher's actual assignment.
+    A subject teacher will only receive the students for the class and subject assigned to that teacher.
+  </p>
+</section>
+
+<section class="card">
+  <h2>Students</h2>
+
+  <div class="info">
+    <div><strong>School:</strong> <span id="schoolLabel">—</span></div>
+    <div><strong>Class:</strong> <span id="classLabel">—</span></div>
+    <div><strong>Subject:</strong> <span id="subjectLabel">—</span></div>
+    <div><strong>Term:</strong> <span id="termLabel">—</span></div>
+    <div><strong>Students:</strong> <span id="countLabel">0</span></div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:15px">
+    <table>
+      <thead>
+        <tr>
+          <th>S/N</th>
+          <th style="text-align:left">Student</th>
+          <th>CA / 40</th>
+          <th>Exam / 60</th>
+          <th>Total / 100</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody id="studentsBody">
+        <tr><td colspan="6">Choose the school, class, subject and term to begin.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:16px;text-align:right">
+    <button class="save" id="saveButton">Save Scores</button>
+  </div>
+
+  <div id="status" class="status"></div>
+</section>
+
+</main>
+
+<script>
+const API_URL =
+  "https://balad-staff-auth.6s9257wftb.workers.dev";
+
+const school = document.getElementById("school");
+const className = document.getElementById("className");
+const subject = document.getElementById("subject");
+const term = document.getElementById("term");
+const body = document.getElementById("studentsBody");
+const count = document.getElementById("countLabel");
+const saveButton = document.getElementById("saveButton");
+const statusBox = document.getElementById("status");
+
+const schoolHeading = document.getElementById("schoolHeading");
+const schoolSubheading = document.getElementById("schoolSubheading");
+const schoolDescription = document.getElementById("schoolDescription");
+
+const schoolData = {
+  primary: {
+    title: "BALAD NURSERY AND PRIMARY SCHOOLS",
+    subtitle: "Primary grading: A++ / A+ / A / B / C / D / F",
+    classes: ["Primary 1","Primary 2","Primary 3","Primary 4","Primary 5","Primary 6"],
+    subjects: [
+      "English Language","Mathematics","Basic Science","Social Studies",
+      "Cultural and Creative Arts","Computer Studies","French","Arabic",
+      "Islamic Religious Studies","Christian Religious Studies",
+      "Physical and Health Education","Handwriting","Quantitative Reasoning",
+      "Verbal Reasoning","Yoruba"
+    ]
+  },
+  junior: {
+    title: "BALAD COMPREHENSIVE COLLEGE",
+    subtitle: "Junior Secondary grading: A / B / C / D / E / F",
+    classes: ["JSS 1","JSS 2","JSS 3"],
+    subjects: [
+      "English Language","Mathematics","Basic Science","Basic Technology",
+      "Social Studies","Civic Education","Business Studies","Computer Studies",
+      "Agricultural Science","Home Economics","Cultural and Creative Arts",
+      "French","Arabic","Yoruba","Physical and Health Education",
+      "Christian Religious Studies","Islamic Religious Studies"
+    ]
+  },
+  senior: {
+    title: "BALAD COMPREHENSIVE COLLEGE",
+    subtitle: "Senior Secondary grading: A / B / C / D / E / F",
+    classes: ["SS 1","SS 2","SS 3"],
+    subjects: [
+      "English Language","Mathematics","Civic Education","Biology","Chemistry",
+      "Physics","Agricultural Science","Economics","Government",
+      "Literature in English","Commerce","Financial Accounting","Geography",
+      "History","Christian Religious Studies","Islamic Religious Studies",
+      "Computer Science","Further Mathematics","French","Arabic","Yoruba"
+    ]
+  }
+};
+
+function getSession() {
+  const rawKeys = [
+    "staffSession",
+    "staffAuth",
+    "controlSession",
+    "authSession",
+    "staff"
+  ];
+
+  for (const key of rawKeys) {
+    const raw = sessionStorage.getItem(key);
+    if (!raw) continue;
+    try {
+      const value = JSON.parse(raw);
+      if (value) return value;
+    } catch (_) {}
+  }
+
+  const token =
+    sessionStorage.getItem("baladStaffIdToken") ||
+    sessionStorage.getItem("baladControlIdToken") ||
+    "";
+
+  if (token) {
+    return {
+      accessToken: token,
+      role: sessionStorage.getItem("baladStaffRole") || "",
+      name: sessionStorage.getItem("baladStaffName") || "",
+      loginCode:
+        sessionStorage.getItem("baladStaffLoginCode") || ""
+    };
+  }
+
+  return null;
+}
+
+function getToken(session) {
+  return (
+    session?.accessToken ||
+    session?.idToken ||
+    session?.token ||
+    session?.id_token ||
+    ""
+  );
+}
+
+async function worker(action, payload = {}) {
+  const session = getSession();
+  const token = getToken(session);
+
+  if (!token) {
+    throw new Error(
+      "Your staff login session is missing. Please log in again."
+    );
+  }
+
+  const response = await fetch(
+    API_URL + "/staff-admin",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: JSON.stringify({
+        action,
+        ...payload
+      })
+    }
+  );
+
+  const data =
+    await response.json().catch(() => ({}));
+
+  if (!response.ok || !data.success) {
+    throw new Error(
+      data.error ||
+      data.message ||
+      "The Worker could not complete this request."
+    );
+  }
+
+  return data;
+}
+
+function grade(total, section) {
+  if (section === "primary") {
+    if (total >= 90) return "A++";
+    if (total >= 80) return "A+";
+    if (total >= 70) return "A";
+    if (total >= 60) return "B";
+    if (total >= 50) return "C";
+    if (total >= 40) return "D";
+    return "F";
+  }
+
+  if (section === "junior") {
+    if (total >= 70) return "A";
+    if (total >= 60) return "B";
+    if (total >= 50) return "C";
+    if (total >= 40) return "D";
+    if (total >= 30) return "E";
+    return "F";
+  }
+
+  if (total >= 75) return "A";
+  if (total >= 65) return "B";
+  if (total >= 55) return "C";
+  if (total >= 45) return "D";
+  if (total >= 40) return "E";
+  return "F";
+}
+
+function setStatus(message, error = false) {
+  statusBox.className =
+    "status " + (error ? "error" : "ok");
+  statusBox.textContent = message;
+}
+
+async function loadStudents() {
+  if (!school.value || !className.value) {
+    body.innerHTML =
+      "<tr><td colspan='6'>Choose the school and class first.</td></tr>";
+    count.textContent = "0";
+    return;
+  }
+
+  try {
+    const data = await worker(
+      "list_students",
+      { school: "primary" === school.value ? "primary" : "college" }
+    );
+
+    const students =
+      (data.students || []).filter(
+        student =>
+          String(student.className || "")
+            .trim()
+            .toLowerCase() ===
+          className.value.trim().toLowerCase()
+      );
+
+    if (!students.length) {
+      body.innerHTML =
+        "<tr><td colspan='6'>No students are currently assigned to this class.</td></tr>";
+      count.textContent = "0";
+      return;
+    }
+
+    body.innerHTML = students.map(
+      (student, index) => `
+        <tr data-student-id="${escapeHtml(student.studentId || student.id || "")}">
+          <td>${index + 1}</td>
+          <td class="name">${escapeHtml(student.studentName || "—")}</td>
+          <td>
+            <input class="score ca" type="number" min="0" max="40" placeholder="0">
+          </td>
+          <td>
+            <input class="score exam" type="number" min="0" max="60" placeholder="0">
+          </td>
+          <td class="total">0</td>
+          <td class="grade">${grade(0, school.value)}</td>
+        </tr>
+      `
+    ).join("");
+
+    count.textContent = String(students.length);
+
+    body.querySelectorAll("input").forEach(
+      input => {
+        input.addEventListener(
+          "input",
+          () => recalculate(input.closest("tr"))
+        );
+      }
+    );
+
+  } catch (error) {
+    body.innerHTML =
+      "<tr><td colspan='6'>Unable to load students.</td></tr>";
+    count.textContent = "0";
+    setStatus(error.message, true);
+  }
+}
+
+function recalculate(row) {
+  const caInput = row.querySelector(".ca");
+  const examInput = row.querySelector(".exam");
+
+  const ca = Number(caInput.value || 0);
+  const exam = Number(examInput.value || 0);
+
+  const totalCell = row.querySelector(".total");
+  const gradeCell = row.querySelector(".grade");
+
+  if (
+    ca < 0 || ca > 40 ||
+    exam < 0 || exam > 60
+  ) {
+    totalCell.textContent = "Invalid";
+    gradeCell.textContent = "—";
+    return;
+  }
+
+  const total = ca + exam;
+  totalCell.textContent = total;
+  gradeCell.textContent =
+    grade(total, school.value);
+}
+
+function populateSchoolOptions() {
+  className.innerHTML =
+    '<option value="">Choose class</option>';
+
+  subject.innerHTML =
+    '<option value="">Choose subject</option>';
+
+  if (!school.value) {
+    schoolDescription.style.display = "none";
+    body.innerHTML =
+      "<tr><td colspan='6'>Choose the school, class, subject and term to begin.</td></tr>";
+    return;
+  }
+
+  const data = schoolData[school.value];
+
+  schoolDescription.style.display = "block";
+  schoolHeading.textContent = data.title;
+  schoolSubheading.textContent = data.subtitle;
+
+  data.classes.forEach(item => {
+    const option =
+      document.createElement("option");
+    option.value = item;
+    option.textContent = item;
+    className.appendChild(option);
+  });
+
+  data.subjects.forEach(item => {
+    const option =
+      document.createElement("option");
+    option.value = item;
+    option.textContent = item;
+    subject.appendChild(option);
+  });
+
+  applyTeacherAssignments();
+
+  render();
+}
+
+function applyTeacherAssignments() {
+  const session = getSession();
+
+  const role =
+    String(
+      session?.role ||
+      sessionStorage.getItem("baladStaffRole") ||
+      ""
+    ).toLowerCase();
+
+  if (!["teacher","class_teacher"].includes(role)) {
+    return;
+  }
+
+  const assignedClasses =
+    Array.isArray(session?.assignedClasses)
+      ? session.assignedClasses.map(
+          x => String(x).trim().toLowerCase()
+        )
+      : [];
+
+  const assignedSubjects =
+    Array.isArray(session?.assignedSubjects)
+      ? session.assignedSubjects.map(
+          x => String(x).trim().toLowerCase()
+        )
+      : [];
+
+  [...className.options].forEach(option => {
+    if (!option.value) return;
+
+    option.hidden =
+      assignedClasses.length > 0 &&
+      !assignedClasses.includes(
+        option.value.trim().toLowerCase()
+      );
+  });
+
+  [...subject.options].forEach(option => {
+    if (!option.value) return;
+
+    option.hidden =
+      assignedSubjects.length > 0 &&
+      !assignedSubjects.includes(
+        option.value.trim().toLowerCase()
+      );
+  });
+
+  const visibleClass =
+    [...className.options].find(
+      option =>
+        option.value &&
+        !option.hidden
+    );
+
+  const visibleSubject =
+    [...subject.options].find(
+      option =>
+        option.value &&
+        !option.hidden
+    );
+
+  if (visibleClass && !className.value) {
+    className.value = visibleClass.value;
+  }
+
+  if (visibleSubject && !subject.value) {
+    subject.value = visibleSubject.value;
+  }
+}
+
+function render() {
+  document.getElementById("schoolLabel").textContent =
+    school.value
+      ? schoolData[school.value].title
+      : "—";
+
+  document.getElementById("classLabel").textContent =
+    className.value || "—";
+
+  document.getElementById("subjectLabel").textContent =
+    subject.value || "—";
+
+  document.getElementById("termLabel").textContent =
+    term.value
+      ? term.options[term.selectedIndex].text
+      : "—";
+
+  if (
+    !school.value ||
+    !className.value ||
+    !subject.value ||
+    !term.value
+  ) {
+    body.innerHTML =
+      "<tr><td colspan='6'>Choose the school, class, subject and term to begin.</td></tr>";
+    count.textContent = "0";
+    return;
+  }
+
+  loadStudents();
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+school.addEventListener(
+  "change",
+  populateSchoolOptions
+);
+
+className.addEventListener(
+  "change",
+  render
+);
+
+subject.addEventListener(
+  "change",
+  render
+);
+
+term.addEventListener(
+  "change",
+  render
+);
+
+saveButton.addEventListener(
+  "click",
+  async () => {
+
+    if (
+      !school.value ||
+      !className.value ||
+      !subject.value ||
+      !term.value
+    ) {
+      setStatus(
+        "Choose the school, class, subject and term first.",
+        true
+      );
+      return;
+    }
+
+    const rows =
+      [...body.querySelectorAll(
+        "tr[data-student-id]"
+      )];
+
+    if (!rows.length) {
+      setStatus(
+        "No students are loaded.",
+        true
+      );
+      return;
+    }
+
+    for (const row of rows) {
+      const ca =
+        Number(
+          row.querySelector(".ca").value || 0
+        );
+
+      const exam =
+        Number(
+          row.querySelector(".exam").value || 0
+        );
+
+      if (
+        ca < 0 || ca > 40 ||
+        exam < 0 || exam > 60
+      ) {
+        setStatus(
+          "Every CA must be 0–40 and every Exam must be 0–60.",
+          true
+        );
+        return;
+      }
+    }
+
+    const results =
+      rows.map(row => ({
+        studentId:
+          row.dataset.studentId,
+
+        ca:
+          Number(
+            row.querySelector(".ca").value || 0
+          ),
+
+        exam:
+          Number(
+            row.querySelector(".exam").value || 0
+          )
+      }));
+
+    saveButton.disabled = true;
+    saveButton.textContent = "Saving...";
+
+    try {
+
+      const data =
+        await worker(
+          "save_subject_results",
+          {
+            school:
+              school.value === "primary"
+                ? "primary"
+                : "college",
+
+            section:
+              school.value,
+
+            className:
+              className.value,
+
+            subject:
+              subject.value,
+
+            term:
+              term.value,
+
+            results
+          }
+        );
+
+      const saved =
+        Number(data.savedCount || 0);
+
+      const failed =
+        Number(data.failedCount || 0);
+
+      if (failed) {
+        setStatus(
+          `${saved} result(s) saved. ${failed} row(s) could not be saved.`,
+          true
+        );
+      } else {
+        setStatus(
+          `${saved} result(s) saved successfully. Calculations and grades are now stored in the student result records.`
+        );
+      }
+
+    } catch (error) {
+
+      setStatus(
+        error.message,
+        true
+      );
+
+    } finally {
+
+      saveButton.disabled = false;
+      saveButton.textContent = "Save Scores";
+
+    }
+  }
+);
+
+populateSchoolOptions();
+</script>
+
+</body>
+</html>

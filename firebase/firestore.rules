@@ -27,7 +27,7 @@ service cloud.firestore {
     }
 
     function isTeacher() {
-      return isActiveStaff() && role() == 'teacher';
+      return isActiveStaff() && (role() == 'teacher' || role() == 'class_teacher');
     }
 
     function teacherHasClass(className) {
@@ -37,6 +37,10 @@ service cloud.firestore {
     match /staff/{uid} {
       allow read: if isControl() || (isActiveStaff() && request.auth.uid == uid);
       allow create, update, delete: if isControl();
+    }
+
+    match /classes/{id} {
+      allow read, write: if isControl();
     }
 
     match /students/{id} {

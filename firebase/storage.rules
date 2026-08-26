@@ -1,0 +1,12 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() { return request.auth != null; }
+    function staffDoc() { return firestore.get(/databases/(default)/documents/staff/$(request.auth.uid)); }
+    function isControl() { return signedIn() && staffDoc().data.active == true && staffDoc().data.role == "control"; }
+
+    match /students/passports/{fileName} {
+      allow read, write: if isControl();
+    }
+  }
+}

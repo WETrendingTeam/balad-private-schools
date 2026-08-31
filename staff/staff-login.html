@@ -367,30 +367,25 @@ async function login(event) {
     const token =
       await credential.user.getIdToken(true);
 
-    sessionStorage.setItem(
-      "baladStaffUid",
+    localStorage.setItem("baladStaffUid",
       credential.user.uid
     );
 
-    sessionStorage.setItem(
-      "baladStaffIdToken",
+    localStorage.setItem("baladStaffIdToken",
       token
     );
 
-    sessionStorage.setItem(
-      "baladStaffRole",
+    localStorage.setItem("baladStaffRole",
       profile.role || ""
     );
 
-    sessionStorage.setItem(
-      "baladStaffName",
+    localStorage.setItem("baladStaffName",
       profile.name ||
       profile.loginCode ||
       loginCode
     );
 
-    sessionStorage.setItem(
-      "baladStaffLoginCode",
+    localStorage.setItem("baladStaffLoginCode",
       profile.loginCode ||
       loginCode
     );

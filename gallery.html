@@ -1,28 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Gallery | Balad Private Schools</title>
-<link href="style.css" rel="stylesheet">
-<script defer src="script.js?v=7"></script>
-<script defer src="content-loader.js"></script>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js?v=7"></script>
+<script defer="" src="content-loader.js" type="module"></script>
 </head>
-<body class="gallery-page">
+<body class="gallery-page" data-cms-page="gallery">
 <header>
-  <div class="logo">
-    <img alt="Balad Private Schools Logo" src="logo.png" data-media-key="asset-logo-png">
-    <div class="school-name">
-      <h2>BALAD PRIVATE SCHOOLS</h2>
-      <p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
-      <small>"Nothing but Success"</small>
-    </div>
-  </div>
-  <input class="menu-toggle" id="balad-menu-toggle" type="checkbox">
-  <label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle">
-    <span class="menu-icon-open">☰</span><span class="menu-icon-close">×</span>
-  </label>
-  <nav id="balad-main-nav">
+<div class="logo">
+<img alt="Balad Private Schools Logo" data-media-key="gallery-image-1" src="images/logo.png"/>
+<div class="school-name">
+<h2>BALAD PRIVATE SCHOOLS</h2>
+<p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
+<small>"Nothing but Success"</small>
+</div>
+</div>
+<input class="menu-toggle" id="balad-menu-toggle" type="checkbox"/>
+<label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle">
+<span class="menu-icon-open">☰</span><span class="menu-icon-close">×</span>
+</label>
+<nav id="balad-main-nav">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <details class="academic-nav school-nav">
@@ -48,123 +49,110 @@
 <a href="news.html">News &amp; Events</a>
 <a href="alumni.html">Alumni</a>
 <a class="nav-login-button" href="control-login.html">LOGIN</a>
-<a class="nav-contact-button" href="contact.html">CONTACT</a>
+<a class="nav-contact-button" href="contact.html">CONTACT US</a>
 </nav>
 </header>
-
 <section class="gallery-album-hero">
-  <div class="container">
-    <p class="eyebrow">BALAD PRIVATE SCHOOLS</p>
-    <h1>School Gallery</h1>
-    <p data-text-key="gallery-intro">Browse our school memories as albums of learning, activities, achievements and special moments.</p>
-    <div class="gallery-search-wrap">
-      <span>⌕</span>
-      <input id="gallerySearch" type="search" placeholder="Search by album, activity or event">
-    </div>
-  </div>
-</section>
-
-<main class="gallery-album-main">
-  <div class="container">
-    <div class="album-toolbar">
-      <div><strong id="albumCount">7 albums</strong><span> • Balad memories</span></div>
-      <button class="album-reset" id="albumReset" type="button">All Albums</button>
-    </div>
-
-    <section class="album-grid" id="albumGrid" aria-label="Photo albums">
-
-      <article class="album-card" data-search="campus environment school building classrooms">
-        <button class="album-cover" type="button" data-album="campus">
-          <div class="album-stack">
-            <img src="images/school-building1.jpg" data-media-key="asset-images-school-building1-jpg" alt="School building">
-            <img src="images/school-building2.jpg" data-media-key="asset-images-school-building2-jpg" alt="School environment">
-            <img src="images/school-building1.jpg" data-media-key="asset-images-school-building1-jpg" alt="Balad campus">
-          </div>
-        </button>
-        <div class="album-meta"><span class="album-location">BALAD PRIVATE SCHOOLS</span><h2>Campus &amp; Environment</h2><p>Our learning spaces and school environment</p><span class="album-count">2 photos</span></div>
-      </article>
-
-      <article class="album-card" data-search="stem science laboratory learning">
-        <button class="album-cover" type="button" data-album="stem">
-          <div class="album-stack">
-            <img src="images/science-lab1.jpg" data-media-key="asset-images-science-lab1-jpg" alt="Science laboratory">
-            <img src="images/science-lab2.jpg" data-media-key="asset-images-science-lab2-jpg" alt="Science activity">
-            <img src="images/science-lab1.jpg" data-media-key="asset-images-science-lab1-jpg" alt="STEM learning">
-          </div>
-        </button>
-        <div class="album-meta"><span class="album-location">ACADEMIC LIFE</span><h2>STEM &amp; Learning</h2><p>Practical learning, experiments and discovery</p><span class="album-count">2 photos</span></div>
-      </article>
-
-      <article class="album-card" data-search="career day careers event">
-        <button class="album-cover" type="button" data-album="career">
-          <div class="album-stack">
-            <img src="images/career-day1.jpg" data-media-key="asset-images-career-day1-jpg" alt="Career Day">
-            <img src="images/career-day2.jpg" data-media-key="asset-images-career-day2-jpg" alt="Career Day activity">
-            <img src="images/career-day3.jpg" data-media-key="asset-images-career-day3-jpg" alt="Career Day">
-          </div>
-        </button>
-        <div class="album-meta"><span class="album-location">SCHOOL EVENTS</span><h2>Career Day</h2><p>Students exploring careers and future possibilities</p><span class="album-count">3 photos</span></div>
-      </article>
-
-      <article class="album-card" data-search="clubs activities student life">
-        <button class="album-cover" type="button" data-album="clubs">
-          <div class="album-stack">
-            <img src="images/club-activities1.jpg" data-media-key="asset-images-club-activities1-jpg" alt="Club activities">
-            <img src="images/club-activities2.jpg" data-media-key="asset-images-club-activities2-jpg" alt="Club activities">
-            <img src="images/club-activities3.jpg" data-media-key="asset-images-club-activities3-jpg" alt="Club activities">
-          </div>
-        </button>
-        <div class="album-meta"><span class="album-location">STUDENT LIFE</span><h2>Clubs &amp; Activities</h2><p>Creativity, teamwork and learning beyond the classroom</p><span class="album-count">4 photos</span></div>
-      </article>
-
-      <article class="album-card" data-search="prize giving awards achievement">
-        <button class="album-cover" type="button" data-album="prizes">
-          <div class="album-stack">
-            <img src="images/prize-giving1.jpg" data-media-key="asset-images-prize-giving1-jpg" alt="Prize giving">
-            <img src="images/prize-giving2.jpg" data-media-key="asset-images-prize-giving2-jpg" alt="Prize giving">
-            <img src="images/prize-giving3.jpg" data-media-key="asset-images-prize-giving3-jpg" alt="Prize giving">
-          </div>
-        </button>
-        <div class="album-meta"><span class="album-location">ACHIEVEMENTS</span><h2>Prize Giving</h2><p>Celebrating excellence and student achievement</p><span class="album-count">5 photos</span></div>
-      </article>
-
-      <article class="album-card" data-search="sports games athletics">
-        <button class="album-cover" type="button" data-album="sports">
-          <div class="album-stack">
-            <img src="images/sports1.jpg" data-media-key="asset-images-sports1-jpg" alt="Sports activities">
-            <img src="images/sports2.jpg" data-media-key="asset-images-sports2-jpg" alt="Sports activities">
-            <img src="images/sports3.jpg" data-media-key="asset-images-sports3-jpg" alt="Sports activities">
-          </div>
-        </button>
-        <div class="album-meta"><span class="album-location">SCHOOL SPORTS</span><h2>Sports &amp; Games</h2><p>Teamwork, discipline and healthy competition</p><span class="album-count">5 photos</span></div>
-      </article>
-
-      <article class="album-card" data-search="teachers day staff">
-        <button class="album-cover" type="button" data-album="teachers">
-          <div class="album-stack">
-            <img src="images/teachers-day1.jpg" data-media-key="asset-images-teachers-day1-jpg" alt="Teachers Day">
-            <img src="images/teachers-day1.jpg" data-media-key="asset-images-teachers-day1-jpg" alt="Teachers Day">
-            <img src="images/teachers-day1.jpg" data-media-key="asset-images-teachers-day1-jpg" alt="Teachers Day">
-          </div>
-        </button>
-        <div class="album-meta"><span class="album-location">OUR TEAM</span><h2>Teachers' Day</h2><p>A moment to celebrate the people behind learning</p><span class="album-count">1 photo</span></div>
-      </article>
-    </section>
-  </div>
-</main>
-
-<div class="album-modal" id="albumModal" hidden>
-  <div class="album-modal-backdrop" data-close-album></div>
-  <section class="album-modal-panel" role="dialog" aria-modal="true" aria-labelledby="albumModalTitle">
-    <button class="album-modal-close" type="button" data-close-album aria-label="Close album">×</button>
-    <span class="album-location" id="albumModalLocation">BALAD PRIVATE SCHOOLS</span>
-    <h2 id="albumModalTitle">Album</h2>
-    <p id="albumModalDescription"></p>
-    <div class="album-photo-grid" id="albumPhotos"></div>
-  </section>
+<div class="container">
+<p class="eyebrow">BALAD PRIVATE SCHOOLS</p>
+<h1>School Gallery</h1>
+<p data-text-key="gallery-intro">Browse our school memories as albums of learning, activities, achievements and special moments.</p>
+<div class="gallery-search-wrap">
+<span>⌕</span>
+<input id="gallerySearch" placeholder="Search by album, activity or event" type="search"/>
 </div>
-
-
+</div>
+</section>
+<main class="gallery-album-main">
+<div class="container">
+<div class="album-toolbar">
+<div><strong id="albumCount">7 albums</strong><span> • Balad memories</span></div>
+<button class="album-reset" id="albumReset" type="button">All Albums</button>
+</div>
+<section aria-label="Photo albums" class="album-grid" id="albumGrid">
+<article class="album-card" data-search="campus environment school building classrooms">
+<button class="album-cover" data-album="campus" type="button">
+<div class="album-stack">
+<img alt="School building" data-media-key="gallery-image-2" src="images/school-building1.jpg"/>
+<img alt="School environment" data-media-key="gallery-image-3" src="images/school-building2.jpg"/>
+<img alt="Balad campus" data-media-key="gallery-image-4" src="images/school-building1.jpg"/>
+</div>
+</button>
+<div class="album-meta"><span class="album-location">BALAD PRIVATE SCHOOLS</span><h2 data-text-key="gallery-text-1">Campus &amp; Environment</h2><p data-text-key="gallery-text-2">Our learning spaces and school environment</p><span class="album-count">2 photos</span></div>
+</article>
+<article class="album-card" data-search="stem science laboratory learning">
+<button class="album-cover" data-album="stem" type="button">
+<div class="album-stack">
+<img alt="Science laboratory" data-media-key="gallery-image-5" src="images/science-lab1.jpg"/>
+<img alt="Science activity" data-media-key="gallery-image-6" src="images/science-lab2.jpg"/>
+<img alt="STEM learning" data-media-key="gallery-image-7" src="images/science-lab1.jpg"/>
+</div>
+</button>
+<div class="album-meta"><span class="album-location">ACADEMIC LIFE</span><h2 data-text-key="gallery-text-3">STEM &amp; Learning</h2><p data-text-key="gallery-text-4">Practical learning, experiments and discovery</p><span class="album-count">2 photos</span></div>
+</article>
+<article class="album-card" data-search="career day careers event">
+<button class="album-cover" data-album="career" type="button">
+<div class="album-stack">
+<img alt="Career Day" data-media-key="gallery-image-8" src="images/career-day1.jpg"/>
+<img alt="Career Day activity" data-media-key="gallery-image-9" src="images/career-day2.jpg"/>
+<img alt="Career Day" data-media-key="gallery-image-10" src="images/career-day3.jpg"/>
+</div>
+</button>
+<div class="album-meta"><span class="album-location">SCHOOL EVENTS</span><h2 data-text-key="gallery-text-5">Career Day</h2><p data-text-key="gallery-text-6">Students exploring careers and future possibilities</p><span class="album-count">3 photos</span></div>
+</article>
+<article class="album-card" data-search="clubs activities student life">
+<button class="album-cover" data-album="clubs" type="button">
+<div class="album-stack">
+<img alt="Club activities" data-media-key="gallery-image-11" src="images/club-activities1.jpg"/>
+<img alt="Club activities" data-media-key="gallery-image-12" src="images/club-activities2.jpg"/>
+<img alt="Club activities" data-media-key="gallery-image-13" src="images/club-activities3.jpg"/>
+</div>
+</button>
+<div class="album-meta"><span class="album-location">STUDENT LIFE</span><h2 data-text-key="gallery-text-7">Clubs &amp; Activities</h2><p data-text-key="gallery-text-8">Creativity, teamwork and learning beyond the classroom</p><span class="album-count">4 photos</span></div>
+</article>
+<article class="album-card" data-search="prize giving awards achievement">
+<button class="album-cover" data-album="prizes" type="button">
+<div class="album-stack">
+<img alt="Prize giving" data-media-key="gallery-image-14" src="images/prize-giving1.jpg"/>
+<img alt="Prize giving" data-media-key="gallery-image-15" src="images/prize-giving2.jpg"/>
+<img alt="Prize giving" data-media-key="gallery-image-16" src="images/prize-giving3.jpg"/>
+</div>
+</button>
+<div class="album-meta"><span class="album-location">ACHIEVEMENTS</span><h2 data-text-key="gallery-text-9">Prize Giving</h2><p data-text-key="gallery-text-10">Celebrating excellence and student achievement</p><span class="album-count">5 photos</span></div>
+</article>
+<article class="album-card" data-search="sports games athletics">
+<button class="album-cover" data-album="sports" type="button">
+<div class="album-stack">
+<img alt="Sports activities" data-media-key="gallery-image-17" src="images/sports1.jpg"/>
+<img alt="Sports activities" data-media-key="gallery-image-18" src="images/sports2.jpg"/>
+<img alt="Sports activities" data-media-key="gallery-image-19" src="images/sports3.jpg"/>
+</div>
+</button>
+<div class="album-meta"><span class="album-location">SCHOOL SPORTS</span><h2 data-text-key="gallery-text-11">Sports &amp; Games</h2><p data-text-key="gallery-text-12">Teamwork, discipline and healthy competition</p><span class="album-count">5 photos</span></div>
+</article>
+<article class="album-card" data-search="teachers day staff">
+<button class="album-cover" data-album="teachers" type="button">
+<div class="album-stack">
+<img alt="Teachers Day" data-media-key="gallery-image-20" src="images/teachers-day1.jpg"/>
+<img alt="Teachers Day" data-media-key="gallery-image-21" src="images/teachers-day1.jpg"/>
+<img alt="Teachers Day" data-media-key="gallery-image-22" src="images/teachers-day1.jpg"/>
+</div>
+</button>
+<div class="album-meta"><span class="album-location">OUR TEAM</span><h2 data-text-key="gallery-text-13">Teachers' Day</h2><p data-text-key="gallery-text-14">A moment to celebrate the people behind learning</p><span class="album-count">1 photo</span></div>
+</article>
+</section>
+</div>
+</main>
+<div class="album-modal" hidden="" id="albumModal">
+<div class="album-modal-backdrop" data-close-album=""></div>
+<section aria-labelledby="albumModalTitle" aria-modal="true" class="album-modal-panel" role="dialog">
+<button aria-label="Close album" class="album-modal-close" data-close-album="" type="button">×</button>
+<span class="album-location" id="albumModalLocation">BALAD PRIVATE SCHOOLS</span>
+<h2 id="albumModalTitle">Album</h2>
+<p id="albumModalDescription"></p>
+<div class="album-photo-grid" id="albumPhotos"></div>
+</section>
+</div>
 <script>
 const albums = {
   campus: {
@@ -256,8 +244,6 @@ function filterAlbums(){
 search.addEventListener("input", filterAlbums);
 document.getElementById("albumReset").addEventListener("click", () => { search.value=""; filterAlbums(); });
 </script>
-<footer><div class="footer-bottom">© <span data-year></span> Balad Private Schools. All Rights Reserved. <span class="footer-developer"><p><p>Developed by <a href="https://wa.me/2349164435249" target="_blank" rel="noopener">LADE </p></a></span></div></footer>
-</body>
-</html>
+<section class="cms-public-content-wrap"><div class="cms-public-content" data-cms-page="gallery" id="cms-page-content"></div></section><footer><div class="footer-bottom">© <span data-year=""></span> Balad Private Schools. All Rights Reserved. <span class="footer-developer">Developer Control · @lade</span></div></footer>
 </body>
 </html>

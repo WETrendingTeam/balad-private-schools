@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Subject Result Entry | BALAD</title>
 <style>
 *{box-sizing:border-box}
@@ -39,102 +40,86 @@ button{border:0;border-radius:8px;padding:12px 18px;font-weight:700;cursor:point
 </style>
 </head>
 <body>
-
 <header>
-  <h1>Subject Result Entry</h1>
-  <p>BALAD — Subject Teacher Workspace</p>
+<h1>Subject Result Entry</h1>
+<p>BALAD — Subject Teacher Workspace</p>
 </header>
-
 <main class="container">
-
 <section class="card">
-  <h2>School, Class &amp; Subject</h2>
-
-  <div class="controls">
-    <div>
-      <label for="school">School / Section</label>
-      <select id="school">
-        <option value="">Choose school / section</option>
-        <option value="primary">BALAD NURSERY AND PRIMARY SCHOOLS</option>
-        <option value="junior">BALAD COMPREHENSIVE COLLEGE — JUNIOR SECONDARY</option>
-        <option value="senior">BALAD COMPREHENSIVE COLLEGE — SENIOR SECONDARY</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="className">Class</label>
-      <select id="className">
-        <option value="">Choose class</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="subject">Assigned Subject</label>
-      <select id="subject">
-        <option value="">Choose subject</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="term">Term</label>
-      <select id="term">
-        <option value="">Choose term</option>
-        <option value="first">First Term</option>
-        <option value="second">Second Term</option>
-        <option value="third">Third Term</option>
-      </select>
-    </div>
-  </div>
-
-  <div id="schoolDescription" style="margin-top:15px;display:none">
-    <p class="school-heading" id="schoolHeading"></p>
-    <p class="school-subheading" id="schoolSubheading"></p>
-  </div>
-
-  <p class="note">
+<h2>School, Class &amp; Subject</h2>
+<div class="controls">
+<div>
+<label for="school">School / Section</label>
+<select id="school">
+<option value="">Choose school / section</option>
+<option value="primary">BALAD NURSERY AND PRIMARY SCHOOLS</option>
+<option value="junior">BALAD COMPREHENSIVE COLLEGE — JUNIOR SECONDARY</option>
+<option value="senior">BALAD COMPREHENSIVE COLLEGE — SENIOR SECONDARY</option>
+</select>
+</div>
+<div>
+<label for="className">Class</label>
+<select id="className">
+<option value="">Choose class</option>
+</select>
+</div>
+<div>
+<label for="subject">Assigned Subject</label>
+<select id="subject">
+<option value="">Choose subject</option>
+</select>
+</div>
+<div>
+<label for="term">Term</label>
+<select id="term">
+<option value="">Choose term</option>
+<option value="first">First Term</option>
+<option value="second">Second Term</option>
+<option value="third">Third Term</option>
+</select>
+</div>
+</div>
+<div id="schoolDescription" style="margin-top:15px;display:none">
+<p class="school-heading" id="schoolHeading"></p>
+<p class="school-subheading" id="schoolSubheading"></p>
+</div>
+<p class="note">
     In the connected dashboard, these choices will be restricted to the teacher's actual assignment.
     A subject teacher will only receive the students for the class and subject assigned to that teacher.
   </p>
 </section>
-
 <section class="card">
-  <h2>Students</h2>
-
-  <div class="info">
-    <div><strong>School:</strong> <span id="schoolLabel">—</span></div>
-    <div><strong>Class:</strong> <span id="classLabel">—</span></div>
-    <div><strong>Subject:</strong> <span id="subjectLabel">—</span></div>
-    <div><strong>Term:</strong> <span id="termLabel">—</span></div>
-    <div><strong>Students:</strong> <span id="countLabel">0</span></div>
-  </div>
-
-  <div class="table-wrap" style="margin-top:15px">
-    <table>
-      <thead>
-        <tr>
-          <th>S/N</th>
-          <th style="text-align:left">Student</th>
-          <th>CA / 40</th>
-          <th>Exam / 60</th>
-          <th>Total / 100</th>
-          <th>Grade</th>
-        </tr>
-      </thead>
-      <tbody id="studentsBody">
-        <tr><td colspan="6">Choose the school, class, subject and term to begin.</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div style="margin-top:16px;text-align:right">
-    <button class="save" id="saveButton">Save Scores</button>
-  </div>
-
-  <div id="status" class="status"></div>
+<h2>Students</h2>
+<div class="info">
+<div><strong>School:</strong> <span id="schoolLabel">—</span></div>
+<div><strong>Class:</strong> <span id="classLabel">—</span></div>
+<div><strong>Subject:</strong> <span id="subjectLabel">—</span></div>
+<div><strong>Term:</strong> <span id="termLabel">—</span></div>
+<div><strong>Students:</strong> <span id="countLabel">0</span></div>
+</div>
+<div class="table-wrap" style="margin-top:15px">
+<table>
+<thead>
+<tr>
+<th>S/N</th>
+<th style="text-align:left">Student</th>
+<th>CA / 40</th>
+<th>Exam / 60</th>
+<th>Total / 100</th>
+<th>Grade</th>
+</tr>
+</thead>
+<tbody id="studentsBody">
+<tr><td colspan="6">Choose the school, class, subject and term to begin.</td></tr>
+</tbody>
+</table>
+</div>
+<div style="margin-top:16px;text-align:right">
+<button class="save" id="saveButton">Save Scores</button>
+</div>
+<div class="status" id="status"></div>
 </section>
-
 </main>
-
 <script>
 const API_URL =
   "https://balad-staff-auth.6s9257wftb.workers.dev";
@@ -171,10 +156,10 @@ const schoolData = {
     classes: ["JSS 1","JSS 2","JSS 3"],
     subjects: [
       "English Language","Mathematics","Basic Science","Basic Technology",
-      "Social Studies","Civic Education","Business Studies","Computer Studies",
-      "Agricultural Science","Home Economics","Cultural and Creative Arts",
-      "French","Arabic","Yoruba","Physical and Health Education",
-      "Christian Religious Studies","Islamic Religious Studies"
+      "Social Studies","Civic Education","ICT","Agricultural Science",
+      "Home Economics","Physical & Health Education","Islamic Religious Studies",
+      "French","Arabic","Business Studies","Cultural & Creative Arts",
+      "Security Education","Yoruba","History"
     ]
   },
   senior: {
@@ -708,6 +693,5 @@ saveButton.addEventListener(
 
 populateSchoolOptions();
 </script>
-
 </body>
 </html>

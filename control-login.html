@@ -1,10 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
 <title>BALAD Control Login</title>
-
 <style>
 *{
   box-sizing:border-box
@@ -105,69 +105,36 @@ button:disabled{
 }
 </style>
 
-<!-- Firebase Compat SDK -->
 <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-auth-compat.js"></script>
-
 </head>
-
 <body>
-
 <div class="card">
-
-  <h1>BALAD Control</h1>
-
-  <p>
+<h1>BALAD Control</h1>
+<p>
     Restricted school administration.
     Sign in with your Control staff code and password.
   </p>
-
-  <form id="form" novalidate>
-
-    <label for="code">
+<form id="form" novalidate="">
+<label for="code">
       Control Staff Code
     </label>
-
-    <input
-      id="code"
-      autocomplete="username"
-      required
-      placeholder="Enter your Control staff code"
-    >
-
-    <label for="password">
+<input autocomplete="username" id="code" placeholder="Enter your Control staff code" required=""/>
+<label for="password">
       Password
     </label>
-
-    <input
-      id="password"
-      type="password"
-      autocomplete="current-password"
-      required
-      placeholder="Enter your password"
-    >
-
-    <button id="button" type="submit">
+<input autocomplete="current-password" id="password" placeholder="Enter your password" required="" type="password"/>
+<button id="button" type="submit">
       Open Control Dashboard
     </button>
-
-    <div
-      id="status"
-      class="status info"
-      aria-live="polite"
-    >
+<div aria-live="polite" class="status info" id="status">
       Ready. Enter your Control staff code and password.
     </div>
-
-  </form>
-
-  <a class="back" href="index.html">
+</form>
+<a class="back" href="index.html">
     ← Back to BALAD website
   </a>
-
 </div>
-
-
 <script>
 
 (function(){
@@ -783,6 +750,5 @@ button:disabled{
 })();
 
 </script>
-
 </body>
 </html>

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Class Teacher Result Review | BALAD</title>
 <style>
 :root{
@@ -300,151 +301,136 @@ td.name,th.name{text-align:left}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="header-inner">
-    <div class="brand">
-      <img src="logo.png" alt="BALAD logo">
-      <div>
-        <h1>BALAD RESULT MANAGEMENT</h1>
-        <p>Class Teacher Result Review</p>
-      </div>
-    </div>
-    <div class="teacher-badge">
-      <strong id="teacherName">Class Teacher</strong>
-      <span id="teacherRole">Class Teacher Access</span>
-    </div>
-  </div>
+<div class="header-inner">
+<div class="brand">
+<img alt="BALAD logo" src="images/logo.png"/>
+<div>
+<h1>BALAD RESULT MANAGEMENT</h1>
+<p>Class Teacher Result Review</p>
+</div>
+</div>
+<div class="teacher-badge">
+<strong id="teacherName">Class Teacher</strong>
+<span id="teacherRole">Class Teacher Access</span>
+</div>
+</div>
 </header>
-
 <main>
-  <section class="page-title">
-    <p class="eyebrow">RESULT MANAGEMENT</p>
-    <h2>Class Teacher Result Review</h2>
-    <p class="subtitle">
+<section class="page-title">
+<p class="eyebrow">RESULT MANAGEMENT</p>
+<h2>Class Teacher Result Review</h2>
+<p class="subtitle">
       Review the complete results of your assigned class before the class result is finalized.
     </p>
-  </section>
-
-  <section class="control-card">
-    <div class="field">
-      <label>ASSIGNED CLASS</label>
-      <select id="classSelect" disabled>
-        <option>Loading assigned class...</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label>TERM</label>
-      <select id="termSelect">
-        <option>FIRST TERM</option>
-        <option>SECOND TERM</option>
-        <option>THIRD TERM</option>
-      </select>
-    </div>
-
-    <button class="primary" id="loadBtn">Load Class Result</button>
-  </section>
-
-  <div id="status" class="status"></div>
-
-  <section class="summary-grid">
-    <div class="stat">
-      <span>Students</span>
-      <strong id="studentCount">—</strong>
-    </div>
-    <div class="stat">
-      <span>Students Complete</span>
-      <strong id="completeCount">—</strong>
-    </div>
-    <div class="stat">
-      <span>Students With Missing Scores</span>
-      <strong id="missingCount">—</strong>
-    </div>
-    <div class="stat">
-      <span>Result Status</span>
-      <strong id="resultStatus">Not Loaded</strong>
-    </div>
-  </section>
-
-  <section class="review-card">
-    <div class="review-head">
-      <div>
-        <h3 id="classHeading">Class Result</h3>
-        <p id="reviewDescription">Load your assigned class to begin review.</p>
-      </div>
-      <button class="secondary" id="refreshBtn">Refresh</button>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>S/N</th>
-            <th class="name">STUDENT</th>
-            <th>ADMISSION NO.</th>
-            <th>SUBJECTS</th>
-            <th>COMPLETED</th>
-            <th>AVERAGE</th>
-            <th>STATUS</th>
-            <th>REVIEW</th>
-          </tr>
-        </thead>
-        <tbody id="classResultsBody">
-          <tr>
-            <td colspan="8" class="empty">
+</section>
+<section class="control-card">
+<div class="field">
+<label>ASSIGNED CLASS</label>
+<select disabled="" id="classSelect">
+<option>Loading assigned class...</option>
+</select>
+</div>
+<div class="field">
+<label>TERM</label>
+<select id="termSelect">
+<option>FIRST TERM</option>
+<option>SECOND TERM</option>
+<option>THIRD TERM</option>
+</select>
+</div>
+<button class="primary" id="loadBtn">Load Class Result</button>
+</section>
+<div class="status" id="status"></div>
+<section class="summary-grid">
+<div class="stat">
+<span>Students</span>
+<strong id="studentCount">—</strong>
+</div>
+<div class="stat">
+<span>Students Complete</span>
+<strong id="completeCount">—</strong>
+</div>
+<div class="stat">
+<span>Students With Missing Scores</span>
+<strong id="missingCount">—</strong>
+</div>
+<div class="stat">
+<span>Result Status</span>
+<strong id="resultStatus">Not Loaded</strong>
+</div>
+</section>
+<section class="review-card">
+<div class="review-head">
+<div>
+<h3 id="classHeading">Class Result</h3>
+<p id="reviewDescription">Load your assigned class to begin review.</p>
+</div>
+<button class="secondary" id="refreshBtn">Refresh</button>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>S/N</th>
+<th class="name">STUDENT</th>
+<th>ADMISSION NO.</th>
+<th>SUBJECTS</th>
+<th>COMPLETED</th>
+<th>AVERAGE</th>
+<th>STATUS</th>
+<th>REVIEW</th>
+</tr>
+</thead>
+<tbody id="classResultsBody">
+<tr>
+<td class="empty" colspan="8">
               No class result loaded.
             </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="actions">
-      <button class="secondary" id="previewBtn" disabled>Preview Final Result</button>
-      <button class="danger" id="finalizeBtn" disabled>Finalize Class Result</button>
-    </div>
-  </section>
-
-  <p class="note">
+</tr>
+</tbody>
+</table>
+</div>
+<div class="actions">
+<button class="secondary" disabled="" id="previewBtn">Preview Result</button>
+<button class="danger" disabled="" id="finalizeBtn">Finalize Class Result</button>
+</div>
+</section>
+<p class="note">
     Subject teachers do not use this page to review the full class result.
     Their access remains limited to entering and checking the calculation for their assigned subject.
     Finalization should only be available to the class teacher after all required results are complete.
   </p>
 </main>
-
 <div class="modal" id="studentModal">
-  <div class="modal-box">
-    <div class="modal-head">
-      <h3 id="modalStudentName">Student Result</h3>
-      <button class="close" id="closeModal">×</button>
-    </div>
-
-    <div class="detail-grid">
-      <div class="detail"><b>Class:</b> <span id="modalClass">—</span></div>
-      <div class="detail"><b>Admission No.:</b> <span id="modalAdmission">—</span></div>
-      <div class="detail"><b>Term:</b> <span id="modalTerm">—</span></div>
-      <div class="detail"><b>Average:</b> <span id="modalAverage">—</span></div>
-    </div>
-
-    <div class="table-wrap">
-      <table class="detail-table">
-        <thead>
-          <tr>
-            <th class="name">SUBJECT</th>
-            <th>CA</th>
-            <th>EXAM</th>
-            <th>TOTAL</th>
-            <th>GRADE</th>
-            <th>STATUS</th>
-          </tr>
-        </thead>
-        <tbody id="studentDetailBody"></tbody>
-      </table>
-    </div>
-  </div>
+<div class="modal-box">
+<div class="modal-head">
+<h3 id="modalStudentName">Student Result</h3>
+<button class="close" id="closeModal">×</button>
 </div>
-
+<div class="detail-grid">
+<div class="detail"><b>Class:</b> <span id="modalClass">—</span></div>
+<div class="detail"><b>Admission No.:</b> <span id="modalAdmission">—</span></div>
+<div class="detail"><b>Term:</b> <span id="modalTerm">—</span></div>
+<div class="detail"><b>Average:</b> <span id="modalAverage">—</span></div>
+</div>
+<div class="table-wrap">
+<table class="detail-table">
+<thead>
+<tr>
+<th class="name">SUBJECT</th>
+<th>CA</th>
+<th>EXAM</th>
+<th>TOTAL</th>
+<th>GRADE</th>
+<th>STATUS</th>
+</tr>
+</thead>
+<tbody id="studentDetailBody"></tbody>
+</table>
+</div>
+</div>
+</div>
 <script>
 const API_URL =
   "https://balad-staff-auth.6s9257wftb.workers.dev";
@@ -999,22 +985,28 @@ document.getElementById("studentModal")
 
 document.getElementById("previewBtn")
   .addEventListener("click",()=>{
-    /*
-      Preview intentionally opens the existing result preview route
-      only when that route is connected. For now it sends the selected
-      class/term through sessionStorage so the existing preview page
-      can consume it without changing the result design.
-    */
-    sessionStorage.setItem(
-      "classResultPreview",
-      JSON.stringify({
-        className:currentClass,
-        term:currentTerm,
-        students:currentStudents
-      })
-    );
-
-    window.location.href="class-result-preview.html";
+    const student=currentStudents.find(x=>Array.isArray(x.results)&&x.results.length) || currentStudents[0];
+    if(!student){
+      setStatus("No student result is available to preview.",true);
+      return;
+    }
+    const className=student.className || currentClass || "";
+    const section=/^JSS|^JS/i.test(className)?"junior":/^SS|^SENIOR/i.test(className)?"senior":"primary";
+    sessionStorage.setItem("baladResultPayload",JSON.stringify({
+      student,
+      results:Array.isArray(student.results)?student.results:[],
+      section,
+      schoolName:section==="primary"?"BALAD NURSERY AND PRIMARY SCHOOLS":"BALAD COMPREHENSIVE COLLEGE",
+      session:(student.results?.[0]?.session || student.session || ""),
+      term:currentTerm || "",
+      accessCode:student.resultAccessCode || "",
+      teacherRemark:student.teacherRemark || "",
+      principalComment:student.principalComment || "",
+      nextTerm:student.nextTerm || "",
+      resumptionDate:student.resumptionDate || "",
+      principalName:student.principalName || ""
+    }));
+    window.location.href="result-templates/"+(section==="primary"?"balad_nursery_result.html":section==="junior"?"balad_comprehensive_junior_result.html":"balad_comprehensive_senior_result.html");
   });
 
 (async function start(){

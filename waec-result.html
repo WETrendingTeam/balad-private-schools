@@ -1,29 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>WAEC Result Statistics | Balad Private Schools</title>
-<link rel="stylesheet" href="style.css">
-<script src="script.js?v=6" defer></script>
-<script src="content-loader.js" defer></script>
-<script src="waec-result.js" defer></script>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js?v=6"></script>
+<script defer="" src="content-loader.js" type="module"></script>
+<script defer="" src="waec-result.js"></script>
 </head>
-<body class="waec-result-page">
+<body class="waec-result-page" data-cms-page="waec-result">
 <div class="announcement-bar"><div class="announcement-track">BALAD PRIVATE SCHOOLS • WAEC RESULT STATISTICS</div></div>
-
 <header>
-  <div class="logo">
-    <img src="logo.png" alt="Balad Private Schools Logo" data-media-key="asset-logo-png">
-    <div class="school-name">
-      <h2>BALAD PRIVATE SCHOOLS</h2>
-      <p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
-      <small>"Nothing but Success"</small>
-    </div>
-  </div>
-  <input type="checkbox" id="balad-menu-toggle" class="menu-toggle">
-  <label class="menu-btn" for="balad-menu-toggle" aria-label="Open menu"><span class="menu-icon-open">☰</span><span class="menu-icon-close">×</span></label>
-  <nav id="balad-main-nav">
+<div class="logo">
+<img alt="Balad Private Schools Logo" data-media-key="waec-result-image-1" src="images/logo.png"/>
+<div class="school-name">
+<h2>BALAD PRIVATE SCHOOLS</h2>
+<p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
+<small>"Nothing but Success"</small>
+</div>
+</div>
+<input class="menu-toggle" id="balad-menu-toggle" type="checkbox"/>
+<label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle"><span class="menu-icon-open">☰</span><span class="menu-icon-close">×</span></label>
+<nav id="balad-main-nav">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <details class="academic-nav school-nav">
@@ -35,7 +35,7 @@
 </details>
 <a href="cbt-centre.html">CBT Centre</a>
 <a href="admissions.html">Admissions</a>
-<details class="academic-nav" open>
+<details class="academic-nav" open="">
 <summary>Academics</summary>
 <div class="academic-submenu">
 <a href="curriculum.html">Curriculum</a>
@@ -49,50 +49,46 @@
 <a href="news.html">News &amp; Events</a>
 <a href="alumni.html">Alumni</a>
 <a class="nav-login-button" href="control-login.html">LOGIN</a>
-<a class="nav-contact-button" href="contact.html">CONTACT</a>
+<a class="nav-contact-button" href="contact.html">CONTACT US</a>
 </nav>
 </header>
-
 <main class="waec-stat-page">
-  <div class="waec-stat-top">
-    <a class="waec-back-link" href="waec-results.html">← Back to WAEC Results</a>
-    <div>
-      <span class="waec-label">BALAD PRIVATE SCHOOLS</span>
-      <h1 id="waecResultTitle">WAEC RESULT STATISTICS</h1>
-      <p id="waecResultSubtitle">May/June examination performance</p>
-    </div>
-  </div>
-
-  <section id="waecPublishedResult" class="waec-published-result">
-    <div class="waec-stat-heading">
-      <div>
-        <span class="waec-label">EXAMINATION PERFORMANCE</span>
-        <h2 id="waecTableTitle">ANALYSIS OF THE 2024 MAY/JUNE WAEC RESULT</h2>
-      </div>
-      <span class="waec-session-badge" id="waecSessionBadge">2024 WAEC</span>
-    </div>
-    <div class="waec-table-wrap">
-      <table class="waec-stat-table">
-        <thead>
-          <tr>
-            <th>S/N</th><th>Subjects</th><th>No of A</th><th>No of B</th><th>No of C</th>
-            <th>Below C</th><th>No of Students</th><th>No of Passed</th><th>No of Failed</th>
-            <th>% Passed</th><th>% Failed</th>
-          </tr>
-        </thead>
-        <tbody id="waecTableBody"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="waecUnavailable" class="waec-unavailable" hidden>
-    <span class="waec-label">RESULT STATISTICS</span>
-    <h2 id="waecUnavailableTitle"></h2>
-    <p>The result statistics for this WAEC year have not been added to the website yet.</p>
-    <a class="btn" href="waec-results.html">Choose Another Year</a>
-  </section>
+<div class="waec-stat-top">
+<a class="waec-back-link" href="waec-results.html">← Back to WAEC Results</a>
+<div>
+<span class="waec-label">BALAD PRIVATE SCHOOLS</span>
+<h1 data-text-key="waec-result-text-1" id="waecResultTitle">WAEC RESULT STATISTICS</h1>
+<p data-text-key="waec-result-text-2" id="waecResultSubtitle">May/June examination performance</p>
+</div>
+</div>
+<section class="waec-published-result" id="waecPublishedResult">
+<div class="waec-stat-heading">
+<div>
+<span class="waec-label">EXAMINATION PERFORMANCE</span>
+<h2 data-text-key="waec-result-text-3" id="waecTableTitle">ANALYSIS OF THE 2024 MAY/JUNE WAEC RESULT</h2>
+</div>
+<span class="waec-session-badge" id="waecSessionBadge">2024 WAEC</span>
+</div>
+<div class="waec-table-wrap">
+<table class="waec-stat-table">
+<thead>
+<tr>
+<th>S/N</th><th>Subjects</th><th>No of A</th><th>No of B</th><th>No of C</th>
+<th>Below C</th><th>No of Students</th><th>No of Passed</th><th>No of Failed</th>
+<th>% Passed</th><th>% Failed</th>
+</tr>
+</thead>
+<tbody id="waecTableBody"></tbody>
+</table>
+</div>
+</section>
+<section class="waec-unavailable" hidden="" id="waecUnavailable">
+<span class="waec-label">RESULT STATISTICS</span>
+<h2 id="waecUnavailableTitle"></h2>
+<p data-text-key="waec-result-text-4">The result statistics for this WAEC year have not been added to the website yet.</p>
+<a class="btn" href="waec-results.html">Choose Another Year</a>
+</section>
 </main>
-
-<footer><div class="footer-bottom">© <span data-year></span> Balad Private Schools. All Rights Reserved. <span class="footer-developer"><p>Developed by <a href="https://wa.me/2349164435249" target="_blank" rel="noopener">LADE</a></p></span></div></footer>
+<section class="cms-public-content-wrap"><div class="cms-public-content" data-cms-page="waec-result" id="cms-page-content"></div></section><footer><div class="footer-bottom">© <span data-year=""></span> Balad Private Schools. All Rights Reserved. <span class="footer-developer">Developer Control · @lade</span></div></footer>
 </body>
 </html>

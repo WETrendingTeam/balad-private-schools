@@ -1,10 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>BALAD Private Schools — Control Dashboard</title>
-
 <style>
 :root{
   --green:#086b49;
@@ -1182,472 +1182,302 @@ tr:hover td{
 
 </style>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 </head>
-
 <body>
-
 <div class="app">
-
 <aside class="sidebar" id="sidebar">
-
 <div class="brand">
-<img src="images/logo.png" alt="Balad Private Schools logo"
-onerror="this.style.display='none'">
-
+<img alt="Balad Private Schools logo" onerror="this.style.display='none'" src="images/images/logo.png"/>
 <div>
 <strong>BALAD PRIVATE SCHOOLS</strong>
 <span>Control Administration</span>
 </div>
 </div>
-
 <nav class="nav">
-
 <div class="nav-label">CONTROL</div>
-
 <button class="nav-btn active" data-section="dashboard">
 Dashboard
 </button>
-
 <button class="nav-btn" data-section="school">
 School Management
 </button>
-
 <div class="nav-label">SELECTED SCHOOL</div>
-
 <button class="nav-btn" data-section="staff">
 Staff Management
 </button>
-
 <button class="nav-btn" data-section="students">
 Student Management
 </button>
-
+<button class="nav-btn" data-section="idcards">
+Student ID &amp; Gate
+</button>
+<button class="nav-btn" data-section="content">
+Content Management
+</button>
 <button class="nav-btn" data-section="classes">
 Classes
 </button>
-
 <button class="nav-btn" data-section="subjects">
 Subjects
 </button>
-
 <button class="nav-btn" data-section="results">
 Results
 </button>
-
 <div class="nav-label">SYSTEM</div>
-
 <button class="nav-btn" data-section="audit">
 Audit Logs
 </button>
-
 <button class="nav-btn" data-section="settings">
 Control Settings
 </button>
-
 <button class="nav-btn danger" id="logoutBtn">
 Log out
 </button>
-
 </nav>
-
 <div class="sidebar-footer">
 <div class="control-badge">
 <small>Signed in as</small>
 <strong id="controlCodeLabel">CONTROL001</strong>
 </div>
 </div>
-
 </aside>
-
-
 <main class="main">
-
 <header class="topbar">
-
 <div class="topbar-left">
-
 <button class="menu-toggle" id="menuToggle">
 Menu
 </button>
-
 <div>
 <div class="page-title" id="pageTitle">
 Dashboard
 </div>
-
 <div class="page-subtitle">
 Balad Private Schools Control System
 </div>
 </div>
-
 </div>
-
 <div class="status">
 <span class="status-dot"></span>
 Worker connected
 </div>
-
 </header>
-
-
 <div class="content">
 
-
-<!-- DASHBOARD -->
-
 <section class="page-section active" id="section-dashboard">
-
 <div class="section-head">
-
 <div>
 <h1>Control Dashboard</h1>
 <p>
 Choose the school section you want to manage.
 </p>
 </div>
-
 </div>
-
-
 <div class="grid stats">
-
 <div class="card stat">
 <div class="stat-label">TOTAL STAFF</div>
 <div class="stat-value" id="statStaff">—</div>
 <div class="stat-note">Excluding CONTROL001</div>
 </div>
-
 <div class="card stat">
 <div class="stat-label">ACTIVE STAFF</div>
 <div class="stat-value" id="statActiveStaff">—</div>
 <div class="stat-note">Currently active</div>
 </div>
-
 <div class="card stat">
 <div class="stat-label">TOTAL STUDENTS</div>
 <div class="stat-value" id="statStudents">—</div>
 <div class="stat-note">All school sections</div>
 </div>
-
 <div class="card stat">
 <div class="stat-label">ACTIVE STUDENTS</div>
 <div class="stat-value" id="statActiveStudents">—</div>
 <div class="stat-note">Currently active</div>
 </div>
-
 </div>
-
-
 <div class="card" style="padding:22px">
-
 <div class="section-head" style="margin-bottom:15px">
-
 <div>
 <h2 style="font-size:17px">
 Choose School
 </h2>
-
 <p>
 The school selection controls every management area.
 </p>
 </div>
-
 </div>
-
-
 <div class="school-grid">
-
-<button class="school-card"
-onclick="selectSchool('primary')">
-
+<button class="school-card" onclick="selectSchool('primary')">
 <div class="eyebrow">
 SCHOOL SECTION
 </div>
-
 <h2>
 Nursery &amp; Primary
 </h2>
-
 <p>
 Manage Nursery and Primary staff, students,
 classes, subjects, assignments and results.
 </p>
-
 <div class="open">
 Open Nursery &amp; Primary →
 </div>
-
 </button>
-
-
-<button class="school-card"
-onclick="selectSchool('secondary')">
-
+<button class="school-card" onclick="selectSchool('secondary')">
 <div class="eyebrow">
 SCHOOL SECTION
 </div>
-
 <h2>
 College
 </h2>
-
 <p>
 Manage College staff, students, JSS/SS
 classes, departments, subjects and results.
 </p>
-
 <div class="open">
 Open College →
 </div>
-
 </button>
-
 </div>
-
 </div>
-
 </section>
 
-
-
-<!-- SCHOOL MANAGEMENT -->
-
 <section class="page-section" id="section-school">
-
 <div class="section-head">
-
 <div>
 <h1 id="schoolWorkspaceTitle">
 School Management
 </h1>
-
 <p id="schoolWorkspaceSubtitle">
 Choose a school section first.
 </p>
 </div>
-
-<button class="btn"
-onclick="showSection('dashboard')">
+<button class="btn" onclick="showSection('dashboard')">
 Change School
 </button>
-
 </div>
-
-
-<div class="notice"
-id="schoolNotice"
-style="margin-bottom:18px">
-
+<div class="notice" id="schoolNotice" style="margin-bottom:18px">
 <strong>No school selected.</strong>
 Choose Nursery &amp; Primary or College.
 
 </div>
-
-
 <div class="workspace">
-
-<div class="module-card"
-onclick="openSchoolModule('staff')">
-
+<div class="module-card" onclick="openSchoolModule('staff')">
 <h3>
 Staff Management
 </h3>
-
 <p>
 Staff directory, 50-row access templates,
 roles and teaching assignments.
 </p>
-
 <span class="module-link">
 Open Staff Management →
 </span>
-
 </div>
-
-
-<div class="module-card"
-onclick="openSchoolModule('students')">
-
+<div class="module-card" onclick="openSchoolModule('students')">
 <h3>
 Student Management
 </h3>
-
 <p>
 Student directory and 50 premade student
 record slots.
 </p>
-
 <span class="module-link">
 Open Student Management →
 </span>
-
 </div>
-
-
-<div class="module-card"
-onclick="openSchoolModule('classes')">
-
+<div class="module-card" onclick="openSchoolModule('classes')">
 <h3>
 Classes
 </h3>
-
 <p>
 Manage the classes and arms used by
 the selected school.
 </p>
-
 <span class="module-link">
 Open Classes →
 </span>
-
 </div>
-
-
-<div class="module-card"
-onclick="openSchoolModule('subjects')">
-
+<div class="module-card" onclick="openSchoolModule('subjects')">
 <h3>
 Subjects
 </h3>
-
 <p>
 Manage the subject directory used by
 staff assignments and results.
 </p>
-
 <span class="module-link">
 Open Subjects →
 </span>
-
 </div>
-
-
-<div class="module-card"
-onclick="openSchoolModule('results')">
-
+<div class="module-card" onclick="openSchoolModule('results')">
 <h3>
 Result Management
 </h3>
-
 <p>
 Result workflow for the selected school.
 </p>
-
 <span class="module-link">
 Open Results →
 </span>
-
 </div>
-
 </div>
-
 </section>
 
-
-
-<!-- STAFF -->
-
 <section class="page-section" id="section-staff">
-
 <div class="section-head">
-
 <div>
 <h1 id="staffTitle">
 Staff Management
 </h1>
-
 <p id="staffSubtitle">
 Select a school first.
 </p>
 </div>
-
 <div class="actions">
-
-<button class="btn"
-onclick="showSection('school')">
+<button class="btn" onclick="showSection('school')">
 ← School Menu
 </button>
-
-<button class="btn btn-primary"
-onclick="openStaffModal()">
+<button class="btn btn-primary" onclick="openStaffModal()">
 Create Staff
 </button>
-
 </div>
-
 </div>
-
-
 <div class="tabs">
-
-<button class="tab active"
-data-staff-view="directory">
+<button class="tab active" data-staff-view="directory">
 Staff Directory
 </button>
-
-<button class="tab"
-data-staff-view="access">
+<button class="tab" data-staff-view="access">
 Staff Access Templates
 </button>
-
-<button class="tab"
-data-staff-view="assignments">
+<button class="tab" data-staff-view="assignments">
 Teacher Assignments
 </button>
-
 </div>
-
-
-
 <div id="staffView-directory">
-
-<div class="notice"
-style="margin-bottom:15px">
-
+<div class="notice" style="margin-bottom:15px">
 <strong>Staff Directory.</strong>
 Existing staff accounts for the selected school
 appear here.
 
 </div>
-
-
 <div class="card">
-
 <div class="card-head">
-
 <h3>
 Staff Directory
 </h3>
-
-<button class="btn btn-small"
-onclick="loadStaff()">
+<button class="btn btn-small" onclick="loadStaff()">
 Refresh
 </button>
-
 </div>
-
-
 <div class="card-body">
-
 <div class="toolbar">
-
-<input
-class="input search"
-id="staffSearch"
-placeholder="Search code, name, role or assignment..."
-oninput="renderStaff()">
-
+<input class="input search" id="staffSearch" oninput="renderStaff()" placeholder="Search code, name, role or assignment..."/>
 </div>
-
-
 <div class="table-wrap">
-
 <table>
-
 <thead>
-
 <tr>
-
 <th>Code</th>
 <th>Name</th>
 <th>Role</th>
@@ -1656,31 +1486,17 @@ oninput="renderStaff()">
 <th>Subjects</th>
 <th>Status</th>
 <th>Account</th>
-
 </tr>
-
 </thead>
-
 <tbody id="staffTable">
 </tbody>
-
 </table>
-
 </div>
-
 </div>
-
 </div>
-
 </div>
-
-
-
-<div id="staffView-access" class="hidden">
-
-<div class="notice"
-style="margin-bottom:15px">
-
+<div class="hidden" id="staffView-access">
+<div class="notice" style="margin-bottom:15px">
 <strong>50 Staff Access Templates.</strong>
 
 Each school has 50 automatic access rows.
@@ -1701,64 +1517,34 @@ Create/Save,
 Reset and Activate/Deactivate.
 
 </div>
-
-
 <div class="card">
-
 <div class="card-head">
-
 <h3>
 Staff Access — 50 Templates
 </h3>
-
-<button class="btn btn-small"
-onclick="buildAccessTemplates()">
+<button class="btn btn-small" onclick="buildAccessTemplates()">
 Refresh Templates
 </button>
-
 </div>
-
-
 <div class="card-body">
-
 <div class="access-toolbar">
-
-<input
-class="input search"
-id="accessSearch"
-placeholder="Search code or staff..."
-oninput="renderAccessTemplates()">
-
-
+<input class="input search" id="accessSearch" oninput="renderAccessTemplates()" placeholder="Search code or staff..."/>
 <div class="pagination">
-
-<button class="btn btn-small"
-onclick="accessPrev()">
+<button class="btn btn-small" onclick="accessPrev()">
 Previous
 </button>
-
 <span id="accessPageLabel">
 1–10 of 50
 </span>
-
-<button class="btn btn-small"
-onclick="accessNext()">
+<button class="btn btn-small" onclick="accessNext()">
 Next
 </button>
-
 </div>
-
 </div>
-
-
 <div class="table-wrap">
-
 <table style="min-width:1650px">
-
 <thead>
-
 <tr>
-
 <th>Auto Code</th>
 <th>Staff Name</th>
 <th>Role</th>
@@ -1767,31 +1553,17 @@ Next
 <th>Subjects</th>
 <th>Status</th>
 <th>Actions</th>
-
 </tr>
-
 </thead>
-
 <tbody id="accessTable">
 </tbody>
-
 </table>
-
 </div>
-
 </div>
-
 </div>
-
 </div>
-
-
-
-<div id="staffView-assignments" class="hidden">
-
-<div class="notice"
-style="margin-bottom:15px">
-
+<div class="hidden" id="staffView-assignments">
+<div class="notice" style="margin-bottom:15px">
 <strong>Teacher assignments.</strong>
 
 A Class Teacher can also teach subjects in
@@ -1803,245 +1575,286 @@ Their main class is stored separately as
 Other classes are stored separately.
 
 </div>
-
-
 <div class="card">
-
 <div class="card-head">
-
 <h3>
 Teacher Assignment Directory
 </h3>
-
-<button class="btn btn-small"
-onclick="loadStaff()">
+<button class="btn btn-small" onclick="loadStaff()">
 Refresh
 </button>
-
 </div>
-
-
 <div class="card-body">
-
 <div class="toolbar">
-
-<input
-class="input search"
-id="assignmentSearch"
-placeholder="Search teacher..."
-oninput="renderAssignments()">
-
+<input class="input search" id="assignmentSearch" oninput="renderAssignments()" placeholder="Search teacher..."/>
 </div>
-
-
 <div class="table-wrap">
-
 <table>
-
 <thead>
-
 <tr>
-
 <th>Staff</th>
 <th>Role</th>
 <th>Class Teacher Of</th>
 <th>Other Teaching Classes</th>
 <th>Subjects</th>
 <th>Manage</th>
-
 </tr>
-
 </thead>
-
 <tbody id="assignmentTable">
 </tbody>
-
 </table>
-
 </div>
-
 </div>
-
 </div>
-
 </div>
-
 </section>
 
-
-
-<!-- STUDENTS -->
-<section class="page-section" id="section-students">
-
+<section class="page-section" id="section-content">
 <div class="section-head">
-  <div>
-    <h1 id="studentTitle">Student Management</h1>
-    <p id="studentSubtitle">Choose a class, then add students in bulk.</p>
-  </div>
-  <div class="actions">
-    <button class="btn" onclick="showSection('school')">← School Menu</button>
-    <button class="btn" onclick="downloadStudentTemplate()">Download Excel Template</button>
-    <button class="btn btn-primary" onclick="openStudentModal()">Quick Add Student</button>
-  </div>
+<div><h1>Content Management</h1><p>Update website content, staff profiles, student photos and gallery media without redeploying the website.</p></div>
 </div>
+<div class="tabs cms-tabs">
+<button class="cms-tab active" data-cms-view="staff">Staff</button>
+<button class="cms-tab" data-cms-view="students">Student Photos</button>
+<button class="cms-tab" data-cms-view="pages">Pages</button>
+<button class="cms-tab" data-cms-view="gallery">Gallery</button>
+</div>
+<div id="cmsView-staff">
+<div class="notice" style="margin-bottom:15px"><strong>Staff profiles.</strong> Manage the public Meet Our Team profiles separately from staff login permissions. Existing staff accounts can be synced into the public profiles.</div>
+<div class="cms-category-grid">
+<button class="cms-category active" data-cms-category="management">Management</button>
+<button class="cms-category" data-cms-category="college">College Staff</button>
+<button class="cms-category" data-cms-category="primary">Primary Staff</button>
+<button class="cms-category" data-cms-category="non_teaching">Non-teaching Staff</button>
+</div>
+<div class="toolbar">
+<button class="btn" onclick="syncCmsStaff()">Sync Staff Accounts</button>
+<button class="btn btn-primary" onclick="openCmsStaffModal()">Add Staff Profile</button>
+</div>
+<div class="card"><div class="card-body"><div class="table-wrap"><table style="min-width:900px">
+<thead id="cmsStaffHead"><tr><th>Photo</th><th>Name</th><th>School</th><th>Subjects</th><th>Position</th><th>Actions</th></tr></thead>
+<tbody id="cmsStaffTable"></tbody>
+</table></div></div></div>
+</div>
+<div class="hidden" id="cmsView-students">
+<div class="notice" style="margin-bottom:15px"><strong>Student photos.</strong> Choose the school and class, then update each student's passport photo. The student record remains the existing BALAD student record.</div>
+<div class="cms-toolbar">
+<select class="select" id="cmsStudentSchool" onchange="cmsStudentSchoolChanged()"><option value="primary">Nursery &amp; Primary</option><option value="secondary">College</option></select>
+<select class="select" id="cmsStudentClass" onchange="loadCmsStudentPhotos()"><option value="">Select class</option></select>
+</div>
+<div class="card"><div class="card-body"><div class="table-wrap"><table style="min-width:850px">
+<thead><tr><th>Photo</th><th>Student</th><th>Admission</th><th>Class</th><th>Update Photo</th></tr></thead>
+<tbody id="cmsStudentTable"></tbody>
+</table></div></div></div>
+</div>
+<div class="hidden" id="cmsView-pages">
+<div class="notice" style="margin-bottom:15px"><strong>Website pages.</strong> Edit existing text and images, or add new content blocks. Changes are saved to the live content database and do not require a new website deployment.</div>
+<div class="cms-toolbar"><select class="select" id="cmsPageSelect" onchange="loadCmsPageEditor()"></select></div>
+<div id="cmsPageEditor"></div>
+</div>
+<div class="hidden" id="cmsView-gallery">
+<div class="notice" style="margin-bottom:15px"><strong>School Gallery.</strong> Create separate albums for each school activity and upload multiple photos/videos directly.</div>
+<div class="card"><div class="card-body">
+<div class="cms-inline-form">
+<div class="field"><label>Album / Activity Name</label><input class="input" id="galleryAlbumTitle" placeholder="e.g. Inter-House Sports"/></div>
+<div class="field"><label>School / Area</label><select class="select" id="galleryAlbumSchool"><option value="both">BALAD PRIVATE SCHOOLS</option><option value="primary">Nursery &amp; Primary</option><option value="college">College</option></select></div>
+<div class="field"><label>Description</label><input class="input" id="galleryAlbumDescription" placeholder="Short description"/></div>
+<div class="field"><label>Activity Category</label><input class="input" id="galleryAlbumActivity" placeholder="Sports, Prize Giving, Career Day..."/></div>
+<div class="field full">
+<label>Upload album media</label>
+<div class="cms-media-actions">
+<button onclick="pickCmsMedia('gallery','camera')" type="button">Camera</button>
+<button onclick="pickCmsMedia('gallery','photos')" type="button">Photos</button>
+<button onclick="pickCmsMedia('gallery','files')" type="button">Files</button>
+</div>
+<input accept="image/*,video/*" capture="environment" class="cms-hidden-input" id="cmsGalleryCamera" type="file"/>
+<input accept="image/*,video/*" class="cms-hidden-input" id="cmsGalleryPhotos" multiple="" type="file"/>
+<input accept="image/*,video/*" class="cms-hidden-input" id="cmsGalleryFiles" multiple="" type="file"/>
+<div class="cms-file-note">Photos and videos can be added to the same activity album.</div>
+</div>
+</div>
+<div style="margin-top:14px"><button class="btn btn-primary" onclick="createCmsAlbum()">Create / Add Album</button></div>
+</div></div>
+<div class="card" style="margin-top:16px"><div class="card-head"><h3>Published Albums</h3><button class="btn btn-small" onclick="loadCmsAlbums()">Refresh</button></div><div class="card-body"><div id="cmsAlbumsList"></div></div></div>
+</div>
+</section>
 
+<section class="page-section" id="section-idcards">
+<div class="section-head">
+<div>
+<h1>Student ID &amp; Gate</h1>
+<p>Generate student ID cards, scan arrival/departure and keep a daily movement record.</p>
+</div>
+<div class="actions">
+<button class="btn" onclick="showSection('students')">Student Management</button>
+<button class="btn btn-primary" onclick="refreshIdCardStudents()">Refresh Students</button>
+</div>
+</div>
+<div class="grid" style="grid-template-columns:1.1fr .9fr;gap:18px">
+<div class="card">
+<div class="card-head">
+<div><h3>Student ID Cards</h3><p class="control-muted">Every existing student already has a unique Scan Code. Select a student to generate their card.</p></div>
+</div>
+<div class="card-body">
+<input class="input search" id="idCardSearch" oninput="renderIdCardStudents()" placeholder="Search student, admission or class..." style="width:100%;margin-bottom:12px"/>
+<div class="table-wrap">
+<table><thead><tr><th>Student</th><th>Class</th><th>Student ID</th><th>Card</th></tr></thead>
+<tbody id="idCardStudentTable"></tbody></table>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-head"><div><h3>School Gate Scanner</h3><p class="control-muted">Scan the barcode. BALAD automatically records arrival first, then departure.</p></div></div>
+<div class="card-body">
+<div id="studentScanner" style="width:100%;max-width:520px;margin:auto"></div>
+<div class="actions" style="margin-top:12px;justify-content:center">
+<button class="btn btn-primary" onclick="startStudentScanner()">Start Camera</button>
+<button class="btn" onclick="stopStudentScanner()">Stop Camera</button>
+</div>
+<div class="notice" id="scannerResult" style="margin-top:15px">Scanner ready.</div>
+</div>
+</div>
+</div>
+<div class="card" style="margin-top:18px">
+<div class="card-head"><div><h3>Today's Student Movement</h3><p class="control-muted">Arrival and departure records for the selected school.</p></div><button class="btn btn-small" onclick="loadStudentAttendance()">Refresh</button></div>
+<div class="card-body">
+<div class="table-wrap"><table><thead><tr><th>Student</th><th>Class</th><th>Arrival</th><th>Departure</th><th>Status</th></tr></thead><tbody id="studentAttendanceTable"></tbody></table></div>
+</div>
+</div>
+</section>
+
+<section class="page-section" id="section-students">
+<div class="section-head">
+<div>
+<h1 id="studentTitle">Student Management</h1>
+<p id="studentSubtitle">Choose a class, then add students in bulk.</p>
+</div>
+<div class="actions">
+<button class="btn" onclick="showSection('school')">← School Menu</button>
+<button class="btn" onclick="downloadStudentTemplate()">Download Excel Template</button>
+<button class="btn btn-primary" onclick="openStudentModal()">Quick Add Student</button>
+</div>
+</div>
 <div class="student-flow-note">
-  <strong>Simple workflow:</strong>
+<strong>Simple workflow:</strong>
   Choose class → Download/complete Excel → Import → BALAD validates → Student ID, Result Access Code and Scan Code are generated automatically.
 </div>
-
 <div id="studentClassHome">
-  <div class="student-section-heading">Nursery &amp; Primary</div>
-  <div class="student-class-grid" id="primaryStudentClassCards"></div>
-
-  <div class="student-section-heading college-heading">College</div>
-  <div class="student-subheading">Junior</div>
-  <div class="student-class-grid" id="juniorStudentClassCards"></div>
-  <div class="student-subheading">Senior</div>
-  <div class="student-class-grid" id="seniorStudentClassCards"></div>
+<div class="student-section-heading">Nursery &amp; Primary</div>
+<div class="student-class-grid" id="primaryStudentClassCards"></div>
+<div class="student-section-heading college-heading">College</div>
+<div class="student-subheading">Junior</div>
+<div class="student-class-grid" id="juniorStudentClassCards"></div>
+<div class="student-subheading">Senior</div>
+<div class="student-class-grid" id="seniorStudentClassCards"></div>
 </div>
-
-<div id="studentClassWorkspace" class="hidden">
-  <div class="class-workspace-head">
-    <div>
-      <button class="btn btn-small" onclick="closeStudentClass()">← All Classes</button>
-      <h2 id="studentClassWorkspaceTitle">Class</h2>
-      <p id="studentClassWorkspaceSubtitle">Students in this class.</p>
-    </div>
-    <div class="class-workspace-actions">
-      <button class="btn" onclick="downloadStudentTemplate()">Download Excel</button>
-      <button class="btn btn-primary" onclick="triggerStudentImport()">Import Excel</button>
-    </div>
-  </div>
-
-  <input type="file" id="studentExcelInput" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleStudentExcel(event)">
-
-  <div id="studentPlacementBar" class="student-placement-bar"></div>
-
-  <div class="card">
-    <div class="card-head">
-      <div>
-        <h3 id="studentClassCount">0 Students</h3>
-        <p class="control-muted">Only students belonging to this class/placement are shown.</p>
-      </div>
-      <div class="toolbar-inline">
-        <input class="input search" id="studentClassSearch" placeholder="Search name, admission or parent..." oninput="renderClassStudents()">
-        <button class="btn btn-small" onclick="renderClassStudents()">Refresh</button>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Student</th>
-              <th>Admission No.</th>
-              <th>Parent / Guardian</th>
-              <th>Phone</th>
-              <th>Student ID</th>
-              <th>Result Access Code</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="classStudentTable"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+<div class="hidden" id="studentClassWorkspace">
+<div class="class-workspace-head">
+<div>
+<button class="btn btn-small" onclick="closeStudentClass()">← All Classes</button>
+<h2 id="studentClassWorkspaceTitle">Class</h2>
+<p id="studentClassWorkspaceSubtitle">Students in this class.</p>
 </div>
-
-<div id="studentImportPanel" class="student-import-panel hidden">
-  <div class="card">
-    <div class="card-head">
-      <div>
-        <h3>Excel Import</h3>
-        <p class="control-muted">Review the rows first. Nothing is saved until you confirm.</p>
-      </div>
-      <button class="btn btn-small" onclick="closeStudentImport()">Close</button>
-    </div>
-    <div class="card-body">
-      <div id="studentImportSummary" class="import-summary"></div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Row</th><th>Student</th><th>Admission No.</th><th>Class</th><th>Placement</th><th>Parent</th><th>Phone</th><th>Status</th></tr></thead>
-          <tbody id="studentImportTable"></tbody>
-        </table>
-      </div>
-      <div class="import-actions">
-        <button class="btn" onclick="closeStudentImport()">Cancel</button>
-        <button class="btn btn-primary" id="confirmStudentImportBtn" onclick="confirmStudentImport()">Import Valid Students</button>
-      </div>
-    </div>
-  </div>
+<div class="class-workspace-actions">
+<button class="btn" onclick="downloadStudentTemplate()">Download Excel</button>
+<button class="btn btn-primary" onclick="triggerStudentImport()">Import Excel</button>
 </div>
-
+</div>
+<input accept=".xlsx,.xls,.csv" id="studentExcelInput" onchange="handleStudentExcel(event)" style="display:none" type="file"/>
+<div class="student-placement-bar" id="studentPlacementBar"></div>
+<div class="card">
+<div class="card-head">
+<div>
+<h3 id="studentClassCount">0 Students</h3>
+<p class="control-muted">Only students belonging to this class/placement are shown.</p>
+</div>
+<div class="toolbar-inline">
+<input class="input search" id="studentClassSearch" oninput="renderClassStudents()" placeholder="Search name, admission or parent..."/>
+<button class="btn btn-small" onclick="renderClassStudents()">Refresh</button>
+</div>
+</div>
+<div class="card-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Student</th>
+<th>Admission No.</th>
+<th>Parent / Guardian</th>
+<th>Phone</th>
+<th>Student ID</th>
+<th>Result Access Code</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="classStudentTable"></tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="student-import-panel hidden" id="studentImportPanel">
+<div class="card">
+<div class="card-head">
+<div>
+<h3>Excel Import</h3>
+<p class="control-muted">Review the rows first. Nothing is saved until you confirm.</p>
+</div>
+<button class="btn btn-small" onclick="closeStudentImport()">Close</button>
+</div>
+<div class="card-body">
+<div class="import-summary" id="studentImportSummary"></div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Row</th><th>Student</th><th>Admission No.</th><th>Class</th><th>Placement</th><th>Parent</th><th>Phone</th><th>Status</th></tr></thead>
+<tbody id="studentImportTable"></tbody>
+</table>
+</div>
+<div class="import-actions">
+<button class="btn" onclick="closeStudentImport()">Cancel</button>
+<button class="btn btn-primary" id="confirmStudentImportBtn" onclick="confirmStudentImport()">Import Valid Students</button>
+</div>
+</div>
+</div>
+</div>
 <div class="student-directory-link">
-  <button class="btn" onclick="openAllStudentsDirectory()">View Full Student Directory</button>
+<button class="btn" onclick="openAllStudentsDirectory()">View Full Student Directory</button>
 </div>
-
 </section>
 
-<!-- CLASSES -->
-
 <section class="page-section" id="section-classes">
-
 <div class="section-head">
-
 <div>
-
 <h1 id="classesTitle">
 Classes
 </h1>
-
 <p id="classesSubtitle">
 Select a school first.
 </p>
-
 </div>
-
 <div class="actions">
-
-<button class="btn"
-onclick="showSection('school')">
+<button class="btn" onclick="showSection('school')">
 ← School Menu
 </button>
-
-<button class="btn btn-primary"
-onclick="openClassModal()">
+<button class="btn btn-primary" onclick="openClassModal()">
 Add Class
 </button>
-
 </div>
-
 </div>
-
-
 <div class="card">
-
 <div class="card-head">
-
 <h3>
 Class Directory
 </h3>
-
-<button class="btn btn-small"
-onclick="loadClasses()">
+<button class="btn btn-small" onclick="loadClasses()">
 Refresh
 </button>
-
 </div>
-
-
 <div class="card-body">
-
 <div class="table-wrap">
-
 <table>
-
 <thead>
-
 <tr>
-
 <th>Class</th>
 <th>School</th>
 <th>Section</th>
@@ -2049,348 +1862,186 @@ Refresh
 <th>Departments</th>
 <th>Capacity</th>
 <th>Status</th>
-
 </tr>
-
 </thead>
-
 <tbody id="classTable">
 </tbody>
-
 </table>
-
 </div>
-
 </div>
-
 </div>
-
 </section>
 
-
-
-<!-- SUBJECTS -->
-
 <section class="page-section" id="section-subjects">
-
 <div class="section-head">
-
 <div>
-
 <h1 id="subjectsTitle">
 Subjects
 </h1>
-
 <p id="subjectsSubtitle">
 Select a school first.
 </p>
-
 </div>
-
-<button class="btn"
-onclick="showSection('school')">
+<button class="btn" onclick="showSection('school')">
 ← School Menu
 </button>
-
 </div>
-
-
 <div class="card">
-
 <div class="card-head">
-
 <h3>
 Subject Directory
 </h3>
-
-<button class="btn btn-small"
-onclick="loadSubjects()">
+<button class="btn btn-small" onclick="loadSubjects()">
 Refresh
 </button>
-
 </div>
-
-
 <div class="card-body">
-
 <div class="table-wrap">
-
 <table>
-
 <thead>
-
 <tr>
-
 <th>Subject</th>
 <th>ID</th>
 <th>Status</th>
-
 </tr>
-
 </thead>
-
 <tbody id="subjectTable">
 </tbody>
-
 </table>
-
 </div>
-
 </div>
-
 </div>
-
 </section>
 
-
-
-<!-- RESULTS -->
-
 <section class="page-section" id="section-results">
-
 <div class="section-head">
-
 <div>
-
 <h1 id="resultsTitle">
 Result Management
 </h1>
-
 <p id="resultsSubtitle">
 Select a school first.
 </p>
-
 </div>
-
-<button class="btn"
-onclick="showSection('school')">
+<button class="btn" onclick="showSection('school')">
 ← School Menu
 </button>
-
 </div>
-
-
 <div class="workspace">
-
-<div class="module-card"
-onclick="toast('Result workflow will be connected next.')">
-
+<div class="module-card" onclick="toast('Result workflow will be connected next.')">
 <h3>
 Class Results
 </h3>
-
 <p>
 Open results by class, term and academic session.
 </p>
-
 <span class="module-link">
 Open →
 </span>
-
 </div>
-
-
-<div class="module-card"
-onclick="toast('Teacher result entry will be connected next.')">
-
+<div class="module-card" onclick="toast('Teacher result entry will be connected next.')">
 <h3>
 Teacher Result Entry
 </h3>
-
 <p>
 Connect result entry to staff assignments.
 </p>
-
 <span class="module-link">
 Open →
 </span>
-
 </div>
-
-
-<div class="module-card"
-onclick="toast('Result approval will be connected next.')">
-
+<div class="module-card" onclick="toast('Result approval will be connected next.')">
 <h3>
 Result Approval
 </h3>
-
 <p>
 Review and approve submitted results.
 </p>
-
 <span class="module-link">
 Open →
 </span>
-
 </div>
-
 </div>
-
 </section>
 
-
-
-<!-- AUDIT -->
-
 <section class="page-section" id="section-audit">
-
 <div class="section-head">
-
 <div>
-
 <h1>
 Audit Logs
 </h1>
-
 <p>
 Track administrative actions performed through
 the Control Worker.
 </p>
-
 </div>
-
-<button class="btn"
-onclick="loadAudit()">
+<button class="btn" onclick="loadAudit()">
 Refresh
 </button>
-
 </div>
-
-
 <div class="card">
-
 <div class="card-body">
-
 <div class="toolbar">
-
-<input
-class="input search"
-id="auditSearch"
-placeholder="Search action, staff or record..."
-oninput="loadAudit()">
-
+<input class="input search" id="auditSearch" oninput="loadAudit()" placeholder="Search action, staff or record..."/>
 </div>
-
-
 <div class="table-wrap">
-
 <table>
-
 <thead>
-
 <tr>
-
 <th>Time</th>
 <th>Actor</th>
 <th>Action</th>
 <th>Type</th>
 <th>Record</th>
-
 </tr>
-
 </thead>
-
 <tbody id="auditTable">
 </tbody>
-
 </table>
-
 </div>
-
 </div>
-
 </div>
-
 </section>
 
-
-
-<!-- SETTINGS -->
-
 <section class="page-section" id="section-settings">
-
 <div class="section-head">
-
 <div>
-
 <h1>
 Control Settings
 </h1>
-
 <p>
 Protected system information for CONTROL001.
 </p>
-
 </div>
-
 </div>
-
-
 <div class="card">
-
 <div class="card-body">
-
 <div class="form-grid">
-
 <div class="field">
-
 <label>
 Control Code
 </label>
-
-<input
-class="input"
-value="CONTROL001"
-disabled>
-
+<input class="input" disabled="" value="CONTROL001"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Firebase Project
 </label>
-
-<input
-class="input"
-value="projectb-wetrending-space"
-disabled>
-
+<input class="input" disabled="" value="projectb-wetrending-space"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Authentication
 </label>
-
-<input
-class="input"
-value="Firebase ID Token"
-disabled>
-
+<input class="input" disabled="" value="Firebase ID Token"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Backend
 </label>
-
-<input
-class="input"
-value="BALAD Control Worker"
-disabled>
-
+<input class="input" disabled="" value="BALAD Control Worker"/>
 </div>
-
 </div>
-
-
 <p style="margin-top:18px;color:var(--muted);font-size:12px;line-height:1.6">
 
 CONTROL001 remains protected.
@@ -2399,652 +2050,331 @@ This dashboard does not expose controls to delete,
 deactivate, replace or reset the Control account.
 
 </p>
-
 </div>
-
 </div>
-
 </section>
-
-
 </div>
 </main>
 </div>
 
-
-
-<!-- STAFF MODAL -->
-
 <div class="modal-backdrop" id="staffModal">
-
 <div class="modal">
-
 <div class="modal-head">
-
 <h2>
 Create Staff Account
 </h2>
-
-<button class="modal-close"
-onclick="closeModal('staffModal')">
+<button class="modal-close" onclick="closeModal('staffModal')">
 ×
 </button>
-
 </div>
-
-
 <div class="modal-body">
-
 <div class="form-grid">
-
-
 <div class="field">
-
 <label>
 Staff Code
 </label>
-
-<input
-class="input"
-id="staffCode"
-placeholder="Auto-generated">
-
+<input class="input" id="staffCode" placeholder="Auto-generated"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Full Name
 </label>
-
-<input
-class="input"
-id="staffName"
-placeholder="Full name">
-
+<input class="input" id="staffName" placeholder="Full name"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Role
 </label>
-
-<select
-class="select"
-id="staffRole">
-
+<select class="select" id="staffRole">
 <option value="teacher">
 Teacher
 </option>
-
 <option value="class_teacher">
 Class Teacher
 </option>
-
 <option value="management">
 Management
 </option>
-
 <option value="other">
 Other Staff
 </option>
-
 </select>
-
 </div>
-
-
 <div class="field">
-
 <label>
 School
 </label>
-
-<select
-class="select"
-id="staffSchool">
-
+<select class="select" id="staffSchool">
 <option value="primary">
 Nursery &amp; Primary
 </option>
-
 <option value="secondary">
 College
 </option>
-
 </select>
-
 </div>
-
-
 <div class="field full">
-
 <label>
 Password
 </label>
-
-<input
-class="input"
-id="staffPassword"
-placeholder="Minimum 8 characters">
-
+<input class="input" id="staffPassword" placeholder="Minimum 8 characters"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Class Teacher Of
 </label>
-
-<select
-class="select"
-id="staffHomeroom">
-
+<select class="select" id="staffHomeroom">
 <option value="">
 Not a Class Teacher
 </option>
-
 </select>
-
 </div>
-
-
 <div class="field">
-
 <label>
 Other Teaching Classes
 </label>
-
-<select
-class="select multi-select"
-id="staffClasses"
-multiple>
+<select class="select multi-select" id="staffClasses" multiple="">
 </select>
-
 </div>
-
-
 <div class="field full">
-
 <label>
 Subjects
 </label>
-
-<select
-class="select"
-id="staffSubjects"
-onchange="subjectOtherChanged('staffSubjects','staffOtherSubject')">
-
+<select class="select" id="staffSubjects" onchange="subjectOtherChanged('staffSubjects','staffOtherSubject')">
 <option value="">
 Select subject
 </option>
-
 </select>
-
-<input
-class="input custom-subject-box hidden"
-id="staffOtherSubject"
-placeholder="Type the subject not listed">
-
+<input class="input custom-subject-box hidden" id="staffOtherSubject" placeholder="Type the subject not listed"/>
 </div>
-
-
 </div>
-
 </div>
-
-
 <div class="modal-foot">
-
-<button class="btn"
-onclick="closeModal('staffModal')">
+<button class="btn" onclick="closeModal('staffModal')">
 Cancel
 </button>
-
-<button class="btn btn-primary"
-onclick="createStaff()">
+<button class="btn btn-primary" onclick="createStaff()">
 Create Staff
 </button>
-
-</div>
-
 </div>
 </div>
-
-
-
-<!-- STUDENT MODAL -->
+</div>
 
 <div class="modal-backdrop" id="studentModal">
-
 <div class="modal">
-
 <div class="modal-head">
-
 <h2>
 Add Student
 </h2>
-
-<button class="modal-close"
-onclick="closeModal('studentModal')">
+<button class="modal-close" onclick="closeModal('studentModal')">
 ×
 </button>
-
 </div>
-
-
 <div class="modal-body">
-
 <div class="form-grid">
-
-
 <div class="field">
-
 <label>
 Student Slot
 </label>
-
-<input
-class="input"
-id="studentSlot"
-placeholder="Auto-generated">
-
+<input class="input" id="studentSlot" placeholder="Auto-generated"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Full Name
 </label>
-
-<input
-class="input"
-id="studentName">
-
+<input class="input" id="studentName"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Admission Number <span class="required-mark">*</span>
 </label>
-
-<input
-class="input"
-id="studentAdmission"
-placeholder="e.g. BAL/2026/001"
-required>
-
+<input class="input" id="studentAdmission" placeholder="e.g. BAL/2026/001" required=""/>
 </div>
-
-
 <div class="field">
-
 <label>
 Class
 </label>
-
-<select
-class="select"
-id="studentClass">
+<select class="select" id="studentClass">
 </select>
-
 </div>
-
-
 <div class="field">
-
 <label>
 Arm
 </label>
-
-<select
-class="select"
-id="studentArm">
-
+<select class="select" id="studentArm">
 <option value="">
 Select arm
 </option>
-
 <option value="A">
 A
 </option>
-
 <option value="B">
 B
 </option>
-
 <option value="C">
 C
 </option>
-
 <option value="D">
 D
 </option>
-
 </select>
-
 </div>
-
-
 <div class="field">
-
 <label>
 Department
 </label>
-
-<select
-class="select"
-id="studentDepartment">
-
+<select class="select" id="studentDepartment">
 <option value="">
 Not applicable
 </option>
-
 <option value="Science">
 Science
 </option>
-
 <option value="Arts">
 Arts
 </option>
-
 <option value="Commercial">
 Commercial
 </option>
-
 </select>
-
 </div>
-
-
 <div class="field">
-
 <label>
 Gender
 </label>
-
-<select
-class="select"
-id="studentGender">
-
+<select class="select" id="studentGender">
 <option value="">
 Select gender
 </option>
-
 <option value="Male">
 Male
 </option>
-
 <option value="Female">
 Female
 </option>
-
 </select>
-
 </div>
-
-
 <div class="field">
-
 <label>
 Date of Birth
 </label>
-
-<input
-class="input"
-id="studentDob"
-type="date">
-
+<input class="input" id="studentDob" type="date"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Guardian Name
 </label>
-
-<input
-class="input"
-id="guardianName">
-
+<input class="input" id="guardianName"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Guardian Phone
 </label>
-
-<input
-class="input"
-id="guardianPhone">
-
+<input class="input" id="guardianPhone"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Guardian WhatsApp
 </label>
-
-<input
-class="input"
-id="guardianWhatsapp">
-
+<input class="input" id="guardianWhatsapp"/>
 </div>
-
-
 <div class="field full">
-
 <label>
 Student Photo
 </label>
-
 <div class="photo-box">
-
-<input
-class="input"
-id="studentPhoto"
-type="file"
-accept="image/*"
-onchange="previewStudentPhoto(event)">
-
+<input accept="image/*" class="input" id="studentPhoto" onchange="previewStudentPhoto(event)" type="file"/>
 <div class="photo-help">
 
 On a phone you can choose a photo from the
 phone or use the camera.
 
 </div>
-
-<img
-id="studentPhotoPreview"
-class="photo-preview"
-alt="Student photo preview">
-
+<img alt="Student photo preview" class="photo-preview" id="studentPhotoPreview"/>
 </div>
-
 </div>
-
-
 </div>
-
 </div>
-
-
 <div class="modal-foot">
-
-<button class="btn"
-onclick="closeModal('studentModal')">
+<button class="btn" onclick="closeModal('studentModal')">
 Cancel
 </button>
-
-<button class="btn btn-primary"
-onclick="createStudent()">
+<button class="btn btn-primary" onclick="createStudent()">
 Create Student
 </button>
-
-</div>
-
 </div>
 </div>
-
-
-
-<!-- CLASS MODAL -->
+</div>
 
 <div class="modal-backdrop" id="classModal">
-
 <div class="modal">
-
 <div class="modal-head">
-
 <h2>
 Create / Update Class
 </h2>
-
-<button class="modal-close"
-onclick="closeModal('classModal')">
+<button class="modal-close" onclick="closeModal('classModal')">
 ×
 </button>
-
 </div>
-
-
 <div class="modal-body">
-
 <div class="form-grid">
-
-
 <div class="field">
-
 <label>
 Class Name
 </label>
-
-<input
-class="input"
-id="className">
-
+<input class="input" id="className"/>
 </div>
-
-
 <div class="field">
-
 <label>
 School
 </label>
-
-<select
-class="select"
-id="classSchool">
-
+<select class="select" id="classSchool">
 <option value="primary">
 Nursery &amp; Primary
 </option>
-
 <option value="secondary">
 College
 </option>
-
 </select>
-
 </div>
-
-
 <div class="field">
-
 <label>
 Section
 </label>
-
-<input
-class="input"
-id="classSection">
-
+<input class="input" id="classSection"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Capacity
 </label>
-
-<input
-class="input"
-id="classCapacity"
-type="number"
-value="35">
-
+<input class="input" id="classCapacity" type="number" value="35"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Use Arms
 </label>
-
-<input
-type="checkbox"
-id="classArms">
-
+<input id="classArms" type="checkbox"/>
 </div>
-
-
 <div class="field">
-
 <label>
 Use Departments
 </label>
-
-<input
-type="checkbox"
-id="classDepartments">
-
+<input id="classDepartments" type="checkbox"/>
 </div>
-
-
 </div>
-
 </div>
-
-
 <div class="modal-foot">
-
-<button class="btn"
-onclick="closeModal('classModal')">
+<button class="btn" onclick="closeModal('classModal')">
 Cancel
 </button>
-
-<button class="btn btn-primary"
-onclick="saveClass()">
+<button class="btn btn-primary" onclick="saveClass()">
 Save Class
 </button>
-
-</div>
-
 </div>
 </div>
-
-
-
-<div class="toast"
-id="toastBox">
 </div>
-
-
-
+<div class="toast" id="toastBox">
+</div>
 <script type="module">
 
 import {
@@ -3058,6 +2388,12 @@ import {
  signOut
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {
+ getFirestore, collection, getDocs, doc, setDoc, deleteDoc, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {
+ getStorage, ref, uploadBytes, getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
 
 
 /*
@@ -3081,6 +2417,8 @@ const firebaseConfig={
 
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
+const db=getFirestore(app);
+const storage=getStorage(app);
 
 
 /*
@@ -3219,11 +2557,13 @@ const titles={
  school:"School Management",
  staff:"Staff Management",
  students:"Student Management",
+ idcards:"Student ID & Gate",
  classes:"Classes",
  subjects:"Subjects",
  results:"Result Management",
  audit:"Audit Logs",
- settings:"Control Settings"
+ settings:"Control Settings",
+ content:"Content Management"
 };
 
 
@@ -3266,6 +2606,14 @@ window.showSection=function(section){
 
  if(section==="students"){
    /* Student Management V2 loads through the class-first view below. */
+ }
+ if(section==="content"){
+   initContentManagement();
+ }
+
+ if(section==="idcards"){
+   refreshIdCardStudents();
+   loadStudentAttendance();
  }
 
  if(section==="classes"){
@@ -7121,7 +6469,424 @@ window.createStudent=async function(){
   }catch(e){toast(e.message||"Unable to create student.");}
 };
 
-</script>
 
+
+/* ==================================================
+   STUDENT ID CARD + GATE
+================================================== */
+let idCardStudents=[];
+let studentScanner=null;
+let lastScannedCode="";
+let lastScanAt=0;
+
+async function refreshIdCardStudents(){
+  try{
+    const d=await worker("list_students",{school:selectedSchool});
+    idCardStudents=d.students||[];
+    renderIdCardStudents();
+  }catch(e){toast(e.message||"Unable to load students.");}
+}
+
+function renderIdCardStudents(){
+  const q=(document.getElementById("idCardSearch")?.value||"").trim().toLowerCase();
+  const rows=idCardStudents.filter(s=>!q||[s.studentName,s.admissionNumber,s.className,s.studentId].join(" ").toLowerCase().includes(q));
+  const body=document.getElementById("idCardStudentTable");
+  if(!body)return;
+  body.innerHTML=rows.map(s=>`<tr>
+    <td><strong>${esc(s.studentName||"—")}</strong></td>
+    <td>${esc(s.className||"—")}</td>
+    <td>${esc(s.studentId||"—")}</td>
+    <td><button class="btn btn-small btn-primary" onclick='printStudentIdCard(${JSON.stringify(String(s.studentId||""))})'>Generate / Print</button></td>
+  </tr>`).join("")||emptyRow(4,"No students found.");
+}
+
+async function printStudentIdCard(id){
+  try{
+    const d=await worker("get_student_id_card",{studentId:id});
+    const s=d.student||{};
+    const w=window.open("","_blank","width=850,height=650");
+    if(!w){toast("Allow pop-ups to print the ID card.");return;}
+    const photo=s.passportUrl||"images/logo.png";
+    w.document.write(`<!doctype html><html><head><title>BALAD Student ID Card</title><style>
+      body{font-family:Arial,sans-serif;background:#f3f5f2;margin:0;padding:35px;display:flex;justify-content:center}.card{width:420px;border:2px solid #075c46;border-radius:18px;overflow:hidden;background:#fff}.head{background:#075c46;color:#fff;text-align:center;padding:14px}.head strong{font-size:19px}.body{padding:20px;display:flex;justify-content:center;align-items:center}.photo{width:105px;height:125px;object-fit:cover;border-radius:10px;border:1px solid #ddd}.name{font-size:20px;font-weight:800;color:#075c46;margin:2px 0 8px}.meta{font-size:12px;line-height:1.7;color:#39463f}.barcode{padding:10px 18px 18px;text-align:center;border-top:1px solid #eee}.barcode svg{width:100%;height:80px}.small{font-size:9px;color:#66716b;margin-top:4px}.foot{font-size:10px;text-align:center;color:#66716b;padding:8px 15px 15px}.print{display:block;margin:15px auto;padding:10px 20px;background:#075c46;color:#fff;border:0;border-radius:8px}@media print{body{padding:0}.print{display:none}.card{box-shadow:none}}</style></head><body>
+      <div><div class="card"><div class="head"><strong>BALAD PRIVATE SCHOOLS</strong><div style="font-size:10px;margin-top:3px">STUDENT IDENTIFICATION CARD</div></div><div class="body"><img class="photo" src="${esc(photo)}" onerror="this.src='images/logo.png'"></div><div class="barcode"><svg id="barcode"></svg><div class="small">Scan at the school gate.</div></div></div><button class="print" onclick="window.print()">Print ID Card</button></div>
+      <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"><\/script><script>JsBarcode('#barcode',${JSON.stringify(String(s.scanCode||""))},{format:'CODE128',displayValue:true,fontSize:11,height:58,margin:2});<\/script></body></html>`);
+    w.document.close();
+  }catch(e){toast(e.message||"Unable to generate ID card.");}
+}
+
+async function startStudentScanner(){
+  if(typeof Html5Qrcode==="undefined"){toast("Scanner library is unavailable. Check your internet connection.");return;}
+  if(studentScanner)return;
+  studentScanner=new Html5Qrcode("studentScanner");
+  try{
+    await studentScanner.start({facingMode:"environment"},{fps:10,qrbox:{width:260,height:120}},async text=>{
+      const now=Date.now();
+      if(text===lastScannedCode && now-lastScanAt<5000)return;
+      lastScannedCode=text;lastScanAt=now;
+      await processStudentScan(text);
+    },()=>{});
+    document.getElementById("scannerResult").textContent="Camera active. Scan the student's barcode.";
+  }catch(e){studentScanner=null;toast(e.message||"Unable to start camera.");}
+}
+
+async function stopStudentScanner(){
+  if(!studentScanner)return;
+  try{await studentScanner.stop();studentScanner.clear();}catch(e){}
+  studentScanner=null;
+  document.getElementById("scannerResult").textContent="Scanner stopped.";
+}
+
+async function processStudentScan(scanCode){
+  const box=document.getElementById("scannerResult");
+  box.textContent="Processing scan...";
+  try{
+    const d=await worker("record_student_scan",{scanCode});
+    const s=d.student||{};
+    const a=d.attendance||{};
+    const time=d.event==='arrival'?a.arrivalAt:a.departureAt;
+    const messageStatus=d.notification?.status||"queued";
+    box.innerHTML=`<strong>${esc(s.studentName||"Student")}</strong><br>${d.event==='arrival'?'ARRIVED AT SCHOOL':'LEFT SCHOOL'} · ${new Date(time).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}<br><small>Parent message: ${esc(messageStatus.replaceAll('_',' '))}</small>`;
+    loadStudentAttendance();
+  }catch(e){box.textContent=e.message||"Scan failed.";}
+}
+
+async function loadStudentAttendance(){
+  const body=document.getElementById("studentAttendanceTable");
+  if(!body)return;
+  try{
+    const d=await worker("list_student_attendance",{school:selectedSchool});
+    const rows=d.attendance||[];
+    body.innerHTML=rows.map(r=>`<tr><td><strong>${esc(r.studentName||"—")}</strong></td><td>${esc(r.className||"—")}</td><td>${r.arrivalAt?new Date(r.arrivalAt).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):'—'}</td><td>${r.departureAt?new Date(r.departureAt).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):'—'}</td><td><span class="badge ${r.departureAt?'green':'orange'}">${r.departureAt?'Completed':'At School'}</span></td></tr>`).join("")||emptyRow(5,"No student movement recorded today.");
+  }catch(e){body.innerHTML=emptyRow(5,esc(e.message||"Unable to load attendance."));}
+}
+
+/* ============================================================
+   LIVE CONTENT MANAGEMENT
+   Website media/content is stored in Firestore + Firebase Storage.
+   Future website edits do not require HTML deployment.
+============================================================ */
+
+let cmsCategory="management";
+let cmsStaffCache=[];
+let cmsStudentCache=[];
+let cmsPageItems=[];
+let cmsGalleryFiles=[];
+let cmsStaffPhotoFile=null;
+let cmsStaffEditingId="";
+let cmsInitialized=false;
+
+const CMS_PAGES=[
+  ["index","Home"],["about","About"],["schools","Schools"],["nursery-primary","Nursery & Primary"],
+  ["comprehensive-college","Comprehensive College"],["admissions","Admissions"],["curriculum","Curriculum"],
+  ["stem","STEM"],["results","Result Portal"],["student-result","Student Result"],["facilities","Facilities"],
+  ["gallery","Gallery"],["news","News & Events"],["alumni","Alumni"],["contact","Contact"],
+  ["cbt-centre","CBT Centre"],["waec-results","WAEC Results"],["waec-result","WAEC Result"],["team","Meet Our Team"]
+];
+
+function cmsEsc(v=""){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
+function cmsSafe(v=""){try{const u=new URL(v,location.href);return ["http:","https:"].includes(u.protocol)?u.href:"";}catch{return "";}}
+async function cmsUpload(file,path){
+  if(!file) throw new Error("Choose a file first.");
+  if(file.size>80*1024*1024) throw new Error("File is too large. Maximum 80 MB.");
+  const clean=String(path).replace(/[^a-zA-Z0-9._/-]/g,"-");
+  const r=ref(storage,clean);
+  await uploadBytes(r,file,{contentType:file.type||undefined});
+  return getDownloadURL(r);
+}
+function cmsPick(kind){
+  const map={staffCamera:"cmsStaffCamera",staffPhotos:"cmsStaffPhotos",staffFiles:"cmsStaffFiles",
+    galleryCamera:"cmsGalleryCamera",galleryPhotos:"cmsGalleryPhotos",galleryFiles:"cmsGalleryFiles"};
+  document.getElementById(map[kind])?.click();
+}
+window.pickCmsMedia=function(area,source){
+  if(area==="gallery") cmsPick("gallery"+source.charAt(0).toUpperCase()+source.slice(1));
+};
+function collectInputFiles(input){return Array.from(input?.files||[]);}
+function cmsSetGalleryFiles(files){cmsGalleryFiles=files; const n=document.getElementById("cmsGalleryFileNote"); if(n)n.textContent=files.length?`${files.length} file${files.length===1?"":"s"} selected.`:"No media selected.";}
+
+function initContentManagement(){
+  if(cmsInitialized) { loadCmsStaff(); return; }
+  cmsInitialized=true;
+  document.querySelectorAll("[data-cms-view]").forEach(tab=>tab.addEventListener("click",()=>{
+    document.querySelectorAll("[data-cms-view]").forEach(x=>x.classList.remove("active"));
+    tab.classList.add("active");
+    document.querySelectorAll("[id^='cmsView-']").forEach(x=>x.classList.add("hidden"));
+    document.getElementById("cmsView-"+tab.dataset.cmsView)?.classList.remove("hidden");
+    if(tab.dataset.cmsView==="staff")loadCmsStaff();
+    if(tab.dataset.cmsView==="students")cmsStudentSchoolChanged();
+    if(tab.dataset.cmsView==="pages")initCmsPages();
+    if(tab.dataset.cmsView==="gallery")loadCmsAlbums();
+  }));
+  document.querySelectorAll("[data-cms-category]").forEach(b=>b.addEventListener("click",()=>{
+    document.querySelectorAll("[data-cms-category]").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active"); cmsCategory=b.dataset.cmsCategory; renderCmsStaff();
+  }));
+  ["cmsStaffCamera","cmsStaffPhotos","cmsStaffFiles"].forEach(id=>document.getElementById(id)?.addEventListener("change",e=>{
+    cmsStaffPhotoFile=e.target.files?.[0]||null; cmsRenderStaffPhotoNote();
+  }));
+  ["cmsGalleryCamera","cmsGalleryPhotos","cmsGalleryFiles"].forEach(id=>document.getElementById(id)?.addEventListener("change",e=>cmsSetGalleryFiles(collectInputFiles(e.target))));
+  initCmsPages(); loadCmsStaff(); syncCmsStaff();
+}
+
+async function syncCmsStaff(){
+  try{
+    const all=[];
+    for(const school of ["primary","secondary"]){
+      const d=await worker("list_staff",{school});
+      (d.staff||[]).forEach(s=>all.push(s));
+    }
+    const seen=new Set();
+    for(const s of all){
+      const uid=String(s.uid||s.id||s.studentId||"").trim(); if(!uid||seen.has(uid))continue; seen.add(uid);
+      const role=String(s.role||"").toLowerCase();
+      const category=role==="management"?"management":(role==="other"?"non_teaching":(String(s.school).toLowerCase()==="college"?"college":"primary"));
+      await setDoc(doc(db,"publicStaff",uid),{
+        accountUid:uid,name:s.name||"",subjects:s.assignedSubjects||[],position:s.position||"",
+        category,school:String(s.school||"").toLowerCase()==="secondary"?"college":String(s.school||"primary").toLowerCase(),
+        photoUrl:s.photoUrl||"",active:s.active!==false,updatedAt:serverTimestamp()
+      },{merge:true});
+    }
+    toast(`${seen.size} staff profile${seen.size===1?"":"s"} synced.`);
+    await loadCmsStaff();
+  }catch(e){toast(e.message||"Unable to sync staff.");}
+}
+
+async function loadCmsStaff(){
+  try{
+    const snap=await getDocs(collection(db,"publicStaff"));
+    cmsStaffCache=snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderCmsStaff();
+  }catch(e){toast(e.message||"Unable to load public staff profiles.");}
+}
+
+function renderCmsStaff(){
+  const body=document.getElementById("cmsStaffTable"); if(!body)return;
+  const head=document.getElementById("cmsStaffHead");
+  const isNonTeaching=cmsCategory==="non_teaching";
+  if(head) head.innerHTML=isNonTeaching
+    ? "<tr><th>Photo</th><th>Name</th><th>Role</th><th>Actions</th></tr>"
+    : "<tr><th>Photo</th><th>Name</th><th>School</th><th>Subjects</th><th>Position</th><th>Actions</th></tr>";
+  const allRows=cmsStaffCache.filter(s=>s.category===cmsCategory);
+  const rows=isNonTeaching?allRows.slice(0,6):allRows;
+  body.innerHTML=rows.map(s=>{
+    const actions=`<div class="row-actions"><button class="mini-btn primary" onclick="editCmsStaff('${cmsEsc(s.id)}')">Edit</button><button class="mini-btn danger" onclick="deleteCmsStaff('${cmsEsc(s.id)}')">Remove</button></div>`;
+    if(isNonTeaching) return `<tr>
+      <td>${s.photoUrl?`<img class="cms-thumb" src="${cmsEsc(s.photoUrl)}" alt="">`:`<div class="cms-thumb" style="display:flex;align-items:center;justify-content:center;background:#eef4f0;font-weight:900">${cmsEsc((s.name||"S").slice(0,2).toUpperCase())}</div>`}</td>
+      <td><strong>${cmsEsc(s.name||"—")}</strong></td>
+      <td>${cmsEsc(s.position||"—")}</td><td>${actions}</td></tr>`;
+    return `<tr>
+      <td>${s.photoUrl?`<img class="cms-thumb" src="${cmsEsc(s.photoUrl)}" alt="">`:`<div class="cms-thumb" style="display:flex;align-items:center;justify-content:center;background:#eef4f0;font-weight:900">${cmsEsc((s.name||"S").slice(0,2).toUpperCase())}</div>`}</td>
+      <td><strong>${cmsEsc(s.name||"—")}</strong></td>
+      <td>${cmsEsc(s.school==="college"?"College":s.school==="primary"?"Nursery & Primary":"—")}</td>
+      <td>${cmsEsc((s.subjects||[]).join(" / ")||"—")}</td>
+      <td>${cmsEsc(s.position||"—")}</td><td>${actions}</td></tr>`;
+  }).join("")||emptyRow(isNonTeaching?4:6,"No profiles in this category yet.");
+  const toolbar=document.querySelector('#cmsView-staff .toolbar');
+  if(toolbar){
+    const oldNote=toolbar.querySelector('.cms-limit-note'); oldNote?.remove();
+    if(isNonTeaching){
+      const note=document.createElement('span'); note.className='cms-limit-note control-muted'; note.textContent=`${Math.min(allRows.length,6)}/6 non-teaching staff slots used`;
+      toolbar.appendChild(note);
+    }
+  }
+}
+function cmsRenderStaffPhotoNote(){
+  const n=document.getElementById("cmsStaffPhotoNote"); if(n)n.textContent=cmsStaffPhotoFile?cmsStaffPhotoFile.name:"No new photo selected.";
+}
+
+window.openCmsStaffModal=function(id=""){
+  cmsStaffEditingId=id; cmsStaffPhotoFile=null;
+  const s=id?cmsStaffCache.find(x=>x.id===id):null;
+  const wrap=document.getElementById("cmsStaffModal")||document.createElement("div");
+  if(!wrap.id){wrap.id="cmsStaffModal";wrap.className="modal-backdrop";document.body.appendChild(wrap);}
+  const currentCategory=s?.category||cmsCategory;
+  const nonTeaching=currentCategory==="non_teaching";
+  const fields=nonTeaching
+    ? `<div class="field"><label>Name</label><input class="input" id="cmsStaffName" value="${cmsEsc(s?.name||"")}" placeholder="Full name"></div>
+       <div class="field"><label>Role</label><input class="input" id="cmsStaffPosition" value="${cmsEsc(s?.position||"")}" placeholder="e.g. Security"></div>`
+    : `<div class="field"><label>Name</label><input class="input" id="cmsStaffName" value="${cmsEsc(s?.name||"")}"></div>
+       <div class="field"><label>Position</label><input class="input" id="cmsStaffPosition" value="${cmsEsc(s?.position||"")}"></div>
+       <div class="field"><label>Category</label><select class="select" id="cmsStaffCategory"><option value="management">Management</option><option value="college">College Staff</option><option value="primary">Primary Staff</option><option value="non_teaching">Non-teaching Staff</option></select></div>
+       <div class="field"><label>School</label><select class="select" id="cmsStaffSchool"><option value="both">Both / School-wide</option><option value="college">College</option><option value="primary">Nursery & Primary</option></select></div>
+       <div class="field full"><label>Subjects</label><input class="input" id="cmsStaffSubjects" value="${cmsEsc((s?.subjects||[]).join(" / "))}" placeholder="e.g. Mathematics / Physics"></div>`;
+  wrap.innerHTML=`<div class="modal"><div class="modal-head"><h2>${s?"Edit":"Add"} ${nonTeaching?"Non-teaching Staff":"Staff Profile"}</h2><button class="modal-close" onclick="closeCmsStaffModal()">×</button></div>
+  <div class="modal-body"><div class="form-grid">${fields}
+  <div class="field full"><label>Profile Picture</label><div class="photo-box">
+    ${s?.photoUrl?`<img class="cms-thumb" style="width:90px;height:90px" src="${cmsEsc(s.photoUrl)}" alt="">`:""}
+    <div class="cms-media-actions"><button type="button" onclick="cmsPick('staffCamera')">Camera</button><button type="button" onclick="cmsPick('staffPhotos')">Photos</button><button type="button" onclick="cmsPick('staffFiles')">Files</button></div>
+    <input class="cms-hidden-input" id="cmsStaffCamera" type="file" accept="image/*" capture="environment">
+    <input class="cms-hidden-input" id="cmsStaffPhotos" type="file" accept="image/*">
+    <input class="cms-hidden-input" id="cmsStaffFiles" type="file" accept="image/*">
+    <div id="cmsStaffPhotoNote" class="cms-file-note">No new photo selected.</div></div></div>
+  </div></div><div class="modal-foot"><button class="btn" onclick="closeCmsStaffModal()">Cancel</button><button class="btn btn-primary" onclick="saveCmsStaff()">Save Profile</button></div></div>`;
+  wrap.classList.add("open");
+  if(!nonTeaching){document.getElementById("cmsStaffCategory").value=currentCategory;document.getElementById("cmsStaffSchool").value=s?.school||"both";}
+  ["cmsStaffCamera","cmsStaffPhotos","cmsStaffFiles"].forEach(x=>document.getElementById(x)?.addEventListener("change",e=>{cmsStaffPhotoFile=e.target.files?.[0]||null;cmsRenderStaffPhotoNote();}));
+};
+window.editCmsStaff=id=>openCmsStaffModal(id);
+window.closeCmsStaffModal=()=>document.getElementById("cmsStaffModal")?.classList.remove("open");
+
+window.saveCmsStaff=async function(){
+  try{
+    const old=cmsStaffEditingId?cmsStaffCache.find(x=>x.id===cmsStaffEditingId):null;
+    const name=val("cmsStaffName").trim(); if(!name)throw new Error("Staff name is required.");
+    const isNonTeaching=(old?.category||cmsCategory)==="non_teaching";
+    const category=isNonTeaching?"non_teaching":val("cmsStaffCategory"), school=isNonTeaching?"both":val("cmsStaffSchool");
+    const subjects=isNonTeaching?[]:val("cmsStaffSubjects").split("/").map(x=>x.trim()).filter(Boolean);
+    if(isNonTeaching && !old && cmsStaffCache.filter(x=>x.category==="non_teaching").length>=6)throw new Error("Non-teaching Staff is limited to 6 slots.");
+    let photoUrl=old?.photoUrl||"";
+    if(cmsStaffPhotoFile)photoUrl=await cmsUpload(cmsStaffPhotoFile,`public/staff/${cmsStaffEditingId||Date.now()}-${Date.now()}.${(cmsStaffPhotoFile.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"")}`);
+    const id=cmsStaffEditingId||("profile-"+Date.now()+"-"+Math.random().toString(36).slice(2,8));
+    const data={name,position:val("cmsStaffPosition"),category,school,subjects,photoUrl,active:true,updatedAt:serverTimestamp()};
+    if(old?.accountUid){await setDoc(doc(db,"staff",old.accountUid),{name,assignedSubjects:subjects,position:data.position,cmsCategory:category,photoUrl,updatedAt:serverTimestamp()},{merge:true});data.accountUid=old.accountUid;}
+    await setDoc(doc(db,"publicStaff",id),data,{merge:true});
+    closeCmsStaffModal();toast("Staff profile saved.");await loadCmsStaff();
+  }catch(e){toast(e.message||"Unable to save staff profile.");}
+};
+window.deleteCmsStaff=async function(id){
+  if(!confirm("Remove this public staff profile?"))return;
+  try{await deleteDoc(doc(db,"publicStaff",id));toast("Profile removed.");loadCmsStaff();}catch(e){toast(e.message);}
+};
+
+/* ---------- STUDENT PHOTOS ---------- */
+window.cmsStudentSchoolChanged=function(){
+  const school=val("cmsStudentSchool")||"primary";
+  const select=document.getElementById("cmsStudentClass"); if(!select)return;
+  const classes=school==="secondary"?COLLEGE_CLASSES:PRIMARY_CLASSES;
+  select.innerHTML='<option value="">Select class</option>'+classes.map(x=>`<option value="${cmsEsc(x)}">${cmsEsc(x)}</option>`).join("");
+  document.getElementById("cmsStudentTable").innerHTML=emptyRow(5,"Select a class to load students.");
+};
+window.loadCmsStudentPhotos=async function(){
+  const school=val("cmsStudentSchool"), cls=val("cmsStudentClass"); if(!cls)return;
+  try{
+    const d=await worker("list_students",{school}); cmsStudentCache=(d.students||[]).filter(s=>String(s.className||s.class||"").toLowerCase()===cls.toLowerCase());
+    const body=document.getElementById("cmsStudentTable");
+    body.innerHTML=cmsStudentCache.map(s=>`<tr>
+      <td>${s.passportUrl?`<img class="cms-thumb" src="${cmsEsc(s.passportUrl)}" alt="">`:`<div class="cms-thumb" style="display:flex;align-items:center;justify-content:center;background:#f1f4f2">No photo</div>`}</td>
+      <td><strong>${cmsEsc(s.studentName||"—")}</strong></td><td>${cmsEsc(s.admissionNumber||"—")}</td><td>${cmsEsc(s.className||"—")}</td>
+      <td><div class="cms-media-actions"><button onclick="pickStudentPhoto('${cmsEsc(s.studentId||s.uid||s.id||"")}','camera')">Camera</button><button onclick="pickStudentPhoto('${cmsEsc(s.studentId||s.uid||s.id||"")}','photos')">Photos</button><button onclick="pickStudentPhoto('${cmsEsc(s.studentId||s.uid||s.id||"")}','files')">Files</button></div></td>
+    </tr>`).join("")||emptyRow(5,"No students found in this class.");
+  }catch(e){toast(e.message);}
+};
+let cmsStudentPhotoTarget="";
+function pickStudentPhoto(id,source){
+  cmsStudentPhotoTarget=id;
+  let input=document.getElementById("cmsStudentPhotoPicker");
+  if(!input){input=document.createElement("input");input.id="cmsStudentPhotoPicker";input.type="file";input.className="cms-hidden-input";document.body.appendChild(input);input.addEventListener("change",async()=>{const file=input.files?.[0];if(file)await saveCmsStudentPhoto(cmsStudentPhotoTarget,file);input.value="";});}
+  input.accept="image/*"; if(source==="camera") input.setAttribute("capture","environment"); else input.removeAttribute("capture"); input.click();
+}
+window.pickStudentPhoto=pickStudentPhoto;
+async function saveCmsStudentPhoto(id,file){
+  try{
+    const url=await cmsUpload(file,`students/passports/${id}-${Date.now()}.${(file.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"")}`);
+    await setDoc(doc(db,"students",id),{passportUrl:url,updatedAt:serverTimestamp()},{merge:true});
+    toast("Student photo updated."); await loadCmsStudentPhotos();
+  }catch(e){toast(e.message||"Unable to update student photo.");}
+}
+window.loadCmsStudentPhotos=loadCmsStudentPhotos;
+
+/* ---------- PAGE CONTENT ---------- */
+function initCmsPages(){
+  const s=document.getElementById("cmsPageSelect"); if(!s||s.options.length)return;
+  s.innerHTML=CMS_PAGES.map(([id,name])=>`<option value="${id}">${name}</option>`).join("");
+  loadCmsPageEditor();
+}
+window.loadCmsPageEditor=async function(){
+  const page=val("cmsPageSelect"); if(!page)return;
+  const box=document.getElementById("cmsPageEditor"); box.innerHTML='<div class="notice">Loading page content…</div>';
+  try{
+    const html=await fetch(`${page}.html`).then(r=>r.text());
+    const soup=new DOMParser().parseFromString(html,"text/html");
+    const snap=await getDocs(collection(db,"publicContent"));
+    const overrides=snap.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.page===page);
+    const om=new Map(overrides.map(x=>[x.key,x]));
+    const texts=[...soup.querySelectorAll("[data-text-key]")].map(el=>({key:el.dataset.textKey,text:el.textContent.trim()}));
+    const imgs=[...soup.querySelectorAll("img[data-media-key], video[data-media-key]")].map(el=>({key:el.dataset.mediaKey,src:el.getAttribute("src")||"",alt:el.getAttribute("alt")||"",kind:el.tagName.toLowerCase()==="video"?"video":"image"}));
+    cmsPageItems={texts,imgs,overrides};
+    box.innerHTML=`<div class="card"><div class="card-head"><h3>Text &amp; Images — ${cmsEsc(CMS_PAGES.find(x=>x[0]===page)?.[1]||page)}</h3></div><div class="card-body">
+      <h4 style="margin:0 0 10px">Text Content</h4>
+      ${texts.map(t=>{const o=om.get(t.key);return `<div class="field" style="margin-bottom:12px"><label>${cmsEsc(t.text.slice(0,90)||t.key)}</label><textarea class="input cms-page-text" data-key="${cmsEsc(t.key)}" rows="3">${cmsEsc(o?.value!==undefined?o.value:t.text)}</textarea></div>`}).join("")||'<p class="cms-empty">No editable text fields found.</p>'}
+      <div style="margin-top:14px"><button class="btn btn-primary" onclick="saveCmsPageTexts()">Save Text Changes</button></div>
+      <hr style="margin:22px 0;border:0;border-top:1px solid #e5ebe7">
+      <h4 style="margin:0 0 10px">Page Media</h4>
+      ${imgs.map(i=>{const o=om.get(i.key);const current=o?.url||i.src;const preview=i.kind==="video"?`<video class="cms-thumb" src="${cmsEsc(current)}" muted></video>`:`<img class="cms-thumb" src="${cmsEsc(current)}" alt="">`;return `<div class="cms-page-image-row" data-key="${cmsEsc(i.key)}" style="display:grid;grid-template-columns:70px 1fr auto;gap:10px;align-items:center;margin-bottom:12px">${preview}<div><strong>${cmsEsc(i.alt||i.key)}</strong><div class="cms-file-note">${cmsEsc(current)}</div></div><div class="cms-media-actions"><button onclick="pickCmsPageImage('${cmsEsc(i.key)}','camera')">Camera</button><button onclick="pickCmsPageImage('${cmsEsc(i.key)}','photos')">Photos</button><button onclick="pickCmsPageImage('${cmsEsc(i.key)}','files')">Files</button></div></div>`}).join("")||'<p class="cms-empty">No page media found.</p>'}
+      <input id="cmsPageFilePicker" class="cms-hidden-input" type="file" accept="image/*,video/*">
+      <hr style="margin:22px 0;border:0;border-top:1px solid #e5ebe7">
+      <h4 style="margin:0 0 10px">Add New Content to This Page</h4>
+      <div class="cms-inline-form"><div class="field"><label>Title</label><input class="input" id="cmsBlockTitle"></div><div class="field"><label>Media</label><div class="cms-media-actions"><button onclick="pickCmsBlockMedia('camera')">Camera</button><button onclick="pickCmsBlockMedia('photos')">Photos</button><button onclick="pickCmsBlockMedia('files')">Files</button></div><input id="cmsBlockFileCamera" class="cms-hidden-input" type="file" accept="image/*,video/*" capture="environment"><input id="cmsBlockFilePhotos" class="cms-hidden-input" type="file" accept="image/*,video/*"><input id="cmsBlockFileFiles" class="cms-hidden-input" type="file" accept="image/*,video/*"></div><div class="field full"><label>Content</label><textarea class="input" id="cmsBlockBody" rows="5" placeholder="Write the content you want to publish on this page."></textarea></div></div>
+      <div class="cms-file-note" id="cmsBlockFileNote">No media selected.</div><div style="margin-top:12px"><button class="btn btn-primary" onclick="saveCmsBlock()">Publish New Content</button></div>
+    </div></div>`;
+    document.getElementById("cmsPageFilePicker")?.addEventListener("change",cmsPageImageSelected);
+    ["cmsBlockFileCamera","cmsBlockFilePhotos","cmsBlockFileFiles"].forEach(id=>document.getElementById(id)?.addEventListener("change",e=>{const n=document.getElementById("cmsBlockFileNote");if(n)n.textContent=e.target.files?.[0]?.name||"No media selected."; }));
+  }catch(e){box.innerHTML=`<div class="notice">${cmsEsc(e.message||"Unable to load page.")}</div>`;}
+};
+let cmsPageImageTarget="",cmsPageImageFile=null;
+function pickCmsPageImage(key,source){cmsPageImageTarget=key;cmsPageImageFile=null;const i=document.getElementById("cmsPageFilePicker");i.accept="image/*,video/*";if(source==="camera")i.setAttribute("capture","environment");else i.removeAttribute("capture");i.onchange=cmsPageImageSelected;i.click();}
+function cmsPageImageSelected(e){cmsPageImageFile=e.target.files?.[0]||null;if(cmsPageImageFile)saveCmsPageImage();}
+async function saveCmsPageImage(){
+  try{const page=val("cmsPageSelect");const url=await cmsUpload(cmsPageImageFile,`public/pages/${page}-${cmsPageImageTarget}-${Date.now()}.${(cmsPageImageFile.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"")}`);
+    await setDoc(doc(db,"publicContent",`override-${page}-${cmsPageImageTarget}`),{page,key:cmsPageImageTarget,type:"media",url,mediaType:(cmsPageImageFile.type||"").startsWith("video/")?"video":"image",updatedAt:serverTimestamp()},{merge:true});
+    toast((cmsPageImageFile.type||"").startsWith("video/")?"Page video updated.":"Page image updated.");loadCmsPageEditor();
+  }catch(e){toast(e.message);}
+}
+window.pickCmsPageImage=pickCmsPageImage;
+window.saveCmsPageTexts=async function(){
+  try{
+    const page=val("cmsPageSelect");
+    for(const el of document.querySelectorAll(".cms-page-text")){
+      await setDoc(doc(db,"publicContent",`override-${page}-${el.dataset.key}`),{page,key:el.dataset.key,type:"text",value:el.value,updatedAt:serverTimestamp()},{merge:true});
+    }
+    toast("Page text updated.");
+  }catch(e){toast(e.message||"Unable to save page text.");}
+};
+function pickCmsBlockMedia(source){const id=source==="camera"?"cmsBlockFileCamera":source==="photos"?"cmsBlockFilePhotos":"cmsBlockFileFiles";document.getElementById(id)?.click();}
+window.pickCmsBlockMedia=pickCmsBlockMedia;
+window.saveCmsBlock=async function(){
+  try{
+    const page=val("cmsPageSelect"),title=val("cmsBlockTitle"),body=val("cmsBlockBody");
+    if(!title&&!body)throw new Error("Enter a title or content first.");
+    let file=null;
+    for(const id of ["cmsBlockFileCamera","cmsBlockFilePhotos","cmsBlockFileFiles"]){if(document.getElementById(id)?.files?.[0]){file=document.getElementById(id).files[0];break;}}
+    let mediaUrl="",mediaType="";
+    if(file){mediaUrl=await cmsUpload(file,`public/pages/${page}/blocks-${Date.now()}-${file.name.replace(/[^a-z0-9.]/gi,"-")}`);mediaType=file.type.startsWith("video/")?"video":"image";}
+    const id=`block-${Date.now()}-${Math.random().toString(36).slice(2,7)}`;
+    await setDoc(doc(db,"publicContent",id),{page,type:"block",title,body,mediaUrl,mediaType,order:Date.now(),active:true,updatedAt:serverTimestamp()});
+    toast("New page content published.");document.getElementById("cmsBlockTitle").value="";document.getElementById("cmsBlockBody").value="";loadCmsPageEditor();
+  }catch(e){toast(e.message||"Unable to publish content.");}
+};
+
+/* ---------- GALLERY ---------- */
+async function loadCmsAlbums(){
+  const box=document.getElementById("cmsAlbumsList");if(!box)return;
+  try{
+    const snap=await getDocs(collection(db,"publicGalleryAlbums"));
+    const rows=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.active!==false);
+    box.innerHTML=rows.map(a=>`<div class="card" style="margin-bottom:12px"><div class="card-body"><strong>${cmsEsc(a.title||"Album")}</strong> · ${cmsEsc(a.schoolLabel||"BALAD") }<div class="cms-file-note">${cmsEsc(a.description||a.activity||"")}</div><div class="cms-album-items">${(a.items||[]).map(p=>p.type==="video"?`<video controls src="${cmsEsc(p.url)}"></video>`:`<img src="${cmsEsc(p.url)}" alt="">`).join("")}</div></div></div>`).join("")||'<div class="notice">No albums published yet.</div>';
+  }catch(e){toast(e.message||"Unable to load albums.");}
+}
+window.loadCmsAlbums=loadCmsAlbums;
+window.createCmsAlbum=async function(){
+  try{
+    const title=val("galleryAlbumTitle").trim();if(!title)throw new Error("Album / activity name is required.");
+    if(!cmsGalleryFiles.length)throw new Error("Choose at least one photo or video.");
+    const id=`album-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,items=[];
+    for(const file of cmsGalleryFiles){
+      const url=await cmsUpload(file,`public/gallery/${id}/${Date.now()}-${file.name.replace(/[^a-z0-9.]/gi,"-")}`);
+      items.push({url,type:file.type.startsWith("video/")?"video":"image",caption:title});
+    }
+    const school=val("galleryAlbumSchool");
+    const schoolLabel=school==="primary"?"Nursery & Primary":school==="college"?"College":"BALAD PRIVATE SCHOOLS";
+    await setDoc(doc(db,"publicGalleryAlbums",id),{title,description:val("galleryAlbumDescription"),activity:val("galleryAlbumActivity"),school,schoolLabel,items,coverUrl:items[0]?.url||"",active:true,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+    cmsGalleryFiles=[];["cmsGalleryCamera","cmsGalleryPhotos","cmsGalleryFiles"].forEach(x=>{const el=document.getElementById(x);if(el)el.value="";});
+    document.getElementById("cmsGalleryFileNote")?.replaceChildren(document.createTextNode("No media selected."));
+    ["galleryAlbumTitle","galleryAlbumDescription","galleryAlbumActivity"].forEach(x=>document.getElementById(x).value="");
+    toast("Album published.");loadCmsAlbums();
+  }catch(e){toast(e.message||"Unable to publish album.");}
+};
+
+/* Make upload pickers available in staff modal after it is created. */
+
+</script>
 </body>
 </html>

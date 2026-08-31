@@ -1,24 +1,25 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Result Portal | BALAD</title>
-<link rel="stylesheet" href="style.css">
+<link href="style.css" rel="stylesheet"/>
 <style>
 .result-choice-page{min-height:70vh;padding:70px 20px}.result-choice-grid{max-width:900px;margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:25px}.result-choice-card{background:#fff;border:1px solid #ddd;border-radius:18px;padding:35px 25px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.07)}.result-choice-card h2{color:#075c43}.result-choice-card a{display:inline-block;margin-top:18px;padding:12px 22px;background:#075c43;color:#fff;text-decoration:none;border-radius:8px}.eyebrow{letter-spacing:2px;font-size:12px;color:#075c43;font-weight:bold}@media(max-width:700px){.result-choice-grid{grid-template-columns:1fr}}
 </style>
-</head>
-<body>
+<script src="content-loader.js" type="module"></script></head>
+<body data-cms-page="results">
 <main class="result-choice-page">
 <div class="container" style="text-align:center;margin-bottom:35px">
-<p class="eyebrow">ACADEMICS</p><h1 style="color:var(--green);font-size:clamp(34px,6vw,56px)">Result Portal</h1>
-<p style="color:var(--muted);max-width:700px;margin:10px auto;line-height:1.7">Choose the school result portal you need.</p>
+<p class="eyebrow" data-text-key="results-text-1">ACADEMICS</p><h1 data-text-key="results-text-2" style="color:var(--green);font-size:clamp(34px,6vw,56px)">Result Portal</h1>
+<p data-text-key="results-text-3" style="color:var(--muted);max-width:700px;margin:10px auto;line-height:1.7">Choose the school result portal you need.</p>
 </div>
 <div class="result-choice-grid">
-<article class="result-choice-card"><h2>BALAD NURSERY AND PRIMARY SCHOOLS</h2><p>Access Nursery and Primary student results.</p><a href="student-result.html?school=primary">Open Primary Results</a></article>
-<article class="result-choice-card"><h2>BALAD COMPREHENSIVE COLLEGE</h2><p>Access Comprehensive College student results.</p><a href="student-result.html?school=college">Open College Results</a></article>
+<article class="result-choice-card"><h2 data-text-key="results-text-4">BALAD NURSERY AND PRIMARY SCHOOLS</h2><p data-text-key="results-text-5">Access Nursery and Primary student results.</p><a href="student-result.html?school=primary">Open Primary Results</a></article>
+<article class="result-choice-card"><h2 data-text-key="results-text-6">BALAD COMPREHENSIVE COLLEGE</h2><p data-text-key="results-text-7">Access Comprehensive College student results.</p><a href="student-result.html?school=college">Open College Results</a></article>
 </div>
 </main>
-</body>
+<section class="cms-public-content-wrap"><div class="cms-public-content" data-cms-page="results" id="cms-page-content"></div></section></body>
 </html>

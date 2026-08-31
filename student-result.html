@@ -1,82 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Student Result | BALAD</title>
-<style>
-body{margin:0;background:#ddd;font-family:Arial,Helvetica,sans-serif;color:#17221e}.access{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box}.access-card{width:min(440px,100%);background:#fff;padding:35px;border-radius:18px;box-shadow:0 12px 35px rgba(0,0,0,.12);text-align:center}.access-card img{width:85px;height:85px;object-fit:contain}.access-card h1{color:#075c43;font-size:25px}.access-card p{color:#666;line-height:1.5}.access-card input{width:100%;box-sizing:border-box;padding:14px;border:1px solid #bbb;border-radius:8px;font-size:16px;margin:12px 0}.access-card button{width:100%;padding:14px;background:#075c43;color:#fff;border:0;border-radius:8px;font-size:16px;font-weight:bold}.error{color:#a61d1d;background:#fdecec;padding:12px;border-radius:8px;margin-top:12px}.sheet{width:210mm;min-height:297mm;margin:20px auto;padding:10mm;background:#f7f0df;border:2px solid #075c43;box-sizing:border-box}.header{display:grid;grid-template-columns:120px 1fr 100px;align-items:center;gap:10px}.logo{width:100px;height:100px;object-fit:contain}.passport{width:90px;height:105px;border:1px solid #777;object-fit:cover}.school{text-align:center}.school h1{margin:0;color:#075c43;font-size:30px}.contact{font-size:10px;line-height:1.5}.title{text-align:center;font-weight:bold;color:#075c43;margin:10px}.info{display:grid;grid-template-columns:1fr 1fr;gap:5px 20px;border:1px solid #999;padding:8px;font-size:10px}.info div{border-bottom:1px solid #aaa;padding:4px}.section{margin-top:10px;background:#6d252d;color:white;padding:6px;font-weight:bold}table{width:100%;border-collapse:collapse;font-size:8px}th,td{border:1px solid #999;padding:4px;text-align:center}.left{text-align:left}.summary{display:grid;grid-template-columns:1fr 1fr 1fr;width:100%;margin-top:8px;border:1px solid #999}.summary-item{min-height:58px;padding:9px 8px;text-align:center;border-right:1px solid #999;display:flex;flex-direction:column;justify-content:center;align-items:center}.summary-item:last-child{border-right:none}.summary-label{color:#075c43;font-size:9px;font-weight:800;margin-bottom:7px}.summary-value{font-size:14px;font-weight:800}.assess{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}.box{border:1px solid #999;padding:7px;font-size:9px;box-sizing:border-box}.box h3{margin:0 0 6px;font-size:10px}.box table{table-layout:fixed;font-size:7px}.box th,.box td{padding:3px 2px}.remarks{width:80%;margin:15px auto;text-align:center;font-size:10px}.remark{margin-bottom:15px}.remark h3{color:#6d252d;font-size:11px;margin:0 0 8px}.remark p{line-height:1.5;margin:0}.resumption{width:220px;margin:15px auto;border:1px solid #999;padding:6px;text-align:center;font-size:10px}.principal-divider{width:45%;margin:22px auto 12px;border:0;border-top:1px solid #777}.principal-signature{text-align:center}.signature-box{width:260px;height:55px;border:1px dashed #777;margin:0 auto 8px}.principal-name{font-size:10px;font-weight:700}.principal-name strong{display:block;font-size:12px}.footer{border-top:1px solid #777;text-align:center;color:#075c43;font-size:9px;margin-top:16px;padding-top:7px}.hidden{display:none!important}
-@media print{body{background:#fff}.sheet{margin:0}}@media(max-width:800px){.sheet{width:100%;margin:0;padding:15px}.header{grid-template-columns:70px 1fr 65px}.logo{width:65px;height:65px}.passport{width:60px;height:75px}.school h1{font-size:18px}.assess{grid-template-columns:1fr}}
-</style></head><body>
-<div id="accessScreen" class="access"><div class="access-card"><img src="logo.png" alt="BALAD Logo"><h1 id="accessTitle">Student Result</h1><p>Enter the student's <b>Result Access Code</b> to view the result.</p><input id="accessCode" autocomplete="off" placeholder="Result Access Code"><button id="accessBtn">View Result</button><div id="accessError"></div></div></div>
-<main id="resultSheet" class="sheet hidden">
-<div class="header"><img class="logo" src="logo.png" alt="School Logo"><div class="school"><h1 id="schoolName">BALAD COMPREHENSIVE COLLEGE</h1><div class="contact">1, Obafemi Street, Abule Afa Bus-stop, Near Ori-Okuta Junction,<br>Off Isawo Road, Ikorodu, Lagos State.<br>Tel: 0706 477 1930, 0806 922 0087, 0818 282 2521<br>Email: baladschools@gmail.com<br><b>“Nothing But Success”</b></div></div><img class="passport" id="studentPassport" src="passport.png" alt="Student Passport"></div>
-<div class="title" id="reportTitle">PROGRESS REPORT SHEET</div>
-<section class="info"><div><b>SESSION:</b> <span id="session">—</span></div><div><b>TERM:</b> <span id="term">—</span></div><div><b>NAME OF STUDENT:</b> <span id="studentName">—</span></div><div><b>NO. IN CLASS:</b> <span id="classNumber">—</span></div><div><b>CLASS:</b> <span id="studentClass">—</span></div><div><b>ATTENDANCE:</b> <span id="attendance">—</span></div><div><b>GENDER:</b> <span id="gender">—</span></div><div><b>NEXT TERM BEGINS:</b> <span id="nextTerm">—</span></div></section>
-<div class="section">COGNITIVE — ACADEMIC PERFORMANCE</div>
-<table><thead><tr><th>S/N</th><th>SUBJECT</th><th>CA<br>40</th><th>EXAM<br>60</th><th>TOTAL<br>100</th><th>GRADE</th><th>REMARK</th><th>POSITION</th><th>1ST TERM</th><th>2ND TERM</th><th>CUMULATIVE AVG</th></tr></thead><tbody id="resultsBody"><tr><td colspan="11">—</td></tr></tbody></table>
-<div class="summary"><div class="summary-item"><div class="summary-label">TOTAL SCORE</div><div class="summary-value" id="totalScore">—</div></div><div class="summary-item"><div class="summary-label">CURRENT AVERAGE</div><div class="summary-value" id="currentAverage">—</div></div><div class="summary-item"><div class="summary-label">CUMULATIVE AVERAGE</div><div class="summary-value" id="cumulativeAverage">—</div></div></div>
-<div class="assess"><div class="box"><h3>PSYCHOMOTOR SKILLS</h3><table><tr><th class="left">Area</th><th>A</th><th>B</th><th>C</th></tr><tbody id="psychomotorBody"></tbody></table></div><div class="box"><h3>AFFECTIVE AREAS</h3><table><tr><th class="left">Area</th><th>5</th><th>4</th><th>3</th><th>2</th><th>1</th></tr><tbody id="affectiveBody"></tbody></table></div><div class="box"><h3 id="gradeTitle">GRADE SCALE</h3><table id="gradeScale"></table></div></div>
-<div class="remarks"><div class="remark"><h3>Class Teacher's Remark:</h3><p id="teacherRemark">—</p></div><div class="remark"><h3>Principal's Comment:</h3><p id="principalComment">—</p></div></div><div class="resumption"><b>Resumption Date:</b> <span id="resumptionDate">—</span></div><hr class="principal-divider"><div class="principal-signature"><div class="signature-box"></div><div class="principal-name"><strong>PRINCIPAL: USMAN OLATUNBOSUN</strong></div></div><div class="footer" id="footerName">© BALAD COMPREHENSIVE COLLEGE</div>
-</main>
-<script>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Student Result | BALAD</title><style>body{margin:0;background:#eee3c7;font-family:Arial,Helvetica,sans-serif;color:#17221e}.access{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box}.access-card{width:min(440px,100%);background:#fff;padding:35px;border-radius:18px;box-shadow:0 12px 35px rgba(0,0,0,.12);text-align:center}.access-card img{width:85px;height:85px;object-fit:contain}.access-card h1{color:#075c43;font-size:25px}.access-card p{color:#666;line-height:1.5}.access-card input{width:100%;box-sizing:border-box;padding:14px;border:1px solid #bbb;border-radius:8px;font-size:16px;margin:12px 0}.access-card button{width:100%;padding:14px;background:#075c43;color:#fff;border:0;border-radius:8px;font-size:16px;font-weight:bold}.error{color:#a61d1d;background:#fdecec;padding:12px;border-radius:8px;margin-top:12px}</style><script src="content-loader.js" type="module"></script></head><body data-cms-page="student-result"><div class="access"><div class="access-card"><img alt="BALAD Logo" data-media-key="student-result-image-1" src="images/logo.png"/><h1 id="accessTitle">Student Result</h1><p>Enter the student's <b>Result Access Code</b> to view the finalized result.</p><input autocomplete="off" id="accessCode" placeholder="Result Access Code"/><button id="accessBtn">View Result</button><div id="accessError"></div></div></div><script>
 const API_URL="https://balad-staff-auth.6s9257wftb.workers.dev";
-const params=new URLSearchParams(location.search); const selectedSchool=params.get("school")==="primary"?"primary":"college";
-let primary=selectedSchool==="primary";
-let resultSection=primary?"primary":"senior";
-document.getElementById("accessTitle").textContent=primary?"BALAD NURSERY AND PRIMARY SCHOOLS":"BALAD COMPREHENSIVE COLLEGE";
-document.getElementById("schoolName").textContent=primary?"BALAD NURSERY AND PRIMARY SCHOOLS":"BALAD COMPREHENSIVE COLLEGE";
-document.getElementById("footerName").textContent=primary?"© BALAD NURSERY AND PRIMARY SCHOOLS":"© BALAD COMPREHENSIVE COLLEGE";
-document.getElementById("reportTitle").textContent=primary?"PROGRESS REPORT SHEET FOR NURSERY AND PRIMARY SCHOOL":"PROGRESS REPORT SHEET FOR SENIOR SECONDARY SCHOOL";
-function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;")}
-function gradeForSection(total,section){
-if(section==="primary"){
-if(total>=90)return"A++";if(total>=80)return"A+";if(total>=70)return"A";if(total>=60)return"B";if(total>=50)return"C";if(total>=40)return"D";return"F";
-}
-if(section==="junior"){
-if(total>=70)return"A";if(total>=60)return"B";if(total>=50)return"C";if(total>=40)return"D";if(total>=30)return"E";return"F";
-}
-if(total>=75)return"A";if(total>=65)return"B";if(total>=55)return"C";if(total>=45)return"D";if(total>=40)return"E";return"F";
-}
-function remarkForGrade(grade){
-if(["A++","A+","A"].includes(grade))return"Excellent";
-if(grade==="B")return"Very Good";
-if(grade==="C")return"Good";
-if(grade==="D")return"Fair";
-if(grade==="E")return"Pass";
-return"Needs Improvement";
-}
-function renderAssess(id,items,type){const b=document.getElementById(id);if(!Array.isArray(items)||!items.length){b.innerHTML='<tr><td colspan="6">—</td></tr>';return}b.innerHTML="";items.forEach(x=>{let s=String(x.grade??x.score??"").toUpperCase();let row=document.createElement("tr");if(type==="psych"){row.innerHTML=`<td class="left">${esc(x.area||"—")}</td><td>${s==="A"?"✓":""}</td><td>${s==="B"?"✓":""}</td><td>${s==="C"?"✓":""}</td>`}else{let n=Number(x.score||0);row.innerHTML=`<td class="left">${esc(x.area||"—")}</td><td>${n===5?"✓":""}</td><td>${n===4?"✓":""}</td><td>${n===3?"✓":""}</td><td>${n===2?"✓":""}</td><td>${n===1?"✓":""}</td>`}b.appendChild(row)})}
-function setScale(){
-const t=document.getElementById("gradeScale");
-if(resultSection==="primary"){
-t.innerHTML='<tr><th>Range</th><th>Grade</th><th>Remark</th></tr><tr><td>90–100</td><td>A++</td><td>Outstanding</td></tr><tr><td>80–89</td><td>A+</td><td>Excellent</td></tr><tr><td>70–79</td><td>A</td><td>Very Good</td></tr><tr><td>60–69</td><td>B</td><td>Good</td></tr><tr><td>50–59</td><td>C</td><td>Fair</td></tr><tr><td>40–49</td><td>D</td><td>Pass</td></tr><tr><td>Below 40</td><td>F</td><td>Needs Improvement</td></tr>';
-}else if(resultSection==="junior"){
-t.innerHTML='<tr><th>Range</th><th>Grade</th><th>Remark</th></tr><tr><td>70–100</td><td>A</td><td>Excellent</td></tr><tr><td>60–69</td><td>B</td><td>Very Good</td></tr><tr><td>50–59</td><td>C</td><td>Good</td></tr><tr><td>40–49</td><td>D</td><td>Fair</td></tr><tr><td>30–39</td><td>E</td><td>Pass</td></tr><tr><td>Below 30</td><td>F</td><td>Needs Improvement</td></tr>';
-}else{
-t.innerHTML='<tr><th>Range</th><th>Grade</th><th>Remark</th></tr><tr><td>75–100</td><td>A</td><td>Excellent</td></tr><tr><td>65–74</td><td>B</td><td>Very Good</td></tr><tr><td>55–64</td><td>C</td><td>Good</td></tr><tr><td>45–54</td><td>D</td><td>Fair</td></tr><tr><td>40–44</td><td>E</td><td>Pass</td></tr><tr><td>Below 40</td><td>F</td><td>Needs Improvement</td></tr>';
-}
-}
-setScale();
-async function openResult(){const code=document.getElementById("accessCode").value.trim();const err=document.getElementById("accessError");err.innerHTML="";if(!code){err.innerHTML='<div class="error">Enter the Result Access Code.</div>';return}const btn=document.getElementById("accessBtn");btn.disabled=true;btn.textContent="Verifying...";try{const r=await fetch(API_URL+"/results",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"get_student_results_by_access_code",accessCode:code,school:selectedSchool})});const data=await r.json();if(!r.ok||!data.success)throw new Error(data.error||"Invalid Result Access Code.");const student=data.student||{};const results=Array.isArray(data.results)?data.results:[];
-
-resultSection = data.section || resultSection;
-primary = resultSection === "primary";
-
-document.getElementById("accessTitle").textContent =
-  primary ? "BALAD NURSERY AND PRIMARY SCHOOLS" : "BALAD COMPREHENSIVE COLLEGE";
-document.getElementById("schoolName").textContent =
-  primary ? "BALAD NURSERY AND PRIMARY SCHOOLS" : "BALAD COMPREHENSIVE COLLEGE";
-document.getElementById("footerName").textContent =
-  primary ? "© BALAD NURSERY AND PRIMARY SCHOOLS" : "© BALAD COMPREHENSIVE COLLEGE";
-document.getElementById("reportTitle").textContent =
-  resultSection === "primary"
-    ? "PROGRESS REPORT SHEET FOR NURSERY AND PRIMARY SCHOOL"
-    : resultSection === "junior"
-      ? "PROGRESS REPORT SHEET FOR JUNIOR SECONDARY SCHOOL"
-      : "PROGRESS REPORT SHEET FOR SENIOR SECONDARY SCHOOL";
-
-setScale();
-
-document.getElementById("studentName").textContent=student.studentName||"—";document.getElementById("studentClass").textContent=student.className||"—";document.getElementById("gender").textContent=student.gender||"—";document.getElementById("session").textContent=data.session||student.session||"—";document.getElementById("term").textContent=data.term||"—";document.getElementById("classNumber").textContent=student.classNumber||"—";document.getElementById("attendance").textContent=student.attendance||"—";document.getElementById("nextTerm").textContent=data.nextTerm||"—";if(student.passportUrl||student.passport)document.getElementById("studentPassport").src=student.passportUrl||student.passport;let total=0;let cum=0,cc=0;const b=document.getElementById("resultsBody");b.innerHTML="";results.forEach((x,i)=>{const n=Number(x.total??((Number(x.ca)||0)+(Number(x.exam)||0)));total+=n;if(x.cumulativeAverage!==undefined&&x.cumulativeAverage!==""){cum+=Number(x.cumulativeAverage);cc++}const grade=x.grade || gradeForSection(n,resultSection);const tr=document.createElement("tr");tr.innerHTML=`<td>${i+1}</td><td class="left">${esc(x.subject)}</td><td>${esc(x.ca)}</td><td>${esc(x.exam)}</td><td>${n}</td><td>${esc(grade)}</td><td>${esc(x.remark||remarkForGrade(grade))}</td><td>${esc(x.position??"—")}</td><td>${esc(x.firstTerm??"—")}</td><td>${esc(x.secondTerm??"—")}</td><td>${esc(x.cumulativeAverage??"—")}</td>`;b.appendChild(tr)});if(!results.length)b.innerHTML='<tr><td colspan="11">No results found.</td></tr>';document.getElementById("totalScore").textContent=total+" / "+(results.length*100);document.getElementById("currentAverage").textContent=results.length?(total/results.length).toFixed(1)+"%":"—";document.getElementById("cumulativeAverage").textContent=cc?(cum/cc).toFixed(1)+"%":"—";renderAssess("psychomotorBody",data.psychomotor||[],"psych");renderAssess("affectiveBody",data.affective||[],"aff");document.getElementById("teacherRemark").textContent=data.teacherRemark||"—";document.getElementById("principalComment").textContent=data.principalComment||"—";document.getElementById("resumptionDate").textContent=data.resumptionDate||"—";document.getElementById("accessScreen").classList.add("hidden");document.getElementById("resultSheet").classList.remove("hidden")}catch(e){err.innerHTML='<div class="error">'+esc(e.message)+"</div>"}finally{btn.disabled=false;btn.textContent="View Result"}}
+const params=new URLSearchParams(location.search);const selectedSchool=params.get("school")==="primary"?"primary":"college";
+const accessTitle=document.getElementById("accessTitle");accessTitle.textContent=selectedSchool==="primary"?"BALAD NURSERY AND PRIMARY SCHOOLS":"BALAD COMPREHENSIVE COLLEGE";
+function esc(v){return String(v??"").replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+function openTemplate(data){sessionStorage.setItem("baladResultPayload",JSON.stringify(data));const sec=data.section||"senior";location.href="result-templates/"+(sec==="primary"?"balad_nursery_result.html":sec==="junior"?"balad_comprehensive_junior_result.html":"balad_comprehensive_senior_result.html");}
+async function openResult(){const code=document.getElementById("accessCode").value.trim();const err=document.getElementById("accessError");err.innerHTML="";if(!code){err.innerHTML='<div class="error">Enter the Result Access Code.</div>';return}const btn=document.getElementById("accessBtn");btn.disabled=true;btn.textContent="Verifying...";try{const r=await fetch(API_URL+"/results",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"get_student_results_by_access_code",accessCode:code,school:selectedSchool})});const data=await r.json();if(!r.ok||!data.success)throw new Error(data.error||"Unable to load result.");data.accessCode=code;openTemplate(data);}catch(e){err.innerHTML='<div class="error">'+esc(e.message)+"</div>"}finally{btn.disabled=false;btn.textContent="View Result"}}
 document.getElementById("accessBtn").addEventListener("click",openResult);document.getElementById("accessCode").addEventListener("keydown",e=>{if(e.key==="Enter")openResult()});
-</script></body></html>
+</script><section class="cms-public-content-wrap"><div class="cms-public-content" data-cms-page="student-result" id="cms-page-content"></div></section></body></html>

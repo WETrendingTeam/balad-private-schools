@@ -66,5 +66,22 @@ service cloud.firestore {
       allow create: if true;
       allow read, update, delete: if isControl() || isManagement();
     }
+
+    // Safe public website content. Never store passwords, guardian data or
+    // private student/result information in these public collections.
+    match /publicContent/{id} {
+      allow read: if true;
+      allow create, update, delete: if isControl();
+    }
+
+    match /publicStaff/{id} {
+      allow read: if true;
+      allow create, update, delete: if isControl();
+    }
+
+    match /publicGalleryAlbums/{id} {
+      allow read: if true;
+      allow create, update, delete: if isControl();
+    }
   }
 }

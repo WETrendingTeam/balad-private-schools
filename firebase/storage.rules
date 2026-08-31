@@ -5,7 +5,22 @@ service firebase.storage {
     function staffDoc() { return firestore.get(/databases/(default)/documents/staff/$(request.auth.uid)); }
     function isControl() { return signedIn() && staffDoc().data.active == true && staffDoc().data.role == "control"; }
 
-    match /students/passports/{fileName} {
+    // Public website media: anyone may view; only CONTROL001 may upload/change.
+    match /public/staff/{fileName=**} {
+      allow read: if true;
+      allow write: if isControl();
+    }
+    match /public/pages/{fileName=**} {
+      allow read: if true;
+      allow write: if isControl();
+    }
+    match /public/gallery/{fileName=**} {
+      allow read: if true;
+      allow write: if isControl();
+    }
+
+    // Existing student passport storage used by the Student/ID system.
+    match /students/passports/{fileName=**} {
       allow read, write: if isControl();
     }
   }

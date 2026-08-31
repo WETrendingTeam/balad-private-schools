@@ -6631,6 +6631,10 @@ function initContentManagement(){
 
 async function syncCmsStaff(){
   try{
+    /* Load existing public profiles first so sync never erases
+       qualification, role, subject or photo fields already saved
+       through Content Management. */
+    await loadCmsStaff();
     const all=[];
     for(const school of ["primary","secondary"]){
       const d=await worker("list_staff",{school});
@@ -6641,11 +6645,20 @@ async function syncCmsStaff(){
       const uid=String(s.uid||s.id||s.studentId||"").trim(); if(!uid||seen.has(uid))continue; seen.add(uid);
       const role=String(s.role||"").toLowerCase();
       const category=role==="management"?"management":(role==="other"?"non_teaching":(String(s.school).toLowerCase()==="college"?"college":"primary"));
-      await setDoc(doc(db,"publicStaff",uid),{
-        accountUid:uid,name:s.name||"",subjects:s.assignedSubjects||[],position:s.position||"",
-        category,school:String(s.school||"").toLowerCase()==="secondary"?"college":String(s.school||"primary").toLowerCase(),
-        photoUrl:s.photoUrl||"",active:s.active!==false,updatedAt:serverTimestamp()
-      },{merge:true});
+      const existing = cmsStaffCache.find(x=>x.id===uid || x.accountUid===uid) || {};
+      const syncData = {
+        accountUid:uid,
+        name:s.name || existing.name || "",
+        subjects:(s.assignedSubjects && s.assignedSubjects.length) ? s.assignedSubjects : (existing.subjects || []),
+        position:s.position || existing.position || "",
+        qualification:s.qualification || s.qualifications || existing.qualification || "",
+        category,
+        school:String(s.school||"").toLowerCase()==="secondary"?"college":String(s.school||"primary").toLowerCase(),
+        photoUrl:s.photoUrl || existing.photoUrl || "",
+        active:s.active!==false,
+        updatedAt:serverTimestamp()
+      };
+      await setDoc(doc(db,"publicStaff",uid),syncData,{merge:true});
     }
     toast(`${seen.size} staff profile${seen.size===1?"":"s"} synced.`);
     await loadCmsStaff();
@@ -6666,7 +6679,7 @@ function renderCmsStaff(){
   const isNonTeaching=cmsCategory==="non_teaching";
   if(head) head.innerHTML=isNonTeaching
     ? "<tr><th>Photo</th><th>Name</th><th>Role</th><th>Actions</th></tr>"
-    : "<tr><th>Photo</th><th>Name</th><th>School</th><th>Subjects</th><th>Position</th><th>Actions</th></tr>";
+    : "<tr><th>Photo</th><th>Name</th><th>School</th><th>Subjects</th><th>Position / Role</th><th>Qualification</th><th>Actions</th></tr>";
   const allRows=cmsStaffCache.filter(s=>s.category===cmsCategory);
   const rows=isNonTeaching?allRows.slice(0,6):allRows;
   body.innerHTML=rows.map(s=>{
@@ -6680,8 +6693,9 @@ function renderCmsStaff(){
       <td><strong>${cmsEsc(s.name||"—")}</strong></td>
       <td>${cmsEsc(s.school==="college"?"College":s.school==="primary"?"Nursery & Primary":"—")}</td>
       <td>${cmsEsc((s.subjects||[]).join(" / ")||"—")}</td>
-      <td>${cmsEsc(s.position||"—")}</td><td>${actions}</td></tr>`;
-  }).join("")||emptyRow(isNonTeaching?4:6,"No profiles in this category yet.");
+      <td>${cmsEsc(s.position||"—")}</td>
+      <td>${cmsEsc(s.qualification||"—")}</td><td>${actions}</td></tr>`;
+  }).join("")||emptyRow(isNonTeaching?4:7,"No profiles in this category yet.");
   const toolbar=document.querySelector('#cmsView-staff .toolbar');
   if(toolbar){
     const oldNote=toolbar.querySelector('.cms-limit-note'); oldNote?.remove();
@@ -6696,54 +6710,232 @@ function cmsRenderStaffPhotoNote(){
 }
 
 window.openCmsStaffModal=function(id=""){
-  cmsStaffEditingId=id; cmsStaffPhotoFile=null;
+  cmsStaffEditingId=id||"";
+  cmsStaffPhotoFile=null;
+
   const s=id?cmsStaffCache.find(x=>x.id===id):null;
+  const currentCategory=s?.category||cmsCategory||"management";
   const wrap=document.getElementById("cmsStaffModal")||document.createElement("div");
-  if(!wrap.id){wrap.id="cmsStaffModal";wrap.className="modal-backdrop";document.body.appendChild(wrap);}
-  const currentCategory=s?.category||cmsCategory;
-  const nonTeaching=currentCategory==="non_teaching";
-  const fields=nonTeaching
-    ? `<div class="field"><label>Name</label><input class="input" id="cmsStaffName" value="${cmsEsc(s?.name||"")}" placeholder="Full name"></div>
-       <div class="field"><label>Role</label><input class="input" id="cmsStaffPosition" value="${cmsEsc(s?.position||"")}" placeholder="e.g. Security"></div>`
-    : `<div class="field"><label>Name</label><input class="input" id="cmsStaffName" value="${cmsEsc(s?.name||"")}"></div>
-       <div class="field"><label>Position</label><input class="input" id="cmsStaffPosition" value="${cmsEsc(s?.position||"")}"></div>
-       <div class="field"><label>Category</label><select class="select" id="cmsStaffCategory"><option value="management">Management</option><option value="college">College Staff</option><option value="primary">Primary Staff</option><option value="non_teaching">Non-teaching Staff</option></select></div>
-       <div class="field"><label>School</label><select class="select" id="cmsStaffSchool"><option value="both">Both / School-wide</option><option value="college">College</option><option value="primary">Nursery & Primary</option></select></div>
-       <div class="field full"><label>Subjects</label><input class="input" id="cmsStaffSubjects" value="${cmsEsc((s?.subjects||[]).join(" / "))}" placeholder="e.g. Mathematics / Physics"></div>`;
-  wrap.innerHTML=`<div class="modal"><div class="modal-head"><h2>${s?"Edit":"Add"} ${nonTeaching?"Non-teaching Staff":"Staff Profile"}</h2><button class="modal-close" onclick="closeCmsStaffModal()">×</button></div>
-  <div class="modal-body"><div class="form-grid">${fields}
-  <div class="field full"><label>Profile Picture</label><div class="photo-box">
+
+  if(!wrap.id){
+    wrap.id="cmsStaffModal";
+    wrap.className="modal-backdrop";
+    document.body.appendChild(wrap);
+  }
+
+  const rules={
+    management:{role:true,qualification:true,subject:true,school:true},
+    college:{role:false,qualification:true,subject:true,school:true},
+    primary:{role:false,qualification:false,subject:false,school:false},
+    non_teaching:{role:true,qualification:false,subject:false,school:false}
+  }[currentCategory]||{role:true,qualification:true,subject:true,school:true};
+
+  const fields=[];
+
+  fields.push(`<div class="field full"><label>Name</label><input class="input" id="cmsStaffName" value="${cmsEsc(s?.name||"")}" placeholder="Full name" autocomplete="off"></div>`);
+
+  if(rules.role){
+    fields.push(`<div class="field full"><label>${currentCategory==="non_teaching"?"Role":"Position / Role"}</label><input class="input" id="cmsStaffPosition" value="${cmsEsc(s?.position||s?.role||"")}" placeholder="${currentCategory==="non_teaching"?"e.g. Security":"e.g. Principal"}" autocomplete="off"></div>`);
+  }else{
+    fields.push(`<input type="hidden" id="cmsStaffPosition" value="${cmsEsc(s?.position||s?.role||"")}">`);
+  }
+
+  fields.push(`<div class="field full"><label>Category</label><select class="select" id="cmsStaffCategory">
+    <option value="management">Management</option>
+    <option value="college">College Staff</option>
+    <option value="primary">Primary Staff</option>
+    <option value="non_teaching">Non-teaching Staff</option>
+  </select></div>`);
+
+  if(rules.qualification){
+    fields.push(`<div class="field full"><label>Qualification</label><input class="input" id="cmsStaffQualification" value="${cmsEsc(s?.qualification||s?.qualifications||"")}" placeholder="e.g. B.Sc. (Ed.) / M.Sc. in Economics" autocomplete="off"></div>`);
+  }else{
+    fields.push(`<input type="hidden" id="cmsStaffQualification" value="">`);
+  }
+
+  if(rules.subject){
+    const subjectValue=Array.isArray(s?.subjects)?s.subjects.join(" / "):(s?.subjects||s?.subject||"");
+    fields.push(`<div class="field full"><label>Subject</label><input class="input" id="cmsStaffSubjects" value="${cmsEsc(subjectValue)}" placeholder="e.g. Chemistry" autocomplete="off"></div>`);
+  }else{
+    fields.push(`<input type="hidden" id="cmsStaffSubjects" value="">`);
+  }
+
+  if(rules.school){
+    fields.push(`<div class="field full"><label>School</label><select class="select" id="cmsStaffSchool">
+      <option value="both">Both / School-wide</option>
+      <option value="college">College</option>
+      <option value="primary">Nursery &amp; Primary</option>
+    </select></div>`);
+  }else{
+    fields.push(`<input type="hidden" id="cmsStaffSchool" value="${currentCategory==="college"?"college":currentCategory==="primary"?"primary":"both"}">`);
+  }
+
+  fields.push(`<div class="field full"><label>Profile Picture</label><div class="photo-box">
     ${s?.photoUrl?`<img class="cms-thumb" style="width:90px;height:90px" src="${cmsEsc(s.photoUrl)}" alt="">`:""}
-    <div class="cms-media-actions"><button type="button" onclick="cmsPick('staffCamera')">Camera</button><button type="button" onclick="cmsPick('staffPhotos')">Photos</button><button type="button" onclick="cmsPick('staffFiles')">Files</button></div>
+    <div class="cms-media-actions">
+      <button type="button" id="cmsStaffCameraButton">Camera</button>
+      <button type="button" id="cmsStaffPhotosButton">Photos</button>
+      <button type="button" id="cmsStaffFilesButton">Files</button>
+    </div>
     <input class="cms-hidden-input" id="cmsStaffCamera" type="file" accept="image/*" capture="environment">
     <input class="cms-hidden-input" id="cmsStaffPhotos" type="file" accept="image/*">
     <input class="cms-hidden-input" id="cmsStaffFiles" type="file" accept="image/*">
-    <div id="cmsStaffPhotoNote" class="cms-file-note">No new photo selected.</div></div></div>
-  </div></div><div class="modal-foot"><button class="btn" onclick="closeCmsStaffModal()">Cancel</button><button class="btn btn-primary" onclick="saveCmsStaff()">Save Profile</button></div></div>`;
+    <div id="cmsStaffPhotoNote" class="cms-file-note">No new photo selected.</div>
+  </div></div>`);
+
+  wrap.innerHTML=`<div class="modal">
+    <div class="modal-head">
+      <h2>${s?"Edit":"Add"} Staff Profile</h2>
+      <button type="button" class="modal-close" id="cmsStaffModalClose">×</button>
+    </div>
+    <div class="modal-body"><div class="form-grid">${fields.join("")}</div></div>
+    <div class="modal-foot">
+      <button type="button" class="btn" id="cmsStaffCancel">Cancel</button>
+      <button type="button" class="btn btn-primary" id="cmsStaffSave">Save Profile</button>
+    </div>
+  </div>`;
+
   wrap.classList.add("open");
-  if(!nonTeaching){document.getElementById("cmsStaffCategory").value=currentCategory;document.getElementById("cmsStaffSchool").value=s?.school||"both";}
-  ["cmsStaffCamera","cmsStaffPhotos","cmsStaffFiles"].forEach(x=>document.getElementById(x)?.addEventListener("change",e=>{cmsStaffPhotoFile=e.target.files?.[0]||null;cmsRenderStaffPhotoNote();}));
+
+  const categoryEl=document.getElementById("cmsStaffCategory");
+  if(categoryEl) categoryEl.value=currentCategory;
+
+  const schoolEl=document.getElementById("cmsStaffSchool");
+  if(schoolEl) schoolEl.value=s?.school||(
+    currentCategory==="college"?"college":
+    currentCategory==="primary"?"primary":"both"
+  );
+
+  document.getElementById("cmsStaffModalClose")?.addEventListener("click",closeCmsStaffModal);
+  document.getElementById("cmsStaffCancel")?.addEventListener("click",closeCmsStaffModal);
+
+  document.getElementById("cmsStaffSave")?.addEventListener("click",function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    window.saveCmsStaff();
+  });
+
+  document.getElementById("cmsStaffCameraButton")?.addEventListener("click",()=>cmsPick("staffCamera"));
+  document.getElementById("cmsStaffPhotosButton")?.addEventListener("click",()=>cmsPick("staffPhotos"));
+  document.getElementById("cmsStaffFilesButton")?.addEventListener("click",()=>cmsPick("staffFiles"));
+
+  ["cmsStaffCamera","cmsStaffPhotos","cmsStaffFiles"].forEach(x=>{
+    document.getElementById(x)?.addEventListener("change",e=>{
+      cmsStaffPhotoFile=e.target.files?.[0]||null;
+      cmsRenderStaffPhotoNote();
+    });
+  });
 };
+
 window.editCmsStaff=id=>openCmsStaffModal(id);
 window.closeCmsStaffModal=()=>document.getElementById("cmsStaffModal")?.classList.remove("open");
 
 window.saveCmsStaff=async function(){
+  const saveButton=document.getElementById("cmsStaffSave");
+  if(saveButton){
+    saveButton.disabled=true;
+    saveButton.textContent="Saving…";
+  }
+
   try{
     const old=cmsStaffEditingId?cmsStaffCache.find(x=>x.id===cmsStaffEditingId):null;
-    const name=val("cmsStaffName").trim(); if(!name)throw new Error("Staff name is required.");
-    const isNonTeaching=(old?.category||cmsCategory)==="non_teaching";
-    const category=isNonTeaching?"non_teaching":val("cmsStaffCategory"), school=isNonTeaching?"both":val("cmsStaffSchool");
-    const subjects=isNonTeaching?[]:val("cmsStaffSubjects").split("/").map(x=>x.trim()).filter(Boolean);
-    if(isNonTeaching && !old && cmsStaffCache.filter(x=>x.category==="non_teaching").length>=6)throw new Error("Non-teaching Staff is limited to 6 slots.");
+    const name=val("cmsStaffName");
+
+    if(!name) throw new Error("Staff name is required.");
+
+    const category=val("cmsStaffCategory")||old?.category||cmsCategory||"management";
+    const role=val("cmsStaffPosition");
+    const qualification=(category==="management"||category==="college")?val("cmsStaffQualification"):"";
+    const subjects=(category==="management"||category==="college")
+      ? val("cmsStaffSubjects").split("/").map(x=>x.trim()).filter(Boolean)
+      : [];
+    const school=(
+      category==="college"?"college":
+      category==="primary"?"primary":
+      category==="non_teaching"?"both":
+      (val("cmsStaffSchool")||"both")
+    );
+
+    if((category==="management"||category==="non_teaching")&&!role){
+      throw new Error(`${category==="management"?"Position / Role":"Role"} is required.`);
+    }
+
+    if((category==="management"||category==="college")&&!qualification){
+      throw new Error("Qualification is required.");
+    }
+
+    if((category==="management"||category==="college")&&!subjects.length){
+      throw new Error("Subject is required.");
+    }
+
+    if(category==="non_teaching"&&!old){
+      const count=cmsStaffCache.filter(x=>x.category==="non_teaching").length;
+      if(count>=6) throw new Error("Non-teaching Staff is limited to 6 slots.");
+    }
+
     let photoUrl=old?.photoUrl||"";
-    if(cmsStaffPhotoFile)photoUrl=await cmsUpload(cmsStaffPhotoFile,`public/staff/${cmsStaffEditingId||Date.now()}-${Date.now()}.${(cmsStaffPhotoFile.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"")}`);
+
+    if(cmsStaffPhotoFile){
+      const ext=(cmsStaffPhotoFile.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"")||"jpg";
+      const recordId=cmsStaffEditingId||("profile-"+Date.now()+"-"+Math.random().toString(36).slice(2,8));
+      photoUrl=await cmsUpload(
+        cmsStaffPhotoFile,
+        `public/staff/${recordId}-${Date.now()}.${ext}`
+      );
+    }
+
     const id=cmsStaffEditingId||("profile-"+Date.now()+"-"+Math.random().toString(36).slice(2,8));
-    const data={name,position:val("cmsStaffPosition"),category,school,subjects,photoUrl,active:true,updatedAt:serverTimestamp()};
-    if(old?.accountUid){await setDoc(doc(db,"staff",old.accountUid),{name,assignedSubjects:subjects,position:data.position,cmsCategory:category,photoUrl,updatedAt:serverTimestamp()},{merge:true});data.accountUid=old.accountUid;}
-    await setDoc(doc(db,"publicStaff",id),data,{merge:true});
-    closeCmsStaffModal();toast("Staff profile saved.");await loadCmsStaff();
-  }catch(e){toast(e.message||"Unable to save staff profile.");}
+
+    const data={
+      name,
+      position:role,
+      qualification,
+      subjects,
+      category,
+      school,
+      photoUrl,
+      active:true,
+      updatedAt:serverTimestamp()
+    };
+
+    if(old?.accountUid){
+      await setDoc(
+        doc(db,"staff",old.accountUid),
+        {
+          name,
+          assignedSubjects:subjects,
+          position:role,
+          qualification,
+          cmsCategory:category,
+          photoUrl,
+          updatedAt:serverTimestamp()
+        },
+        {merge:true}
+      );
+      data.accountUid=old.accountUid;
+    }
+
+    await setDoc(
+      doc(db,"publicStaff",id),
+      data,
+      {merge:true}
+    );
+
+    closeCmsStaffModal();
+    toast("Staff profile saved successfully.");
+    await loadCmsStaff();
+
+  }catch(e){
+    console.error("BALAD staff profile save error:",e);
+    toast(e?.message||"Unable to save staff profile.");
+  }finally{
+    if(saveButton){
+      saveButton.disabled=false;
+      saveButton.textContent="Save Profile";
+    }
+  }
 };
+
 window.deleteCmsStaff=async function(id){
   if(!confirm("Remove this public staff profile?"))return;
   try{await deleteDoc(doc(db,"publicStaff",id));toast("Profile removed.");loadCmsStaff();}catch(e){toast(e.message);}

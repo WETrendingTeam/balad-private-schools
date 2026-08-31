@@ -1,18 +1,693 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- BALAD Team profile display rules: Management=name/role/qualification/subject; College=name/qualification/subject; Primary=name only; Non-teaching=name/role. -->
+<title>Meet Our Team | BALAD Private Schools</title>
+<link rel="stylesheet" href="style.css">
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0" name="viewport"/>
-<title>Meet Our Team | Balad Private Schools</title><link href="style.css" rel="stylesheet"/><script defer="" src="script.js?v=5"></script><script src="content-loader.js" type="module"></script></head>
-<body class="team-page" data-cms-page="team">
-<header><div class="logo"><img alt="Balad Private Schools Logo" data-media-key="team-image-1" src="logo.png"/><div class="school-name"><h2>BALAD PRIVATE SCHOOLS</h2><p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p><small>"Nothing but Success"</small></div></div>
-<input class="menu-toggle" id="balad-menu-toggle" type="checkbox"/><label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle"><span class="menu-icon-open">☰</span><span class="menu-icon-close">×</span></label>
-<nav id="balad-main-nav"><a href="index.html">Home</a><a href="about.html">About</a><details class="academic-nav school-nav"><summary>Schools</summary><div class="academic-submenu"><a href="nursery-primary.html">Balad Nursery &amp; Primary</a><a href="comprehensive-college.html">Balad Comprehensive College</a></div></details><a href="cbt-centre.html">CBT Centre</a><a href="admissions.html">Admissions</a><details class="academic-nav"><summary>Academics</summary><div class="academic-submenu"><a href="curriculum.html">Curriculum</a><a href="stem.html">STEM</a><a href="results.html">Result Portal</a></div></details><a class="active" href="team.html">Meet Our Team</a><a href="facilities.html">Facilities</a><a href="gallery.html">Gallery</a><a href="news.html">News &amp; Events</a><a href="alumni.html">Alumni</a><a class="nav-login-button" href="control-login.html">LOGIN</a><a class="nav-contact-button" href="contact.html">CONTACT US</a></nav></header>
-<section class="team-hero-shell"><div class="team-hero-heading"><p class="team-hero-eyebrow">MEET OUR TEAM</p><p>Meet the dedicated professionals whose passion, expertise and commitment help shape every learner at Balad Private Schools.</p></div></section>
+<style>
+/* ==========================================================
+   BALAD TEAM PAGE — LIVE STAFF PROFILES
+   Uses publicStaff from the BALAD Firebase project.
+========================================================== */
+
+.team-live-section{
+    padding:42px 0;
+}
+
+.team-live-header{
+    text-align:center;
+    margin-bottom:28px;
+}
+
+.team-live-header h2{
+    color:#075c46;
+    margin-bottom:8px;
+}
+
+.team-live-header p{
+    max-width:700px;
+    margin:0 auto;
+    color:#66736e;
+    line-height:1.55;
+}
+
+.team-live-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:18px;
+    align-items:stretch;
+}
+
+/* Management has five profiles: 2 on the first row, 3 on the second. */
+#managementGrid{
+    grid-template-columns:repeat(6,minmax(0,1fr));
+}
+
+#managementGrid .team-profile-card{
+    grid-column:span 2;
+}
+
+#managementGrid .team-profile-card:nth-child(1){
+    grid-column:2 / span 2;
+}
+
+#managementGrid .team-profile-card:nth-child(2){
+    grid-column:4 / span 2;
+}
+
+#managementGrid .team-profile-card:nth-child(n+3){
+    grid-column:span 2;
+}
+
+
+.team-profile-card{
+    border:0;
+    width:100%;
+    padding:0;
+    background:#fff;
+    border-radius:16px;
+    overflow:hidden;
+    text-align:left;
+    box-shadow:0 8px 28px rgba(15,40,30,.08);
+    cursor:pointer;
+    transition:transform .2s ease,box-shadow .2s ease;
+    color:inherit;
+}
+
+.team-profile-card:hover,
+.team-profile-card:focus-visible{
+    transform:translateY(-5px);
+    box-shadow:0 14px 35px rgba(15,40,30,.14);
+    outline:2px solid #075c46;
+    outline-offset:2px;
+}
+
+.team-profile-photo{
+    width:100%;
+    height:245px;
+    object-fit:cover;
+    display:block;
+    background:#eaf3ef;
+}
+
+.team-profile-body{
+    padding:18px;
+}
+
+.team-profile-body h3{
+    color:#17221e;
+    margin:0 0 6px;
+    font-size:1.05rem;
+}
+
+.team-profile-position{
+    color:#075c46;
+    font-weight:800;
+    margin:0 0 14px;
+}
+
+.team-profile-detail{
+    margin:7px 0;
+    color:#66736e;
+    font-size:.88rem;
+    line-height:1.45;
+}
+
+.team-profile-detail strong{
+    color:#075c46;
+}
+
+.team-click-note{
+    margin-top:14px;
+    font-size:.75rem;
+    color:#8a9590;
+    font-weight:700;
+}
+
+.team-empty,
+.team-error{
+    grid-column:1/-1;
+    padding:25px;
+    text-align:center;
+    border-radius:14px;
+    background:#f5f8f6;
+    color:#66736e;
+}
+
+.team-error{
+    background:#fff1ef;
+    color:#a21b1b;
+}
+
+.team-modal{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(10,30,23,.68);
+}
+
+.team-modal.open{
+    display:flex;
+}
+
+.team-modal-card{
+    width:min(520px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:22px;
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+    position:relative;
+}
+
+.team-modal-close{
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.92);
+    color:#075c46;
+    font-size:24px;
+    cursor:pointer;
+    z-index:2;
+}
+
+.team-modal-photo{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    background:#eaf3ef;
+}
+
+.team-modal-body{
+    padding:24px;
+}
+
+.team-modal-body h2{
+    color:#075c46;
+    margin:0 0 5px;
+}
+
+.team-modal-role{
+    color:#66736e;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.team-modal-row{
+    padding:13px 0;
+    border-bottom:1px solid #e5ebe8;
+}
+
+.team-modal-row:last-child{
+    border-bottom:0;
+}
+
+.team-modal-row strong{
+    display:block;
+    color:#075c46;
+    margin-bottom:5px;
+}
+
+.team-loading{
+    padding:25px;
+    text-align:center;
+    color:#66736e;
+}
+
+@media(max-width:900px){
+    .team-live-section{
+        padding:30px 8px;
+    }
+
+    .team-live-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:12px;
+    }
+
+    #managementGrid{
+        grid-template-columns:repeat(6,minmax(0,1fr));
+    }
+}
+
+@media(max-width:560px){
+    .team-live-section{
+        padding:26px 4px;
+    }
+
+    .team-live-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:8px;
+    }
+
+    #managementGrid{
+        grid-template-columns:repeat(6,minmax(0,1fr));
+    }
+
+    .team-profile-photo{
+        height:120px;
+    }
+
+    .team-profile-body{
+        padding:10px;
+    }
+
+    .team-profile-body h3{
+        font-size:.82rem;
+        line-height:1.2;
+    }
+
+    .team-profile-position{
+        font-size:.72rem;
+        margin-bottom:8px;
+    }
+
+    .team-profile-detail{
+        font-size:.68rem;
+        line-height:1.3;
+    }
+
+    .team-click-note{
+        font-size:.62rem;
+        margin-top:8px;
+    }
+
+    .team-modal-photo{
+        height:250px;
+    }
+}
+</style>
+
+<script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="logo.png" alt="BALAD Private Schools Logo">
+        <div class="school-name">
+            <h2>BALAD PRIVATE SCHOOLS</h2>
+            <p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
+            <small>"Nothing but Success"</small>
+        </div>
+    </div>
+
+    <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="team.html">Meet Our Team</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<section class="page-hero">
+    <div class="page-overlay">
+        <h1>Meet Our Team</h1>
+        <p>
+            Meet the dedicated professionals whose passion, expertise and commitment
+            help shape every learner at BALAD Private Schools.
+        </p>
+    </div>
+</section>
+
 <main>
-<section class="team-section" id="management-team-public"><div class="container"><h2>Management</h2><div class="public-staff-grid" data-public-staff-category="management"></div></div></section>
-<section class="team-section" id="college-team-public"><div class="container"><h2>College Staff</h2><div class="public-staff-grid" data-public-staff-category="college"></div></div></section>
-<section class="team-section" id="primary-team-public"><div class="container"><h2>Primary Staff</h2><div class="public-staff-grid" data-public-staff-category="primary"></div></div></section>
-<section class="team-section" id="nonteaching-team-public"><div class="container"><h2>Non-teaching Staff</h2><div class="public-staff-grid" data-public-staff-category="non_teaching"></div></div></section>
-<section class="cms-public-content-wrap"><div class="cms-public-content" data-cms-page="team" id="cms-page-content"></div></section>
+
+<section class="team-live-section" id="management">
+    <div class="team-live-header">
+        <h2>Management</h2>
+        <p>Our school leaders and management team.</p>
+    </div>
+    <div class="team-live-grid" id="managementGrid">
+        <div class="team-loading">Loading management profiles…</div>
+    </div>
+</section>
+
+<section class="team-live-section" id="college">
+    <div class="team-live-header">
+        <h2>College Staff</h2>
+        <p>Meet the professionals supporting teaching and learning in the College.</p>
+    </div>
+    <div class="team-live-grid" id="collegeGrid">
+        <div class="team-loading">Loading College staff profiles…</div>
+    </div>
+</section>
+
+<section class="team-live-section" id="primary">
+    <div class="team-live-header">
+        <h2>Primary Staff</h2>
+        <p>Meet the professionals supporting our Nursery and Primary learners.</p>
+    </div>
+    <div class="team-live-grid" id="primaryGrid">
+        <div class="team-loading">Loading Primary staff profiles…</div>
+    </div>
+</section>
+
+<section class="team-live-section" id="non-teaching">
+    <div class="team-live-header">
+        <h2>Non-teaching Staff</h2>
+        <p>Meet the team supporting the safe and smooth running of the school.</p>
+    </div>
+    <div class="team-live-grid" id="nonTeachingGrid">
+        <div class="team-loading">Loading non-teaching profiles…</div>
+    </div>
+</section>
+
 </main>
-<footer><div class="footer-bottom">© <span data-year=""></span> Balad Private Schools. All Rights Reserved.<span class="footer-developer">Developer Control · @lade</span></div></footer>
-</body></html>
+
+<div class="team-modal" id="teamModal" role="dialog" aria-modal="true" aria-label="Staff profile">
+    <div class="team-modal-card">
+        <button class="team-modal-close" id="teamModalClose" type="button" aria-label="Close profile">×</button>
+        <img class="team-modal-photo" id="modalPhoto" src="" alt="">
+        <div class="team-modal-body">
+            <h2 id="modalName">Staff Profile</h2>
+            <div class="team-modal-role" id="modalPosition"></div>
+
+            <div class="team-modal-row">
+                <strong>Qualification</strong>
+                <div id="modalQualification">—</div>
+            </div>
+
+            <div class="team-modal-row">
+                <strong>Subject</strong>
+                <div id="modalSubjects">—</div>
+            </div>
+
+            <div class="team-modal-row">
+                <strong>School / Section</strong>
+                <div id="modalSchool">—</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function(){
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCLU7CdFlCrLxGzRo0Z0PQOQ-6Y91ccj-M",
+        authDomain: "projectb-wetrending-space.firebaseapp.com",
+        projectId: "projectb-wetrending-space",
+        storageBucket: "projectb-wetrending-space.firebasestorage.app",
+        messagingSenderId: "106348539335",
+        appId: "1:106348539335:web:50ec676ce6d424a82c3de2"
+    };
+
+    const FALLBACK_PHOTO = "logo.png";
+
+    function esc(value){
+        return String(value ?? "")
+            .replace(/&/g,"&amp;")
+            .replace(/</g,"&lt;")
+            .replace(/>/g,"&gt;")
+            .replace(/"/g,"&quot;")
+            .replace(/'/g,"&#039;");
+    }
+
+    function valueText(value){
+        if(Array.isArray(value)) return value.filter(Boolean).join(" / ");
+        return String(value ?? "").trim();
+    }
+
+    function qualificationText(staff){
+        return valueText(
+            staff.qualification ??
+            staff.qualifications ??
+            staff.Qualification ??
+            ""
+        ) || "To be updated";
+    }
+
+    function subjectText(staff){
+        return valueText(
+            staff.subjects ??
+            staff.assignedSubjects ??
+            staff.subject ??
+            ""
+        ) || "To be updated";
+    }
+
+    function schoolText(staff){
+        const s = String(staff.school || "").toLowerCase();
+        if(s === "college" || s === "secondary") return "College";
+        if(s === "primary") return "Nursery & Primary";
+        return "BALAD Private Schools";
+    }
+
+    function categoryText(staff){
+        const c = String(staff.category || "").toLowerCase();
+        if(c === "management") return "management";
+        if(c === "college") return "college";
+        if(c === "primary") return "primary";
+        if(c === "non_teaching" || c === "non-teaching") return "non_teaching";
+
+        const role = String(staff.role || "").toLowerCase();
+        if(role === "management") return "management";
+        if(role === "other" || role === "other staff") return "non_teaching";
+
+        const school = String(staff.school || "").toLowerCase();
+        return school === "college" || school === "secondary"
+            ? "college"
+            : "primary";
+    }
+
+    function photoText(staff){
+        return String(
+            staff.photoUrl ||
+            staff.photo ||
+            FALLBACK_PHOTO
+        ).trim() || FALLBACK_PHOTO;
+    }
+
+    function renderCard(staff, index, category){
+        const photo = esc(photoText(staff));
+        const name = esc(staff.name || "Staff Member");
+        const position = esc(staff.position || staff.role || "Staff");
+        const qualification = esc(qualificationText(staff));
+        const subjects = esc(subjectText(staff));
+
+        let details = "";
+
+        if(category === "management"){
+            details = `
+                <p class="team-profile-detail"><strong>Qualification:</strong><br>${qualification}</p>
+                <p class="team-profile-detail"><strong>Subject:</strong><br>${subjects}</p>
+            `;
+        }else if(category === "college"){
+            details = `
+                <p class="team-profile-detail"><strong>Qualification:</strong><br>${qualification}</p>
+                <p class="team-profile-detail"><strong>Subject:</strong><br>${subjects}</p>
+            `;
+        }else if(category === "non_teaching"){
+            details = `<p class="team-profile-position">${position}</p>`;
+        }
+
+        return `
+            <button class="team-profile-card"
+                    type="button"
+                    data-profile-index="${index}"
+                    aria-label="Open profile for ${name}">
+                <img class="team-profile-photo"
+                     src="${photo}"
+                     alt="${name}"
+                     onerror="this.onerror=null;this.src='${FALLBACK_PHOTO}'">
+
+                <div class="team-profile-body">
+                    <h3>${name}</h3>
+                    ${category === "management" || category === "college" ? `<p class="team-profile-position">${position}</p>` : ""}
+                    ${details}
+                    <div class="team-click-note">Tap to view full profile →</div>
+                </div>
+            </button>
+        `;
+    }
+
+    function renderCategory(id, records, label){
+        const grid = document.getElementById(id);
+        const category = id === "managementGrid"
+            ? "management"
+            : id === "collegeGrid"
+                ? "college"
+                : id === "primaryGrid"
+                    ? "primary"
+                    : "non_teaching";
+
+        grid.dataset.category = category;
+
+        if(!records.length){
+            grid.innerHTML =
+                `<div class="team-empty">No ${label} profiles have been added yet.</div>`;
+            return;
+        }
+
+        grid.innerHTML =
+            records.map((staff,index) => renderCard(staff,index,category)).join("");
+
+        grid.querySelectorAll(".team-profile-card").forEach(card => {
+            card.addEventListener("click", () => {
+                const staff = records[
+                    Number(card.dataset.profileIndex)
+                ];
+                openModal(staff, category);
+            });
+        });
+    }
+
+    function openModal(staff, category){
+        const qualificationRow = document.getElementById("modalQualification").closest(".team-modal-row");
+        const subjectRow = document.getElementById("modalSubjects").closest(".team-modal-row");
+        const schoolRow = document.getElementById("modalSchool").closest(".team-modal-row");
+
+        document.getElementById("modalPhoto").src = photoText(staff);
+        document.getElementById("modalPhoto").alt = staff.name || "Staff Profile";
+        document.getElementById("modalName").textContent =
+            staff.name || "Staff Profile";
+        document.getElementById("modalPosition").textContent =
+            staff.position || staff.role || "";
+        document.getElementById("modalQualification").textContent =
+            qualificationText(staff);
+        document.getElementById("modalSubjects").textContent =
+            subjectText(staff);
+        document.getElementById("modalSchool").textContent =
+            schoolText(staff);
+
+        /* Match the same information rules used on the cards. */
+        qualificationRow.style.display =
+            (category === "management" || category === "college") ? "block" : "none";
+        subjectRow.style.display =
+            (category === "management" || category === "college") ? "block" : "none";
+        schoolRow.style.display =
+            (category === "management" || category === "college") ? "block" : "none";
+        document.getElementById("modalPosition").style.display =
+            (category === "management" || category === "non_teaching") ? "block" : "none";
+
+        document.getElementById("teamModal").classList.add("open");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal(){
+        document.getElementById("teamModal").classList.remove("open");
+        document.body.style.overflow = "";
+    }
+
+    document.getElementById("teamModalClose")
+        .addEventListener("click", closeModal);
+
+    document.getElementById("teamModal")
+        .addEventListener("click", function(e){
+            if(e.target === this) closeModal();
+        });
+
+    document.addEventListener("keydown", function(e){
+        if(e.key === "Escape") closeModal();
+    });
+
+    try{
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        db.collection("publicStaff")
+            .get()
+            .then(snapshot => {
+
+                const records = snapshot.docs
+                    .map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }))
+                    .filter(staff => staff.active !== false);
+
+                const grouped = {
+                    management: [],
+                    college: [],
+                    primary: [],
+                    non_teaching: []
+                };
+
+                records.forEach(staff => {
+                    const category = categoryText(staff);
+                    if(grouped[category]) grouped[category].push(staff);
+                });
+
+                renderCategory(
+                    "managementGrid",
+                    grouped.management,
+                    "management"
+                );
+
+                renderCategory(
+                    "collegeGrid",
+                    grouped.college,
+                    "College"
+                );
+
+                renderCategory(
+                    "primaryGrid",
+                    grouped.primary,
+                    "Primary"
+                );
+
+                renderCategory(
+                    "nonTeachingGrid",
+                    grouped.non_teaching,
+                    "non-teaching"
+                );
+            })
+            .catch(error => {
+                console.error("BALAD team profiles error:", error);
+
+                document.querySelectorAll(".team-live-grid")
+                    .forEach(grid => {
+                        grid.innerHTML =
+                            `<div class="team-error">
+                                Staff profiles could not be loaded right now.
+                                Please try again.
+                            </div>`;
+                    });
+            });
+
+    }catch(error){
+        console.error("Firebase initialization error:", error);
+
+        document.querySelectorAll(".team-live-grid")
+            .forEach(grid => {
+                grid.innerHTML =
+                    `<div class="team-error">
+                        Staff profiles could not be loaded right now.
+                    </div>`;
+            });
+    }
+
+})();
+</script>
+
+<script src="script.js"></script>
+
+<script>
+(function(){
+  // Display-rule helper for BALAD Team profiles.
+  window.BALAD_TEAM_DISPLAY_RULES = {
+    management: ["name","role","qualification","subject"],
+    college: ["name","qualification","subject"],
+    primary: ["name"],
+    "non-teaching": ["name","role"]
+  };
+})();
+</script>
+</body>
+</html>

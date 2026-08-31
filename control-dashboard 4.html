@@ -1,0 +1,6892 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BALAD Private Schools — Control Dashboard</title>
+<style>
+:root{
+  --green:#086b49;
+  --green-dark:#064c36;
+  --soft:#eaf5f0;
+  --ink:#17221e;
+  --muted:#69736f;
+  --line:#dfe7e3;
+  --bg:#f5f7f6;
+  --white:#fff;
+  --danger:#b42318;
+  --danger-bg:#fff0ee;
+  --shadow:0 8px 30px rgba(15,40,30,.07);
+  --radius:14px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+}
+
+button,input,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.app{
+  min-height:100vh;
+  display:flex;
+}
+
+.sidebar{
+  width:270px;
+  background:#fff;
+  border-right:1px solid var(--line);
+  position:fixed;
+  inset:0 auto 0 0;
+  z-index:50;
+  display:flex;
+  flex-direction:column;
+}
+
+.brand{
+  height:78px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 20px;
+  border-bottom:1px solid var(--line);
+}
+
+.brand img{
+  width:44px;
+  height:44px;
+  object-fit:contain;
+}
+
+.brand strong{
+  display:block;
+  font-size:14px;
+}
+
+.brand span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.nav{
+  padding:16px 12px;
+  overflow:auto;
+  flex:1;
+}
+
+.nav-label{
+  color:#89938f;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.1em;
+  padding:14px 12px 7px;
+}
+
+.nav-btn{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#4d5954;
+  text-align:left;
+  padding:11px 12px;
+  border-radius:9px;
+  margin:2px 0;
+  font-weight:650;
+  font-size:13px;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+  background:var(--soft);
+  color:var(--green);
+}
+
+.nav-btn.danger{
+  color:var(--danger);
+}
+
+.sidebar-footer{
+  border-top:1px solid var(--line);
+  padding:14px 16px;
+}
+
+.control-badge{
+  background:#f5f7f6;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px 12px;
+}
+
+.control-badge small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.control-badge strong{
+  font-size:12px;
+}
+
+.main{
+  margin-left:270px;
+  width:calc(100% - 270px);
+  min-width:0;
+}
+
+.topbar{
+  height:78px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
+  position:sticky;
+  top:0;
+  z-index:30;
+}
+
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.menu-toggle{
+  display:none;
+  border:0;
+  background:#f0f5f2;
+  padding:9px;
+  border-radius:8px;
+}
+
+.page-title{
+  font-size:18px;
+  font-weight:800;
+}
+
+.page-subtitle{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:11px;
+  font-weight:700;
+  color:var(--green);
+}
+
+.status-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--green);
+}
+
+.content{
+  padding:28px;
+  max-width:1500px;
+  margin:auto;
+}
+
+.page-section{
+  display:none;
+}
+
+.page-section.active{
+  display:block;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+  margin-bottom:22px;
+}
+
+.section-head h1{
+  font-size:25px;
+}
+
+.section-head p{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:5px;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+  padding:10px 14px;
+  border-radius:9px;
+  font-weight:700;
+  font-size:12px;
+}
+
+.btn:hover{
+  border-color:#b7c8c0;
+}
+
+.btn-primary{
+  background:var(--green);
+  color:#fff;
+  border-color:var(--green);
+}
+
+.btn-primary:hover{
+  background:var(--green-dark);
+}
+
+.btn-danger{
+  color:var(--danger);
+  border-color:#efc9c5;
+  background:#fff;
+}
+
+.btn-small{
+  padding:7px 10px;
+  font-size:11px;
+}
+
+.grid{
+  display:grid;
+  gap:16px;
+}
+
+.stats{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  margin-bottom:20px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.stat{
+  padding:18px;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+}
+
+.stat-value{
+  font-size:28px;
+  font-weight:850;
+  margin-top:8px;
+}
+
+.stat-note{
+  font-size:10px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.school-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+
+.school-card{
+  padding:24px;
+  border:2px solid var(--line);
+  border-radius:16px;
+  background:#fff;
+  text-align:left;
+  transition:.15s;
+}
+
+.school-card:hover{
+  border-color:var(--green);
+  transform:translateY(-1px);
+}
+
+.school-card .eyebrow{
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.1em;
+  color:var(--green);
+}
+
+.school-card h2{
+  margin:7px 0 5px;
+  font-size:20px;
+}
+
+.school-card p{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.school-card .open{
+  margin-top:18px;
+  color:var(--green);
+  font-weight:800;
+  font-size:12px;
+}
+
+.workspace{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+
+.module-card{
+  padding:20px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+}
+
+.module-card:hover{
+  border-color:#b7c8c0;
+}
+
+.module-card h3{
+  font-size:15px;
+}
+
+.module-card p{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.5;
+  margin-top:7px;
+}
+
+.module-card .module-link{
+  display:block;
+  margin-top:15px;
+  color:var(--green);
+  font-size:11px;
+  font-weight:800;
+}
+
+.tabs{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+
+.tab{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  padding:9px 13px;
+  font-size:12px;
+  font-weight:700;
+  color:#56625d;
+}
+
+.tab.active{
+  background:var(--soft);
+  border-color:#b8d9cb;
+  color:var(--green);
+}
+
+.toolbar{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+
+.input,
+.select{
+  width:100%;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  padding:10px 11px;
+  font-size:12px;
+  color:var(--ink);
+  outline:none;
+}
+
+.input:focus,
+.select:focus{
+  border-color:#8fbbaa;
+}
+
+.search{
+  max-width:420px;
+}
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:980px;
+}
+
+th,
+td{
+  padding:11px 10px;
+  border-bottom:1px solid #edf1ef;
+  text-align:left;
+  font-size:11px;
+  vertical-align:middle;
+}
+
+th{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  color:#7a8580;
+  background:#fbfcfb;
+  white-space:nowrap;
+}
+
+tr:hover td{
+  background:#fcfefd;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:4px 7px;
+  border-radius:999px;
+  background:#f0f3f1;
+  color:#52605a;
+  font-size:10px;
+  font-weight:750;
+}
+
+.badge.green{
+  background:var(--soft);
+  color:var(--green);
+}
+
+.badge.red{
+  background:var(--danger-bg);
+  color:var(--danger);
+}
+
+.notice{
+  padding:13px 15px;
+  border-radius:10px;
+  background:#f7faf8;
+  border:1px solid var(--line);
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.55;
+}
+
+.notice strong{
+  color:var(--ink);
+}
+
+.access-toolbar{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+
+.pagination{
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+
+.pagination span{
+  font-size:11px;
+  color:var(--muted);
+  padding:0 6px;
+}
+
+.row-actions{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+.mini-btn{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:7px;
+  padding:6px 8px;
+  font-size:10px;
+  font-weight:750;
+}
+
+.mini-btn.danger{
+  color:var(--danger);
+  border-color:#efc9c5;
+}
+
+.mini-btn.primary{
+  color:var(--green);
+  border-color:#b8d9cb;
+}
+
+.assignment-note{
+  font-size:10px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.template-control{
+  min-width:150px;
+}
+
+.multi-select{
+  min-width:190px;
+  max-height:120px;
+}
+
+.multi-select option{
+  padding:5px;
+}
+
+.custom-subject-box{
+  margin-top:7px;
+}
+
+.photo-box{
+  border:1px dashed #b8c8c1;
+  border-radius:10px;
+  padding:13px;
+  background:#fafcfb;
+}
+
+.photo-preview{
+  width:80px;
+  height:80px;
+  border-radius:10px;
+  object-fit:cover;
+  display:none;
+  margin-top:10px;
+  border:1px solid var(--line);
+}
+
+.photo-help{
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.5;
+  margin-top:6px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.field label{
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  color:#68736f;
+  margin-bottom:6px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(20,35,29,.35);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:100;
+}
+
+.modal-backdrop.open{
+  display:flex;
+}
+
+.modal{
+  width:min(820px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 20px 60px rgba(0,0,0,.2);
+}
+
+.modal-head{
+  padding:17px 18px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+}
+
+.modal-head h2{
+  font-size:16px;
+}
+
+.modal-close{
+  border:0;
+  background:transparent;
+  font-size:24px;
+  color:#748079;
+}
+
+.modal-body{
+  padding:18px;
+}
+
+.modal-foot{
+  padding:14px 18px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+}
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#17221e;
+  color:#fff;
+  padding:12px 15px;
+  border-radius:9px;
+  font-size:12px;
+  z-index:200;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(8px);
+  transition:.2s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:none;
+}
+
+@media(max-width:900px){
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.2s;
+  }
+
+  .sidebar.open{
+    transform:none;
+  }
+
+  .main{
+    margin-left:0;
+    width:100%;
+  }
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .topbar{
+    padding:0 16px;
+  }
+
+  .content{
+    padding:18px;
+  }
+
+  .school-grid,
+  .workspace{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .section-head{
+    flex-direction:column;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+}
+
+
+/* =========================================================
+   BALAD STUDENT MANAGEMENT — CLASS-FIRST / EXCEL-FIRST
+========================================================= */
+.student-flow-note{margin:0 0 20px;padding:15px 18px;border:1px solid #d9e6df;border-left:5px solid #086b49;background:#f4f9f6;border-radius:12px;color:#31443c;line-height:1.55}
+.student-section-heading{font-size:15px;font-weight:900;letter-spacing:.05em;color:#086b49;margin:22px 0 12px;text-transform:uppercase}
+.student-section-heading.college-heading{margin-top:30px}
+.student-subheading{font-size:13px;font-weight:900;color:#5d6662;margin:14px 0 10px;text-transform:uppercase}
+.student-class-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.student-class-card{border:1px solid #dfe8e4;background:#fff;border-radius:16px;padding:18px;cursor:pointer;transition:.18s;box-shadow:0 7px 22px rgba(16,52,40,.06);text-align:left}
+.student-class-card:hover{transform:translateY(-2px);border-color:#086b49;box-shadow:0 12px 28px rgba(16,52,40,.11)}
+.student-class-card .class-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.student-class-card h3{margin:0;font-size:18px;color:#1e2a26}
+.student-class-card .count{font-weight:900;color:#086b49}
+.student-class-card p{margin:7px 0 12px;color:#6a756f;font-size:13px}
+.student-class-card .placement-chips{display:flex;flex-wrap:wrap;gap:6px}
+.student-class-card .placement-chip{font-size:11px;padding:5px 8px;border-radius:999px;background:#f0f5f2;color:#086b49;font-weight:800}
+.class-workspace-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}
+.class-workspace-head h2{margin:10px 0 4px;font-size:26px}
+.class-workspace-head p{margin:0;color:#68746e}
+.class-workspace-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.student-placement-bar{display:flex;gap:8px;flex-wrap:wrap;padding:12px 0 18px}
+.student-placement-btn{border:1px solid #d8e4de;background:#fff;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer;color:#3d4b45}
+.student-placement-btn.active{background:#086b49;color:#fff;border-color:#086b49}
+.toolbar-inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.student-import-panel{margin-top:18px}
+.import-summary{padding:14px;border-radius:12px;background:#f6faf8;border:1px solid #dce8e2;margin-bottom:14px;line-height:1.6}
+.import-summary .valid{color:#086b49;font-weight:900}.import-summary .invalid{color:#b91c1c;font-weight:900}
+.import-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+.student-directory-link{margin:18px 0;text-align:right}
+.required-mark{color:#d62828}
+.student-import-ok{color:#086b49;font-weight:800}.student-import-error{color:#b91c1c;font-weight:800}
+@media(max-width:900px){.student-class-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.class-workspace-head{flex-direction:column}.class-workspace-actions{justify-content:flex-start}}
+@media(max-width:600px){.student-class-grid{grid-template-columns:1fr}.class-workspace-head h2{font-size:22px}.toolbar-inline{width:100%}.toolbar-inline .input{width:100%}.class-workspace-actions{width:100%}.class-workspace-actions .btn{flex:1}.import-actions{flex-direction:column}.import-actions .btn{width:100%}}
+
+
+/* =========================================================
+   BALAD — SCHOOL CREAM & GREEN DASHBOARD THEME
+   Added as an override so existing functionality is preserved.
+========================================================= */
+:root{
+  --green:#08734f;
+  --green-dark:#045238;
+  --green-deep:#063f2d;
+  --green-soft:#e7f2ec;
+  --green-pale:#f1f7f3;
+  --cream:#f7f1e3;
+  --cream-light:#fbf8f0;
+  --cream-deep:#eee3ca;
+  --ink:#17221d;
+  --muted:#69746e;
+  --line:#dce5df;
+  --white:#ffffff;
+  --shadow:0 10px 28px rgba(6,63,45,.07);
+}
+
+/* Page background */
+body{
+  background:
+    radial-gradient(circle at top right, rgba(247,241,227,.75), transparent 28%),
+    linear-gradient(180deg,#fbfaf6 0%,#f3f7f4 100%);
+}
+
+/* Sidebar */
+.sidebar{
+  background:linear-gradient(180deg,#fffdf8 0%,#f7f3e8 100%);
+  border-right:1px solid #ddd8ca;
+}
+
+.brand{
+  background:rgba(255,255,255,.72);
+  border-bottom-color:#e4dfd2;
+}
+
+.brand strong{
+  color:var(--green-deep);
+}
+
+.nav-label{
+  color:#8a806e;
+}
+
+.nav-btn{
+  color:#53615a;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+  background:var(--green-soft);
+  color:var(--green);
+}
+
+.nav-btn.active{
+  box-shadow:inset 3px 0 0 var(--green);
+}
+
+.control-badge{
+  background:var(--cream-light);
+  border-color:#ded8c9;
+}
+
+/* Top bar */
+.topbar{
+  background:rgba(255,255,255,.94);
+  border-bottom-color:#dfe5df;
+  box-shadow:0 3px 16px rgba(6,63,45,.04);
+}
+
+.page-title{
+  color:var(--green-deep);
+}
+
+.status{
+  color:var(--green);
+}
+
+.status-dot{
+  background:var(--green);
+  box-shadow:0 0 0 4px rgba(8,115,79,.10);
+}
+
+/* Main section headings */
+.section-head h1,
+.section-head h2{
+  color:var(--green-deep);
+}
+
+.section-head p{
+  color:#6d776f;
+}
+
+/* General cards */
+.card,
+.module-card{
+  background:linear-gradient(145deg,#fff 0%,#fbfaf5 100%);
+  border-color:#dfe5df;
+  box-shadow:var(--shadow);
+}
+
+.module-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.module-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:4px;
+  background:var(--green);
+}
+
+.module-card:hover{
+  border-color:#b9d4c6;
+  transform:translateY(-2px);
+  box-shadow:0 14px 34px rgba(6,63,45,.11);
+}
+
+.module-card h3{
+  color:var(--green-deep);
+}
+
+.module-card .module-link{
+  color:var(--green);
+}
+
+/* Dashboard statistic cards */
+.stats .stat:nth-child(1){
+  background:linear-gradient(145deg,#fff 0%,#edf7f1 100%);
+  border-top:4px solid #08734f;
+}
+.stats .stat:nth-child(2){
+  background:linear-gradient(145deg,#fff 0%,#faf3df 100%);
+  border-top:4px solid #b28a3c;
+}
+.stats .stat:nth-child(3){
+  background:linear-gradient(145deg,#fff 0%,#eef5f0 100%);
+  border-top:4px solid #4e876f;
+}
+.stats .stat:nth-child(4){
+  background:linear-gradient(145deg,#fff 0%,#f6efe0 100%);
+  border-top:4px solid #8c7548;
+}
+
+.stat-label{
+  color:#68756e;
+}
+
+.stat-value{
+  color:var(--green-deep);
+}
+
+.stat-note{
+  color:#7a817c;
+}
+
+/* School cards */
+.school-grid{
+  gap:20px;
+}
+
+.school-card{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(145deg,#fff 0%,#fbf8ef 100%);
+  border-color:#ddd9cc;
+  box-shadow:0 10px 30px rgba(80,67,38,.06);
+}
+
+.school-card::after{
+  content:"";
+  position:absolute;
+  right:-38px;
+  top:-45px;
+  width:125px;
+  height:125px;
+  border-radius:50%;
+  background:rgba(8,115,79,.07);
+}
+
+.school-card:hover{
+  border-color:#8ebba8;
+  box-shadow:0 14px 34px rgba(6,63,45,.12);
+}
+
+.school-card .eyebrow{
+  color:var(--green);
+}
+
+.school-card h2{
+  color:var(--green-deep);
+}
+
+.school-card p{
+  color:#68746d;
+}
+
+.school-card .open{
+  color:var(--green);
+}
+
+/* Primary / College class cards */
+.student-flow-note{
+  background:linear-gradient(135deg,#f8f3e5 0%,#edf7f1 100%);
+  border-color:#d8e2d9;
+  border-left-color:var(--green);
+  box-shadow:0 7px 20px rgba(6,63,45,.04);
+}
+
+.student-section-heading{
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.student-section-heading::after{
+  content:"";
+  height:1px;
+  flex:1;
+  background:#d8e4dd;
+}
+
+.student-subheading{
+  color:#6d674f;
+}
+
+.student-class-grid{
+  gap:16px;
+}
+
+.student-class-card{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(145deg,#fff 0%,#fbf7eb 100%);
+  border:1px solid #dedbcc;
+  box-shadow:0 8px 24px rgba(75,64,37,.07);
+}
+
+.student-class-card::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:5px;
+  background:var(--green);
+}
+
+.student-class-card:hover{
+  border-color:#9ac2ae;
+  box-shadow:0 13px 30px rgba(6,63,45,.12);
+}
+
+.student-class-card h3{
+  color:var(--green-deep);
+}
+
+.student-class-card .count{
+  color:var(--green);
+  background:var(--green-soft);
+  padding:5px 8px;
+  border-radius:999px;
+}
+
+.student-class-card p{
+  color:#707970;
+}
+
+.student-class-card .placement-chip{
+  background:#eaf3ed;
+  color:var(--green);
+}
+
+.student-class-card:nth-child(even) .placement-chip{
+  background:#f5eddc;
+  color:#806a38;
+}
+
+/* Buttons */
+.btn{
+  border-color:#d7e0da;
+  background:#fffdf9;
+}
+
+.btn:hover{
+  border-color:#a9c5b7;
+  background:#f7faf8;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#08734f,#05613f);
+  border-color:#08734f;
+  box-shadow:0 6px 16px rgba(8,115,79,.18);
+}
+
+.btn-primary:hover{
+  background:linear-gradient(135deg,#075f42,#044c35);
+}
+
+.mini-btn.primary{
+  color:var(--green);
+  border-color:#b8d4c5;
+  background:#f7fbf8;
+}
+
+.tab.active{
+  background:var(--green-soft);
+  border-color:#b8d5c6;
+  color:var(--green);
+}
+
+/* Notices and workflow boxes */
+.notice{
+  background:linear-gradient(135deg,#faf6e9,#f2f8f4);
+  border-color:#dce4dc;
+}
+
+.notice strong{
+  color:var(--green-deep);
+}
+
+/* Tables */
+table{
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+th{
+  background:#f5f1e5;
+  color:#6d684f;
+}
+
+tr:hover td{
+  background:#f5faf7;
+}
+
+/* Inputs */
+.input,
+.select{
+  background:#fffdf9;
+  border-color:#d7e0da;
+}
+
+.input:focus,
+.select:focus{
+  border-color:#75aa91;
+  box-shadow:0 0 0 3px rgba(8,115,79,.08);
+}
+
+/* Import panel */
+.student-import-panel{
+  background:linear-gradient(145deg,#fff 0%,#fbf8ef 100%);
+  border:1px solid #ddd9cc;
+  border-radius:16px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+.import-summary{
+  background:linear-gradient(135deg,#f7f1e3,#eef7f2);
+  border-color:#d8e3db;
+}
+
+/* Modal */
+.modal{
+  border:1px solid #dedfd5;
+}
+
+.modal-head{
+  background:linear-gradient(90deg,#fbf7eb,#f0f7f3);
+}
+
+.modal-head h2{
+  color:var(--green-deep);
+}
+
+/* Mobile */
+@media(max-width:600px){
+  .content{
+    background:linear-gradient(180deg,#fbfaf6,#f2f7f4);
+  }
+}
+
+</style>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+<div class="brand">
+<img alt="Balad Private Schools logo" onerror="this.style.display='none'" src="images/images/logo.png"/>
+<div>
+<strong>BALAD PRIVATE SCHOOLS</strong>
+<span>Control Administration</span>
+</div>
+</div>
+<nav class="nav">
+<div class="nav-label">CONTROL</div>
+<button class="nav-btn active" data-section="dashboard">
+Dashboard
+</button>
+<button class="nav-btn" data-section="school">
+School Management
+</button>
+<div class="nav-label">SELECTED SCHOOL</div>
+<button class="nav-btn" data-section="staff">
+Staff Management
+</button>
+<button class="nav-btn" data-section="students">
+Student Management
+</button>
+<button class="nav-btn" data-section="idcards">
+Student ID &amp; Gate
+</button>
+<button class="nav-btn" data-section="content">
+Content Management
+</button>
+<button class="nav-btn" data-section="classes">
+Classes
+</button>
+<button class="nav-btn" data-section="subjects">
+Subjects
+</button>
+<button class="nav-btn" data-section="results">
+Results
+</button>
+<div class="nav-label">SYSTEM</div>
+<button class="nav-btn" data-section="audit">
+Audit Logs
+</button>
+<button class="nav-btn" data-section="settings">
+Control Settings
+</button>
+<button class="nav-btn danger" id="logoutBtn">
+Log out
+</button>
+</nav>
+<div class="sidebar-footer">
+<div class="control-badge">
+<small>Signed in as</small>
+<strong id="controlCodeLabel">CONTROL001</strong>
+</div>
+</div>
+</aside>
+<main class="main">
+<header class="topbar">
+<div class="topbar-left">
+<button class="menu-toggle" id="menuToggle">
+Menu
+</button>
+<div>
+<div class="page-title" id="pageTitle">
+Dashboard
+</div>
+<div class="page-subtitle">
+Balad Private Schools Control System
+</div>
+</div>
+</div>
+<div class="status">
+<span class="status-dot"></span>
+Worker connected
+</div>
+</header>
+<div class="content">
+
+<section class="page-section active" id="section-dashboard">
+<div class="section-head">
+<div>
+<h1>Control Dashboard</h1>
+<p>
+Choose the school section you want to manage.
+</p>
+</div>
+</div>
+<div class="grid stats">
+<div class="card stat">
+<div class="stat-label">TOTAL STAFF</div>
+<div class="stat-value" id="statStaff">—</div>
+<div class="stat-note">Excluding CONTROL001</div>
+</div>
+<div class="card stat">
+<div class="stat-label">ACTIVE STAFF</div>
+<div class="stat-value" id="statActiveStaff">—</div>
+<div class="stat-note">Currently active</div>
+</div>
+<div class="card stat">
+<div class="stat-label">TOTAL STUDENTS</div>
+<div class="stat-value" id="statStudents">—</div>
+<div class="stat-note">All school sections</div>
+</div>
+<div class="card stat">
+<div class="stat-label">ACTIVE STUDENTS</div>
+<div class="stat-value" id="statActiveStudents">—</div>
+<div class="stat-note">Currently active</div>
+</div>
+</div>
+<div class="card" style="padding:22px">
+<div class="section-head" style="margin-bottom:15px">
+<div>
+<h2 style="font-size:17px">
+Choose School
+</h2>
+<p>
+The school selection controls every management area.
+</p>
+</div>
+</div>
+<div class="school-grid">
+<button class="school-card" onclick="selectSchool('primary')">
+<div class="eyebrow">
+SCHOOL SECTION
+</div>
+<h2>
+Nursery &amp; Primary
+</h2>
+<p>
+Manage Nursery and Primary staff, students,
+classes, subjects, assignments and results.
+</p>
+<div class="open">
+Open Nursery &amp; Primary →
+</div>
+</button>
+<button class="school-card" onclick="selectSchool('secondary')">
+<div class="eyebrow">
+SCHOOL SECTION
+</div>
+<h2>
+College
+</h2>
+<p>
+Manage College staff, students, JSS/SS
+classes, departments, subjects and results.
+</p>
+<div class="open">
+Open College →
+</div>
+</button>
+</div>
+</div>
+</section>
+
+<section class="page-section" id="section-school">
+<div class="section-head">
+<div>
+<h1 id="schoolWorkspaceTitle">
+School Management
+</h1>
+<p id="schoolWorkspaceSubtitle">
+Choose a school section first.
+</p>
+</div>
+<button class="btn" onclick="showSection('dashboard')">
+Change School
+</button>
+</div>
+<div class="notice" id="schoolNotice" style="margin-bottom:18px">
+<strong>No school selected.</strong>
+Choose Nursery &amp; Primary or College.
+
+</div>
+<div class="workspace">
+<div class="module-card" onclick="openSchoolModule('staff')">
+<h3>
+Staff Management
+</h3>
+<p>
+Staff directory, 50-row access templates,
+roles and teaching assignments.
+</p>
+<span class="module-link">
+Open Staff Management →
+</span>
+</div>
+<div class="module-card" onclick="openSchoolModule('students')">
+<h3>
+Student Management
+</h3>
+<p>
+Student directory and 50 premade student
+record slots.
+</p>
+<span class="module-link">
+Open Student Management →
+</span>
+</div>
+<div class="module-card" onclick="openSchoolModule('classes')">
+<h3>
+Classes
+</h3>
+<p>
+Manage the classes and arms used by
+the selected school.
+</p>
+<span class="module-link">
+Open Classes →
+</span>
+</div>
+<div class="module-card" onclick="openSchoolModule('subjects')">
+<h3>
+Subjects
+</h3>
+<p>
+Manage the subject directory used by
+staff assignments and results.
+</p>
+<span class="module-link">
+Open Subjects →
+</span>
+</div>
+<div class="module-card" onclick="openSchoolModule('results')">
+<h3>
+Result Management
+</h3>
+<p>
+Result workflow for the selected school.
+</p>
+<span class="module-link">
+Open Results →
+</span>
+</div>
+</div>
+</section>
+
+<section class="page-section" id="section-staff">
+<div class="section-head">
+<div>
+<h1 id="staffTitle">
+Staff Management
+</h1>
+<p id="staffSubtitle">
+Select a school first.
+</p>
+</div>
+<div class="actions">
+<button class="btn" onclick="showSection('school')">
+← School Menu
+</button>
+<button class="btn btn-primary" onclick="openStaffModal()">
+Create Staff
+</button>
+</div>
+</div>
+<div class="tabs">
+<button class="tab active" data-staff-view="directory">
+Staff Directory
+</button>
+<button class="tab" data-staff-view="access">
+Staff Access Templates
+</button>
+<button class="tab" data-staff-view="assignments">
+Teacher Assignments
+</button>
+</div>
+<div id="staffView-directory">
+<div class="notice" style="margin-bottom:15px">
+<strong>Staff Directory.</strong>
+Existing staff accounts for the selected school
+appear here.
+
+</div>
+<div class="card">
+<div class="card-head">
+<h3>
+Staff Directory
+</h3>
+<button class="btn btn-small" onclick="loadStaff()">
+Refresh
+</button>
+</div>
+<div class="card-body">
+<div class="toolbar">
+<input class="input search" id="staffSearch" oninput="renderStaff()" placeholder="Search code, name, role or assignment..."/>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Name</th>
+<th>Role</th>
+<th>Class Teacher Of</th>
+<th>Other Teaching Classes</th>
+<th>Subjects</th>
+<th>Status</th>
+<th>Account</th>
+</tr>
+</thead>
+<tbody id="staffTable">
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden" id="staffView-access">
+<div class="notice" style="margin-bottom:15px">
+<strong>50 Staff Access Templates.</strong>
+
+Each school has 50 automatic access rows.
+
+Only 10 rows are displayed at a time.
+
+Nursery &amp; Primary:
+<strong>PRI001 – PRI050</strong>.
+
+College:
+<strong>COL001 – COL050</strong>.
+
+Each row contains role,
+Class Teacher Of,
+other teaching classes,
+subjects,
+Create/Save,
+Reset and Activate/Deactivate.
+
+</div>
+<div class="card">
+<div class="card-head">
+<h3>
+Staff Access — 50 Templates
+</h3>
+<button class="btn btn-small" onclick="buildAccessTemplates()">
+Refresh Templates
+</button>
+</div>
+<div class="card-body">
+<div class="access-toolbar">
+<input class="input search" id="accessSearch" oninput="renderAccessTemplates()" placeholder="Search code or staff..."/>
+<div class="pagination">
+<button class="btn btn-small" onclick="accessPrev()">
+Previous
+</button>
+<span id="accessPageLabel">
+1–10 of 50
+</span>
+<button class="btn btn-small" onclick="accessNext()">
+Next
+</button>
+</div>
+</div>
+<div class="table-wrap">
+<table style="min-width:1650px">
+<thead>
+<tr>
+<th>Auto Code</th>
+<th>Staff Name</th>
+<th>Role</th>
+<th>Class Teacher Of</th>
+<th>Other Teaching Classes</th>
+<th>Subjects</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="accessTable">
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden" id="staffView-assignments">
+<div class="notice" style="margin-bottom:15px">
+<strong>Teacher assignments.</strong>
+
+A Class Teacher can also teach subjects in
+other classes.
+
+Their main class is stored separately as
+<strong>Class Teacher Of</strong>.
+
+Other classes are stored separately.
+
+</div>
+<div class="card">
+<div class="card-head">
+<h3>
+Teacher Assignment Directory
+</h3>
+<button class="btn btn-small" onclick="loadStaff()">
+Refresh
+</button>
+</div>
+<div class="card-body">
+<div class="toolbar">
+<input class="input search" id="assignmentSearch" oninput="renderAssignments()" placeholder="Search teacher..."/>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Staff</th>
+<th>Role</th>
+<th>Class Teacher Of</th>
+<th>Other Teaching Classes</th>
+<th>Subjects</th>
+<th>Manage</th>
+</tr>
+</thead>
+<tbody id="assignmentTable">
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="page-section" id="section-content">
+<div class="section-head">
+<div><h1>Content Management</h1><p>Update website content, staff profiles, student photos and gallery media without redeploying the website.</p></div>
+</div>
+<div class="tabs cms-tabs">
+<button class="cms-tab active" data-cms-view="staff">Staff</button>
+<button class="cms-tab" data-cms-view="students">Student Photos</button>
+<button class="cms-tab" data-cms-view="pages">Pages</button>
+<button class="cms-tab" data-cms-view="gallery">Gallery</button>
+</div>
+<div id="cmsView-staff">
+<div class="notice" style="margin-bottom:15px"><strong>Staff profiles.</strong> Manage the public Meet Our Team profiles separately from staff login permissions. Existing staff accounts can be synced into the public profiles.</div>
+<div class="cms-category-grid">
+<button class="cms-category active" data-cms-category="management">Management</button>
+<button class="cms-category" data-cms-category="college">College Staff</button>
+<button class="cms-category" data-cms-category="primary">Primary Staff</button>
+<button class="cms-category" data-cms-category="non_teaching">Non-teaching Staff</button>
+</div>
+<div class="toolbar">
+<button class="btn" onclick="syncCmsStaff()">Sync Staff Accounts</button>
+<button class="btn btn-primary" onclick="openCmsStaffModal()">Add Staff Profile</button>
+</div>
+<div class="card"><div class="card-body"><div class="table-wrap"><table style="min-width:900px">
+<thead id="cmsStaffHead"><tr><th>Photo</th><th>Name</th><th>School</th><th>Subjects</th><th>Position</th><th>Actions</th></tr></thead>
+<tbody id="cmsStaffTable"></tbody>
+</table></div></div></div>
+</div>
+<div class="hidden" id="cmsView-students">
+<div class="notice" style="margin-bottom:15px"><strong>Student photos.</strong> Choose the school and class, then update each student's passport photo. The student record remains the existing BALAD student record.</div>
+<div class="cms-toolbar">
+<select class="select" id="cmsStudentSchool" onchange="cmsStudentSchoolChanged()"><option value="primary">Nursery &amp; Primary</option><option value="secondary">College</option></select>
+<select class="select" id="cmsStudentClass" onchange="loadCmsStudentPhotos()"><option value="">Select class</option></select>
+</div>
+<div class="card"><div class="card-body"><div class="table-wrap"><table style="min-width:850px">
+<thead><tr><th>Photo</th><th>Student</th><th>Admission</th><th>Class</th><th>Update Photo</th></tr></thead>
+<tbody id="cmsStudentTable"></tbody>
+</table></div></div></div>
+</div>
+<div class="hidden" id="cmsView-pages">
+<div class="notice" style="margin-bottom:15px"><strong>Website pages.</strong> Edit existing text and images, or add new content blocks. Changes are saved to the live content database and do not require a new website deployment.</div>
+<div class="cms-toolbar"><select class="select" id="cmsPageSelect" onchange="loadCmsPageEditor()"></select></div>
+<div id="cmsPageEditor"></div>
+</div>
+<div class="hidden" id="cmsView-gallery">
+<div class="notice" style="margin-bottom:15px"><strong>School Gallery.</strong> Create separate albums for each school activity and upload multiple photos/videos directly.</div>
+<div class="card"><div class="card-body">
+<div class="cms-inline-form">
+<div class="field"><label>Album / Activity Name</label><input class="input" id="galleryAlbumTitle" placeholder="e.g. Inter-House Sports"/></div>
+<div class="field"><label>School / Area</label><select class="select" id="galleryAlbumSchool"><option value="both">BALAD PRIVATE SCHOOLS</option><option value="primary">Nursery &amp; Primary</option><option value="college">College</option></select></div>
+<div class="field"><label>Description</label><input class="input" id="galleryAlbumDescription" placeholder="Short description"/></div>
+<div class="field"><label>Activity Category</label><input class="input" id="galleryAlbumActivity" placeholder="Sports, Prize Giving, Career Day..."/></div>
+<div class="field full">
+<label>Upload album media</label>
+<div class="cms-media-actions">
+<button onclick="pickCmsMedia('gallery','camera')" type="button">Camera</button>
+<button onclick="pickCmsMedia('gallery','photos')" type="button">Photos</button>
+<button onclick="pickCmsMedia('gallery','files')" type="button">Files</button>
+</div>
+<input accept="image/*,video/*" capture="environment" class="cms-hidden-input" id="cmsGalleryCamera" type="file"/>
+<input accept="image/*,video/*" class="cms-hidden-input" id="cmsGalleryPhotos" multiple="" type="file"/>
+<input accept="image/*,video/*" class="cms-hidden-input" id="cmsGalleryFiles" multiple="" type="file"/>
+<div class="cms-file-note">Photos and videos can be added to the same activity album.</div>
+</div>
+</div>
+<div style="margin-top:14px"><button class="btn btn-primary" onclick="createCmsAlbum()">Create / Add Album</button></div>
+</div></div>
+<div class="card" style="margin-top:16px"><div class="card-head"><h3>Published Albums</h3><button class="btn btn-small" onclick="loadCmsAlbums()">Refresh</button></div><div class="card-body"><div id="cmsAlbumsList"></div></div></div>
+</div>
+</section>
+
+<section class="page-section" id="section-idcards">
+<div class="section-head">
+<div>
+<h1>Student ID &amp; Gate</h1>
+<p>Generate student ID cards, scan arrival/departure and keep a daily movement record.</p>
+</div>
+<div class="actions">
+<button class="btn" onclick="showSection('students')">Student Management</button>
+<button class="btn btn-primary" onclick="refreshIdCardStudents()">Refresh Students</button>
+</div>
+</div>
+<div class="grid" style="grid-template-columns:1.1fr .9fr;gap:18px">
+<div class="card">
+<div class="card-head">
+<div><h3>Student ID Cards</h3><p class="control-muted">Every existing student already has a unique Scan Code. Select a student to generate their card.</p></div>
+</div>
+<div class="card-body">
+<input class="input search" id="idCardSearch" oninput="renderIdCardStudents()" placeholder="Search student, admission or class..." style="width:100%;margin-bottom:12px"/>
+<div class="table-wrap">
+<table><thead><tr><th>Student</th><th>Class</th><th>Student ID</th><th>Card</th></tr></thead>
+<tbody id="idCardStudentTable"></tbody></table>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-head"><div><h3>School Gate Scanner</h3><p class="control-muted">Scan the barcode. BALAD automatically records arrival first, then departure.</p></div></div>
+<div class="card-body">
+<div id="studentScanner" style="width:100%;max-width:520px;margin:auto"></div>
+<div class="actions" style="margin-top:12px;justify-content:center">
+<button class="btn btn-primary" onclick="startStudentScanner()">Start Camera</button>
+<button class="btn" onclick="stopStudentScanner()">Stop Camera</button>
+</div>
+<div class="notice" id="scannerResult" style="margin-top:15px">Scanner ready.</div>
+</div>
+</div>
+</div>
+<div class="card" style="margin-top:18px">
+<div class="card-head"><div><h3>Today's Student Movement</h3><p class="control-muted">Arrival and departure records for the selected school.</p></div><button class="btn btn-small" onclick="loadStudentAttendance()">Refresh</button></div>
+<div class="card-body">
+<div class="table-wrap"><table><thead><tr><th>Student</th><th>Class</th><th>Arrival</th><th>Departure</th><th>Status</th></tr></thead><tbody id="studentAttendanceTable"></tbody></table></div>
+</div>
+</div>
+</section>
+
+<section class="page-section" id="section-students">
+<div class="section-head">
+<div>
+<h1 id="studentTitle">Student Management</h1>
+<p id="studentSubtitle">Choose a class, then add students in bulk.</p>
+</div>
+<div class="actions">
+<button class="btn" onclick="showSection('school')">← School Menu</button>
+<button class="btn" onclick="downloadStudentTemplate()">Download Excel Template</button>
+<button class="btn btn-primary" onclick="openStudentModal()">Quick Add Student</button>
+</div>
+</div>
+<div class="student-flow-note">
+<strong>Simple workflow:</strong>
+  Choose class → Download/complete Excel → Import → BALAD validates → Student ID, Result Access Code and Scan Code are generated automatically.
+</div>
+<div id="studentClassHome">
+<div class="student-section-heading">Nursery &amp; Primary</div>
+<div class="student-class-grid" id="primaryStudentClassCards"></div>
+<div class="student-section-heading college-heading">College</div>
+<div class="student-subheading">Junior</div>
+<div class="student-class-grid" id="juniorStudentClassCards"></div>
+<div class="student-subheading">Senior</div>
+<div class="student-class-grid" id="seniorStudentClassCards"></div>
+</div>
+<div class="hidden" id="studentClassWorkspace">
+<div class="class-workspace-head">
+<div>
+<button class="btn btn-small" onclick="closeStudentClass()">← All Classes</button>
+<h2 id="studentClassWorkspaceTitle">Class</h2>
+<p id="studentClassWorkspaceSubtitle">Students in this class.</p>
+</div>
+<div class="class-workspace-actions">
+<button class="btn" onclick="downloadStudentTemplate()">Download Excel</button>
+<button class="btn btn-primary" onclick="triggerStudentImport()">Import Excel</button>
+</div>
+</div>
+<input accept=".xlsx,.xls,.csv" id="studentExcelInput" onchange="handleStudentExcel(event)" style="display:none" type="file"/>
+<div class="student-placement-bar" id="studentPlacementBar"></div>
+<div class="card">
+<div class="card-head">
+<div>
+<h3 id="studentClassCount">0 Students</h3>
+<p class="control-muted">Only students belonging to this class/placement are shown.</p>
+</div>
+<div class="toolbar-inline">
+<input class="input search" id="studentClassSearch" oninput="renderClassStudents()" placeholder="Search name, admission or parent..."/>
+<button class="btn btn-small" onclick="renderClassStudents()">Refresh</button>
+</div>
+</div>
+<div class="card-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Student</th>
+<th>Admission No.</th>
+<th>Parent / Guardian</th>
+<th>Phone</th>
+<th>Student ID</th>
+<th>Result Access Code</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="classStudentTable"></tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="student-import-panel hidden" id="studentImportPanel">
+<div class="card">
+<div class="card-head">
+<div>
+<h3>Excel Import</h3>
+<p class="control-muted">Review the rows first. Nothing is saved until you confirm.</p>
+</div>
+<button class="btn btn-small" onclick="closeStudentImport()">Close</button>
+</div>
+<div class="card-body">
+<div class="import-summary" id="studentImportSummary"></div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Row</th><th>Student</th><th>Admission No.</th><th>Class</th><th>Placement</th><th>Parent</th><th>Phone</th><th>Status</th></tr></thead>
+<tbody id="studentImportTable"></tbody>
+</table>
+</div>
+<div class="import-actions">
+<button class="btn" onclick="closeStudentImport()">Cancel</button>
+<button class="btn btn-primary" id="confirmStudentImportBtn" onclick="confirmStudentImport()">Import Valid Students</button>
+</div>
+</div>
+</div>
+</div>
+<div class="student-directory-link">
+<button class="btn" onclick="openAllStudentsDirectory()">View Full Student Directory</button>
+</div>
+</section>
+
+<section class="page-section" id="section-classes">
+<div class="section-head">
+<div>
+<h1 id="classesTitle">
+Classes
+</h1>
+<p id="classesSubtitle">
+Select a school first.
+</p>
+</div>
+<div class="actions">
+<button class="btn" onclick="showSection('school')">
+← School Menu
+</button>
+<button class="btn btn-primary" onclick="openClassModal()">
+Add Class
+</button>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<h3>
+Class Directory
+</h3>
+<button class="btn btn-small" onclick="loadClasses()">
+Refresh
+</button>
+</div>
+<div class="card-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>School</th>
+<th>Section</th>
+<th>Arms</th>
+<th>Departments</th>
+<th>Capacity</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="classTable">
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+
+<section class="page-section" id="section-subjects">
+<div class="section-head">
+<div>
+<h1 id="subjectsTitle">
+Subjects
+</h1>
+<p id="subjectsSubtitle">
+Select a school first.
+</p>
+</div>
+<button class="btn" onclick="showSection('school')">
+← School Menu
+</button>
+</div>
+<div class="card">
+<div class="card-head">
+<h3>
+Subject Directory
+</h3>
+<button class="btn btn-small" onclick="loadSubjects()">
+Refresh
+</button>
+</div>
+<div class="card-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Subject</th>
+<th>ID</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="subjectTable">
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+
+<section class="page-section" id="section-results">
+<div class="section-head">
+<div>
+<h1 id="resultsTitle">
+Result Management
+</h1>
+<p id="resultsSubtitle">
+Select a school first.
+</p>
+</div>
+<button class="btn" onclick="showSection('school')">
+← School Menu
+</button>
+</div>
+<div class="workspace">
+<div class="module-card" onclick="toast('Result workflow will be connected next.')">
+<h3>
+Class Results
+</h3>
+<p>
+Open results by class, term and academic session.
+</p>
+<span class="module-link">
+Open →
+</span>
+</div>
+<div class="module-card" onclick="toast('Teacher result entry will be connected next.')">
+<h3>
+Teacher Result Entry
+</h3>
+<p>
+Connect result entry to staff assignments.
+</p>
+<span class="module-link">
+Open →
+</span>
+</div>
+<div class="module-card" onclick="toast('Result approval will be connected next.')">
+<h3>
+Result Approval
+</h3>
+<p>
+Review and approve submitted results.
+</p>
+<span class="module-link">
+Open →
+</span>
+</div>
+</div>
+</section>
+
+<section class="page-section" id="section-audit">
+<div class="section-head">
+<div>
+<h1>
+Audit Logs
+</h1>
+<p>
+Track administrative actions performed through
+the Control Worker.
+</p>
+</div>
+<button class="btn" onclick="loadAudit()">
+Refresh
+</button>
+</div>
+<div class="card">
+<div class="card-body">
+<div class="toolbar">
+<input class="input search" id="auditSearch" oninput="loadAudit()" placeholder="Search action, staff or record..."/>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Actor</th>
+<th>Action</th>
+<th>Type</th>
+<th>Record</th>
+</tr>
+</thead>
+<tbody id="auditTable">
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+
+<section class="page-section" id="section-settings">
+<div class="section-head">
+<div>
+<h1>
+Control Settings
+</h1>
+<p>
+Protected system information for CONTROL001.
+</p>
+</div>
+</div>
+<div class="card">
+<div class="card-body">
+<div class="form-grid">
+<div class="field">
+<label>
+Control Code
+</label>
+<input class="input" disabled="" value="CONTROL001"/>
+</div>
+<div class="field">
+<label>
+Firebase Project
+</label>
+<input class="input" disabled="" value="projectb-wetrending-space"/>
+</div>
+<div class="field">
+<label>
+Authentication
+</label>
+<input class="input" disabled="" value="Firebase ID Token"/>
+</div>
+<div class="field">
+<label>
+Backend
+</label>
+<input class="input" disabled="" value="BALAD Control Worker"/>
+</div>
+</div>
+<p style="margin-top:18px;color:var(--muted);font-size:12px;line-height:1.6">
+
+CONTROL001 remains protected.
+
+This dashboard does not expose controls to delete,
+deactivate, replace or reset the Control account.
+
+</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+
+<div class="modal-backdrop" id="staffModal">
+<div class="modal">
+<div class="modal-head">
+<h2>
+Create Staff Account
+</h2>
+<button class="modal-close" onclick="closeModal('staffModal')">
+×
+</button>
+</div>
+<div class="modal-body">
+<div class="form-grid">
+<div class="field">
+<label>
+Staff Code
+</label>
+<input class="input" id="staffCode" placeholder="Auto-generated"/>
+</div>
+<div class="field">
+<label>
+Full Name
+</label>
+<input class="input" id="staffName" placeholder="Full name"/>
+</div>
+<div class="field">
+<label>
+Role
+</label>
+<select class="select" id="staffRole">
+<option value="teacher">
+Teacher
+</option>
+<option value="class_teacher">
+Class Teacher
+</option>
+<option value="management">
+Management
+</option>
+<option value="other">
+Other Staff
+</option>
+</select>
+</div>
+<div class="field">
+<label>
+School
+</label>
+<select class="select" id="staffSchool">
+<option value="primary">
+Nursery &amp; Primary
+</option>
+<option value="secondary">
+College
+</option>
+</select>
+</div>
+<div class="field full">
+<label>
+Password
+</label>
+<input class="input" id="staffPassword" placeholder="Minimum 8 characters"/>
+</div>
+<div class="field">
+<label>
+Class Teacher Of
+</label>
+<select class="select" id="staffHomeroom">
+<option value="">
+Not a Class Teacher
+</option>
+</select>
+</div>
+<div class="field">
+<label>
+Other Teaching Classes
+</label>
+<select class="select multi-select" id="staffClasses" multiple="">
+</select>
+</div>
+<div class="field full">
+<label>
+Subjects
+</label>
+<select class="select" id="staffSubjects" onchange="subjectOtherChanged('staffSubjects','staffOtherSubject')">
+<option value="">
+Select subject
+</option>
+</select>
+<input class="input custom-subject-box hidden" id="staffOtherSubject" placeholder="Type the subject not listed"/>
+</div>
+</div>
+</div>
+<div class="modal-foot">
+<button class="btn" onclick="closeModal('staffModal')">
+Cancel
+</button>
+<button class="btn btn-primary" onclick="createStaff()">
+Create Staff
+</button>
+</div>
+</div>
+</div>
+
+<div class="modal-backdrop" id="studentModal">
+<div class="modal">
+<div class="modal-head">
+<h2>
+Add Student
+</h2>
+<button class="modal-close" onclick="closeModal('studentModal')">
+×
+</button>
+</div>
+<div class="modal-body">
+<div class="form-grid">
+<div class="field">
+<label>
+Student Slot
+</label>
+<input class="input" id="studentSlot" placeholder="Auto-generated"/>
+</div>
+<div class="field">
+<label>
+Full Name
+</label>
+<input class="input" id="studentName"/>
+</div>
+<div class="field">
+<label>
+Admission Number <span class="required-mark">*</span>
+</label>
+<input class="input" id="studentAdmission" placeholder="e.g. BAL/2026/001" required=""/>
+</div>
+<div class="field">
+<label>
+Class
+</label>
+<select class="select" id="studentClass">
+</select>
+</div>
+<div class="field">
+<label>
+Arm
+</label>
+<select class="select" id="studentArm">
+<option value="">
+Select arm
+</option>
+<option value="A">
+A
+</option>
+<option value="B">
+B
+</option>
+<option value="C">
+C
+</option>
+<option value="D">
+D
+</option>
+</select>
+</div>
+<div class="field">
+<label>
+Department
+</label>
+<select class="select" id="studentDepartment">
+<option value="">
+Not applicable
+</option>
+<option value="Science">
+Science
+</option>
+<option value="Arts">
+Arts
+</option>
+<option value="Commercial">
+Commercial
+</option>
+</select>
+</div>
+<div class="field">
+<label>
+Gender
+</label>
+<select class="select" id="studentGender">
+<option value="">
+Select gender
+</option>
+<option value="Male">
+Male
+</option>
+<option value="Female">
+Female
+</option>
+</select>
+</div>
+<div class="field">
+<label>
+Date of Birth
+</label>
+<input class="input" id="studentDob" type="date"/>
+</div>
+<div class="field">
+<label>
+Guardian Name
+</label>
+<input class="input" id="guardianName"/>
+</div>
+<div class="field">
+<label>
+Guardian Phone
+</label>
+<input class="input" id="guardianPhone"/>
+</div>
+<div class="field">
+<label>
+Guardian WhatsApp
+</label>
+<input class="input" id="guardianWhatsapp"/>
+</div>
+<div class="field full">
+<label>
+Student Photo
+</label>
+<div class="photo-box">
+<input accept="image/*" class="input" id="studentPhoto" onchange="previewStudentPhoto(event)" type="file"/>
+<div class="photo-help">
+
+On a phone you can choose a photo from the
+phone or use the camera.
+
+</div>
+<img alt="Student photo preview" class="photo-preview" id="studentPhotoPreview"/>
+</div>
+</div>
+</div>
+</div>
+<div class="modal-foot">
+<button class="btn" onclick="closeModal('studentModal')">
+Cancel
+</button>
+<button class="btn btn-primary" onclick="createStudent()">
+Create Student
+</button>
+</div>
+</div>
+</div>
+
+<div class="modal-backdrop" id="classModal">
+<div class="modal">
+<div class="modal-head">
+<h2>
+Create / Update Class
+</h2>
+<button class="modal-close" onclick="closeModal('classModal')">
+×
+</button>
+</div>
+<div class="modal-body">
+<div class="form-grid">
+<div class="field">
+<label>
+Class Name
+</label>
+<input class="input" id="className"/>
+</div>
+<div class="field">
+<label>
+School
+</label>
+<select class="select" id="classSchool">
+<option value="primary">
+Nursery &amp; Primary
+</option>
+<option value="secondary">
+College
+</option>
+</select>
+</div>
+<div class="field">
+<label>
+Section
+</label>
+<input class="input" id="classSection"/>
+</div>
+<div class="field">
+<label>
+Capacity
+</label>
+<input class="input" id="classCapacity" type="number" value="35"/>
+</div>
+<div class="field">
+<label>
+Use Arms
+</label>
+<input id="classArms" type="checkbox"/>
+</div>
+<div class="field">
+<label>
+Use Departments
+</label>
+<input id="classDepartments" type="checkbox"/>
+</div>
+</div>
+</div>
+<div class="modal-foot">
+<button class="btn" onclick="closeModal('classModal')">
+Cancel
+</button>
+<button class="btn btn-primary" onclick="saveClass()">
+Save Class
+</button>
+</div>
+</div>
+</div>
+<div class="toast" id="toastBox">
+</div>
+<script type="module">
+
+import {
+ initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+ getAuth,
+ onAuthStateChanged,
+ signOut
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {
+ getFirestore, collection, getDocs, doc, setDoc, deleteDoc, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {
+ getStorage, ref, uploadBytes, getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
+
+
+/*
+==================================================
+EXISTING AUTH / WORKER CONFIG
+DO NOT CHANGE
+==================================================
+*/
+
+const WORKER_URL =
+"https://balad-staff-auth.6s9257wftb.workers.dev";
+
+const firebaseConfig={
+ apiKey:"AIzaSyCLU7CdFlCrLxGzRo0Z0PQOQ-6Y91ccj-M",
+ authDomain:"projectb-wetrending-space.firebaseapp.com",
+ projectId:"projectb-wetrending-space",
+ storageBucket:"projectb-wetrending-space.firebasestorage.app",
+ messagingSenderId:"106348539335",
+ appId:"1:106348539335:web:50ec676ce6d424a82c3de2"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const storage=getStorage(app);
+
+
+/*
+==================================================
+DASHBOARD STATE
+==================================================
+*/
+
+let currentSection="dashboard";
+
+let selectedSchool="";
+
+let staffData=[];
+let studentData=[];
+let classData=[];
+let subjectData=[];
+
+
+/*
+==================================================
+50 STAFF TEMPLATES
+ONLY 10 DISPLAYED AT ONCE
+==================================================
+*/
+
+let accessRows=[];
+let accessPage=1;
+
+const ACCESS_TOTAL=50;
+const ACCESS_PAGE_SIZE=10;
+
+
+/*
+==================================================
+50 STUDENT TEMPLATES
+ONLY 10 DISPLAYED AT ONCE
+==================================================
+*/
+
+let studentRows=[];
+let studentPage=1;
+
+const STUDENT_TOTAL=50;
+const STUDENT_PAGE_SIZE=10;
+
+
+/*
+==================================================
+STANDARD SUBJECT LIST
+OTHER = CUSTOM SUBJECT
+==================================================
+*/
+
+const PRIMARY_SUBJECTS=[
+ "English Language",
+ "Mathematics",
+ "Basic Science",
+ "Basic Technology",
+ "Social Studies",
+ "Civic Education",
+ "Computer Studies",
+ "Agricultural Science",
+ "Home Economics",
+ "Religious Studies",
+ "Physical & Health Education",
+ "French",
+ "Creative Arts",
+ "Other"
+];
+
+const COLLEGE_SUBJECTS=[
+ "English Language",
+ "Mathematics",
+ "Further Mathematics",
+ "Physics",
+ "Chemistry",
+ "Biology",
+ "Agricultural Science",
+ "Economics",
+ "Government",
+ "Commerce",
+ "Accounting",
+ "Geography",
+ "Literature in English",
+ "Civic Education",
+ "Computer Studies",
+ "Data Processing",
+ "Christian Religious Studies",
+ "Islamic Religious Studies",
+ "French",
+ "Other"
+];
+
+
+/*
+==================================================
+CLASS OPTIONS
+==================================================
+*/
+
+const PRIMARY_CLASSES=[
+ "Crèche",
+ "Nursery 1",
+ "Nursery 2",
+ "Primary 1",
+ "Primary 2",
+ "Primary 3",
+ "Primary 4",
+ "Primary 5",
+ "Primary 6"
+];
+
+const COLLEGE_CLASSES=[
+ "JSS 1",
+ "JSS 2",
+ "JSS 3",
+ "SS 1",
+ "SS 2",
+ "SS 3"
+];
+
+const CLASS_ARMS=[
+ "A",
+ "B"
+];
+
+
+/*
+==================================================
+NAVIGATION
+==================================================
+*/
+
+const titles={
+ dashboard:"Dashboard",
+ school:"School Management",
+ staff:"Staff Management",
+ students:"Student Management",
+ idcards:"Student ID & Gate",
+ classes:"Classes",
+ subjects:"Subjects",
+ results:"Result Management",
+ audit:"Audit Logs",
+ settings:"Control Settings",
+ content:"Content Management"
+};
+
+
+window.showSection=function(section){
+
+ currentSection=section;
+
+ document
+ .querySelectorAll(".page-section")
+ .forEach(x=>x.classList.remove("active"));
+
+ document
+ .getElementById("section-"+section)
+ ?.classList.add("active");
+
+ document
+ .querySelectorAll(".nav-btn[data-section]")
+ .forEach(x=>{
+   x.classList.toggle(
+     "active",
+     x.dataset.section===section
+   );
+ });
+
+ document.getElementById("pageTitle").textContent=
+ titles[section]||"Control Dashboard";
+
+ document
+ .getElementById("sidebar")
+ .classList.remove("open");
+
+
+ if(section==="dashboard"){
+   loadSummary();
+ }
+
+ if(section==="staff"){
+   loadStaff();
+ }
+
+ if(section==="students"){
+   /* Student Management V2 loads through the class-first view below. */
+ }
+ if(section==="content"){
+   initContentManagement();
+ }
+
+ if(section==="idcards"){
+   refreshIdCardStudents();
+   loadStudentAttendance();
+ }
+
+ if(section==="classes"){
+   loadClasses();
+ }
+
+ if(section==="subjects"){
+   loadSubjects();
+ }
+
+ if(section==="audit"){
+   loadAudit();
+ }
+
+};
+
+
+document
+.querySelectorAll(".nav-btn[data-section]")
+.forEach(btn=>{
+ btn.addEventListener(
+   "click",
+   ()=>showSection(btn.dataset.section)
+ );
+});
+
+
+document
+.getElementById("menuToggle")
+.addEventListener(
+ "click",
+ ()=>{
+   document
+   .getElementById("sidebar")
+   .classList.toggle("open");
+ }
+);
+
+
+/*
+==================================================
+SCHOOL SELECTION
+==================================================
+*/
+
+window.selectSchool=function(school){
+
+ selectedSchool=school;
+
+ const name=
+ school==="secondary"
+ ? "College"
+ : "Nursery & Primary";
+
+
+ document
+ .getElementById("schoolWorkspaceTitle")
+ .textContent=name+" Management";
+
+ document
+ .getElementById("schoolWorkspaceSubtitle")
+ .textContent=
+ "All management areas below are scoped to "+name+".";
+
+
+ document
+ .getElementById("schoolNotice")
+ .innerHTML=
+ "<strong>"+name+" selected.</strong> "+
+ "Choose the management area you want to open.";
+
+
+ document
+ .getElementById("staffTitle")
+ .textContent=
+ name+" — Staff Management";
+
+
+ document
+ .getElementById("staffSubtitle")
+ .textContent=
+ "Manage staff access, roles and teaching assignments for "+name+".";
+
+
+ document
+ .getElementById("studentTitle")
+ .textContent=
+ name+" — Student Management";
+
+
+ document
+ .getElementById("studentSubtitle")
+ .textContent=
+ "Manage students for "+name+".";
+
+
+ document
+ .getElementById("classesTitle")
+ .textContent=
+ name+" — Classes";
+
+
+ document
+ .getElementById("classesSubtitle")
+ .textContent=
+ "Manage classes and structure for "+name+".";
+
+
+ document
+ .getElementById("subjectsTitle")
+ .textContent=
+ name+" — Subjects";
+
+
+ document
+ .getElementById("subjectsSubtitle")
+ .textContent=
+ "Subjects used by "+name+".";
+
+
+ document
+ .getElementById("resultsTitle")
+ .textContent=
+ name+" — Result Management";
+
+
+ document
+ .getElementById("resultsSubtitle")
+ .textContent=
+ "Result workflow for "+name+".";
+
+
+ document
+ .getElementById("staffSchool")
+ .value=school;
+
+
+ document
+ .getElementById("classSchool")
+ .value=school;
+
+
+ buildAccessTemplates();
+
+ populateStaffClassSelectors();
+ populateStudentClassSelector();
+ populateStaffSubjectSelector();
+
+ showSection("school");
+};
+
+
+window.openSchoolModule=function(module){
+
+ if(!selectedSchool){
+
+   toast("Choose a school first.");
+
+   showSection("dashboard");
+
+   return;
+ }
+
+ showSection(module);
+};
+
+
+/*
+==================================================
+WORKER CALL
+KEEPING EXISTING AUTHENTICATION
+==================================================
+*/
+
+async function worker(action,payload={}){
+
+ const user=auth.currentUser;
+
+ if(!user){
+   throw new Error(
+     "No Firebase session. Return to the Control login."
+   );
+ }
+
+ const idToken=
+ await user.getIdToken(true);
+
+ const response=
+ await fetch(
+   WORKER_URL.replace(/\/$/,"")+"/staff-admin",
+   {
+     method:"POST",
+     headers:{
+       "Content-Type":"application/json",
+       "Authorization":"Bearer "+idToken
+     },
+     body:JSON.stringify({
+       action,
+       ...payload
+     })
+   }
+ );
+
+ const data=
+ await response
+ .json()
+ .catch(
+   ()=>({
+     success:false,
+     error:"Invalid Worker response."
+   })
+ );
+
+ if(
+   !response.ok ||
+   data.success===false
+ ){
+   throw new Error(
+     data.error||
+     `Worker error (${response.status})`
+   );
+ }
+
+ return data;
+}
+
+
+/*
+==================================================
+AUTH
+==================================================
+*/
+
+onAuthStateChanged(
+ auth,
+ user=>{
+
+   if(!user){
+
+     window.location.href=
+     "staff-login.html";
+
+     return;
+   }
+
+   loadSummary();
+ }
+);
+
+
+document
+.getElementById("logoutBtn")
+.addEventListener(
+ "click",
+ async()=>{
+   await signOut(auth);
+   window.location.href="staff-login.html";
+ }
+);
+
+
+/*
+==================================================
+SUMMARY
+==================================================
+*/
+
+async function loadSummary(){
+
+ try{
+
+   const d=
+   await worker("dashboard_summary");
+
+   const s=d.summary;
+
+   document
+   .getElementById("statStaff")
+   .textContent=s.staff.total;
+
+   document
+   .getElementById("statActiveStaff")
+   .textContent=s.staff.active;
+
+   document
+   .getElementById("statStudents")
+   .textContent=s.students.total;
+
+   document
+   .getElementById("statActiveStudents")
+   .textContent=s.students.active;
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+}
+
+
+/*
+==================================================
+STAFF DIRECTORY
+==================================================
+*/
+
+async function loadStaff(){
+
+ if(!selectedSchool){
+
+   toast(
+     "Choose Nursery & Primary or College first."
+   );
+
+   return;
+ }
+
+ try{
+
+   const d=
+   await worker(
+     "list_staff",
+     {school:selectedSchool}
+   );
+
+   staffData=d.staff||[];
+
+   renderStaff();
+   renderAssignments();
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+}
+
+
+window.renderStaff=function(){
+
+ const q=
+ (
+   document
+   .getElementById("staffSearch")
+   ?.value||""
+ )
+ .toLowerCase();
+
+
+ const rows=
+ staffData.filter(
+   s=>
+   `${s.loginCode||""}
+    ${s.name||""}
+    ${s.role||""}
+    ${(s.assignedClasses||[]).join(" ")}
+    ${(s.assignedSubjects||[]).join(" ")}`
+   .toLowerCase()
+   .includes(q)
+ );
+
+
+ document
+ .getElementById("staffTable")
+ .innerHTML=
+ rows.map(s=>{
+
+   const classes=s.assignedClasses||[];
+
+   const home=s.homeroom||"";
+
+   const other=
+   classes.filter(x=>x!==home);
+
+
+   return `
+<tr>
+
+<td>
+<strong>${esc(s.loginCode||"")}</strong>
+</td>
+
+<td>
+${esc(s.name||"")}
+</td>
+
+<td>
+<span class="badge">
+${esc(s.role||"")}
+</span>
+</td>
+
+<td>
+${esc(home||"—")}
+</td>
+
+<td>
+${esc(other.join(", ")||"—")}
+</td>
+
+<td>
+${esc(
+ (s.assignedSubjects||[]).join(", ")
+ ||"—"
+)}
+</td>
+
+<td>
+<span class="badge ${s.active?"green":"red"}">
+${s.active?"Active":"Inactive"}
+</span>
+</td>
+
+<td>
+
+<div class="row-actions">
+
+${
+ String(s.loginCode||"").toUpperCase()
+ ==="CONTROL001"
+
+ ? "Protected"
+
+ : `
+
+<button
+class="mini-btn primary"
+onclick="editAssignment('${escAttr(s.uid||s.id||"")}')">
+Manage
+</button>
+
+<button
+class="mini-btn"
+onclick="requestReset('${escAttr(s.uid||s.id||"")}')">
+Reset
+</button>
+
+<button
+class="mini-btn danger"
+onclick="requestDeactivate(
+'${escAttr(s.uid||s.id||"")}',
+${!!s.active}
+)">
+${s.active?"Deactivate":"Activate"}
+</button>
+
+`
+}
+
+</div>
+
+</td>
+
+</tr>
+`;
+ }).join("")
+ ||
+ emptyRow(
+   8,
+   "No staff records found."
+ );
+
+};
+
+
+/*
+==================================================
+STAFF ASSIGNMENTS
+==================================================
+*/
+
+window.renderAssignments=function(){
+
+ const q=
+ (
+  document
+  .getElementById("assignmentSearch")
+  ?.value||""
+ )
+ .toLowerCase();
+
+
+ const rows=
+ staffData.filter(
+   s=>
+   `${s.name||""}
+    ${s.loginCode||""}
+    ${s.role||""}`
+   .toLowerCase()
+   .includes(q)
+   &&
+   [
+     "teacher",
+     "class_teacher"
+   ]
+   .includes(
+     String(s.role||"").toLowerCase()
+   )
+ );
+
+
+ document
+ .getElementById("assignmentTable")
+ .innerHTML=
+ rows.map(
+ s=>`
+
+<tr>
+
+<td>
+<strong>
+${esc(s.name||"")}
+</strong>
+
+<br>
+
+<small>
+${esc(s.loginCode||"")}
+</small>
+
+</td>
+
+<td>
+${esc(s.role||"")}
+</td>
+
+<td>
+${esc(s.homeroom||"—")}
+</td>
+
+<td>
+${esc(
+ (s.assignedClasses||[])
+ .filter(x=>x!==s.homeroom)
+ .join(", ")
+ ||"—"
+)}
+</td>
+
+<td>
+${esc(
+ (s.assignedSubjects||[])
+ .join(", ")
+ ||"—"
+)}
+</td>
+
+<td>
+
+<button
+class="mini-btn primary"
+onclick="editAssignment('${escAttr(s.uid||s.id||"")}')">
+Manage
+</button>
+
+</td>
+
+</tr>
+
+`
+ ).join("")
+ ||
+ emptyRow(
+   6,
+   "No teacher assignments found."
+ );
+
+};
+
+
+/*
+==================================================
+STAFF TABS
+==================================================
+*/
+
+document
+.querySelectorAll("[data-staff-view]")
+.forEach(tab=>{
+
+ tab.addEventListener(
+   "click",
+   ()=>{
+
+     document
+     .querySelectorAll("[data-staff-view]")
+     .forEach(
+       x=>x.classList.remove("active")
+     );
+
+     tab.classList.add("active");
+
+     document
+     .querySelectorAll("[id^='staffView-']")
+     .forEach(
+       x=>x.classList.add("hidden")
+     );
+
+     document
+     .getElementById(
+       "staffView-"+tab.dataset.staffView
+     )
+     .classList.remove("hidden");
+
+
+     if(
+       tab.dataset.staffView==="access"
+     ){
+       buildAccessTemplates();
+     }else{
+       loadStaff();
+     }
+
+   }
+ );
+
+});
+
+
+/*
+==================================================
+STAFF TEMPLATE CREATION
+50 TOTAL / 10 AT A TIME
+==================================================
+*/
+
+window.buildAccessTemplates=
+async function(){
+
+ if(!selectedSchool)return;
+
+ const prefix=
+ selectedSchool==="secondary"
+ ? "COL"
+ : "PRI";
+
+
+ accessRows=
+ Array.from(
+   {length:ACCESS_TOTAL},
+   (_,i)=>({
+
+     index:i+1,
+
+     code:
+     `${prefix}${String(i+1).padStart(3,"0")}`,
+
+     name:"",
+
+     role:"teacher",
+
+     home:"",
+
+     classes:[],
+
+     subjects:[],
+
+     active:true,
+
+     created:false,
+
+     uid:""
+
+   })
+ );
+
+
+ accessPage=1;
+
+ renderAccessTemplates();
+
+
+ /*
+ LOAD EXISTING STAFF INTO THEIR AUTOMATIC ROW
+ */
+
+ try{
+
+   const d=
+   await worker(
+     "list_staff",
+     {school:selectedSchool}
+   );
+
+
+   const byCode=
+   new Map(
+     (d.staff||[])
+     .map(
+       x=>[
+         String(
+           x.loginCode||
+           x.staffCode||
+           ""
+         ).toUpperCase(),
+         x
+       ]
+     )
+   );
+
+
+   accessRows.forEach(r=>{
+
+     const s=
+     byCode.get(r.code);
+
+     if(!s)return;
+
+     const home=
+     s.homeroom||"";
+
+
+     r.uid=
+     s.studentId||
+     s.uid||
+     s.id||
+     "";
+
+
+     r.created=true;
+
+     r.name=s.name||"";
+
+     r.role=s.role||"teacher";
+
+     r.home=home;
+
+     r.classes=
+     (s.assignedClasses||[])
+     .filter(
+       x=>x!==home
+     );
+
+     r.subjects=
+     s.assignedSubjects||[];
+
+     r.active=
+     s.active!==false;
+
+   });
+
+
+   renderAccessTemplates();
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+};
+
+
+/*
+==================================================
+STAFF TEMPLATE RENDER
+==================================================
+*/
+
+window.renderAccessTemplates=function(){
+
+ const q=
+ (
+   document
+   .getElementById("accessSearch")
+   ?.value||""
+ )
+ .toLowerCase();
+
+
+ const rows=
+ accessRows.filter(
+   r=>
+   `${r.code}
+    ${r.name}
+    ${r.role}`
+   .toLowerCase()
+   .includes(q)
+ );
+
+
+ const start=
+ (accessPage-1)*
+ ACCESS_PAGE_SIZE;
+
+
+ const page=
+ rows.slice(
+   start,
+   start+ACCESS_PAGE_SIZE
+ );
+
+
+ document
+ .getElementById("accessPageLabel")
+ .textContent=
+ rows.length
+ ?
+ `${start+1}–${Math.min(
+    start+page.length,
+    rows.length
+  )} of ${rows.length}`
+ :
+ "0–0 of 0";
+
+
+ document
+ .getElementById("accessTable")
+ .innerHTML=
+ page.map(
+   r=>`
+
+<tr>
+
+<td>
+
+<strong>
+${r.code}
+</strong>
+
+<div class="assignment-note">
+Auto-generated
+</div>
+
+</td>
+
+
+<td>
+
+<input
+class="input template-control"
+value="${esc(r.name)}"
+placeholder="Staff name"
+onchange="
+accessChange(
+ ${r.index},
+ 'name',
+ this.value
+)">
+
+</td>
+
+
+<td>
+
+<select
+class="select template-control"
+onchange="
+accessChange(
+ ${r.index},
+ 'role',
+ this.value
+)">
+
+<option
+value="teacher"
+${r.role==="teacher"?"selected":""}>
+Teacher
+</option>
+
+<option
+value="class_teacher"
+${r.role==="class_teacher"?"selected":""}>
+Class Teacher
+</option>
+
+<option
+value="management"
+${r.role==="management"?"selected":""}>
+Management
+</option>
+
+<option
+value="other"
+${r.role==="other"?"selected":""}>
+Other Staff
+</option>
+
+</select>
+
+</td>
+
+
+<td>
+
+<select
+class="select template-control"
+id="home-${r.index}"
+onchange="
+accessHomeChange(
+ ${r.index},
+ this.value
+)">
+
+${classOptions(
+ r.home,
+ selectedSchool
+)}
+
+</select>
+
+</td>
+
+
+<td>
+
+<select
+multiple
+class="select multi-select"
+id="classes-${r.index}"
+onchange="
+accessClassesChange(
+ ${r.index},
+ this
+)">
+
+${classOptionsMulti(
+ r.classes,
+ selectedSchool
+)}
+
+</select>
+
+</td>
+
+
+<td>
+
+<select
+class="select template-control"
+id="subject-${r.index}"
+onchange="
+accessSubjectChange(
+ ${r.index},
+ this
+)">
+
+${subjectOptions(
+ r.subjects?.[0]||"",
+ selectedSchool
+)}
+
+</select>
+
+<input
+class="
+input
+custom-subject-box
+${r.subjects?.[0]==="Other"?"":"hidden"}
+"
+id="other-subject-${r.index}"
+value="${
+ esc(
+  r.subjects?.[0]==="Other"
+  ? r.subjects?.[1]||""
+  : ""
+ )
+}"
+placeholder="Type custom subject"
+onchange="
+accessOtherSubjectChange(
+ ${r.index},
+ this.value
+)">
+
+</td>
+
+
+<td>
+
+<span
+class="badge ${r.active?"green":"red"}">
+
+${
+ r.active
+ ?
+ (
+   r.created
+   ?"Created"
+   :"Ready"
+ )
+ :
+ "Inactive"
+}
+
+</span>
+
+</td>
+
+
+<td>
+
+<div class="row-actions">
+
+<button
+class="mini-btn primary"
+onclick="saveTemplate(${r.index})">
+
+${r.created?"Save Changes":"Create"}
+
+</button>
+
+
+<button
+class="mini-btn"
+onclick="resetTemplate(${r.index})">
+
+Reset
+
+</button>
+
+
+<button
+class="mini-btn danger"
+onclick="toggleTemplate(${r.index})">
+
+${r.active?"Deactivate":"Activate"}
+
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`
+ ).join("")
+ ||
+ emptyRow(
+   8,
+   "No templates found."
+ );
+
+};
+
+
+/*
+==================================================
+STAFF TEMPLATE FIELD CHANGES
+==================================================
+*/
+
+window.accessChange=
+function(index,key,value){
+
+ const r=
+ accessRows.find(
+   x=>x.index===index
+ );
+
+ if(r){
+   r[key]=value;
+ }
+
+};
+
+
+window.accessHomeChange=
+function(index,value){
+
+ const r=
+ accessRows.find(
+   x=>x.index===index
+ );
+
+ if(r){
+   r.home=value;
+ }
+
+};
+
+
+window.accessClassesChange=
+function(index,select){
+
+ const r=
+ accessRows.find(
+   x=>x.index===index
+ );
+
+ if(!r)return;
+
+ r.classes=
+ Array.from(
+   select.selectedOptions
+ )
+ .map(x=>x.value)
+ .filter(Boolean);
+
+};
+
+
+window.accessSubjectChange=
+function(index,value){
+
+ const r=
+ accessRows.find(
+   x=>x.index===index
+ );
+
+ if(!r)return;
+
+ if(value==="Other"){
+
+   r.subjects=[
+     "Other",
+     ""
+   ];
+
+ }else{
+
+   r.subjects=
+   value
+   ? [value]
+   : [];
+
+ }
+
+ renderAccessTemplates();
+
+};
+
+
+window.accessOtherSubjectChange=
+function(index,value){
+
+ const r=
+ accessRows.find(
+   x=>x.index===index
+ );
+
+ if(!r)return;
+
+ r.subjects=[
+   "Other",
+   value.trim()
+ ];
+
+};
+
+
+/*
+==================================================
+STAFF PAGINATION
+==================================================
+*/
+
+window.accessPrev=
+function(){
+
+ if(accessPage>1){
+
+   accessPage--;
+
+   renderAccessTemplates();
+
+ }
+
+};
+
+
+window.accessNext=
+function(){
+
+ const q=
+ (
+   document
+   .getElementById("accessSearch")
+   ?.value||""
+ )
+ .toLowerCase();
+
+
+ const total=
+ accessRows.filter(
+   r=>
+   `${r.code} ${r.name} ${r.role}`
+   .toLowerCase()
+   .includes(q)
+ ).length;
+
+
+ if(
+   accessPage*ACCESS_PAGE_SIZE<
+   total
+ ){
+
+   accessPage++;
+
+   renderAccessTemplates();
+
+ }
+
+};
+
+
+/*
+==================================================
+CREATE STAFF TEMPLATE
+==================================================
+*/
+
+window.saveTemplate=
+async function(index){
+
+ const r=
+ accessRows.find(
+   x=>x.index===index
+ );
+
+ if(!r)return;
+
+
+ if(!r.name.trim()){
+
+   toast(
+     "Enter the staff name first."
+   );
+
+   return;
+
+ }
+
+
+ const subjectValues=
+ r.subjects||[];
+
+
+ if(
+   subjectValues.length &&
+   subjectValues[0]==="Other" &&
+   !subjectValues[1]
+ ){
+
+   toast(
+     "Type the custom subject first."
+   );
+
+   return;
+
+ }
+
+
+ try{
+
+   const result=
+   await worker(
+     "create_staff",
+     {
+       staff:{
+         loginCode:r.code,
+
+         name:r.name,
+
+         role:r.role,
+
+         school:selectedSchool,
+
+         homeroom:r.home,
+
+         assignedClasses:r.classes||[],
+
+         assignedSubjects:
+         r.subjects?.[0]==="Other"
+         ? [r.subjects[1]]
+         : r.subjects||[]
+       }
+     }
+   );
+
+
+   r.uid=
+   result.staff?.uid||
+   result.result?.uid||
+   "";
+
+   r.created=true;
+
+   r.active=true;
+
+
+   renderAccessTemplates();
+
+   toast(
+     `${r.code} created. Temporary password: ${
+       result.temporaryPassword||
+       result.staff?.temporaryPassword||
+       "generated"
+     }`
+   );
+
+
+   loadStaff();
+
+   loadSummary();
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+};
+
+
+/*
+==================================================
+STAFF RESET
+==================================================
+*/
+
+window.resetTemplate=
+async function(index){
+
+ const r=
+ accessRows.find(
+   x=>x.index===index
+ );
+
+ if(!r)return;
+
+
+ if(r.uid){
+
+   try{
+
+     const result=
+     await worker(
+       "reset_staff_password",
+       {uid:r.uid}
+     );
+
+     toast(
+       `${r.code} password reset. Temporary password: ${
+         result.temporaryPassword||
+         "generated"
+       }`
+     );
+
+   }catch(e){
+
+     toast(e.message);
+
+   }
+
+   return;
+ }
+
+
+ r.name="";
+ r.role="teacher";
+ r.home="";
+ r.classes=[];
+ r.subjects=[];
+ r.active=true;
+
+
+ renderAccessTemplates();
+
+ toast(
+   r.code+" template reset."
+ );
+
+};
+
+
+/*
+==================================================
+STAFF ACTIVATE / DEACTIVATE
+==================================================
+*/
+
+window.toggleTemplate=
+async function(index){
+
+ const r=
+ accessRows.find(
+   x=>x.index===index
+ );
+
+ if(!r)return;
+
+
+ const next=
+ !r.active;
+
+
+ if(r.uid){
+
+   try{
+
+     await worker(
+       "set_staff_active",
+       {
+         studentId:r.uid,
+         active:next
+       }
+     );
+
+
+     r.active=next;
+
+     renderAccessTemplates();
+
+     loadStaff();
+
+     toast(
+       r.code+
+       (next
+       ?" activated."
+       :" deactivated.")
+     );
+
+   }catch(e){
+
+     toast(e.message);
+
+   }
+
+   return;
+ }
+
+
+ r.active=next;
+
+ renderAccessTemplates();
+
+ toast(
+   r.code+
+   " template "+
+   (r.active
+   ?"activated."
+   :"deactivated.")
+ );
+
+};
+
+
+/*
+==================================================
+DIRECTORY RESET / DEACTIVATE
+==================================================
+*/
+
+window.requestReset=
+async function(uid){
+
+ try{
+
+   const result=
+   await worker(
+     "reset_staff_password",
+     {uid}
+   );
+
+   toast(
+     `Password reset. Temporary password: ${
+       result.temporaryPassword||
+       "generated"
+     }`
+   );
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+};
+
+
+window.requestDeactivate=
+async function(uid,active){
+
+ try{
+
+   await worker(
+     "set_staff_active",
+     {
+       uid,
+       active:!active
+     }
+   );
+
+
+   toast(
+     !active
+     ?"Activated successfully."
+     :"Deactivated successfully."
+   );
+
+
+   loadStaff();
+   loadSummary();
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+};
+
+
+/*
+==================================================
+CREATE STAFF MODAL
+==================================================
+*/
+
+window.openStaffModal=
+function(){
+
+ if(!selectedSchool){
+
+   toast(
+     "Choose a school first."
+   );
+
+   return;
+ }
+
+
+ document
+ .getElementById("staffSchool")
+ .value=selectedSchool;
+
+
+ populateStaffClassSelectors();
+ populateStaffSubjectSelector();
+
+
+ const prefix=
+ selectedSchool==="secondary"
+ ?"COL"
+ :"PRI";
+
+
+ const next=
+ findNextStaffCode(
+   prefix
+ );
+
+
+ document
+ .getElementById("staffCode")
+ .value=next;
+
+
+ document
+ .getElementById("staffModal")
+ .classList.add("open");
+
+};
+
+
+function findNextStaffCode(prefix){
+
+ const used=
+ new Set(
+   staffData
+   .map(
+     s=>
+     String(
+       s.loginCode||
+       s.staffCode||
+       ""
+     ).toUpperCase()
+   )
+ );
+
+
+ for(let i=1;i<=50;i++){
+
+   const code=
+   prefix+
+   String(i).padStart(3,"0");
+
+   if(!used.has(code)){
+     return code;
+   }
+
+ }
+
+ return prefix+"050";
+
+}
+
+
+/*
+==================================================
+CREATE STAFF
+==================================================
+*/
+
+window.createStaff=
+async function(){
+
+ try{
+
+   const classTeacherOf=
+   val("staffHomeroom");
+
+
+   const otherClasses=
+   selectedValues(
+     "staffClasses"
+   );
+
+
+   const selectedSubject=
+   val("staffSubjects");
+
+
+   let subjects=[];
+
+
+   if(selectedSubject==="Other"){
+
+     const custom=
+     val("staffOtherSubject");
+
+     if(!custom){
+
+       toast(
+         "Type the custom subject."
+       );
+
+       return;
+     }
+
+     subjects=[custom];
+
+   }else if(selectedSubject){
+
+     subjects=[selectedSubject];
+
+   }
+
+
+   const result=
+   await worker(
+     "create_staff",
+     {
+       staff:{
+         loginCode:
+         val("staffCode").toUpperCase(),
+
+         name:
+         val("staffName"),
+
+         role:
+         val("staffRole"),
+
+         school:
+         val("staffSchool"),
+
+         password:
+         val("staffPassword"),
+
+         assignedClasses:[
+           ...(classTeacherOf
+           ?[classTeacherOf]
+           :[]),
+           ...otherClasses
+         ],
+
+         assignedSubjects:
+         subjects,
+
+         homeroom:
+         classTeacherOf
+       }
+     }
+   );
+
+
+   closeModal("staffModal");
+
+
+   toast(
+     `Staff created. Temporary password: ${
+       result.temporaryPassword||
+       "created"
+     }`
+   );
+
+
+   loadStaff();
+   loadSummary();
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+};
+
+
+/*
+==================================================
+EDIT ASSIGNMENT
+==================================================
+*/
+
+window.editAssignment=
+async function(uid){
+
+ const s=
+ staffData.find(
+   x=>(x.uid||x.id)===uid
+ );
+
+ if(!s)return;
+
+
+ const home=
+ prompt(
+   "Class Teacher Of:",
+   s.homeroom||""
+ );
+
+
+ if(home===null)return;
+
+
+ const classes=
+ prompt(
+   "Other Teaching Classes, separated by commas:",
+   (s.assignedClasses||[])
+   .filter(
+     x=>x!==s.homeroom
+   )
+   .join(", ")
+ );
+
+
+ if(classes===null)return;
+
+
+ const subjects=
+ prompt(
+   "Subjects, separated by commas:",
+   (s.assignedSubjects||[])
+   .join(", ")
+ );
+
+
+ if(subjects===null)return;
+
+
+ try{
+
+   await worker(
+     "update_staff_assignment",
+     {
+       uid,
+
+       assignedClasses:[
+         home,
+         ...classes
+         .split(",")
+         .map(x=>x.trim())
+         .filter(Boolean)
+       ]
+       .filter(Boolean),
+
+       assignedSubjects:
+       subjects
+       .split(",")
+       .map(x=>x.trim())
+       .filter(Boolean),
+
+       homeroom:
+       home.trim()
+     }
+   );
+
+
+   toast(
+     "Staff assignment updated."
+   );
+
+
+   loadStaff();
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+};
+
+
+/*
+==================================================
+STUDENT DIRECTORY
+==================================================
+*/
+
+/*
+==================================================
+STUDENT DIRECTORY — CLASS-FIRST VERSION
+==================================================
+
+IMPORTANT:
+The dashboard no longer uses the old #studentTable directory.
+Student Management is class-first and renders through:
+- primaryStudentClassCards
+- juniorStudentClassCards
+- seniorStudentClassCards
+- classStudentTable
+
+Keep this named function in sync with the V2 implementation below
+because older dashboard handlers call loadStudents() directly.
+==================================================
+*/
+async function loadStudents(){
+
+ if(!selectedSchool)return;
+
+ try{
+
+   const d=
+   await worker(
+     "list_students",
+     {school:selectedSchool}
+   );
+
+   studentData=d.students||[];
+
+   /* V2 class-first renderer. */
+   if(typeof renderStudentClassCards==="function")
+     renderStudentClassCards();
+
+   if(
+     typeof studentClassSelection!=="undefined" &&
+     studentClassSelection.className &&
+     typeof renderClassStudents==="function"
+   ){
+     renderClassStudents();
+   }
+
+ }catch(e){
+
+   toast(e.message||"Unable to load students.");
+
+ }
+
+}
+
+
+window.renderStudents=
+function(){
+
+ /*
+  * Compatibility wrapper for older dashboard code.
+  * There is intentionally no #studentTable element in Student
+  * Management V2, so never write to that old DOM target.
+  */
+
+ if(typeof renderStudentClassCards==="function")
+   renderStudentClassCards();
+
+ if(
+   typeof studentClassSelection!=="undefined" &&
+   studentClassSelection.className &&
+   typeof renderClassStudents==="function"
+ ){
+   renderClassStudents();
+ }
+
+};
+
+
+/*
+==================================================
+STUDENT TABS
+==================================================
+*/
+
+document
+.querySelectorAll("[data-student-view]")
+.forEach(tab=>{
+
+ tab.addEventListener(
+   "click",
+   ()=>{
+
+     document
+     .querySelectorAll("[data-student-view]")
+     .forEach(
+       x=>x.classList.remove("active")
+     );
+
+     tab.classList.add("active");
+
+
+     document
+     .querySelectorAll("[id^='studentView-']")
+     .forEach(
+       x=>x.classList.add("hidden")
+     );
+
+
+     document
+     .getElementById(
+       "studentView-"+tab.dataset.studentView
+     )
+     .classList.remove("hidden");
+
+
+     if(
+       tab.dataset.studentView==="templates"
+     ){
+
+       buildStudentTemplates();
+
+     }else{
+
+       loadStudents();
+
+     }
+
+   }
+ );
+
+});
+
+
+/*
+==================================================
+STUDENT TEMPLATES
+50 TOTAL / 10 AT A TIME
+==================================================
+*/
+
+window.buildStudentTemplates=
+async function(){
+
+ if(!selectedSchool)return;
+
+
+ const prefix=
+ selectedSchool==="secondary"
+ ?"COL-STU-"
+ :"PRI-STU-";
+
+
+ studentRows=
+ Array.from(
+   {length:STUDENT_TOTAL},
+   (_,i)=>({
+
+     index:i+1,
+
+     slot:
+     prefix+
+     String(i+1).padStart(3,"0"),
+
+     name:"",
+
+     admission:"",
+
+     className:"",
+
+     arm:"",
+
+     department:"",
+
+     active:true,
+
+     created:false,
+
+     uid:""
+
+   })
+ );
+
+
+ studentPage=1;
+
+ renderStudentTemplates();
+
+
+ /*
+ LOAD EXISTING STUDENTS
+ */
+
+ try{
+
+   const d=
+   await worker(
+     "list_students",
+     {school:selectedSchool}
+   );
+
+
+   const existing=
+   d.students||[];
+
+
+   existing.forEach(s=>{
+
+     const slot=
+     String(
+       s.slotCode||
+       s.studentSlot||
+       ""
+     ).toUpperCase();
+
+
+     const row=
+     studentRows.find(
+       r=>r.slot.toUpperCase()===slot
+     );
+
+
+     if(!row)return;
+
+
+     row.uid=
+     s.studentId||
+     s.uid||
+     s.id||
+     "";
+
+
+     row.created=true;
+
+     row.name=
+     s.studentName||"";
+
+     row.admission=
+     s.admissionNumber||"";
+
+     row.className=
+     s.className||"";
+
+     row.arm=
+     s.arm||"";
+
+     row.department=
+     s.department||"";
+
+     row.active=
+     s.active!==false;
+
+   });
+
+
+   renderStudentTemplates();
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+};
+
+
+/*
+==================================================
+STUDENT TEMPLATE RENDER
+==================================================
+*/
+
+window.renderStudentTemplates=
+function(){
+
+ const q=
+ (
+  document
+  .getElementById("studentTemplateSearch")
+  ?.value||""
+ )
+ .toLowerCase();
+
+
+ const rows=
+ studentRows.filter(
+   r=>
+   `${r.slot}
+    ${r.name}
+    ${r.admission}
+    ${r.className}`
+   .toLowerCase()
+   .includes(q)
+ );
+
+
+ const start=
+ (studentPage-1)*
+ STUDENT_PAGE_SIZE;
+
+
+ const page=
+ rows.slice(
+   start,
+   start+STUDENT_PAGE_SIZE
+ );
+
+
+ document
+ .getElementById("studentPageLabel")
+ .textContent=
+ rows.length
+ ?
+ `${start+1}–${Math.min(
+   start+page.length,
+   rows.length
+ )} of ${rows.length}`
+ :
+ "0–0 of 0";
+
+
+ document
+ .getElementById("studentTemplateTable")
+ .innerHTML=
+ page.map(
+ r=>`
+
+<tr>
+
+<td>
+
+<strong>
+${r.slot}
+</strong>
+
+<div class="assignment-note">
+Auto-generated
+</div>
+
+</td>
+
+
+<td>
+
+<input
+class="input template-control"
+value="${esc(r.name)}"
+placeholder="Student name"
+onchange="
+studentChange(
+ ${r.index},
+ 'name',
+ this.value
+)">
+
+</td>
+
+
+<td>
+
+<select
+class="select template-control"
+onchange="
+studentChange(
+ ${r.index},
+ 'className',
+ this.value
+)">
+
+${classOptions(
+ r.className,
+ selectedSchool
+)}
+
+</select>
+
+</td>
+
+
+<td>
+
+<select
+class="select template-control"
+onchange="
+studentChange(
+ ${r.index},
+ 'arm',
+ this.value
+)">
+
+<option value="">
+Select arm
+</option>
+
+${CLASS_ARMS.map(
+ arm=>
+ `<option
+ value="${escAttr(arm)}"
+ ${r.arm===arm?"selected":""}>
+ ${esc(arm)}
+ </option>`
+).join("")}
+
+</select>
+
+</td>
+
+
+<td>
+
+<select
+class="select template-control"
+onchange="
+studentChange(
+ ${r.index},
+ 'department',
+ this.value
+)">
+
+${departmentOptions(
+ r.department,
+ selectedSchool
+)}
+
+</select>
+
+</td>
+
+
+<td>
+
+<span
+class="badge ${r.active?"green":"red"}">
+
+${
+ r.active
+ ?
+ (
+  r.created
+  ?"Created"
+  :"Ready"
+ )
+ :
+ "Inactive"
+}
+
+</span>
+
+</td>
+
+
+<td>
+
+<div class="row-actions">
+
+<button
+class="mini-btn primary"
+onclick="
+saveStudentTemplate(${r.index})
+">
+
+${r.created?"Save Changes":"Create"}
+
+</button>
+
+
+<button
+class="mini-btn"
+onclick="
+resetStudentTemplate(${r.index})
+">
+
+Reset
+
+</button>
+
+
+<button
+class="mini-btn danger"
+onclick="
+toggleStudentTemplate(${r.index})
+">
+
+${r.active
+?"Deactivate"
+:"Activate"}
+
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`
+ ).join("")
+ ||
+ emptyRow(
+   8,
+   "No student templates found."
+ );
+
+};
+
+
+/*
+==================================================
+STUDENT TEMPLATE CHANGES
+==================================================
+*/
+
+window.studentChange=
+function(index,key,value){
+
+ const r=
+ studentRows.find(
+   x=>x.index===index
+ );
+
+ if(r){
+
+   r[key]=value;
+
+ }
+
+};
+
+
+/*
+==================================================
+STUDENT PAGINATION
+==================================================
+*/
+
+window.studentPrev=
+function(){
+
+ if(studentPage>1){
+
+   studentPage--;
+
+   renderStudentTemplates();
+
+ }
+
+};
+
+
+window.studentNext=
+function(){
+
+ const q=
+ (
+   document
+   .getElementById("studentTemplateSearch")
+   ?.value||""
+ )
+ .toLowerCase();
+
+
+ const total=
+ studentRows.filter(
+   r=>
+   `${r.slot} ${r.name} ${r.admission} ${r.className}`
+   .toLowerCase()
+   .includes(q)
+ ).length;
+
+
+ if(
+   studentPage*STUDENT_PAGE_SIZE<
+   total
+ ){
+
+   studentPage++;
+
+   renderStudentTemplates();
+
+ }
+
+};
+
+
+/*
+==================================================
+CREATE STUDENT FROM TEMPLATE
+==================================================
+*/
+
+window.saveStudentTemplate=
+async function(index){
+
+ const r=
+ studentRows.find(
+   x=>x.index===index
+ );
+
+ if(!r)return;
+
+
+ if(!r.name.trim()){
+
+   toast(
+     "Enter the student name first."
+   );
+
+   return;
+
+ }
+
+
+ if(!r.className){
+
+   toast(
+     "Choose the student's class first."
+   );
+
+   return;
+
+ }
+
+
+ try{
+
+   const result=
+   await worker(
+     "create_student",
+     {
+       student:{
+         slotCode:r.slot,
+
+         school:selectedSchool,
+
+         studentName:r.name,
+
+         admissionNumber:"",
+
+         className:r.className,
+
+         arm:r.arm,
+
+         department:
+         selectedSchool==="secondary"
+         ?r.department
+         :"",
+
+         gender:"",
+
+         dateOfBirth:"",
+
+         guardianName:"",
+
+         guardianPhone:"",
+
+         guardianWhatsApp:"",
+
+         passportUrl:""
+       }
+     }
+   );
+
+
+   r.uid=
+   result.student?.uid||
+   result.result?.uid||
+   "";
+
+   r.created=true;
+
+
+   renderStudentTemplates();
+
+   loadStudents();
+
+   loadSummary();
+
+
+   toast(
+     `${r.slot} created. Result access code: ${
+       result.student?.resultAccessCode||
+       "created"
+     }`
+   );
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+};
+
+
+/*
+==================================================
+STUDENT RESET
+==================================================
+*/
+
+window.resetStudentTemplate=
+function(index){
+
+ const r=
+ studentRows.find(
+   x=>x.index===index
+ );
+
+ if(!r)return;
+
+
+ if(r.created){
+
+   toast(
+     "Existing student records are not deleted by Reset."
+   );
+
+   return;
+
+ }
+
+
+ r.name="";
+ r.admission="";
+ r.className="";
+ r.arm="";
+ r.department="";
+ r.active=true;
+
+
+ renderStudentTemplates();
+
+ toast(
+   r.slot+" template reset."
+ );
+
+};
+
+
+/*
+==================================================
+STUDENT ACTIVATE / DEACTIVATE
+==================================================
+*/
+
+window.toggleStudentTemplate=
+async function(index){
+
+ const r=
+ studentRows.find(
+   x=>x.index===index
+ );
+
+ if(!r)return;
+
+
+ const next=
+ !r.active;
+
+
+ if(r.uid){
+
+   try{
+
+     /*
+     The Worker action for students will be
+     connected with the Worker update later.
+     */
+
+     await worker(
+       "set_student_active",
+       {
+         uid:r.uid,
+         active:next
+       }
+     );
+
+
+     r.active=next;
+
+     renderStudentTemplates();
+
+     loadStudents();
+
+     toast(
+       r.slot+
+       (next
+       ?" activated."
+       :" deactivated.")
+     );
+
+   }catch(e){
+
+     toast(e.message);
+
+   }
+
+   return;
+
+ }
+
+
+ r.active=next;
+
+ renderStudentTemplates();
+
+ toast(
+   r.slot+
+   " template "+
+   (
+     r.active
+     ?"activated."
+     :"deactivated."
+   )
+ );
+
+};
+
+
+/*
+==================================================
+STUDENT MODAL
+==================================================
+*/
+
+window.openStudentModal=
+function(){
+
+ if(!selectedSchool){
+
+   toast(
+     "Choose a school first."
+   );
+
+   return;
+
+ }
+
+
+ populateStudentClassSelector();
+
+
+ const prefix=
+ selectedSchool==="secondary"
+ ?"COL-STU-"
+ :"PRI-STU-";
+
+
+ const next=
+ findNextStudentSlot(prefix);
+
+
+ document
+ .getElementById("studentSlot")
+ .value=next;
+
+
+ document
+ .getElementById("studentDepartment")
+ .style.display=
+ selectedSchool==="secondary"
+ ?"block"
+ :"none";
+
+
+ document
+ .getElementById("studentModal")
+ .classList.add("open");
+
+};
+
+
+/*
+==================================================
+CREATE STUDENT
+==================================================
+*/
+
+window.createStudent=
+async function(){
+
+ try{
+
+   const photo=
+   document
+   .getElementById("studentPhoto")
+   .files[0];
+
+
+   let passportUrl="";
+
+
+   /*
+   We collect the selected phone image here.
+
+   The Worker/storage upload will be connected
+   after this dashboard structure is locked.
+   */
+
+   if(photo){
+
+     passportUrl=
+     await fileToDataURL(photo);
+
+   }
+
+
+   const r=
+   await worker(
+     "create_student",
+     {
+       student:{
+
+         slotCode:
+         val("studentSlot").toUpperCase(),
+
+         school:
+         selectedSchool,
+
+         studentName:
+         val("studentName"),
+
+         admissionNumber:"",
+
+         className:
+         val("studentClass"),
+
+         arm:
+         val("studentArm"),
+
+         department:
+         selectedSchool==="secondary"
+         ?val("studentDepartment")
+         :"",
+
+         gender:
+         val("studentGender"),
+
+         dateOfBirth:
+         val("studentDob"),
+
+         guardianName:
+         val("guardianName"),
+
+         guardianPhone:
+         val("guardianPhone"),
+
+         guardianWhatsApp:
+         val("guardianWhatsapp"),
+
+         passportUrl
+       }
+     }
+   );
+
+
+   closeModal("studentModal");
+
+
+   toast(
+     `Student created. Result access code: ${
+       r.student?.resultAccessCode||
+       "created"
+     }`
+   );
+
+
+   loadStudents();
+
+   loadSummary();
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+};
+
+
+/*
+==================================================
+CLASSES
+==================================================
+*/
+
+async function loadClasses(){
+
+ if(!selectedSchool)return;
+
+
+ try{
+
+   const d=
+   await worker(
+     "list_classes",
+     {school:selectedSchool}
+   );
+
+
+   classData=
+   d.classes||[];
+
+
+   renderClasses();
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+}
+
+
+function renderClasses(){
+
+ document
+ .getElementById("classTable")
+ .innerHTML=
+ classData.map(
+ c=>`
+
+<tr>
+
+<td>
+<strong>
+${esc(c.name||"")}
+</strong>
+</td>
+
+<td>
+${
+ c.school==="secondary"
+ ?"College"
+ :"Nursery & Primary"
+}
+</td>
+
+<td>
+${esc(c.section||"—")}
+</td>
+
+<td>
+${c.useArms?"Yes":"No"}
+</td>
+
+<td>
+${esc(
+ (c.departments||[])
+ .join(", ")
+ ||"—"
+)}
+</td>
+
+<td>
+${esc(
+ String(c.capacity||35)
+)}
+</td>
+
+<td>
+
+<span
+class="badge ${c.active?"green":"red"}">
+
+${c.active?"Active":"Inactive"}
+
+</span>
+
+</td>
+
+</tr>
+
+`
+ ).join("")
+ ||
+ emptyRow(
+   7,
+   "No classes found."
+ );
+
+}
+
+
+window.openClassModal=
+function(){
+
+ if(selectedSchool){
+
+   document
+   .getElementById("classModal")
+   .classList.add("open");
+
+ }else{
+
+   toast(
+     "Choose a school first."
+   );
+
+ }
+
+};
+
+
+window.saveClass=
+async function(){
+
+ try{
+
+   await worker(
+     "save_class",
+     {
+       class:{
+         name:
+         val("className"),
+
+         school:
+         val("classSchool"),
+
+         section:
+         val("classSection"),
+
+         capacity:
+         Number(
+           val("classCapacity")
+         )||35,
+
+         useArms:
+         document
+         .getElementById("classArms")
+         .checked,
+
+         useDepartments:
+         document
+         .getElementById("classDepartments")
+         .checked
+       }
+     }
+   );
+
+
+   closeModal("classModal");
+
+   toast("Class saved.");
+
+   loadClasses();
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+};
+
+
+/*
+==================================================
+SUBJECTS
+==================================================
+*/
+
+async function loadSubjects(){
+
+ if(!selectedSchool)return;
+
+
+ try{
+
+   const d=
+   await worker(
+     "list_subjects"
+   );
+
+
+   subjectData=
+   d.subjects||[];
+
+
+   document
+   .getElementById("subjectTable")
+   .innerHTML=
+   subjectData.map(
+     s=>`
+
+<tr>
+
+<td>
+<strong>
+${esc(s.name||"")}
+</strong>
+</td>
+
+<td>
+${esc(s.id||"")}
+</td>
+
+<td>
+
+<span
+class="badge ${s.active!==false?"green":"red"}">
+
+${s.active!==false
+?"Active"
+:"Inactive"}
+
+</span>
+
+</td>
+
+</tr>
+
+`
+   ).join("")
+   ||
+   emptyRow(
+     3,
+     "No subjects found."
+   );
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+}
+
+
+/*
+==================================================
+AUDIT
+==================================================
+*/
+
+async function loadAudit(){
+
+ try{
+
+   const d=
+   await worker(
+     "list_audit",
+     {
+       search:
+       document
+       .getElementById("auditSearch")
+       ?.value||""
+     }
+   );
+
+
+   document
+   .getElementById("auditTable")
+   .innerHTML=
+   (d.logs||[])
+   .map(
+     l=>`
+
+<tr>
+
+<td>
+${esc(l.timestamp||"")}
+</td>
+
+<td>
+${esc(l.actorCode||"")}
+</td>
+
+<td>
+${esc(l.action||"")}
+</td>
+
+<td>
+${esc(l.recordType||"")}
+</td>
+
+<td>
+${esc(l.recordId||"")}
+</td>
+
+</tr>
+
+`
+   ).join("")
+   ||
+   emptyRow(
+     5,
+     "No audit records found."
+   );
+
+ }catch(e){
+
+   toast(e.message);
+
+ }
+
+}
+
+
+/*
+==================================================
+SELECTOR HELPERS
+==================================================
+*/
+
+function classOptions(
+ selected="",
+ school=selectedSchool
+){
+
+ const list=
+ school==="secondary"
+ ?COLLEGE_CLASSES
+ :PRIMARY_CLASSES;
+
+
+ return `
+<option value="">
+Select class
+</option>
+`+
+list.map(
+ c=>
+ `<option
+ value="${escAttr(c)}"
+ ${selected===c?"selected":""}>
+ ${esc(c)}
+ </option>`
+).join("");
+
+}
+
+
+function classOptionsMulti(
+ selected=[],
+ school=selectedSchool
+){
+
+ const list=
+ school==="secondary"
+ ?COLLEGE_CLASSES
+ :PRIMARY_CLASSES;
+
+
+ return list.map(
+ c=>
+ `<option
+ value="${escAttr(c)}"
+ ${selected.includes(c)?"selected":""}>
+ ${esc(c)}
+ </option>`
+ ).join("");
+
+}
+
+
+function subjectOptions(
+ selected="",
+ school=selectedSchool
+){
+
+ const list=
+ school==="secondary"
+ ?COLLEGE_SUBJECTS
+ :PRIMARY_SUBJECTS;
+
+
+ return `
+<option value="">
+Select subject
+</option>
+`+
+list.map(
+ s=>
+ `<option
+ value="${escAttr(s)}"
+ ${selected===s?"selected":""}>
+ ${esc(s)}
+ </option>`
+).join("");
+
+}
+
+
+function departmentOptions(
+ selected="",
+ school=selectedSchool
+){
+
+ if(school!=="secondary"){
+
+   return `
+<option value="">
+Not applicable
+</option>
+`;
+
+ }
+
+
+ return `
+<option value="">
+Select department
+</option>
+
+<option
+value="Science"
+${selected==="Science"?"selected":""}>
+Science
+</option>
+
+<option
+value="Arts"
+${selected==="Arts"?"selected":""}>
+Arts
+</option>
+
+<option
+value="Commercial"
+${selected==="Commercial"?"selected":""}>
+Commercial
+</option>
+`;
+
+}
+
+
+/*
+==================================================
+POPULATE STAFF SELECTORS
+==================================================
+*/
+
+function populateStaffClassSelectors(){
+
+ const home=
+ document
+ .getElementById("staffHomeroom");
+
+
+ const other=
+ document
+ .getElementById("staffClasses");
+
+
+ if(!home||!other)return;
+
+
+ home.innerHTML=
+ classOptions("",selectedSchool);
+
+
+ other.innerHTML=
+ classOptionsMulti([],selectedSchool);
+
+}
+
+
+/*
+==================================================
+POPULATE STUDENT CLASS
+==================================================
+*/
+
+function populateStudentClassSelector(){
+
+ const select=
+ document
+ .getElementById("studentClass");
+
+ if(!select)return;
+
+
+ select.innerHTML=
+ classOptions("",selectedSchool);
+
+}
+
+
+/*
+==================================================
+POPULATE SUBJECT
+==================================================
+*/
+
+function populateStaffSubjectSelector(){
+
+ const select=
+ document
+ .getElementById("staffSubjects");
+
+ if(!select)return;
+
+
+ select.innerHTML=
+ subjectOptions("",selectedSchool);
+
+ document
+ .getElementById("staffOtherSubject")
+ .classList.add("hidden");
+
+}
+
+
+/*
+==================================================
+SUBJECT OTHER
+==================================================
+*/
+
+window.subjectOtherChanged=
+function(selectId,otherId){
+
+ const select=
+ document
+ .getElementById(selectId);
+
+ const other=
+ document
+ .getElementById(otherId);
+
+
+ if(
+   select.value==="Other"
+ ){
+
+   other.classList.remove("hidden");
+
+ }else{
+
+   other.classList.add("hidden");
+
+   other.value="";
+
+ }
+
+};
+
+
+/*
+==================================================
+PHOTO PREVIEW
+==================================================
+*/
+
+window.previewStudentPhoto=
+function(event){
+
+ const file=
+ event.target.files[0];
+
+ const preview=
+ document
+ .getElementById("studentPhotoPreview");
+
+
+ if(!file){
+
+   preview.style.display="none";
+
+   preview.src="";
+
+   return;
+
+ }
+
+
+ const reader=
+ new FileReader();
+
+
+ reader.onload=
+ function(e){
+
+   preview.src=e.target.result;
+
+   preview.style.display="block";
+
+ };
+
+
+ reader.readAsDataURL(file);
+
+};
+
+
+function fileToDataURL(file){
+
+ return new Promise(
+   (resolve,reject)=>{
+
+     const reader=
+     new FileReader();
+
+     reader.onload=
+     ()=>resolve(reader.result);
+
+     reader.onerror=
+     reject;
+
+     reader.readAsDataURL(file);
+
+   }
+ );
+
+}
+
+
+/*
+==================================================
+NEXT STUDENT SLOT
+==================================================
+*/
+
+function findNextStudentSlot(prefix){
+
+ const used=
+ new Set(
+   studentData.map(
+     s=>
+     String(
+       s.slotCode||
+       s.studentSlot||
+       ""
+     ).toUpperCase()
+   )
+ );
+
+
+ for(let i=1;i<=50;i++){
+
+   const slot=
+   prefix+
+   String(i).padStart(3,"0");
+
+
+   if(!used.has(slot)){
+
+     return slot;
+
+   }
+
+ }
+
+
+ return prefix+"050";
+
+}
+
+
+/*
+==================================================
+MODAL
+==================================================
+*/
+
+window.closeModal=
+id=>{
+  const modal=document.getElementById(id);
+  if(modal) modal.classList.remove("open");
+};
+
+
+/*
+==================================================
+GENERAL HELPERS
+==================================================
+*/
+
+function val(id){
+
+ return(
+   document
+   .getElementById(id)
+   ?.value
+   .trim()||
+   ""
+ );
+
+}
+
+
+function selectedValues(id){
+
+ const select=
+ document
+ .getElementById(id);
+
+ if(!select)return[];
+
+ return Array
+ .from(select.selectedOptions)
+ .map(x=>x.value)
+ .filter(Boolean);
+
+}
+
+
+function emptyRow(
+ cols,
+ msg
+){
+
+ return `
+<tr>
+
+<td
+colspan="${cols}"
+style="
+padding:28px;
+text-align:center;
+color:#89938f;
+">
+
+${esc(msg)}
+
+</td>
+
+</tr>
+`;
+
+}
+
+
+function esc(v){
+
+ return String(v??"")
+ .replaceAll("&","&amp;")
+ .replaceAll("<","&lt;")
+ .replaceAll(">","&gt;")
+ .replaceAll('"',"&quot;")
+ .replaceAll("'","&#039;");
+
+}
+
+
+function escAttr(v){
+
+ return esc(v);
+
+}
+
+
+window.toast=
+msg=>{
+
+ const b=
+ document
+ .getElementById("toastBox");
+
+ b.textContent=msg;
+
+ b.classList.add("show");
+
+ clearTimeout(
+   window.__toastTimer
+ );
+
+ window.__toastTimer=
+ setTimeout(
+   ()=>{
+     b.classList.remove("show");
+   },
+   4500
+ );
+
+};
+
+
+
+/* =========================================================
+   STUDENT MANAGEMENT V2 — CLASS FIRST / EXCEL IMPORT
+========================================================= */
+let studentClassSelection={className:"",placement:""};
+let pendingStudentImport=[];
+
+const BALAD_PRIMARY_CLASSES=["Crèche","Nursery 1","Nursery 2","Primary 1","Primary 2","Primary 3","Primary 4","Primary 5","Primary 6"];
+const BALAD_COLLEGE_JUNIOR=["JSS 1","JSS 2","JSS 3"];
+const BALAD_COLLEGE_SENIOR=["SS 1","SS 2","SS 3"];
+const BALAD_PRIMARY_ARMS=["A","B"];
+const BALAD_SENIOR_DEPARTMENTS=["Science","Arts","Commercial"];
+
+function studentClassList(){
+  return selectedSchool==="secondary" ? [...BALAD_COLLEGE_JUNIOR,...BALAD_COLLEGE_SENIOR] : BALAD_PRIMARY_CLASSES;
+}
+function studentPlacementList(className){
+  if(selectedSchool!=="secondary") return BALAD_PRIMARY_ARMS;
+  if(/^SS [123]$/i.test(className||"")) return BALAD_SENIOR_DEPARTMENTS;
+  return ["Whole class"];
+}
+function studentPlacementLabel(className, placement){
+  if(!placement || placement==="Whole class") return className;
+  return `${className} — ${placement}`;
+}
+function studentMatchesPlacement(s){
+  if(!s) return false;
+  if(String(s.className||"").trim().toLowerCase()!==String(studentClassSelection.className||"").trim().toLowerCase()) return false;
+  if(!studentClassSelection.placement || studentClassSelection.placement==="Whole class") return true;
+  return String(s.arm||s.department||"").trim().toLowerCase()===String(studentClassSelection.placement).trim().toLowerCase();
+}
+
+window.loadStudents=async function(){
+  if(!selectedSchool)return;
+  try{
+    const d=await worker("list_students",{school:selectedSchool});
+    studentData=d.students||[];
+    renderStudentClassCards();
+    if(studentClassSelection.className) renderClassStudents();
+  }catch(e){toast(e.message);}
+};
+
+window.renderStudentClassCards=function(){
+  const makeCard=(name)=>{
+    const rows=studentData.filter(s=>String(s.className||"").trim().toLowerCase()===name.toLowerCase());
+    const placements=studentPlacementList(name);
+    const chips=placements.map(p=>{
+      const n=p==="Whole class"?rows.length:rows.filter(s=>String(s.arm||s.department||"").toLowerCase()===p.toLowerCase()).length;
+      return `<span class="placement-chip">${esc(p)}: ${n}</span>`;
+    }).join("");
+    return `<button class="student-class-card" onclick="openStudentClass('${escAttr(name)}')"><div class="class-top"><h3>${esc(name)}</h3><span class="count">${rows.length}</span></div><p>Open class to add, import or manage students</p><div class="placement-chips">${chips}</div></button>`;
+  };
+  const primary=document.getElementById("primaryStudentClassCards");
+  const junior=document.getElementById("juniorStudentClassCards");
+  const senior=document.getElementById("seniorStudentClassCards");
+  if(primary) primary.innerHTML=selectedSchool==="secondary"?"<div class='control-muted'>Select Nursery &amp; Primary from the School menu.</div>":BALAD_PRIMARY_CLASSES.map(makeCard).join("");
+  if(junior) junior.innerHTML=selectedSchool==="secondary"?BALAD_COLLEGE_JUNIOR.map(makeCard).join(""):"<div class='control-muted'>Select College from the School menu.</div>";
+  if(senior) senior.innerHTML=selectedSchool==="secondary"?BALAD_COLLEGE_SENIOR.map(makeCard).join(""):"<div class='control-muted'>Select College from the School menu.</div>";
+};
+
+window.openStudentClass=function(className){
+  studentClassSelection.className=className;
+  const placements=studentPlacementList(className);
+  studentClassSelection.placement=placements.length===1?placements[0]:"";
+  document.getElementById("studentClassHome").classList.add("hidden");
+  document.getElementById("studentClassWorkspace").classList.remove("hidden");
+  document.getElementById("studentImportPanel").classList.add("hidden");
+  document.getElementById("studentClassWorkspaceTitle").textContent=className;
+  document.getElementById("studentClassWorkspaceSubtitle").textContent=`${selectedSchool==="secondary"?"College":"Nursery & Primary"} • ${studentPlacementLabel(className,studentClassSelection.placement)}`;
+  renderStudentPlacementButtons();
+  renderClassStudents();
+};
+
+window.closeStudentClass=function(){
+  studentClassSelection={className:"",placement:""};
+  document.getElementById("studentClassWorkspace").classList.add("hidden");
+  document.getElementById("studentClassHome").classList.remove("hidden");
+  document.getElementById("studentImportPanel").classList.add("hidden");
+  renderStudentClassCards();
+};
+
+function renderStudentPlacementButtons(){
+  const bar=document.getElementById("studentPlacementBar");
+  const placements=studentPlacementList(studentClassSelection.className);
+  if(placements.length===1 && placements[0]==="Whole class"){
+    bar.innerHTML="<span class='student-placement-btn active'>Whole Class</span>";
+    return;
+  }
+  bar.innerHTML=placements.map(p=>`<button class="student-placement-btn ${studentClassSelection.placement===p?"active":""}" onclick="selectStudentPlacement('${escAttr(p)}')">${esc(p)}</button>`).join("");
+}
+window.selectStudentPlacement=function(p){
+  studentClassSelection.placement=p;
+  document.getElementById("studentClassWorkspaceSubtitle").textContent=`${selectedSchool==="secondary"?"College":"Nursery & Primary"} • ${studentPlacementLabel(studentClassSelection.className,p)}`;
+  renderStudentPlacementButtons();
+  renderClassStudents();
+};
+
+window.renderClassStudents=function(){
+  const q=(document.getElementById("studentClassSearch")?.value||"").toLowerCase().trim();
+  const rows=studentData.filter(studentMatchesPlacement).filter(s=>`${s.studentName||""} ${s.admissionNumber||""} ${s.guardianName||""} ${s.guardianPhone||""}`.toLowerCase().includes(q));
+  document.getElementById("studentClassCount").textContent=`${rows.length} Student${rows.length===1?"":"s"}`;
+  document.getElementById("classStudentTable").innerHTML=rows.map(s=>`<tr><td><strong>${esc(s.studentName||"")}</strong><br><small>${esc(s.gender||"")}</small></td><td>${esc(s.admissionNumber||"—")}</td><td>${esc(s.guardianName||"—")}</td><td>${esc(s.guardianPhone||"—")}</td><td><span class="badge">${esc(s.studentId||"—")}</span></td><td><span class="badge">${esc(s.resultAccessCode||"—")}</span></td><td><span class="badge ${s.active===false?"red":"green"}">${s.active===false?"Inactive":"Active"}</span></td></tr>`).join("")||emptyRow(7,"No students in this class/placement yet. Import the Excel list to begin.");
+};
+
+window.openAllStudentsDirectory=function(){
+  showSection("students");
+  closeStudentClass();
+  document.getElementById("studentClassHome").classList.add("hidden");
+  document.getElementById("studentClassWorkspace").classList.remove("hidden");
+  studentClassSelection={className:"",placement:""};
+  document.getElementById("studentClassWorkspaceTitle").textContent="Full Student Directory";
+  document.getElementById("studentClassWorkspaceSubtitle").textContent="All students in the selected school.";
+  document.getElementById("studentPlacementBar").innerHTML="";
+  const rows=studentData;
+  document.getElementById("studentClassCount").textContent=`${rows.length} Student${rows.length===1?"":"s"}`;
+  document.getElementById("classStudentTable").innerHTML=rows.map(s=>`<tr><td><strong>${esc(s.studentName||"")}</strong><br><small>${esc(s.className||"")}</small></td><td>${esc(s.admissionNumber||"—")}</td><td>${esc(s.guardianName||"—")}</td><td>${esc(s.guardianPhone||"—")}</td><td><span class="badge">${esc(s.studentId||"—")}</span></td><td><span class="badge">${esc(s.resultAccessCode||"—")}</span></td><td><span class="badge ${s.active===false?"red":"green"}">${s.active===false?"Inactive":"Active"}</span></td></tr>`).join("")||emptyRow(7,"No students found.");
+};
+
+window.downloadStudentTemplate=function(){
+  if(!selectedSchool){toast("Choose Nursery & Primary or College first.");showSection("school");return;}
+  const cls=studentClassSelection.className||"";
+  const placement=studentClassSelection.placement||"";
+  const rows=[{
+    "Student Full Name":"",
+    "Admission Number":"",
+    "Gender":"",
+    "Date of Birth":"",
+    "Guardian Name":"",
+    "Guardian Phone":"",
+    "Guardian WhatsApp":"",
+    "Guardian Email":"",
+    "Address":"",
+    "Passport Photo URL":"",
+    "School":selectedSchool==="secondary"?"College":"Nursery & Primary",
+    "Class":cls,
+    "Arm":selectedSchool==="secondary"?"":(placement||"A"),
+    "Department":selectedSchool==="secondary"&&/^SS [123]$/i.test(cls)?(placement||"Science"):""
+  }];
+  const ws=XLSX.utils.json_to_sheet(rows);
+  ws["!cols"]=[{wch:24},{wch:20},{wch:12},{wch:14},{wch:24},{wch:18},{wch:18},{wch:28},{wch:30},{wch:36},{wch:18},{wch:18},{wch:12},{wch:18}];
+  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Students");
+  XLSX.writeFile(wb,`BALAD-${(cls||"Student-Import").replace(/[^a-z0-9]+/gi,"-")}-Student-Template.xlsx`);
+};
+
+window.triggerStudentImport=function(){
+  if(!studentClassSelection.className){toast("Open a class first.");return;}
+  document.getElementById("studentExcelInput").value="";
+  document.getElementById("studentExcelInput").click();
+};
+
+window.handleStudentExcel=async function(event){
+  const file=event.target.files?.[0];
+  if(!file)return;
+  if(typeof XLSX==="undefined"){toast("Excel support is not loaded. Check your internet connection and reload.");return;}
+  try{
+    const data=await file.arrayBuffer();
+    const wb=XLSX.read(data,{type:"array"});
+    const ws=wb.Sheets[wb.SheetNames[0]];
+    const raw=XLSX.utils.sheet_to_json(ws,{defval:""});
+    pendingStudentImport=validateStudentImportRows(raw);
+    renderStudentImport();
+    document.getElementById("studentImportPanel").classList.remove("hidden");
+    document.getElementById("studentImportPanel").scrollIntoView({behavior:"smooth",block:"start"});
+  }catch(e){toast("Unable to read the Excel file: "+e.message);}
+};
+
+function normHeader(v){return String(v||"").trim().toLowerCase().replace(/[^a-z0-9]+/g,"");}
+function rowValue(row,names){
+  const wanted=names.map(normHeader);
+  const key=Object.keys(row).find(k=>wanted.includes(normHeader(k)));
+  return key===undefined?"":String(row[key]??"").trim();
+}
+function validateStudentImportRows(raw){
+  const existingAdmissions=new Set(studentData.map(s=>String(s.admissionNumber||"").trim().toLowerCase()).filter(Boolean));
+  const batchAdmissions=new Set();
+  return raw.map((row,i)=>{
+    const name=rowValue(row,["Student Full Name","Student Name","Full Name","Name"]);
+    const admission=rowValue(row,["Admission Number","Admission No","Admission"]);
+    const gender=rowValue(row,["Gender","Sex"]);
+    const dob=rowValue(row,["Date of Birth","DOB"]);
+    const guardian=rowValue(row,["Guardian Name","Parent Name"]);
+    const phone=rowValue(row,["Guardian Phone","Parent Phone","Phone"]);
+    const whatsapp=rowValue(row,["Guardian WhatsApp","Parent WhatsApp","WhatsApp"]);
+    const email=rowValue(row,["Guardian Email","Parent Email","Email"]);
+    const address=rowValue(row,["Address","Home Address"]);
+    const photo=rowValue(row,["Passport Photo URL","Photo URL","Passport URL"]);
+    const cls=rowValue(row,["Class","Class Name"])||studentClassSelection.className;
+    const arm=rowValue(row,["Arm"])||((selectedSchool!=="secondary"&&studentClassSelection.placement!=="Whole class")?studentClassSelection.placement:"");
+    const dept=rowValue(row,["Department"])||((selectedSchool==="secondary"&&/^SS [123]$/i.test(cls)&&studentClassSelection.placement!=="Whole class")?studentClassSelection.placement:"");
+    const errors=[];
+    if(!name)errors.push("Student name missing");
+    if(!admission)errors.push("Admission number missing");
+    const expectedClasses=studentClassList().map(x=>x.toLowerCase());
+    if(!expectedClasses.includes(cls.toLowerCase()))errors.push("Invalid class");
+    if(selectedSchool!=="secondary"){
+      if(!["A","B"].includes(arm.toUpperCase()))errors.push("Primary students must use Arm A or B");
+      if(dept)errors.push("Department is not used in Nursery & Primary");
+    }else if(/^SS [123]$/i.test(cls)){
+      if(!BALAD_SENIOR_DEPARTMENTS.map(x=>x.toLowerCase()).includes(dept.toLowerCase()))errors.push("SS1–SS3 requires Science, Arts or Commercial");
+      if(arm)errors.push("College does not use arms");
+    }else{
+      if(dept||arm)errors.push("JSS1–JSS3 does not use arm or department");
+    }
+    const key=admission.toLowerCase();
+    if(key&&(existingAdmissions.has(key)||batchAdmissions.has(key)))errors.push("Duplicate admission number");
+    if(key)batchAdmissions.add(key);
+    return {row:i+2,name,admission,gender,dob,guardian,phone,whatsapp,email,address,photo,school:selectedSchool,className:cls,arm:arm.toUpperCase(),department:dept,errors};
+  });
+}
+
+function renderStudentImport(){
+  const valid=pendingStudentImport.filter(r=>!r.errors.length).length;
+  const invalid=pendingStudentImport.length-valid;
+  document.getElementById("studentImportSummary").innerHTML=`<strong>${pendingStudentImport.length} row${pendingStudentImport.length===1?"":"s"} found.</strong> <span class="valid">${valid} ready</span> ${invalid?`<span class="invalid">${invalid} need correction</span>`:""}<br><small>Only valid rows will be sent to BALAD. The Worker will generate Student ID, Result Access Code and Scan Code.</small>`;
+  document.getElementById("studentImportTable").innerHTML=pendingStudentImport.map(r=>`<tr><td>${r.row}</td><td>${esc(r.name||"—")}</td><td>${esc(r.admission||"—")}</td><td>${esc(r.className||"—")}</td><td>${esc(r.arm||r.department||"Whole class")}</td><td>${esc(r.guardian||"—")}</td><td>${esc(r.phone||"—")}</td><td class="${r.errors.length?"student-import-error":"student-import-ok"}">${r.errors.length?r.errors.join("; "):"Ready"}</td></tr>`).join("");
+  const btn=document.getElementById("confirmStudentImportBtn");btn.disabled=valid===0;btn.textContent=valid?`Import ${valid} Student${valid===1?"":"s"}`:"Nothing to Import";
+}
+window.closeStudentImport=function(){document.getElementById("studentImportPanel").classList.add("hidden");pendingStudentImport=[];};
+window.confirmStudentImport=async function(){
+  const valid=pendingStudentImport.filter(r=>!r.errors.length);
+  if(!valid.length){toast("No valid students to import.");return;}
+  const btn=document.getElementById("confirmStudentImportBtn");btn.disabled=true;btn.textContent="Importing...";
+  try{
+    const d=await worker("bulk_create_students",{school:selectedSchool,students:valid});
+    const created=d.created?.length||0, failed=d.failed?.length||0;
+    toast(`${created} student${created===1?"":"s"} imported${failed?`; ${failed} failed`:""}. IDs, result access codes and scan codes generated automatically.`);
+    closeStudentImport();
+    await loadStudents();
+    if(studentClassSelection.className)renderClassStudents();
+    loadSummary();
+  }catch(e){toast(e.message||"Import failed.");btn.disabled=false;btn.textContent=`Import ${valid.length} Students`;}
+};
+
+/* Make the class-first student screen the default whenever Student Management opens. */
+const originalShowSection=window.showSection;
+window.showSection=function(section){
+  originalShowSection(section);
+  if(section==="students"){
+    document.getElementById("studentClassHome")?.classList.remove("hidden");
+    document.getElementById("studentClassWorkspace")?.classList.add("hidden");
+    document.getElementById("studentImportPanel")?.classList.add("hidden");
+    if(selectedSchool) setTimeout(()=>loadStudents(),0);
+  }
+};
+
+/* Quick-add now follows the same class rules and requires admission number. */
+window.openStudentModal=function(){
+  if(!selectedSchool){toast("Choose a school first.");return;}
+  populateStudentClassSelector();
+  const prefix=selectedSchool==="secondary"?"COL-STU-":"PRI-STU-";
+  document.getElementById("studentSlot").value=findNextStudentSlot(prefix);
+  const cls=document.getElementById("studentClass");
+  const arm=document.getElementById("studentArm");
+  const dept=document.getElementById("studentDepartment");
+  cls.onchange=()=>refreshQuickStudentPlacement();
+  refreshQuickStudentPlacement();
+  if(document.getElementById("studentAdmission"))document.getElementById("studentAdmission").value="";
+  document.getElementById("studentModal").classList.add("open");
+};
+function refreshQuickStudentPlacement(){
+  const cls=document.getElementById("studentClass")?.value||"";
+  const arm=document.getElementById("studentArm");
+  const dept=document.getElementById("studentDepartment");
+  if(selectedSchool!=="secondary"){
+    arm.closest(".field").style.display="block";dept.closest(".field").style.display="none";arm.innerHTML='<option value="">Select arm</option>'+BALAD_PRIMARY_ARMS.map(x=>`<option value="${x}">${x}</option>`).join("");
+  }else if(/^SS [123]$/i.test(cls)){
+    arm.closest(".field").style.display="none";dept.closest(".field").style.display="block";dept.innerHTML='<option value="">Select department</option>'+BALAD_SENIOR_DEPARTMENTS.map(x=>`<option value="${x}">${x}</option>`).join("");
+  }else{
+    arm.closest(".field").style.display="none";dept.closest(".field").style.display="none";
+  }
+}
+window.createStudent=async function(){
+  try{
+    const name=val("studentName"), admission=val("studentAdmission"), cls=val("studentClass");
+    if(!name){toast("Student name is required.");return;}
+    if(!admission){toast("Admission number is required.");return;}
+    if(!cls){toast("Class is required.");return;}
+    const photo=document.getElementById("studentPhoto")?.files?.[0];
+    const passportUrl=photo?await fileToDataURL(photo):"";
+    const r=await worker("create_student",{student:{slotCode:val("studentSlot").toUpperCase(),school:selectedSchool,studentName:name,admissionNumber:admission,className:cls,arm:selectedSchool!=="secondary"?val("studentArm"):"",department:selectedSchool==="secondary"&&/^SS [123]$/i.test(cls)?val("studentDepartment"):"",gender:val("studentGender"),dateOfBirth:val("studentDob"),guardianName:val("guardianName"),guardianPhone:val("guardianPhone"),guardianWhatsApp:val("guardianWhatsapp"),passportUrl}});
+    closeModal("studentModal");toast(`Student created. Result Access Code: ${r.student?.resultAccessCode||"created"}`);await loadStudents();loadSummary();
+  }catch(e){toast(e.message||"Unable to create student.");}
+};
+
+
+
+/* ==================================================
+   STUDENT ID CARD + GATE
+================================================== */
+let idCardStudents=[];
+let studentScanner=null;
+let lastScannedCode="";
+let lastScanAt=0;
+
+async function refreshIdCardStudents(){
+  try{
+    const d=await worker("list_students",{school:selectedSchool});
+    idCardStudents=d.students||[];
+    renderIdCardStudents();
+  }catch(e){toast(e.message||"Unable to load students.");}
+}
+
+function renderIdCardStudents(){
+  const q=(document.getElementById("idCardSearch")?.value||"").trim().toLowerCase();
+  const rows=idCardStudents.filter(s=>!q||[s.studentName,s.admissionNumber,s.className,s.studentId].join(" ").toLowerCase().includes(q));
+  const body=document.getElementById("idCardStudentTable");
+  if(!body)return;
+  body.innerHTML=rows.map(s=>`<tr>
+    <td><strong>${esc(s.studentName||"—")}</strong></td>
+    <td>${esc(s.className||"—")}</td>
+    <td>${esc(s.studentId||"—")}</td>
+    <td><button class="btn btn-small btn-primary" onclick='printStudentIdCard(${JSON.stringify(String(s.studentId||""))})'>Generate / Print</button></td>
+  </tr>`).join("")||emptyRow(4,"No students found.");
+}
+
+async function printStudentIdCard(id){
+  try{
+    const d=await worker("get_student_id_card",{studentId:id});
+    const s=d.student||{};
+    const w=window.open("","_blank","width=850,height=650");
+    if(!w){toast("Allow pop-ups to print the ID card.");return;}
+    const photo=s.passportUrl||"images/logo.png";
+    w.document.write(`<!doctype html><html><head><title>BALAD Student ID Card</title><style>
+      body{font-family:Arial,sans-serif;background:#f3f5f2;margin:0;padding:35px;display:flex;justify-content:center}.card{width:420px;border:2px solid #075c46;border-radius:18px;overflow:hidden;background:#fff}.head{background:#075c46;color:#fff;text-align:center;padding:14px}.head strong{font-size:19px}.body{padding:20px;display:flex;justify-content:center;align-items:center}.photo{width:105px;height:125px;object-fit:cover;border-radius:10px;border:1px solid #ddd}.name{font-size:20px;font-weight:800;color:#075c46;margin:2px 0 8px}.meta{font-size:12px;line-height:1.7;color:#39463f}.barcode{padding:10px 18px 18px;text-align:center;border-top:1px solid #eee}.barcode svg{width:100%;height:80px}.small{font-size:9px;color:#66716b;margin-top:4px}.foot{font-size:10px;text-align:center;color:#66716b;padding:8px 15px 15px}.print{display:block;margin:15px auto;padding:10px 20px;background:#075c46;color:#fff;border:0;border-radius:8px}@media print{body{padding:0}.print{display:none}.card{box-shadow:none}}</style></head><body>
+      <div><div class="card"><div class="head"><strong>BALAD PRIVATE SCHOOLS</strong><div style="font-size:10px;margin-top:3px">STUDENT IDENTIFICATION CARD</div></div><div class="body"><img class="photo" src="${esc(photo)}" onerror="this.src='images/logo.png'"></div><div class="barcode"><svg id="barcode"></svg><div class="small">Scan at the school gate.</div></div></div><button class="print" onclick="window.print()">Print ID Card</button></div>
+      <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"><\/script><script>JsBarcode('#barcode',${JSON.stringify(String(s.scanCode||""))},{format:'CODE128',displayValue:true,fontSize:11,height:58,margin:2});<\/script></body></html>`);
+    w.document.close();
+  }catch(e){toast(e.message||"Unable to generate ID card.");}
+}
+
+async function startStudentScanner(){
+  if(typeof Html5Qrcode==="undefined"){toast("Scanner library is unavailable. Check your internet connection.");return;}
+  if(studentScanner)return;
+  studentScanner=new Html5Qrcode("studentScanner");
+  try{
+    await studentScanner.start({facingMode:"environment"},{fps:10,qrbox:{width:260,height:120}},async text=>{
+      const now=Date.now();
+      if(text===lastScannedCode && now-lastScanAt<5000)return;
+      lastScannedCode=text;lastScanAt=now;
+      await processStudentScan(text);
+    },()=>{});
+    document.getElementById("scannerResult").textContent="Camera active. Scan the student's barcode.";
+  }catch(e){studentScanner=null;toast(e.message||"Unable to start camera.");}
+}
+
+async function stopStudentScanner(){
+  if(!studentScanner)return;
+  try{await studentScanner.stop();studentScanner.clear();}catch(e){}
+  studentScanner=null;
+  document.getElementById("scannerResult").textContent="Scanner stopped.";
+}
+
+async function processStudentScan(scanCode){
+  const box=document.getElementById("scannerResult");
+  box.textContent="Processing scan...";
+  try{
+    const d=await worker("record_student_scan",{scanCode});
+    const s=d.student||{};
+    const a=d.attendance||{};
+    const time=d.event==='arrival'?a.arrivalAt:a.departureAt;
+    const messageStatus=d.notification?.status||"queued";
+    box.innerHTML=`<strong>${esc(s.studentName||"Student")}</strong><br>${d.event==='arrival'?'ARRIVED AT SCHOOL':'LEFT SCHOOL'} · ${new Date(time).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}<br><small>Parent message: ${esc(messageStatus.replaceAll('_',' '))}</small>`;
+    loadStudentAttendance();
+  }catch(e){box.textContent=e.message||"Scan failed.";}
+}
+
+async function loadStudentAttendance(){
+  const body=document.getElementById("studentAttendanceTable");
+  if(!body)return;
+  try{
+    const d=await worker("list_student_attendance",{school:selectedSchool});
+    const rows=d.attendance||[];
+    body.innerHTML=rows.map(r=>`<tr><td><strong>${esc(r.studentName||"—")}</strong></td><td>${esc(r.className||"—")}</td><td>${r.arrivalAt?new Date(r.arrivalAt).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):'—'}</td><td>${r.departureAt?new Date(r.departureAt).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):'—'}</td><td><span class="badge ${r.departureAt?'green':'orange'}">${r.departureAt?'Completed':'At School'}</span></td></tr>`).join("")||emptyRow(5,"No student movement recorded today.");
+  }catch(e){body.innerHTML=emptyRow(5,esc(e.message||"Unable to load attendance."));}
+}
+
+/* ============================================================
+   LIVE CONTENT MANAGEMENT
+   Website media/content is stored in Firestore + Firebase Storage.
+   Future website edits do not require HTML deployment.
+============================================================ */
+
+let cmsCategory="management";
+let cmsStaffCache=[];
+let cmsStudentCache=[];
+let cmsPageItems=[];
+let cmsGalleryFiles=[];
+let cmsStaffPhotoFile=null;
+let cmsStaffEditingId="";
+let cmsInitialized=false;
+
+const CMS_PAGES=[
+  ["index","Home"],["about","About"],["schools","Schools"],["nursery-primary","Nursery & Primary"],
+  ["comprehensive-college","Comprehensive College"],["admissions","Admissions"],["curriculum","Curriculum"],
+  ["stem","STEM"],["results","Result Portal"],["student-result","Student Result"],["facilities","Facilities"],
+  ["gallery","Gallery"],["news","News & Events"],["alumni","Alumni"],["contact","Contact"],
+  ["cbt-centre","CBT Centre"],["waec-results","WAEC Results"],["waec-result","WAEC Result"],["team","Meet Our Team"]
+];
+
+function cmsEsc(v=""){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
+function cmsSafe(v=""){try{const u=new URL(v,location.href);return ["http:","https:"].includes(u.protocol)?u.href:"";}catch{return "";}}
+async function cmsUpload(file,path){
+  if(!file) throw new Error("Choose a file first.");
+  if(file.size>80*1024*1024) throw new Error("File is too large. Maximum 80 MB.");
+  const clean=String(path).replace(/[^a-zA-Z0-9._/-]/g,"-");
+  const r=ref(storage,clean);
+  await uploadBytes(r,file,{contentType:file.type||undefined});
+  return getDownloadURL(r);
+}
+function cmsPick(kind){
+  const map={staffCamera:"cmsStaffCamera",staffPhotos:"cmsStaffPhotos",staffFiles:"cmsStaffFiles",
+    galleryCamera:"cmsGalleryCamera",galleryPhotos:"cmsGalleryPhotos",galleryFiles:"cmsGalleryFiles"};
+  document.getElementById(map[kind])?.click();
+}
+window.pickCmsMedia=function(area,source){
+  if(area==="gallery") cmsPick("gallery"+source.charAt(0).toUpperCase()+source.slice(1));
+};
+function collectInputFiles(input){return Array.from(input?.files||[]);}
+function cmsSetGalleryFiles(files){cmsGalleryFiles=files; const n=document.getElementById("cmsGalleryFileNote"); if(n)n.textContent=files.length?`${files.length} file${files.length===1?"":"s"} selected.`:"No media selected.";}
+
+function initContentManagement(){
+  if(cmsInitialized) { loadCmsStaff(); return; }
+  cmsInitialized=true;
+  document.querySelectorAll("[data-cms-view]").forEach(tab=>tab.addEventListener("click",()=>{
+    document.querySelectorAll("[data-cms-view]").forEach(x=>x.classList.remove("active"));
+    tab.classList.add("active");
+    document.querySelectorAll("[id^='cmsView-']").forEach(x=>x.classList.add("hidden"));
+    document.getElementById("cmsView-"+tab.dataset.cmsView)?.classList.remove("hidden");
+    if(tab.dataset.cmsView==="staff")loadCmsStaff();
+    if(tab.dataset.cmsView==="students")cmsStudentSchoolChanged();
+    if(tab.dataset.cmsView==="pages")initCmsPages();
+    if(tab.dataset.cmsView==="gallery")loadCmsAlbums();
+  }));
+  document.querySelectorAll("[data-cms-category]").forEach(b=>b.addEventListener("click",()=>{
+    document.querySelectorAll("[data-cms-category]").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active"); cmsCategory=b.dataset.cmsCategory; renderCmsStaff();
+  }));
+  ["cmsStaffCamera","cmsStaffPhotos","cmsStaffFiles"].forEach(id=>document.getElementById(id)?.addEventListener("change",e=>{
+    cmsStaffPhotoFile=e.target.files?.[0]||null; cmsRenderStaffPhotoNote();
+  }));
+  ["cmsGalleryCamera","cmsGalleryPhotos","cmsGalleryFiles"].forEach(id=>document.getElementById(id)?.addEventListener("change",e=>cmsSetGalleryFiles(collectInputFiles(e.target))));
+  initCmsPages(); loadCmsStaff(); syncCmsStaff();
+}
+
+async function syncCmsStaff(){
+  try{
+    const all=[];
+    for(const school of ["primary","secondary"]){
+      const d=await worker("list_staff",{school});
+      (d.staff||[]).forEach(s=>all.push(s));
+    }
+    const seen=new Set();
+    for(const s of all){
+      const uid=String(s.uid||s.id||s.studentId||"").trim(); if(!uid||seen.has(uid))continue; seen.add(uid);
+      const role=String(s.role||"").toLowerCase();
+      const category=role==="management"?"management":(role==="other"?"non_teaching":(String(s.school).toLowerCase()==="college"?"college":"primary"));
+      await setDoc(doc(db,"publicStaff",uid),{
+        accountUid:uid,name:s.name||"",subjects:s.assignedSubjects||[],position:s.position||"",
+        category,school:String(s.school||"").toLowerCase()==="secondary"?"college":String(s.school||"primary").toLowerCase(),
+        photoUrl:s.photoUrl||"",active:s.active!==false,updatedAt:serverTimestamp()
+      },{merge:true});
+    }
+    toast(`${seen.size} staff profile${seen.size===1?"":"s"} synced.`);
+    await loadCmsStaff();
+  }catch(e){toast(e.message||"Unable to sync staff.");}
+}
+
+async function loadCmsStaff(){
+  try{
+    const snap=await getDocs(collection(db,"publicStaff"));
+    cmsStaffCache=snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderCmsStaff();
+  }catch(e){toast(e.message||"Unable to load public staff profiles.");}
+}
+
+function renderCmsStaff(){
+  const body=document.getElementById("cmsStaffTable"); if(!body)return;
+  const head=document.getElementById("cmsStaffHead");
+  const isNonTeaching=cmsCategory==="non_teaching";
+  if(head) head.innerHTML=isNonTeaching
+    ? "<tr><th>Photo</th><th>Name</th><th>Role</th><th>Actions</th></tr>"
+    : "<tr><th>Photo</th><th>Name</th><th>School</th><th>Subjects</th><th>Position</th><th>Actions</th></tr>";
+  const allRows=cmsStaffCache.filter(s=>s.category===cmsCategory);
+  const rows=isNonTeaching?allRows.slice(0,6):allRows;
+  body.innerHTML=rows.map(s=>{
+    const actions=`<div class="row-actions"><button class="mini-btn primary" onclick="editCmsStaff('${cmsEsc(s.id)}')">Edit</button><button class="mini-btn danger" onclick="deleteCmsStaff('${cmsEsc(s.id)}')">Remove</button></div>`;
+    if(isNonTeaching) return `<tr>
+      <td>${s.photoUrl?`<img class="cms-thumb" src="${cmsEsc(s.photoUrl)}" alt="">`:`<div class="cms-thumb" style="display:flex;align-items:center;justify-content:center;background:#eef4f0;font-weight:900">${cmsEsc((s.name||"S").slice(0,2).toUpperCase())}</div>`}</td>
+      <td><strong>${cmsEsc(s.name||"—")}</strong></td>
+      <td>${cmsEsc(s.position||"—")}</td><td>${actions}</td></tr>`;
+    return `<tr>
+      <td>${s.photoUrl?`<img class="cms-thumb" src="${cmsEsc(s.photoUrl)}" alt="">`:`<div class="cms-thumb" style="display:flex;align-items:center;justify-content:center;background:#eef4f0;font-weight:900">${cmsEsc((s.name||"S").slice(0,2).toUpperCase())}</div>`}</td>
+      <td><strong>${cmsEsc(s.name||"—")}</strong></td>
+      <td>${cmsEsc(s.school==="college"?"College":s.school==="primary"?"Nursery & Primary":"—")}</td>
+      <td>${cmsEsc((s.subjects||[]).join(" / ")||"—")}</td>
+      <td>${cmsEsc(s.position||"—")}</td><td>${actions}</td></tr>`;
+  }).join("")||emptyRow(isNonTeaching?4:6,"No profiles in this category yet.");
+  const toolbar=document.querySelector('#cmsView-staff .toolbar');
+  if(toolbar){
+    const oldNote=toolbar.querySelector('.cms-limit-note'); oldNote?.remove();
+    if(isNonTeaching){
+      const note=document.createElement('span'); note.className='cms-limit-note control-muted'; note.textContent=`${Math.min(allRows.length,6)}/6 non-teaching staff slots used`;
+      toolbar.appendChild(note);
+    }
+  }
+}
+function cmsRenderStaffPhotoNote(){
+  const n=document.getElementById("cmsStaffPhotoNote"); if(n)n.textContent=cmsStaffPhotoFile?cmsStaffPhotoFile.name:"No new photo selected.";
+}
+
+window.openCmsStaffModal=function(id=""){
+  cmsStaffEditingId=id; cmsStaffPhotoFile=null;
+  const s=id?cmsStaffCache.find(x=>x.id===id):null;
+  const wrap=document.getElementById("cmsStaffModal")||document.createElement("div");
+  if(!wrap.id){wrap.id="cmsStaffModal";wrap.className="modal-backdrop";document.body.appendChild(wrap);}
+  const currentCategory=s?.category||cmsCategory;
+  const nonTeaching=currentCategory==="non_teaching";
+  const fields=nonTeaching
+    ? `<div class="field"><label>Name</label><input class="input" id="cmsStaffName" value="${cmsEsc(s?.name||"")}" placeholder="Full name"></div>
+       <div class="field"><label>Role</label><input class="input" id="cmsStaffPosition" value="${cmsEsc(s?.position||"")}" placeholder="e.g. Security"></div>`
+    : `<div class="field"><label>Name</label><input class="input" id="cmsStaffName" value="${cmsEsc(s?.name||"")}"></div>
+       <div class="field"><label>Position</label><input class="input" id="cmsStaffPosition" value="${cmsEsc(s?.position||"")}"></div>
+       <div class="field"><label>Category</label><select class="select" id="cmsStaffCategory"><option value="management">Management</option><option value="college">College Staff</option><option value="primary">Primary Staff</option><option value="non_teaching">Non-teaching Staff</option></select></div>
+       <div class="field"><label>School</label><select class="select" id="cmsStaffSchool"><option value="both">Both / School-wide</option><option value="college">College</option><option value="primary">Nursery & Primary</option></select></div>
+       <div class="field full"><label>Subjects</label><input class="input" id="cmsStaffSubjects" value="${cmsEsc((s?.subjects||[]).join(" / "))}" placeholder="e.g. Mathematics / Physics"></div>`;
+  wrap.innerHTML=`<div class="modal"><div class="modal-head"><h2>${s?"Edit":"Add"} ${nonTeaching?"Non-teaching Staff":"Staff Profile"}</h2><button class="modal-close" onclick="closeCmsStaffModal()">×</button></div>
+  <div class="modal-body"><div class="form-grid">${fields}
+  <div class="field full"><label>Profile Picture</label><div class="photo-box">
+    ${s?.photoUrl?`<img class="cms-thumb" style="width:90px;height:90px" src="${cmsEsc(s.photoUrl)}" alt="">`:""}
+    <div class="cms-media-actions"><button type="button" onclick="cmsPick('staffCamera')">Camera</button><button type="button" onclick="cmsPick('staffPhotos')">Photos</button><button type="button" onclick="cmsPick('staffFiles')">Files</button></div>
+    <input class="cms-hidden-input" id="cmsStaffCamera" type="file" accept="image/*" capture="environment">
+    <input class="cms-hidden-input" id="cmsStaffPhotos" type="file" accept="image/*">
+    <input class="cms-hidden-input" id="cmsStaffFiles" type="file" accept="image/*">
+    <div id="cmsStaffPhotoNote" class="cms-file-note">No new photo selected.</div></div></div>
+  </div></div><div class="modal-foot"><button class="btn" onclick="closeCmsStaffModal()">Cancel</button><button class="btn btn-primary" onclick="saveCmsStaff()">Save Profile</button></div></div>`;
+  wrap.classList.add("open");
+  if(!nonTeaching){document.getElementById("cmsStaffCategory").value=currentCategory;document.getElementById("cmsStaffSchool").value=s?.school||"both";}
+  ["cmsStaffCamera","cmsStaffPhotos","cmsStaffFiles"].forEach(x=>document.getElementById(x)?.addEventListener("change",e=>{cmsStaffPhotoFile=e.target.files?.[0]||null;cmsRenderStaffPhotoNote();}));
+};
+window.editCmsStaff=id=>openCmsStaffModal(id);
+window.closeCmsStaffModal=()=>document.getElementById("cmsStaffModal")?.classList.remove("open");
+
+window.saveCmsStaff=async function(){
+  try{
+    const old=cmsStaffEditingId?cmsStaffCache.find(x=>x.id===cmsStaffEditingId):null;
+    const name=val("cmsStaffName").trim(); if(!name)throw new Error("Staff name is required.");
+    const isNonTeaching=(old?.category||cmsCategory)==="non_teaching";
+    const category=isNonTeaching?"non_teaching":val("cmsStaffCategory"), school=isNonTeaching?"both":val("cmsStaffSchool");
+    const subjects=isNonTeaching?[]:val("cmsStaffSubjects").split("/").map(x=>x.trim()).filter(Boolean);
+    if(isNonTeaching && !old && cmsStaffCache.filter(x=>x.category==="non_teaching").length>=6)throw new Error("Non-teaching Staff is limited to 6 slots.");
+    let photoUrl=old?.photoUrl||"";
+    if(cmsStaffPhotoFile)photoUrl=await cmsUpload(cmsStaffPhotoFile,`public/staff/${cmsStaffEditingId||Date.now()}-${Date.now()}.${(cmsStaffPhotoFile.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"")}`);
+    const id=cmsStaffEditingId||("profile-"+Date.now()+"-"+Math.random().toString(36).slice(2,8));
+    const data={name,position:val("cmsStaffPosition"),category,school,subjects,photoUrl,active:true,updatedAt:serverTimestamp()};
+    if(old?.accountUid){await setDoc(doc(db,"staff",old.accountUid),{name,assignedSubjects:subjects,position:data.position,cmsCategory:category,photoUrl,updatedAt:serverTimestamp()},{merge:true});data.accountUid=old.accountUid;}
+    await setDoc(doc(db,"publicStaff",id),data,{merge:true});
+    closeCmsStaffModal();toast("Staff profile saved.");await loadCmsStaff();
+  }catch(e){toast(e.message||"Unable to save staff profile.");}
+};
+window.deleteCmsStaff=async function(id){
+  if(!confirm("Remove this public staff profile?"))return;
+  try{await deleteDoc(doc(db,"publicStaff",id));toast("Profile removed.");loadCmsStaff();}catch(e){toast(e.message);}
+};
+
+/* ---------- STUDENT PHOTOS ---------- */
+window.cmsStudentSchoolChanged=function(){
+  const school=val("cmsStudentSchool")||"primary";
+  const select=document.getElementById("cmsStudentClass"); if(!select)return;
+  const classes=school==="secondary"?COLLEGE_CLASSES:PRIMARY_CLASSES;
+  select.innerHTML='<option value="">Select class</option>'+classes.map(x=>`<option value="${cmsEsc(x)}">${cmsEsc(x)}</option>`).join("");
+  document.getElementById("cmsStudentTable").innerHTML=emptyRow(5,"Select a class to load students.");
+};
+window.loadCmsStudentPhotos=async function(){
+  const school=val("cmsStudentSchool"), cls=val("cmsStudentClass"); if(!cls)return;
+  try{
+    const d=await worker("list_students",{school}); cmsStudentCache=(d.students||[]).filter(s=>String(s.className||s.class||"").toLowerCase()===cls.toLowerCase());
+    const body=document.getElementById("cmsStudentTable");
+    body.innerHTML=cmsStudentCache.map(s=>`<tr>
+      <td>${s.passportUrl?`<img class="cms-thumb" src="${cmsEsc(s.passportUrl)}" alt="">`:`<div class="cms-thumb" style="display:flex;align-items:center;justify-content:center;background:#f1f4f2">No photo</div>`}</td>
+      <td><strong>${cmsEsc(s.studentName||"—")}</strong></td><td>${cmsEsc(s.admissionNumber||"—")}</td><td>${cmsEsc(s.className||"—")}</td>
+      <td><div class="cms-media-actions"><button onclick="pickStudentPhoto('${cmsEsc(s.studentId||s.uid||s.id||"")}','camera')">Camera</button><button onclick="pickStudentPhoto('${cmsEsc(s.studentId||s.uid||s.id||"")}','photos')">Photos</button><button onclick="pickStudentPhoto('${cmsEsc(s.studentId||s.uid||s.id||"")}','files')">Files</button></div></td>
+    </tr>`).join("")||emptyRow(5,"No students found in this class.");
+  }catch(e){toast(e.message);}
+};
+let cmsStudentPhotoTarget="";
+function pickStudentPhoto(id,source){
+  cmsStudentPhotoTarget=id;
+  let input=document.getElementById("cmsStudentPhotoPicker");
+  if(!input){input=document.createElement("input");input.id="cmsStudentPhotoPicker";input.type="file";input.className="cms-hidden-input";document.body.appendChild(input);input.addEventListener("change",async()=>{const file=input.files?.[0];if(file)await saveCmsStudentPhoto(cmsStudentPhotoTarget,file);input.value="";});}
+  input.accept="image/*"; if(source==="camera") input.setAttribute("capture","environment"); else input.removeAttribute("capture"); input.click();
+}
+window.pickStudentPhoto=pickStudentPhoto;
+async function saveCmsStudentPhoto(id,file){
+  try{
+    const url=await cmsUpload(file,`students/passports/${id}-${Date.now()}.${(file.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"")}`);
+    await setDoc(doc(db,"students",id),{passportUrl:url,updatedAt:serverTimestamp()},{merge:true});
+    toast("Student photo updated."); await loadCmsStudentPhotos();
+  }catch(e){toast(e.message||"Unable to update student photo.");}
+}
+window.loadCmsStudentPhotos=loadCmsStudentPhotos;
+
+/* ---------- PAGE CONTENT ---------- */
+function initCmsPages(){
+  const s=document.getElementById("cmsPageSelect"); if(!s||s.options.length)return;
+  s.innerHTML=CMS_PAGES.map(([id,name])=>`<option value="${id}">${name}</option>`).join("");
+  loadCmsPageEditor();
+}
+window.loadCmsPageEditor=async function(){
+  const page=val("cmsPageSelect"); if(!page)return;
+  const box=document.getElementById("cmsPageEditor"); box.innerHTML='<div class="notice">Loading page content…</div>';
+  try{
+    const html=await fetch(`${page}.html`).then(r=>r.text());
+    const soup=new DOMParser().parseFromString(html,"text/html");
+    const snap=await getDocs(collection(db,"publicContent"));
+    const overrides=snap.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.page===page);
+    const om=new Map(overrides.map(x=>[x.key,x]));
+    const texts=[...soup.querySelectorAll("[data-text-key]")].map(el=>({key:el.dataset.textKey,text:el.textContent.trim()}));
+    const imgs=[...soup.querySelectorAll("img[data-media-key], video[data-media-key]")].map(el=>({key:el.dataset.mediaKey,src:el.getAttribute("src")||"",alt:el.getAttribute("alt")||"",kind:el.tagName.toLowerCase()==="video"?"video":"image"}));
+    cmsPageItems={texts,imgs,overrides};
+    box.innerHTML=`<div class="card"><div class="card-head"><h3>Text &amp; Images — ${cmsEsc(CMS_PAGES.find(x=>x[0]===page)?.[1]||page)}</h3></div><div class="card-body">
+      <h4 style="margin:0 0 10px">Text Content</h4>
+      ${texts.map(t=>{const o=om.get(t.key);return `<div class="field" style="margin-bottom:12px"><label>${cmsEsc(t.text.slice(0,90)||t.key)}</label><textarea class="input cms-page-text" data-key="${cmsEsc(t.key)}" rows="3">${cmsEsc(o?.value!==undefined?o.value:t.text)}</textarea></div>`}).join("")||'<p class="cms-empty">No editable text fields found.</p>'}
+      <div style="margin-top:14px"><button class="btn btn-primary" onclick="saveCmsPageTexts()">Save Text Changes</button></div>
+      <hr style="margin:22px 0;border:0;border-top:1px solid #e5ebe7">
+      <h4 style="margin:0 0 10px">Page Media</h4>
+      ${imgs.map(i=>{const o=om.get(i.key);const current=o?.url||i.src;const preview=i.kind==="video"?`<video class="cms-thumb" src="${cmsEsc(current)}" muted></video>`:`<img class="cms-thumb" src="${cmsEsc(current)}" alt="">`;return `<div class="cms-page-image-row" data-key="${cmsEsc(i.key)}" style="display:grid;grid-template-columns:70px 1fr auto;gap:10px;align-items:center;margin-bottom:12px">${preview}<div><strong>${cmsEsc(i.alt||i.key)}</strong><div class="cms-file-note">${cmsEsc(current)}</div></div><div class="cms-media-actions"><button onclick="pickCmsPageImage('${cmsEsc(i.key)}','camera')">Camera</button><button onclick="pickCmsPageImage('${cmsEsc(i.key)}','photos')">Photos</button><button onclick="pickCmsPageImage('${cmsEsc(i.key)}','files')">Files</button></div></div>`}).join("")||'<p class="cms-empty">No page media found.</p>'}
+      <input id="cmsPageFilePicker" class="cms-hidden-input" type="file" accept="image/*,video/*">
+      <hr style="margin:22px 0;border:0;border-top:1px solid #e5ebe7">
+      <h4 style="margin:0 0 10px">Add New Content to This Page</h4>
+      <div class="cms-inline-form"><div class="field"><label>Title</label><input class="input" id="cmsBlockTitle"></div><div class="field"><label>Media</label><div class="cms-media-actions"><button onclick="pickCmsBlockMedia('camera')">Camera</button><button onclick="pickCmsBlockMedia('photos')">Photos</button><button onclick="pickCmsBlockMedia('files')">Files</button></div><input id="cmsBlockFileCamera" class="cms-hidden-input" type="file" accept="image/*,video/*" capture="environment"><input id="cmsBlockFilePhotos" class="cms-hidden-input" type="file" accept="image/*,video/*"><input id="cmsBlockFileFiles" class="cms-hidden-input" type="file" accept="image/*,video/*"></div><div class="field full"><label>Content</label><textarea class="input" id="cmsBlockBody" rows="5" placeholder="Write the content you want to publish on this page."></textarea></div></div>
+      <div class="cms-file-note" id="cmsBlockFileNote">No media selected.</div><div style="margin-top:12px"><button class="btn btn-primary" onclick="saveCmsBlock()">Publish New Content</button></div>
+    </div></div>`;
+    document.getElementById("cmsPageFilePicker")?.addEventListener("change",cmsPageImageSelected);
+    ["cmsBlockFileCamera","cmsBlockFilePhotos","cmsBlockFileFiles"].forEach(id=>document.getElementById(id)?.addEventListener("change",e=>{const n=document.getElementById("cmsBlockFileNote");if(n)n.textContent=e.target.files?.[0]?.name||"No media selected."; }));
+  }catch(e){box.innerHTML=`<div class="notice">${cmsEsc(e.message||"Unable to load page.")}</div>`;}
+};
+let cmsPageImageTarget="",cmsPageImageFile=null;
+function pickCmsPageImage(key,source){cmsPageImageTarget=key;cmsPageImageFile=null;const i=document.getElementById("cmsPageFilePicker");i.accept="image/*,video/*";if(source==="camera")i.setAttribute("capture","environment");else i.removeAttribute("capture");i.onchange=cmsPageImageSelected;i.click();}
+function cmsPageImageSelected(e){cmsPageImageFile=e.target.files?.[0]||null;if(cmsPageImageFile)saveCmsPageImage();}
+async function saveCmsPageImage(){
+  try{const page=val("cmsPageSelect");const url=await cmsUpload(cmsPageImageFile,`public/pages/${page}-${cmsPageImageTarget}-${Date.now()}.${(cmsPageImageFile.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"")}`);
+    await setDoc(doc(db,"publicContent",`override-${page}-${cmsPageImageTarget}`),{page,key:cmsPageImageTarget,type:"media",url,mediaType:(cmsPageImageFile.type||"").startsWith("video/")?"video":"image",updatedAt:serverTimestamp()},{merge:true});
+    toast((cmsPageImageFile.type||"").startsWith("video/")?"Page video updated.":"Page image updated.");loadCmsPageEditor();
+  }catch(e){toast(e.message);}
+}
+window.pickCmsPageImage=pickCmsPageImage;
+window.saveCmsPageTexts=async function(){
+  try{
+    const page=val("cmsPageSelect");
+    for(const el of document.querySelectorAll(".cms-page-text")){
+      await setDoc(doc(db,"publicContent",`override-${page}-${el.dataset.key}`),{page,key:el.dataset.key,type:"text",value:el.value,updatedAt:serverTimestamp()},{merge:true});
+    }
+    toast("Page text updated.");
+  }catch(e){toast(e.message||"Unable to save page text.");}
+};
+function pickCmsBlockMedia(source){const id=source==="camera"?"cmsBlockFileCamera":source==="photos"?"cmsBlockFilePhotos":"cmsBlockFileFiles";document.getElementById(id)?.click();}
+window.pickCmsBlockMedia=pickCmsBlockMedia;
+window.saveCmsBlock=async function(){
+  try{
+    const page=val("cmsPageSelect"),title=val("cmsBlockTitle"),body=val("cmsBlockBody");
+    if(!title&&!body)throw new Error("Enter a title or content first.");
+    let file=null;
+    for(const id of ["cmsBlockFileCamera","cmsBlockFilePhotos","cmsBlockFileFiles"]){if(document.getElementById(id)?.files?.[0]){file=document.getElementById(id).files[0];break;}}
+    let mediaUrl="",mediaType="";
+    if(file){mediaUrl=await cmsUpload(file,`public/pages/${page}/blocks-${Date.now()}-${file.name.replace(/[^a-z0-9.]/gi,"-")}`);mediaType=file.type.startsWith("video/")?"video":"image";}
+    const id=`block-${Date.now()}-${Math.random().toString(36).slice(2,7)}`;
+    await setDoc(doc(db,"publicContent",id),{page,type:"block",title,body,mediaUrl,mediaType,order:Date.now(),active:true,updatedAt:serverTimestamp()});
+    toast("New page content published.");document.getElementById("cmsBlockTitle").value="";document.getElementById("cmsBlockBody").value="";loadCmsPageEditor();
+  }catch(e){toast(e.message||"Unable to publish content.");}
+};
+
+/* ---------- GALLERY ---------- */
+async function loadCmsAlbums(){
+  const box=document.getElementById("cmsAlbumsList");if(!box)return;
+  try{
+    const snap=await getDocs(collection(db,"publicGalleryAlbums"));
+    const rows=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.active!==false);
+    box.innerHTML=rows.map(a=>`<div class="card" style="margin-bottom:12px"><div class="card-body"><strong>${cmsEsc(a.title||"Album")}</strong> · ${cmsEsc(a.schoolLabel||"BALAD") }<div class="cms-file-note">${cmsEsc(a.description||a.activity||"")}</div><div class="cms-album-items">${(a.items||[]).map(p=>p.type==="video"?`<video controls src="${cmsEsc(p.url)}"></video>`:`<img src="${cmsEsc(p.url)}" alt="">`).join("")}</div></div></div>`).join("")||'<div class="notice">No albums published yet.</div>';
+  }catch(e){toast(e.message||"Unable to load albums.");}
+}
+window.loadCmsAlbums=loadCmsAlbums;
+window.createCmsAlbum=async function(){
+  try{
+    const title=val("galleryAlbumTitle").trim();if(!title)throw new Error("Album / activity name is required.");
+    if(!cmsGalleryFiles.length)throw new Error("Choose at least one photo or video.");
+    const id=`album-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,items=[];
+    for(const file of cmsGalleryFiles){
+      const url=await cmsUpload(file,`public/gallery/${id}/${Date.now()}-${file.name.replace(/[^a-z0-9.]/gi,"-")}`);
+      items.push({url,type:file.type.startsWith("video/")?"video":"image",caption:title});
+    }
+    const school=val("galleryAlbumSchool");
+    const schoolLabel=school==="primary"?"Nursery & Primary":school==="college"?"College":"BALAD PRIVATE SCHOOLS";
+    await setDoc(doc(db,"publicGalleryAlbums",id),{title,description:val("galleryAlbumDescription"),activity:val("galleryAlbumActivity"),school,schoolLabel,items,coverUrl:items[0]?.url||"",active:true,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+    cmsGalleryFiles=[];["cmsGalleryCamera","cmsGalleryPhotos","cmsGalleryFiles"].forEach(x=>{const el=document.getElementById(x);if(el)el.value="";});
+    document.getElementById("cmsGalleryFileNote")?.replaceChildren(document.createTextNode("No media selected."));
+    ["galleryAlbumTitle","galleryAlbumDescription","galleryAlbumActivity"].forEach(x=>document.getElementById(x).value="");
+    toast("Album published.");loadCmsAlbums();
+  }catch(e){toast(e.message||"Unable to publish album.");}
+};
+
+/* Make upload pickers available in staff modal after it is created. */
+
+</script>
+</body>
+</html>

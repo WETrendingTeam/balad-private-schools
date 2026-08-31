@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BALAD Comprehensive College Result</title>
+
+<style>
+:root{
+  --green:#075c43;
+  --green-dark:#064b38;
+  --cream:#eee3c7;
+  --line:#9d9d94;
+  --text:#1d2924;
+  --maroon:#6d252d;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#dcdcdc;
+  color:var(--text);
+  font-family:"Times New Roman",Times,serif;
+  font-size:12px;
+}
+
+.toolbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:var(--green-dark);
+  color:#fff;
+  padding:9px 14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.toolbar strong{font-size:13px}
+
+.toolbar button{
+  border:0;
+  border-radius:7px;
+  padding:8px 12px;
+  background:#fff;
+  color:var(--green-dark);
+  font-family:inherit;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.sheet{
+  width:210mm;
+  min-height:297mm;
+  margin:15px auto;
+  padding:7mm 6mm 5mm;
+  background:var(--cream);
+  border:2px solid var(--green);
+  box-shadow:0 3px 15px #0002;
+}
+
+/* HEADER */
+.header{
+  display:grid;
+  grid-template-columns:92px 1fr 112px;
+  gap:8px;
+  align-items:center;
+}
+
+/* BALAD LOGO */
+.logo-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.logo{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+.school{
+  text-align:center;
+}
+
+.school h1{
+  margin:0;
+  color:var(--green);
+  font-size:25px;
+  line-height:1.05;
+  white-space:nowrap;
+}
+
+
+.school p{
+  margin:2px 0;
+  line-height:1.25;
+  font-size:10px;
+}
+
+/* NOTHING BUT SUCCESS */
+.motto{
+  color:#c62828;
+  font-weight:bold;
+  font-style:italic;
+  font-size:11px;
+  margin:4px 0;
+}
+
+.photo-box{
+  border:1px solid #777;
+  height:105px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:10px;
+  color:#777;
+  background:#fff;
+  overflow:hidden;
+}
+
+.photo-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.access{
+  text-align:center;
+  color:var(--green);
+  font-weight:bold;
+  font-size:9px;
+  margin-top:3px;
+}
+
+.title{
+  text-align:center;
+  color:var(--green);
+  font-weight:bold;
+  margin:7px 0 6px;
+  line-height:1.05;
+}
+
+.title-main{
+  display:block;
+  font-size:16px;
+  color:var(--maroon);
+}
+
+.title-sub{
+  display:block;
+  font-size:10px;
+  margin-top:2px;
+  color:var(--green);
+}
+
+/* STUDENT INFORMATION */
+.info{
+  border:1px solid #888;
+  border-radius:7px;
+  padding:5px 8px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 20px;
+  margin-bottom:6px;
+}
+
+.info-item{
+  display:flex;
+  gap:7px;
+  border-bottom:1px solid #aaa;
+  padding:2.5px 0;
+  min-height:18px;
+  font-size:9.5px;
+}
+
+.info-item b{
+  min-width:105px;
+  font-size:9px;
+}
+
+/* SECTION HEADINGS */
+.section-title{
+  background:var(--green);
+  color:#fff;
+  text-align:center;
+  font-weight:bold;
+  padding:5px 7px;
+  border-radius:7px 7px 0 0;
+  font-size:11px;
+  letter-spacing:.2px;
+}
+
+/* ACADEMIC TABLE */
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.academic{
+  font-size:7.5px;
+  table-layout:fixed;
+}
+
+.academic th,
+.academic td{
+  border:1px solid #9b9b94;
+  padding:3px 2px;
+  text-align:center;
+  vertical-align:middle;
+}
+
+.academic th{
+  font-weight:bold;
+}
+
+.academic .subject{
+  text-align:left;
+  padding-left:5px;
+  width:18%;
+}
+
+.academic .ca{width:6.5%}
+.academic .exam{width:6.5%}
+.academic .total{width:6.5%}
+.academic .grade{width:6.5%}
+.academic .remark{width:10%}
+.academic .term{width:8%}
+.academic .cum{width:9%}
+
+.italic{
+  font-style:italic;
+}
+
+/* SUMMARY */
+.summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  margin-top:6px;
+}
+
+.summary-box{
+  border:1px solid #9b9b94;
+  text-align:center;
+  padding:6px 3px;
+}
+
+.summary-label{
+  color:var(--green);
+  font-size:8px;
+  font-weight:bold;
+}
+
+.summary-value{
+  font-size:14px;
+  font-weight:bold;
+  margin-top:3px;
+}
+
+/* THREE-IN-ONE LOWER ROW */
+.lower{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:6px;
+  margin-top:7px;
+  align-items:start;
+}
+
+.box{
+  border:1px solid #999;
+  min-width:0;
+}
+
+.box-title{
+  background:#e7efe9;
+  color:var(--green);
+  text-align:center;
+  font-weight:bold;
+  padding:4px 2px;
+  font-size:9px;
+}
+
+.box table{
+  font-size:6.8px;
+}
+
+.box th,
+.box td{
+  border:1px solid #aaa;
+  padding:2.5px 2px;
+  text-align:center;
+}
+
+.box .area{
+  text-align:left;
+  padding-left:3px;
+}
+
+.grade-scale table{
+  font-size:7px;
+}
+
+.grade-scale td:first-child{
+  width:32%;
+}
+
+.grade-scale td:nth-child(2){
+  width:20%;
+  font-weight:bold;
+}
+
+/* COMMENTS */
+.comments{
+  margin-top:7px;
+  border-top:1px solid #888;
+}
+
+.comment{
+  text-align:center;
+  padding:5px 10px;
+  border-bottom:1px solid #999;
+}
+
+.comment h3{
+  margin:0 0 3px;
+  color:var(--green);
+  font-size:10px;
+}
+
+.comment p{
+  margin:0;
+  font-size:9.5px;
+  line-height:1.3;
+  font-style:italic;
+}
+
+/* RESUMPTION + PRINCIPAL SIGNATURE */
+.resumption{
+  text-align:center;
+  margin-top:6px;
+}
+
+.resumption-box{
+  display:inline-block;
+  border:1px solid #999;
+  padding:5px 16px;
+  font-size:8.5px;
+  min-width:180px;
+}
+
+.principal{
+  text-align:center;
+  margin-top:7px;
+}
+
+.principal-line{
+  width:190px;
+  border-top:1px solid #777;
+  margin:0 auto 5px;
+}
+
+.signature-box{
+  width:95px;
+  height:38px;
+  border:1px dashed #999;
+  margin:0 auto 4px;
+}
+
+.principal-name{
+  font-size:9px;
+  font-weight:bold;
+}
+
+.footer{
+  border-top:1px solid #777;
+  text-align:center;
+  color:var(--green);
+  font-size:6.5px;
+  margin-top:6px;
+  padding-top:5px;
+}
+
+/* MOBILE */
+@media(max-width:850px){
+
+  body{
+    background:var(--cream);
+    font-size:10px;
+  }
+
+  .toolbar{
+    position:relative;
+    padding:8px 10px;
+  }
+
+  .toolbar strong{
+    font-size:11px;
+  }
+
+  .toolbar button{
+    padding:7px 9px;
+    font-size:10px;
+  }
+
+  .sheet{
+    width:100%;
+    min-height:auto;
+    margin:0;
+    padding:9px 7px 6px;
+    border:1px solid var(--green);
+    box-shadow:none;
+  }
+
+  .header{
+    grid-template-columns:62px 1fr 78px;
+    gap:5px;
+  }
+
+  /* MOBILE LOGO */
+.logo{
+  width:52px;
+  height:52px;
+}
+
+  .school h1{
+    font-size:17px;
+  }
+
+  .school h2{
+    font-size:9px;
+  }
+
+  .school p{
+    font-size:7px;
+    line-height:1.2;
+  }
+
+  .motto{
+    color:#c62828;
+    font-size:8px;
+    margin:2px 0;
+  }
+
+  .photo-box{
+    height:72px;
+    font-size:7px;
+  }
+
+  .access{
+    font-size:6.5px;
+  }
+
+  .title{
+    margin:5px 0 4px;
+  }
+
+  .title-main{
+    font-size:11px;
+    color:var(--maroon);
+  }
+
+  .title-sub{
+    font-size:7.5px;
+  }
+
+  .info{
+    padding:4px 5px;
+    gap:0 8px;
+    margin-bottom:5px;
+  }
+
+  .info-item{
+    font-size:7px;
+    padding:2px 0;
+    min-height:15px;
+    gap:4px;
+  }
+
+  .info-item b{
+    min-width:65px;
+    font-size:6.7px;
+  }
+
+  .section-title{
+    padding:4px;
+    font-size:8.5px;
+  }
+
+  .academic{
+    font-size:5.7px;
+  }
+
+  .academic th,
+  .academic td{
+    padding:2.2px 1px;
+  }
+
+  .academic .subject{
+    width:21%;
+    padding-left:3px;
+  }
+
+  .academic .remark{
+    width:9%;
+  }
+
+  .summary{
+    margin-top:4px;
+  }
+
+  .summary-box{
+    padding:4px 2px;
+  }
+
+  .summary-label{
+    font-size:6px;
+  }
+
+  .summary-value{
+    font-size:10px;
+    margin-top:2px;
+  }
+
+  .lower{
+    gap:3px;
+    margin-top:5px;
+  }
+
+  .box-title{
+    padding:3px 1px;
+    font-size:6.8px;
+  }
+
+  .box table{
+    font-size:4.9px;
+  }
+
+  .box th,
+  .box td{
+    padding:1.7px 1px;
+  }
+
+  .grade-scale table{
+    font-size:5.2px;
+  }
+
+  .comments{
+    margin-top:5px;
+  }
+
+  .comment{
+    padding:4px 5px;
+  }
+
+  .comment h3{
+    font-size:7.5px;
+    margin-bottom:2px;
+  }
+
+  .comment p{
+    font-size:6.8px;
+    line-height:1.25;
+  }
+
+  .resumption{
+    margin-top:4px;
+  }
+
+  .resumption-box{
+    min-width:150px;
+    padding:4px 10px;
+    font-size:6.5px;
+  }
+
+  .principal{
+    margin-top:5px;
+  }
+
+  .principal-line{
+    width:145px;
+    margin-bottom:3px;
+  }
+
+  .signature-box{
+    width:70px;
+    height:25px;
+    margin-bottom:3px;
+  }
+
+  .principal-name{
+    font-size:6.8px;
+  }
+
+  .footer{
+    font-size:5.5px;
+    margin-top:4px;
+    padding-top:3px;
+  }
+}
+
+@media print{
+  body{background:#fff}
+
+  .toolbar{display:none}
+
+  .sheet{
+    margin:0;
+    width:210mm;
+    min-height:297mm;
+    box-shadow:none;
+  }
+}
+</style>
+</head>
+
+<body data-result-section="senior">
+
+<div class="toolbar">
+  <strong>BALAD COLLEGE RESULT</strong>
+  <button onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+<main class="sheet">
+
+  <header class="header">
+
+    <div class="logo-wrap">
+      <img
+        class="logo"
+        alt="Balad Private Schools Logo"
+        src="images/logo.png"
+        data-media-key="asset-logo-png"
+      >
+    </div>
+
+    <div class="school">
+      <h1>BALAD COMPREHENSIVE COLLEGE</h1>
+     
+
+      <p>
+        1, Obafemi Street, Abule Afa Bus-stop, Near Ori-Okuta Junction,<br>
+        Off Isawo Road, Ikorodu, Lagos State.
+      </p>
+
+      <p>
+        Tel: 0706 477 1930, 0806 922 0087, 0818 282 2521
+      </p>
+
+      <p>
+        Email: baladschools@gmail.com | Website: www.baladschools.com
+      </p>
+
+      <div class="motto">“Nothing But Success”</div>
+
+      <p>(English, French and Arabic Languages)</p>
+    </div>
+
+    <div>
+      <div class="photo-box">STUDENT<br>PHOTO</div>
+
+      <div class="access">
+        RESULT ACCESS CODE<br>
+        <span>BPS-7X9K-2M4D</span>
+      </div>
+    </div>
+
+  </header>
+
+  <div class="title">
+    <span class="title-main">PROGRESS REPORT SHEET FOR COLLEGE</span>
+    <span class="title-sub">SENIOR SECONDARY SCHOOL</span>
+  </div>
+
+  <section class="info">
+
+    <div class="info-item">
+      <b>SESSION:</b><span>2026/2027</span>
+    </div>
+
+    <div class="info-item">
+      <b>TERM:</b><span>SECOND TERM</span>
+    </div>
+
+    <div class="info-item">
+      <b>NAME OF STUDENT:</b><span>MUBARAK SULIAT KEHINDE</span>
+    </div>
+
+    <div class="info-item">
+      <b>ATTENDANCE:</b><span>93%</span>
+    </div>
+
+    <div class="info-item">
+      <b>ADMISSION NO.:</b><span>BAL/SS2/0026</span>
+    </div>
+
+    <div class="info-item">
+      <b>NO. IN CLASS:</b><span>26</span>
+    </div>
+
+    <div class="info-item">
+      <b>CLASS:</b><span>SS2 SCIENCE</span>
+    </div>
+
+    <div class="info-item">
+      <b>NO. TIMES SCHOOL OPENED:</b><span>104</span>
+    </div>
+
+    <div class="info-item">
+      <b>GENDER:</b><span>FEMALE</span>
+    </div>
+
+    <div class="info-item">
+      <b>NO. TIMES PRESENT:</b><span>97</span>
+    </div>
+
+    <div class="info-item">
+      <b>AGE:</b><span>16 YEARS</span>
+    </div>
+
+    <div class="info-item">
+      <b>NO. TIMES ABSENT:</b><span>7</span>
+    </div>
+
+    <div class="info-item">
+      <b>NEXT TERM BEGINS:</b><span>8 SEPTEMBER 2027</span>
+    </div>
+
+  </section>
+
+  <div class="section-title">ACADEMIC PERFORMANCE</div>
+
+  <table class="academic">
+
+    <thead>
+      <tr>
+        <th rowspan="2" class="subject">SUBJECT</th>
+        <th colspan="3">SCORES</th>
+        <th rowspan="2" class="grade">GRADE</th>
+        <th rowspan="2" class="remark">REMARK</th>
+        <th rowspan="2" class="term">1ST TERM<br>%</th>
+        <th rowspan="2" class="term">2ND TERM<br>%</th>
+        <th rowspan="2" class="cum">CUMULATIVE<br>AVG %</th>
+      </tr>
+
+      <tr>
+        <th class="ca">CA<br>40</th>
+        <th class="exam">EXAM<br>60</th>
+        <th class="total">TOTAL<br>100</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr><td class="subject">English Language</td><td>34</td><td>52</td><td>86</td><td><b>A</b></td><td class="italic">Excellent</td><td>82</td><td>86</td><td><b>84</b></td></tr>
+
+      <tr><td class="subject">Mathematics</td><td>37</td><td>54</td><td>91</td><td><b>A</b></td><td class="italic">Excellent</td><td>84</td><td>91</td><td><b>87.5</b></td></tr>
+
+      <tr><td class="subject">Physics</td><td>32</td><td>49</td><td>81</td><td><b>A</b></td><td class="italic">Excellent</td><td>80</td><td>81</td><td><b>80.5</b></td></tr>
+
+      <tr><td class="subject">Chemistry</td><td>35</td><td>55</td><td>90</td><td><b>A</b></td><td class="italic">Excellent</td><td>78</td><td>90</td><td><b>84</b></td></tr>
+
+      <tr><td class="subject">Biology</td><td>36</td><td>51</td><td>87</td><td><b>A</b></td><td class="italic">Excellent</td><td>79</td><td>87</td><td><b>83</b></td></tr>
+
+      <tr><td class="subject">Further Mathematics</td><td>31</td><td>50</td><td>81</td><td><b>A</b></td><td class="italic">Excellent</td><td>76</td><td>81</td><td><b>78.5</b></td></tr>
+
+      <tr><td class="subject">Agricultural Science</td><td>33</td><td>48</td><td>81</td><td><b>A</b></td><td class="italic">Excellent</td><td>74</td><td>81</td><td><b>77.5</b></td></tr>
+
+      <tr><td class="subject">Economics</td><td>38</td><td>56</td><td>94</td><td><b>A</b></td><td class="italic">Excellent</td><td>82</td><td>94</td><td><b>88</b></td></tr>
+
+      <tr><td class="subject">Food and Nutrition</td><td>35</td><td>53</td><td>88</td><td><b>A</b></td><td class="italic">Excellent</td><td>80</td><td>88</td><td><b>84</b></td></tr>
+
+      <tr><td class="subject">Civic Education</td><td>36</td><td>52</td><td>88</td><td><b>A</b></td><td class="italic">Excellent</td><td>78</td><td>88</td><td><b>83</b></td></tr>
+
+      <tr><td class="subject">Data Processing</td><td>34</td><td>50</td><td>84</td><td><b>A</b></td><td class="italic">Excellent</td><td>76</td><td>84</td><td><b>80</b></td></tr>
+
+      <tr><td class="subject">Arabic</td><td>32</td><td>49</td><td>81</td><td><b>A</b></td><td class="italic">Excellent</td><td>75</td><td>81</td><td><b>78</b></td></tr>
+
+      <tr><td class="subject">Technical Drawing</td><td>30</td><td>47</td><td>77</td><td><b>B</b></td><td class="italic">Very Good</td><td>70</td><td>77</td><td><b>73.5</b></td></tr>
+
+      <tr><td class="subject">Islamic Religion Studies</td><td>29</td><td>46</td><td>75</td><td><b>B</b></td><td class="italic">Very Good</td><td>68</td><td>75</td><td><b>71.5</b></td></tr>
+
+    </tbody>
+
+  </table>
+
+  <div class="summary">
+
+    <div class="summary-box">
+      <div class="summary-label">TOTAL SCORE</div>
+      <div class="summary-value">1,209 / 1,400</div>
+    </div>
+
+    <div class="summary-box">
+      <div class="summary-label">CURRENT AVERAGE</div>
+      <div class="summary-value">86.36%</div>
+    </div>
+
+    <div class="summary-box">
+      <div class="summary-label">CUMULATIVE AVERAGE</div>
+      <div class="summary-value">81.93%</div>
+    </div>
+
+  </div>
+
+  <div class="lower">
+
+    <section class="box">
+
+      <div class="box-title">PSYCHOMOTOR SKILLS</div>
+
+      <table>
+        <tr>
+          <th>AREA</th>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th>D</th>
+        </tr>
+
+        <tr><td class="area">Sports / Games</td><td></td><td>✓</td><td></td><td></td></tr>
+        <tr><td class="area">Handwriting</td><td></td><td></td><td>✓</td><td></td></tr>
+        <tr><td class="area">Drawing & Painting</td><td></td><td>✓</td><td></td><td></td></tr>
+        <tr><td class="area">Verbal Fluency</td><td></td><td>✓</td><td></td><td></td></tr>
+        <tr><td class="area">Club Activities</td><td></td><td></td><td>✓</td><td></td></tr>
+        <tr><td class="area">Practical Skills</td><td>✓</td><td></td><td></td><td></td></tr>
+      </table>
+
+    </section>
+
+    <section class="box">
+
+      <div class="box-title">AFFECTIVE AREAS</div>
+
+      <table>
+
+        <tr>
+          <th>AREA</th>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th>D</th>
+        </tr>
+
+        <tr><td class="area">Punctuality</td><td>✓</td><td></td><td></td><td></td></tr>
+        <tr><td class="area">Neatness</td><td></td><td>✓</td><td></td><td></td></tr>
+        <tr><td class="area">Politeness</td><td>✓</td><td></td><td></td><td></td></tr>
+        <tr><td class="area">Honesty</td><td>✓</td><td></td><td></td><td></td></tr>
+        <tr><td class="area">Cooperation</td><td></td><td>✓</td><td></td><td></td></tr>
+        <tr><td class="area">Leadership</td><td></td><td>✓</td><td></td><td></td></tr>
+
+      </table>
+
+    </section>
+
+    <section class="box grade-scale">
+
+      <div class="box-title">GRADE SCALE</div>
+
+      <table>
+
+        <tr>
+          <th>RANGE</th>
+          <th>GRADE</th>
+          <th>REMARK</th>
+        </tr>
+
+        <tr><td>75–100</td><td>A</td><td>Excellent</td></tr>
+        <tr><td>70–74</td><td>B</td><td>Very Good</td></tr>
+        <tr><td>50–69</td><td>C</td><td>Good / Credit</td></tr>
+        <tr><td>45–49</td><td>D</td><td>Fair</td></tr>
+        <tr><td>40–44</td><td>E</td><td>Pass</td></tr>
+        <tr><td>Below 40</td><td>F</td><td>Needs Improvement</td></tr>
+
+      </table>
+
+    </section>
+
+  </div>
+
+  <section class="comments">
+
+    <div class="comment">
+      <h3>Class Teacher's Remark:</h3>
+      <p>Mubarak is a bright and diligent student. She shows great interest in her studies and should keep it up.</p>
+    </div>
+
+    <div class="comment">
+      <h3>Principal's Comment:</h3>
+      <p>A very good term. You are encouraged to maintain this standard.</p>
+    </div>
+
+  </section>
+
+  <div class="resumption">
+    <div class="resumption-box">
+      <b>Resumption Date:</b> __________________
+    </div>
+  </div>
+
+  <div class="principal">
+
+    <div class="principal-line"></div>
+
+    <div class="signature-box"></div>
+
+    <div class="principal-name">
+      PRINCIPAL: USMAN OLATUNBOSUN
+    </div>
+
+  </div>
+
+  <div class="footer">
+    © Balad private schools
+  </div>
+
+</main>
+
+<script src="result-template.js"></script>
+</body>
+</html>

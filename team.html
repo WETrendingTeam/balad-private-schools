@@ -3,43 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Meet Our Team | BALAD Private Schools</title>
+
 <link rel="stylesheet" href="style.css">
 
 <style>
+
+/* =========================================================
+   BALAD TEAM PAGE
+   KEEP EXISTING CARD DESIGN / DIMENSIONS
+   ========================================================= */
 
 .team-page{
   background:#fff;
   color:#17221e;
 }
 
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
 .team-hero-shell{
-  background:#f4eddf;
-  border-bottom:1px solid #e6dece;
+  position:relative;
+  min-height:360px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      rgba(0,0,0,.42),
+      rgba(0,0,0,.55)
+    ),
+    url("images/team.jpg") center/cover no-repeat;
 }
 
 .team-hero-heading{
-  max-width:900px;
+  position:relative;
+  z-index:2;
+  width:min(900px,92%);
   margin:0 auto;
-  padding:58px 20px 48px;
+  padding:70px 20px;
   text-align:center;
 }
 
 .team-hero-heading .team-hero-eyebrow{
   margin:0 0 12px;
+
   color:#075c46;
+
   font-size:clamp(1.8rem,4vw,3rem);
   font-weight:800;
   letter-spacing:.02em;
+
+  text-shadow:
+    0 2px 5px rgba(0,0,0,.45);
 }
 
 .team-hero-heading > p:last-child{
   margin:0 auto;
   max-width:760px;
-  color:#34413d;
+
+  color:#fff;
+
   font-size:clamp(1rem,2vw,1.2rem);
   line-height:1.55;
+  font-weight:500;
+
+  text-shadow:
+    0 2px 5px rgba(0,0,0,.7);
 }
+
+
+/* =========================================================
+   TEAM SECTIONS
+   ========================================================= */
 
 .team-live-section{
   padding:30px 0 20px;
@@ -53,139 +94,265 @@
 
 .team-live-header h2{
   margin:0 0 6px;
+
   color:#075c46;
+
   font-size:clamp(1.6rem,3vw,2.15rem);
+  font-weight:800;
 }
 
 .team-live-header p{
   margin:0 auto;
+
   color:#68746f;
+
   font-size:1rem;
   line-height:1.4;
 }
 
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
 .team-live-grid{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
   gap:18px;
+
   width:100%;
 }
+
+
+/*
+   FIRST TWO MANAGEMENT MEMBERS
+
+   This is intentionally kept at 66.6667%
+   so the first two cards remain centred exactly
+   like the reference design.
+*/
 
 .management-top{
   width:66.6667%;
   margin:0 auto 18px;
 }
 
+
+/*
+   REMAINING MANAGEMENT MEMBERS
+*/
+
 .management-bottom{
   width:100%;
 }
 
+
+/* =========================================================
+   TEAM CARD
+   ========================================================= */
+
 .team-profile-card{
   display:block;
+
   width:100%;
   min-width:0;
+
   padding:0;
   margin:0;
+
   border:1px solid #dfe8e4;
   border-top:4px solid #087454;
+
   border-radius:15px;
+
   overflow:hidden;
+
   background:#fff;
-  box-shadow:0 7px 22px rgba(15,40,30,.07);
+
+  box-shadow:
+    0 7px 22px rgba(15,40,30,.07);
+
   text-align:left;
+
   cursor:pointer;
+
   color:inherit;
-  transition:transform .18s ease, box-shadow .18s ease;
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease;
 }
 
 .team-profile-card:hover,
 .team-profile-card:focus-visible{
   transform:translateY(-3px);
-  box-shadow:0 12px 28px rgba(15,40,30,.12);
+
+  box-shadow:
+    0 12px 28px rgba(15,40,30,.12);
+
   outline:2px solid #075c46;
   outline-offset:2px;
 }
 
-/* KEEP EXISTING IMAGE SIZE / CARD STRUCTURE */
+
+/* =========================================================
+   TEAM PHOTO
+   IMPORTANT:
+   KEEP THE CARD SIZE.
+   ONLY MAKE THE IMAGE FIT.
+   ========================================================= */
 
 .team-profile-photo,
 .team-profile-placeholder{
   width:100%;
+
   aspect-ratio:1 / 1;
+
   height:auto;
+
   display:block;
+
   object-fit:contain;
+
   object-position:center;
+
   background:#eaf3ef;
 }
 
 .team-profile-placeholder{
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   color:#087454;
+
   font-size:clamp(1.5rem,4vw,2.5rem);
+
   font-weight:800;
 }
+
+
+/* =========================================================
+   CARD BODY
+   ========================================================= */
 
 .team-profile-body{
   padding:12px 13px 13px;
 }
 
-/* STAFF NAME */
+
+/* =========================================================
+   STAFF NAME
+   ========================================================= */
 
 .team-profile-body h3{
   margin:0 0 7px;
-  color:#075c46 !important;
+
+  color:#075c46;
+
   font-size:clamp(.92rem,1.55vw,1.08rem);
+
   line-height:1.2;
-  font-weight:800 !important;
+
+  font-weight:800;
 }
 
-/* QUALIFICATION / SUBJECT */
+
+/* =========================================================
+   DETAILS
+   ========================================================= */
 
 .team-detail{
   display:flex;
+
   align-items:baseline;
+
   gap:5px;
+
   margin:4px 0;
-  color:#17221e !important;
+
+  color:#17221e;
+
   font-size:.82rem;
+
   line-height:1.3;
 }
 
+
+/* LABEL
+   Qualification:
+   Subject:
+*/
+
 .team-detail strong{
   flex:0 0 auto;
-  color:#075c46 !important;
-  font-weight:800 !important;
-  font-style:italic !important;
+
+  color:#075c46;
+
+  font-weight:800;
+
+  font-style:italic;
 }
+
+
+/* VALUE
+   Actual qualification / subject
+*/
 
 .team-detail span{
   min-width:0;
-  color:#17221e !important;
-  font-weight:500 !important;
-  font-style:normal !important;
+
+  color:#17221e;
+
+  font-weight:500;
+
+  font-style:normal;
 }
 
-/* POSITION / ROLE */
+
+/* =========================================================
+   POSITION / ROLE
+   ========================================================= */
 
 .team-profile-role{
   margin:10px 0 0;
+
   padding-top:0;
-  color:#c52c2c !important;
+
+  color:#c52c2c;
+
   text-align:center;
-  font-weight:800 !important;
+
+  font-weight:800;
+
   font-size:.9rem;
+
   line-height:1.25;
 }
 
+
+/* =========================================================
+   CLICK NOTE
+   ========================================================= */
+
 .team-click-note{
   margin:8px 0 0;
-  color:#68746f;
+
+  color:#8a9590;
+
   font-size:.72rem;
+
   font-weight:700;
 }
+
+
+/* =========================================================
+   PRIMARY
+   ========================================================= */
 
 .primary-grid .team-profile-body{
   padding:11px 13px 13px;
@@ -195,41 +362,71 @@
   margin:0;
 }
 
+
+/* =========================================================
+   NON-TEACHING
+   ========================================================= */
+
 .nonteaching-grid .team-profile-body h3{
   margin-bottom:6px;
 }
 
 .nonteaching-role{
   margin:0;
+
   color:#075c46;
+
   font-size:.84rem;
+
   font-weight:800;
 }
+
+
+/* =========================================================
+   LOADING / EMPTY / ERROR
+   ========================================================= */
 
 .team-loading,
 .team-empty,
 .team-error{
   grid-column:1/-1;
+
   padding:22px;
+
   border-radius:14px;
+
   text-align:center;
+
   color:#68746f;
+
   background:#f5f8f6;
 }
 
 .team-error{
   color:#a21b1b;
+
   background:#fff1ef;
 }
 
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
 .team-modal{
   position:fixed;
+
   inset:0;
+
   z-index:9999;
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   padding:18px;
+
   background:rgba(10,30,23,.68);
 }
 
@@ -239,34 +436,54 @@
 
 .team-modal-card{
   position:relative;
+
   width:min(520px,100%);
+
   max-height:90vh;
+
   overflow:auto;
+
   border-radius:20px;
+
   background:#fff;
-  box-shadow:0 25px 70px rgba(0,0,0,.25);
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.25);
 }
 
 .team-modal-close{
   position:absolute;
+
   top:10px;
   right:10px;
+
   z-index:2;
+
   width:38px;
   height:38px;
+
   border:0;
+
   border-radius:50%;
+
   background:rgba(255,255,255,.94);
+
   color:#075c46;
+
   font-size:23px;
+
   cursor:pointer;
 }
 
 .team-modal-photo{
   width:100%;
+
   aspect-ratio:1 / 1;
+
   object-fit:cover;
+
   display:block;
+
   background:#eaf3ef;
 }
 
@@ -276,20 +493,29 @@
 
 .team-modal-body h2{
   margin:0 0 5px;
-  color:#17221e;
+
+  color:#075c46;
+
+  text-align:center;
 }
 
 .team-modal-role{
   margin:0 0 12px;
+
   color:#c52c2c;
+
   text-align:center;
+
   font-weight:800;
 }
 
 .team-modal-row{
   padding:8px 0;
+
   border-bottom:1px solid #e5ebe8;
+
   color:#17221e;
+
   line-height:1.4;
 }
 
@@ -299,94 +525,204 @@
 
 .team-modal-row strong{
   color:#075c46;
+
+  font-weight:800;
+
+  font-style:italic;
+
   margin-right:5px;
 }
 
-/* MOBILE
-   Card dimensions and grid remain unchanged.
-*/
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width:700px){
 
-  .team-hero-heading{
-    padding:40px 15px 34px;
+  .team-hero-shell{
+    min-height:360px;
   }
+
+  .team-hero-heading{
+    padding:55px 15px 45px;
+  }
+
+  .team-hero-heading .team-hero-eyebrow{
+    color:#087454;
+
+    font-size:2rem;
+  }
+
+  .team-hero-heading > p:last-child{
+    color:#fff;
+
+    font-size:.9rem;
+
+    line-height:1.5;
+  }
+
 
   .team-live-section{
     padding:24px 0 14px;
   }
 
+
   .team-live-grid{
     gap:9px;
   }
 
+
+  /*
+     KEEP THE SAME MANAGEMENT WIDTH
+     AS THE REFERENCE.
+  */
+
   .management-top{
     width:66.6667%;
+
+    margin-left:auto;
+    margin-right:auto;
+
     gap:9px;
   }
+
 
   .team-profile-body{
     padding:8px 8px 9px;
   }
 
+
   .team-profile-body h3{
     font-size:.72rem;
+
     margin-bottom:5px;
-    color:#075c46 !important;
-    font-weight:800 !important;
+
+    line-height:1.2;
   }
+
 
   .team-detail{
     display:block;
+
     margin:3px 0;
-    color:#17221e !important;
+
+    color:#17221e;
+
     font-size:.66rem;
+
     line-height:1.25;
   }
 
+
   .team-detail strong{
     display:inline;
-    color:#075c46 !important;
-    font-weight:800 !important;
-    font-style:italic !important;
+
+    color:#075c46;
+
+    font-style:italic;
+
+    font-weight:800;
   }
 
+
   .team-detail span{
-    color:#17221e !important;
-    font-weight:500 !important;
-    font-style:normal !important;
+    color:#17221e;
+
+    font-weight:500;
   }
+
 
   .team-profile-role{
     margin-top:6px;
-    color:#c52c2c !important;
+
+    color:#c52c2c;
+
     font-size:.68rem;
-    font-weight:800 !important;
+
+    font-weight:800;
   }
+
 
   .team-click-note{
     font-size:.58rem;
+
     margin-top:5px;
-    color:#68746f;
+
+    color:#8a9590;
   }
+
 
   .nonteaching-role{
     font-size:.65rem;
   }
 
+
   .team-live-header h2{
     font-size:1.5rem;
   }
+
 
   .team-live-header p{
     font-size:.86rem;
   }
 }
 
+
+/* =========================================================
+   EXTRA TEXT OVERRIDE
+   Ensures dynamically generated staff text stays correct.
+   DOES NOT ALTER CARD SIZE.
+   ========================================================= */
+
+.team-profile-card h3{
+  color:#075c46 !important;
+  font-weight:800 !important;
+}
+
+.team-profile-card .team-detail strong{
+  color:#075c46 !important;
+  font-weight:800 !important;
+  font-style:italic !important;
+}
+
+.team-profile-card .team-detail span{
+  color:#17221e !important;
+  font-weight:500 !important;
+  font-style:normal !important;
+}
+
+.team-profile-card .team-profile-role{
+  color:#c52c2c !important;
+  font-weight:800 !important;
+}
+
+
+/* =========================================================
+   NAVIGATION SAFETY
+   Make sure mobile menu button remains visible.
+   ========================================================= */
+
+.menu-btn{
+  position:relative;
+  z-index:10001;
+}
+
+#balad-main-nav{
+  position:relative;
+  z-index:10000;
+}
+
 </style>
 </head>
 
+
 <body class="team-page" data-cms-page="team">
+
+
+<!-- =======================================================
+     HEADER / NAVIGATION
+     ======================================================= -->
 
 <header>
 
@@ -414,11 +750,13 @@
 
   </div>
 
+
   <input
     class="menu-toggle"
     id="balad-menu-toggle"
     type="checkbox"
   >
+
 
   <label
     aria-label="Open menu"
@@ -427,15 +765,18 @@
   >
 
     <span class="menu-icon-open">☰</span>
+
     <span class="menu-icon-close">×</span>
 
   </label>
+
 
   <nav id="balad-main-nav">
 
     <a href="index.html">Home</a>
 
     <a href="about.html">About</a>
+
 
     <details class="academic-nav school-nav">
 
@@ -455,9 +796,16 @@
 
     </details>
 
-    <a href="cbt-centre.html">CBT Centre</a>
 
-    <a href="admissions.html">Admissions</a>
+    <a href="cbt-centre.html">
+      CBT Centre
+    </a>
+
+
+    <a href="admissions.html">
+      Admissions
+    </a>
+
 
     <details class="academic-nav">
 
@@ -465,33 +813,63 @@
 
       <div class="academic-submenu">
 
-        <a href="curriculum.html">Curriculum</a>
+        <a href="curriculum.html">
+          Curriculum
+        </a>
 
-        <a href="stem.html">STEM</a>
+        <a href="stem.html">
+          STEM
+        </a>
 
-        <a href="results.html">Result Portal</a>
+        <a href="results.html">
+          Result Portal
+        </a>
 
       </div>
 
     </details>
 
-    <a class="active" href="team.html">
+
+    <a
+      class="active"
+      href="team.html"
+    >
       Meet Our Team
     </a>
 
-    <a href="facilities.html">Facilities</a>
 
-    <a href="gallery.html">Gallery</a>
+    <a href="facilities.html">
+      Facilities
+    </a>
 
-    <a href="news.html">News &amp; Events</a>
 
-    <a href="alumni.html">Alumni</a>
+    <a href="gallery.html">
+      Gallery
+    </a>
 
-    <a class="nav-login-button" href="control-login.html">
+
+    <a href="news.html">
+      News &amp; Events
+    </a>
+
+
+    <a href="alumni.html">
+      Alumni
+    </a>
+
+
+    <a
+      class="nav-login-button"
+      href="control-login.html"
+    >
       LOGIN
     </a>
 
-    <a class="nav-contact-button" href="contact.html">
+
+    <a
+      class="nav-contact-button"
+      href="contact.html"
+    >
       CONTACT US
     </a>
 
@@ -499,6 +877,11 @@
 
 </header>
 
+
+
+<!-- =======================================================
+     HERO
+     ======================================================= -->
 
 <section class="team-hero-shell">
 
@@ -519,9 +902,17 @@
 </section>
 
 
+
+<!-- =======================================================
+     MAIN
+     ======================================================= -->
+
 <main>
 
-  <!-- MANAGEMENT -->
+
+  <!-- =====================================================
+       MANAGEMENT
+       ===================================================== -->
 
   <section class="team-live-section">
 
@@ -530,15 +921,21 @@
       <div class="team-live-header">
 
         <h2>
-          Management
+          Management Team
         </h2>
 
         <p>
-          Our school leaders and management team.
+          School leadership responsible for academic direction,
+          administration and the smooth running of Balad Private Schools.
         </p>
 
       </div>
 
+
+      <!-- FIRST TWO:
+           Principal
+           Head Teacher
+      -->
 
       <div
         class="team-live-grid management-top"
@@ -552,6 +949,12 @@
       </div>
 
 
+      <!-- NEXT THREE:
+           VP Administration
+           VP Academics
+           Administrator
+      -->
+
       <div
         class="team-live-grid management-bottom"
         id="management-bottom"
@@ -562,7 +965,10 @@
   </section>
 
 
-  <!-- COLLEGE -->
+
+  <!-- =====================================================
+       COLLEGE
+       ===================================================== -->
 
   <section class="team-live-section">
 
@@ -598,7 +1004,10 @@
   </section>
 
 
-  <!-- PRIMARY -->
+
+  <!-- =====================================================
+       PRIMARY
+       ===================================================== -->
 
   <section class="team-live-section">
 
@@ -634,7 +1043,10 @@
   </section>
 
 
-  <!-- NON-TEACHING -->
+
+  <!-- =====================================================
+       NON-TEACHING
+       ===================================================== -->
 
   <section class="team-live-section">
 
@@ -672,7 +1084,10 @@
 </main>
 
 
-<!-- PROFILE MODAL -->
+
+<!-- =======================================================
+     PROFILE MODAL
+     ======================================================= -->
 
 <div
   class="team-modal"
@@ -696,11 +1111,13 @@
       ×
     </button>
 
+
     <img
       class="team-modal-photo"
       id="team-modal-photo"
       alt=""
     >
+
 
     <div
       class="team-modal-body"
@@ -712,6 +1129,11 @@
 </div>
 
 
+
+<!-- =======================================================
+     FIREBASE / STAFF LOADER
+     ======================================================= -->
+
 <script type="module">
 
 import { db } from "./firebase-config.js";
@@ -719,33 +1141,42 @@ import { db } from "./firebase-config.js";
 import {
   collection,
   getDocs
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* =========================================
-   SECURITY / HTML ESCAPING
-   ========================================= */
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
 
 const esc = (value="") =>
-  String(value).replace(/[&<>"']/g, ch => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-  }[ch]));
+  String(value).replace(
+    /[&<>"']/g,
+    ch => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[ch])
+  );
 
 
-/* =========================================
+
+/* =========================================================
    SAFE IMAGE URL
-   ========================================= */
+   ========================================================= */
 
 function safeUrl(value=""){
 
   try{
 
     const url =
-      new URL(value, location.href);
+      new URL(
+        value,
+        location.href
+      );
 
     if(
       url.protocol === "http:" ||
@@ -764,9 +1195,10 @@ function safeUrl(value=""){
 }
 
 
-/* =========================================
-   STAFF INITIALS
-   ========================================= */
+
+/* =========================================================
+   INITIALS
+   ========================================================= */
 
 function initials(name="Staff"){
 
@@ -782,9 +1214,10 @@ function initials(name="Staff"){
 }
 
 
-/* =========================================
-   SUBJECT VALUE
-   ========================================= */
+
+/* =========================================================
+   SUBJECT
+   ========================================================= */
 
 function subjectValue(staff){
 
@@ -814,9 +1247,10 @@ function subjectValue(staff){
 }
 
 
-/* =========================================
-   QUALIFICATION VALUE
-   ========================================= */
+
+/* =========================================================
+   QUALIFICATION
+   ========================================================= */
 
 function qualificationValue(staff){
 
@@ -829,9 +1263,10 @@ function qualificationValue(staff){
 }
 
 
-/* =========================================
-   ROLE / POSITION
-   ========================================= */
+
+/* =========================================================
+   ROLE
+   ========================================================= */
 
 function roleValue(staff){
 
@@ -844,9 +1279,10 @@ function roleValue(staff){
 }
 
 
-/* =========================================
+
+/* =========================================================
    PHOTO
-   ========================================= */
+   ========================================================= */
 
 function photoMarkup(staff, modal=false){
 
@@ -857,11 +1293,16 @@ function photoMarkup(staff, modal=false){
       ""
     );
 
+
   if(url){
 
     return `
       <img
-        class="${modal ? "team-modal-photo" : "team-profile-photo"}"
+        class="${
+          modal
+            ? "team-modal-photo"
+            : "team-profile-photo"
+        }"
         src="${esc(url)}"
         alt="${esc(staff.name || "Staff")}"
       >
@@ -869,16 +1310,21 @@ function photoMarkup(staff, modal=false){
 
   }
 
+
   return modal
 
     ? `
-      <div class="team-profile-placeholder team-modal-photo">
+      <div
+        class="team-profile-placeholder team-modal-photo"
+      >
         ${esc(initials(staff.name))}
       </div>
     `
 
     : `
-      <div class="team-profile-placeholder">
+      <div
+        class="team-profile-placeholder"
+      >
         ${esc(initials(staff.name))}
       </div>
     `;
@@ -886,11 +1332,12 @@ function photoMarkup(staff, modal=false){
 }
 
 
-/* =========================================
-   STAFF DETAIL
-   ========================================= */
 
-function detail(label, value){
+/* =========================================================
+   DETAIL ROW
+   ========================================================= */
+
+function detail(label,value){
 
   if(!value) return "";
 
@@ -911,11 +1358,12 @@ function detail(label, value){
 }
 
 
-/* =========================================
-   STAFF CARD
-   ========================================= */
 
-function card(staff, category){
+/* =========================================================
+   CARD
+   ========================================================= */
+
+function card(staff,category){
 
   const name =
     staff.name ||
@@ -953,6 +1401,7 @@ function card(staff, category){
         "Subject",
         subject
       );
+
 
     if(role){
 
@@ -1003,6 +1452,8 @@ function card(staff, category){
   }
 
 
+  /* PROFILE NOTE */
+
   if(category !== "primary"){
 
     body += `
@@ -1035,18 +1486,26 @@ function card(staff, category){
 }
 
 
-/* =========================================
+
+/* =========================================================
    MODAL
-   ========================================= */
+   ========================================================= */
 
 const modal =
-  document.getElementById("team-modal");
+  document.getElementById(
+    "team-modal"
+  );
 
 const modalBody =
-  document.getElementById("team-modal-body");
+  document.getElementById(
+    "team-modal-body"
+  );
 
 const modalPhoto =
-  document.getElementById("team-modal-photo");
+  document.getElementById(
+    "team-modal-photo"
+  );
+
 
 
 function openProfile(staff){
@@ -1084,6 +1543,7 @@ function openProfile(staff){
       ${esc(staff.name || "Staff")}
     </h2>
 
+
     ${
       role
         ? `
@@ -1093,6 +1553,7 @@ function openProfile(staff){
         `
         : ""
     }
+
 
     ${
       qualification
@@ -1106,6 +1567,7 @@ function openProfile(staff){
         `
         : ""
     }
+
 
     ${
       subject
@@ -1136,13 +1598,16 @@ function openProfile(staff){
 }
 
 
-/* =========================================
+
+/* =========================================================
    CLOSE MODAL
-   ========================================= */
+   ========================================================= */
 
 function closeProfile(){
 
-  modal.classList.remove("open");
+  modal.classList.remove(
+    "open"
+  );
 
   modal.setAttribute(
     "aria-hidden",
@@ -1155,8 +1620,11 @@ function closeProfile(){
 }
 
 
+
 document
-  .getElementById("team-modal-close")
+  .getElementById(
+    "team-modal-close"
+  )
   .addEventListener(
     "click",
     closeProfile
@@ -1191,9 +1659,10 @@ document.addEventListener(
 );
 
 
-/* =========================================
+
+/* =========================================================
    LOAD STAFF
-   ========================================= */
+   ========================================================= */
 
 async function loadStaff(){
 
@@ -1219,85 +1688,96 @@ async function loadStaff(){
         );
 
 
-    /* =========================================
-       MANAGEMENT HIERARCHY
 
-       1. Principal
-       2. Head Teacher
-       3. Vice Principal Administration
-       4. Vice Principal Academics
-       5. Administrator
-       ========================================= */
+    /* =====================================================
+       EXACT MANAGEMENT HIERARCHY
+       ===================================================== */
 
-    const managementRank =
-      staffMember => {
+    const managementOrder = [
 
-        const role =
-          String(
-            roleValue(staffMember)
+      "principal",
+
+      "head teacher",
+
+      "vice principal administration",
+
+      "vice principal academics",
+
+      "administrator"
+
+    ];
+
+
+
+    function normalizeRole(value){
+
+      return String(value || "")
+
+        .toLowerCase()
+
+        .replace(
+          /&/g,
+          "and"
+        )
+
+        .replace(
+          /[‐-‒–—-]/g,
+          " "
+        )
+
+        .replace(
+          /\s+/g,
+          " "
+        )
+
+        .trim();
+
+    }
+
+
+
+    function managementRank(staffMember){
+
+      const role =
+        normalizeRole(
+          roleValue(
+            staffMember
           )
-          .toLowerCase()
-          .replace(/&/g,"and")
-          .replace(/[‐-‒–—-]/g," ")
-          .replace(/\s+/g," ")
-          .trim();
+        );
 
 
-        if(
-          role === "principal"
-        ){
-
-          return 1;
-
-        }
+      const exact =
+        managementOrder.indexOf(
+          role
+        );
 
 
-        if(
-          role === "head teacher"
-        ){
+      if(exact !== -1){
 
-          return 2;
+        return exact;
 
-        }
+      }
 
 
-        if(
-          role ===
-          "vice principal administration"
-        ){
-
-          return 3;
-
-        }
+      const matched =
+        managementOrder.findIndex(
+          item =>
+            role.includes(item) ||
+            item.includes(role)
+        );
 
 
-        if(
-          role ===
-          "vice principal academics"
-        ){
+      return matched === -1
+        ? 999
+        : matched;
 
-          return 4;
-
-        }
+    }
 
 
-        if(
-          role === "administrator"
-        ){
 
-          return 5;
-
-        }
-
-
-        return 999;
-
-      };
-
-
-    /* =========================================
+    /* =====================================================
        GROUP STAFF
-       ========================================= */
+       ===================================================== */
 
     const groups = {
 
@@ -1309,9 +1789,8 @@ async function loadStaff(){
             s =>
               String(
                 s.category || ""
-              )
-              .toLowerCase()
-              === "management"
+              ).toLowerCase() ===
+              "management"
           )
 
           .sort(
@@ -1327,9 +1806,8 @@ async function loadStaff(){
           s =>
             String(
               s.category || ""
-            )
-            .toLowerCase()
-            === "college"
+            ).toLowerCase() ===
+            "college"
         ),
 
 
@@ -1339,46 +1817,45 @@ async function loadStaff(){
           s =>
             String(
               s.category || ""
-            )
-            .toLowerCase()
-            === "primary"
+            ).toLowerCase() ===
+            "primary"
         ),
 
 
       non_teaching:
 
-        staff.filter(s => {
+        staff.filter(
+          s => {
 
-          const c =
-            String(
-              s.category || ""
-            )
-            .toLowerCase()
-            .replace(
-              /[-\s]/g,
-              "_"
+            const c =
+              String(
+                s.category || ""
+              )
+              .toLowerCase()
+              .replace(
+                /[-\s]/g,
+                "_"
+              );
+
+            return (
+              c === "non_teaching"
             );
 
-          return c === "non_teaching";
-
-        })
+          }
+        )
 
     };
 
 
-    /* =========================================
-       MANAGEMENT TOP
 
-       First two positions:
-       Principal
-       Head Teacher
-       ========================================= */
+    /* =====================================================
+       MANAGEMENT
+       ===================================================== */
 
     const top =
       document.getElementById(
         "management-top"
       );
-
 
     const bottom =
       document.getElementById(
@@ -1387,6 +1864,7 @@ async function loadStaff(){
 
 
     top.innerHTML =
+
       groups.management
         .slice(0,2)
         .map(
@@ -1407,16 +1885,9 @@ async function loadStaff(){
       `;
 
 
-    /* =========================================
-       MANAGEMENT BOTTOM
-
-       Remaining positions:
-       VP Administration
-       VP Academics
-       Administrator
-       ========================================= */
 
     bottom.innerHTML =
+
       groups.management
         .slice(2)
         .map(
@@ -1429,13 +1900,16 @@ async function loadStaff(){
         .join("");
 
 
-    /* =========================================
-       COLLEGE
-       ========================================= */
 
-    document.getElementById(
-      "college-grid"
-    ).innerHTML =
+    /* =====================================================
+       COLLEGE
+       ===================================================== */
+
+    document
+      .getElementById(
+        "college-grid"
+      )
+      .innerHTML =
 
       groups.college
         .map(
@@ -1456,13 +1930,16 @@ async function loadStaff(){
       `;
 
 
-    /* =========================================
-       PRIMARY
-       ========================================= */
 
-    document.getElementById(
-      "primary-grid"
-    ).innerHTML =
+    /* =====================================================
+       PRIMARY
+       ===================================================== */
+
+    document
+      .getElementById(
+        "primary-grid"
+      )
+      .innerHTML =
 
       groups.primary
         .map(
@@ -1483,13 +1960,16 @@ async function loadStaff(){
       `;
 
 
-    /* =========================================
-       NON-TEACHING
-       ========================================= */
 
-    document.getElementById(
-      "nonteaching-grid"
-    ).innerHTML =
+    /* =====================================================
+       NON-TEACHING
+       ===================================================== */
+
+    document
+      .getElementById(
+        "nonteaching-grid"
+      )
+      .innerHTML =
 
       groups.non_teaching
         .map(
@@ -1510,40 +1990,44 @@ async function loadStaff(){
       `;
 
 
-    /* =========================================
+
+    /* =====================================================
        PROFILE CLICK
-       ========================================= */
+       ===================================================== */
 
     document
       .querySelectorAll(
         ".team-profile-card"
       )
-      .forEach(button => {
+      .forEach(
+        button => {
 
-        button.addEventListener(
-          "click",
-          () => {
+          button.addEventListener(
+            "click",
+            () => {
 
-            const staffMember =
-              staff.find(
-                s =>
-                  s.id ===
-                  button.dataset.staffId
-              );
+              const staffMember =
+                staff.find(
+                  s =>
+                    s.id ===
+                    button.dataset.staffId
+                );
 
 
-            if(staffMember){
+              if(staffMember){
 
-              openProfile(
-                staffMember
-              );
+                openProfile(
+                  staffMember
+                );
+
+              }
 
             }
+          );
 
-          }
-        );
+        }
+      );
 
-      });
 
 
   }catch(error){
@@ -1555,40 +2039,56 @@ async function loadStaff(){
 
 
     const message = `
+
       <p class="team-error">
-        Staff profiles could not be loaded right now.
+
+        Staff profiles could not be
+        loaded right now.
+
         Please try again.
+
       </p>
+
     `;
 
 
-    document.getElementById(
-      "management-top"
-    ).innerHTML =
+    document
+      .getElementById(
+        "management-top"
+      )
+      .innerHTML =
       message;
 
 
-    document.getElementById(
-      "management-bottom"
-    ).innerHTML =
+    document
+      .getElementById(
+        "management-bottom"
+      )
+      .innerHTML =
       "";
 
 
-    document.getElementById(
-      "college-grid"
-    ).innerHTML =
+    document
+      .getElementById(
+        "college-grid"
+      )
+      .innerHTML =
       message;
 
 
-    document.getElementById(
-      "primary-grid"
-    ).innerHTML =
+    document
+      .getElementById(
+        "primary-grid"
+      )
+      .innerHTML =
       message;
 
 
-    document.getElementById(
-      "nonteaching-grid"
-    ).innerHTML =
+    document
+      .getElementById(
+        "nonteaching-grid"
+      )
+      .innerHTML =
       message;
 
   }
@@ -1596,9 +2096,11 @@ async function loadStaff(){
 }
 
 
+
 loadStaff();
 
 </script>
+
 
 <script src="script.js"></script>
 

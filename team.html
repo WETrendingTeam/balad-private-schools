@@ -3,115 +3,717 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meet Our Team | Balad Private Schools</title>
+<title>Meet Our Team | BALAD Private Schools</title>
 <link rel="stylesheet" href="style.css">
-<script defer src="script.js?v=5"></script>
-<script defer src="content-loader.js"></script>
+
 <style>
-.team-page{--green:#075c46;--green-dark:#075c46;--red:#c5222d;--muted:#68746f;--line:#dfe8e3;--soft:#f3f8f5;--shadow:0 6px 20px rgba(10,59,45,.10);background:#fff;color:#1d2925}
-.team-page .page-hero{margin:0;background:linear-gradient(120deg,var(--green-dark),var(--green));padding:55px 20px;text-align:center;color:#fff}
-.team-page .page-overlay{max-width:900px;margin:auto}.team-page .page-overlay h1{font-size:clamp(32px,4vw,52px);margin:0 0 8px}.team-page .page-overlay p{color:#fff;max-width:780px;margin:auto;line-height:1.55}
-.team-page .team-navigation{text-align:center;padding:24px 12px 5px}.team-page .team-buttons{display:flex;justify-content:center;gap:12px;margin-top:0;flex-wrap:wrap}.team-page .team-btn{padding:10px 22px;border-radius:30px;background:var(--green);color:#fff;font-weight:800;text-decoration:none}.team-page .team-btn:not(.active){background:#fff;color:var(--green);border:1px solid var(--green)}
-.team-page .team-section{padding:35px 0}.team-page .team-section>.container>h2{text-align:center;color:var(--green);font-size:28px;margin-bottom:6px}.team-page .team-subtitle{text-align:center;color:var(--muted);max-width:780px;margin:0 auto 25px;font-size:14px}
-.team-page .management-row{display:grid;gap:16px;margin-bottom:16px}.team-page .principal-head-row{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px;margin-inline:auto}.team-page .three-management-row{grid-template-columns:repeat(3,minmax(0,1fr));max-width:1040px;margin-inline:auto}
-.team-page .team-card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--green);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);text-align:center;min-width:0}
-.team-page .management-card .staff-photo,.team-page .teacher-card .staff-photo,.team-page .non-teaching-card .staff-photo{width:100%;height:190px;object-fit:cover;display:block;background:#fff}
-.team-page .management-card .staff-photo{aspect-ratio:1/1;height:auto;object-fit:cover}.team-page .team-card-content{padding:12px 10px 14px}
-.team-page .team-card-content h3{font-size:15px;line-height:1.2;color:#111;margin:0 0 5px}.team-page .team-card-content p{font-size:11px;color:var(--muted);margin:4px 0;line-height:1.35}
-.team-page .staff-detail{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.team-page .position{color:var(--red)!important;font-weight:800!important;text-align:center!important;margin-top:5px!important}
-.team-page .teachers-grid,.team-page .primary-grid,.team-page .non-teaching-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.team-page .teacher-card .staff-photo,.team-page .non-teaching-card .staff-photo{height:190px}.team-page .teacher-card .team-card-content,.team-page .non-teaching-card .team-card-content{padding:10px}.team-page .teacher-card .team-card-content h3,.team-page .non-teaching-card .team-card-content h3{font-size:14px}
-.team-page .primary-card .team-card-content{padding:12px 8px}.team-page .primary-card .team-card-content h3{font-size:14px}.team-page .primary-card .staff-photo{height:190px}
-.team-page .teachers-section{background:var(--soft)}.team-page .non-teaching-section{background:#fff}
-.team-page .empty-section{display:none}
-.team-page .team-hero-slider{width:min(94%,1100px);margin:22px auto 0;overflow:hidden;border-radius:18px;position:relative;box-shadow:var(--shadow);background:#0b4e3d}.team-page .team-hero-track{display:flex;transition:transform .45s ease}.team-page .team-hero-slide{min-width:100%;height:330px;background-size:cover;background-position:center;position:relative;display:flex;align-items:flex-end}.team-page .team-hero-slide:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent,rgba(0,0,0,.72))}.team-page .team-hero-slide>div{position:relative;z-index:1;color:#fff;padding:30px;max-width:680px}.team-page .team-hero-slide span{font-size:12px;font-weight:900;letter-spacing:1.5px}.team-page .team-hero-slide h2{font-size:30px;margin:7px 0}.team-page .team-hero-slide p{margin:0;color:#fff;font-size:14px}.team-page .team-hero-dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:7px;z-index:3}.team-page .team-hero-dots span{width:8px;height:8px;border-radius:50%;background:#fff;opacity:.5}.team-page .team-hero-dots span.active{opacity:1}.team-page .team-hero-shell{padding-bottom:18px}.team-page .hero-section-nav{display:flex;justify-content:center;gap:12px;margin-top:15px}.team-page .hero-section-nav a{padding:9px 20px;border-radius:24px;border:1px solid var(--green);color:var(--green);text-decoration:none;font-weight:800}.team-page .hero-section-nav a.active{background:var(--green);color:#fff}
-.team-page .team-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}.team-page .team-modal.open{display:flex}.team-page .team-modal-card{width:min(520px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative}.team-page .team-modal-close{position:absolute;right:10px;top:10px;width:36px;height:36px;border:0;border-radius:50%;background:#fff;color:var(--green);font-size:25px;z-index:2}.team-page .team-modal-photo{width:100%;height:300px;object-fit:cover;display:block}.team-page .team-modal-body{padding:20px}.team-page .team-modal-body h2{color:var(--green);margin:0 0 7px}.team-page .team-modal-role{color:var(--red);font-weight:800}.team-page .team-modal-row{padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
-@media(max-width:760px){.team-page .page-hero{padding:35px 15px}.team-page .page-overlay h1{font-size:34px}.team-page .team-hero-slide{height:245px}.team-page .team-hero-slide>div{padding:20px}.team-page .team-hero-slide h2{font-size:22px}.team-page .principal-head-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.team-page .three-management-row,.team-page .teachers-grid,.team-page .primary-grid,.team-page .non-teaching-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.team-page .management-card .staff-photo,.team-page .teacher-card .staff-photo,.team-page .primary-card .staff-photo,.team-page .non-teaching-card .staff-photo{height:115px;aspect-ratio:1/1;object-fit:cover}.team-page .team-card-content{padding:7px 4px}.team-page .team-card-content h3{font-size:9px}.team-page .team-card-content p{font-size:7px}.team-page .staff-detail{white-space:nowrap}.team-page .position{font-size:7px!important}.team-page .team-modal-photo{height:230px}}
-@media(max-width:430px){.team-page .team-buttons{gap:6px}.team-page .team-btn{padding:8px 13px;font-size:11px}.team-page .team-hero-slide{height:215px}.team-page .team-hero-slide h2{font-size:19px}.team-page .team-hero-slide p{font-size:11px}.team-page .principal-head-row,.team-page .three-management-row,.team-page .teachers-grid,.team-page .primary-grid,.team-page .non-teaching-grid{gap:4px}.team-page .management-card .staff-photo,.team-page .teacher-card .staff-photo,.team-page .primary-card .staff-photo,.team-page .non-teaching-card .staff-photo{height:95px}.team-page .team-card-content h3{font-size:8px}.team-page .team-card-content p{font-size:6px}.team-page .position{font-size:6.5px!important}}
+
+
+.team-page{
+  background:#fff;
+  color:#17221e;
+}
+
+.team-hero-shell{
+  background:#f4eddf;
+  border-bottom:1px solid #e6dece;
+}
+
+.team-hero-heading{
+  max-width:900px;
+  margin:0 auto;
+  padding:58px 20px 48px;
+  text-align:center;
+}
+
+.team-hero-heading .team-hero-eyebrow{
+  margin:0 0 12px;
+  color:#075c46;
+  font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:800;
+  letter-spacing:.02em;
+}
+
+.team-hero-heading > p:last-child{
+  margin:0 auto;
+  max-width:760px;
+  color:#34413d;
+  font-size:clamp(1rem,2vw,1.2rem);
+  line-height:1.55;
+}
+
+
+.team-live-section{
+  padding:30px 0 20px;
+}
+
+.team-live-header{
+  text-align:center;
+  margin:0 auto 18px;
+  padding:0 14px;
+}
+
+.team-live-header h2{
+  margin:0 0 6px;
+  color:#075c46;
+  font-size:clamp(1.6rem,3vw,2.15rem);
+}
+
+.team-live-header p{
+  margin:0 auto;
+  color:#68746f;
+  font-size:1rem;
+  line-height:1.4;
+}
+
+
+.team-live-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+  width:100%;
+}
+
+
+.management-top{
+  width:66.6667%;
+  margin:0 auto 18px;
+}
+
+.management-bottom{
+  width:100%;
+}
+
+
+.team-profile-card{
+  display:block;
+  width:100%;
+  min-width:0;
+  padding:0;
+  margin:0;
+  border:1px solid #dfe8e4;
+  border-top:4px solid #087454;
+  border-radius:15px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 7px 22px rgba(15,40,30,.07);
+  text-align:left;
+  cursor:pointer;
+  color:inherit;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+
+.team-profile-card:hover,
+.team-profile-card:focus-visible{
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(15,40,30,.12);
+  outline:2px solid #075c46;
+  outline-offset:2px;
+}
+
+.team-profile-photo,
+.team-profile-placeholder{
+  width:100%;
+  aspect-ratio:1 / 1;
+  height:auto;
+  display:block;
+  object-fit:contain;
+  object-position:center;
+  background:#eaf3ef;
+}
+
+.team-profile-placeholder{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#087454;
+  font-size:clamp(1.5rem,4vw,2.5rem);
+  font-weight:800;
+}
+
+.team-profile-body{
+  padding:12px 13px 13px;
+}
+
+
+.team-profile-body h3{
+  margin:0 0 7px;
+  color:#075c46;
+  font-size:clamp(.92rem,1.55vw,1.08rem);
+  line-height:1.2;
+  font-weight:800;
+}
+
+
+.team-detail{
+  display:flex;
+  align-items:baseline;
+  gap:5px;
+  margin:4px 0;
+  color:#17221e;
+  font-size:.82rem;
+  line-height:1.3;
+}
+
+.team-detail strong{
+  flex:0 0 auto;
+  color:#075c46;
+  font-weight:800;
+  font-style:italic;
+}
+
+.team-detail span{
+  min-width:0;
+  color:#17221e;
+  font-weight:500;
+}
+
+
+.team-profile-role{
+  margin:10px 0 0;
+  padding-top:0;
+  color:#c52c2c;
+  text-align:center;
+  font-weight:800;
+  font-size:.9rem;
+  line-height:1.25;
+}
+
+.team-click-note{
+  margin:8px 0 0;
+  color:#8a9590;
+  font-size:.72rem;
+  font-weight:700;
+}
+
+
+.primary-grid .team-profile-body{
+  padding:11px 13px 13px;
+}
+
+.primary-grid .team-profile-body h3{
+  margin:0;
+}
+
+
+.nonteaching-grid .team-profile-body h3{
+  margin-bottom:6px;
+}
+
+.nonteaching-role{
+  margin:0;
+  color:#075c46;
+  font-size:.84rem;
+  font-weight:800;
+}
+
+
+.team-loading,
+.team-empty,
+.team-error{
+  grid-column:1/-1;
+  padding:22px;
+  border-radius:14px;
+  text-align:center;
+  color:#68746f;
+  background:#f5f8f6;
+}
+
+.team-error{
+  color:#a21b1b;
+  background:#fff1ef;
+}
+
+
+.team-modal{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(10,30,23,.68);
+}
+
+.team-modal.open{
+  display:flex;
+}
+
+.team-modal-card{
+  position:relative;
+  width:min(520px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.team-modal-close{
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:2;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.94);
+  color:#075c46;
+  font-size:23px;
+  cursor:pointer;
+}
+
+.team-modal-photo{
+  width:100%;
+  aspect-ratio:1 / 1;
+  object-fit:cover;
+  display:block;
+  background:#eaf3ef;
+}
+
+.team-modal-body{
+  padding:18px 20px 20px;
+}
+
+.team-modal-body h2{
+  margin:0 0 5px;
+  color:#17221e;
+}
+
+.team-modal-role{
+  margin:0 0 12px;
+  color:#c52c2c;
+  text-align:center;
+  font-weight:800;
+}
+
+.team-modal-row{
+  padding:8px 0;
+  border-bottom:1px solid #e5ebe8;
+  color:#68746f;
+  line-height:1.4;
+}
+
+.team-modal-row:last-child{
+  border-bottom:0;
+}
+
+.team-modal-row strong{
+  color:#075c46;
+  margin-right:5px;
+}
+
+
+@media (max-width:700px){
+  .team-hero-heading{
+    padding:40px 15px 34px;
+  }
+
+  .team-live-section{
+    padding:24px 0 14px;
+  }
+
+  .team-live-grid{
+    gap:9px;
+  }
+
+  .management-top{
+    width:66.6667%;
+    gap:9px;
+  }
+
+  .team-profile-body{
+    padding:8px 8px 9px;
+  }
+
+  .team-profile-body h3{
+    font-size:.72rem;
+    margin-bottom:5px;
+  }
+
+  .team-detail{
+    display:block;
+    margin:3px 0;
+    color:#17221e;
+    font-size:.66rem;
+    line-height:1.25;
+  }
+
+  .team-detail strong{
+    display:inline;
+    color:#075c46;
+    font-style:italic;
+  }
+
+  .team-detail span{
+    color:#17221e;
+  }
+
+  .team-profile-role{
+    margin-top:6px;
+    color:#c52c2c;
+    font-size:.68rem;
+    font-weight:800;
+  }
+
+  .team-click-note{
+    font-size:.58rem;
+    margin-top:5px;
+  }
+
+  .nonteaching-role{
+    font-size:.65rem;
+  }
+
+  .team-live-header h2{
+    font-size:1.5rem;
+  }
+
+  .team-live-header p{
+    font-size:.86rem;
+  }
+}
 </style>
 </head>
-<body class="team-page">
-<section class="team-hero-shell">
+
+<body class="team-page" data-cms-page="team">
+
 <header>
-<div class="logo"><img alt="Balad Private Schools Logo" src="logo.png"><div class="school-name"><h2>BALAD PRIVATE SCHOOLS</h2><p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p><small>"Nothing but Success"</small></div></div>
-<input class="menu-toggle" id="balad-menu-toggle" type="checkbox">
-<label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle"><span class="menu-icon-open">☰</span><span class="menu-icon-close">×</span></label>
-<nav id="balad-main-nav">
-<a href="index.html">Home</a><a href="about.html">About</a><details class="academic-nav"><summary>Academic</summary><div class="academic-submenu"><a href="curriculum.html">Curriculum</a><a href="stem.html">STEM</a><a href="results.html">Result Portal</a></div></details><a class="active" href="team.html">Meet Our Team</a><a href="facilities.html">Facilities</a><a href="gallery.html">Gallery</a><a href="news.html">News &amp; Events</a><a href="contact.html">Contact</a>
-</nav>
+  <div class="logo">
+    <img alt="BALAD Private Schools Logo" src="images/logo.png" data-media-key="asset-logo-png">
+    <div class="school-name">
+      <h2>BALAD PRIVATE SCHOOLS</h2>
+      <p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
+      <small>"Nothing but Success"</small>
+    </div>
+  </div>
+
+  <input class="menu-toggle" id="balad-menu-toggle" type="checkbox">
+  <label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle">
+    <span class="menu-icon-open">☰</span>
+    <span class="menu-icon-close">×</span>
+  </label>
+
+  <nav id="balad-main-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <details class="academic-nav school-nav">
+      <summary>Schools</summary>
+      <div class="academic-submenu">
+        <a href="nursery-primary.html">Balad Nursery &amp; Primary</a>
+        <a href="comprehensive-college.html">Balad Comprehensive College</a>
+      </div>
+    </details>
+    <a href="cbt-centre.html">CBT Centre</a>
+    <a href="admissions.html">Admissions</a>
+    <details class="academic-nav">
+      <summary>Academics</summary>
+      <div class="academic-submenu">
+        <a href="curriculum.html">Curriculum</a>
+        <a href="stem.html">STEM</a>
+        <a href="results.html">Result Portal</a>
+      </div>
+    </details>
+    <a class="active" href="team.html">Meet Our Team</a>
+    <a href="facilities.html">Facilities</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="news.html">News &amp; Events</a>
+    <a href="alumni.html">Alumni</a>
+    <a class="nav-login-button" href="control-login.html">LOGIN</a>
+    <a class="nav-contact-button" href="contact.html">CONTACT US</a>
+  </nav>
 </header>
-<div class="page-hero"><div class="page-overlay"><h1>Meet Our Team</h1><p>Meet the dedicated professionals whose passion, expertise and commitment help shape every learner at Balad Private Schools.</p></div>
-<div class="team-hero-slider" aria-label="Our Team Highlights"><div class="team-hero-track" id="teamHeroTrack">
-<div class="team-hero-slide" style="background-image:url('images/teachers-day1.jpg')"><div><span>OUR TEAM</span><h2>People Who Shape Learning</h2><p>Dedicated professionals supporting every learner at Balad Private Schools.</p></div></div>
-<div class="team-hero-slide" style="background-image:url('images/club-activities4.jpg')"><div><span>COLLEGE &amp; PRIMARY</span><h2>Learning, Guidance &amp; Growth</h2><p>Our staff work together to build knowledge, confidence and character.</p></div></div>
-<div class="team-hero-slide" style="background-image:url('images/prize-giving4.jpg')"><div><span>OUR COMMUNITY</span><h2>Supporting Every Learner</h2><p>A school team committed to excellence, discipline and student success.</p></div></div>
-</div><div class="team-hero-dots" id="teamHeroDots"><span class="active"></span><span></span><span></span></div></div>
-<div class="hero-section-nav"><a class="active" href="#management">Management</a><a href="#college-team">College</a><a href="#primary-team">Primary</a><a href="#non-teaching-team">Non-Teaching</a></div>
-</div>
+
+<section class="team-hero-shell">
+  <div class="team-hero-heading">
+    <p class="team-hero-eyebrow">Meet Our Team</p>
+    <p>Meet the dedicated professionals whose passion, expertise and commitment help shape every learner at BALAD Private Schools.</p>
+  </div>
 </section>
-<section class="team-navigation"><div class="team-buttons"><a class="team-btn active" href="#college-team">College</a><a class="team-btn" href="#primary-team">Primary</a><a class="team-btn" href="#non-teaching-team">Non-Teaching</a></div></section>
+
 <main>
-<section class="team-section management-team" id="management"><div class="container"><h2>Management Team</h2><p class="team-subtitle">School leadership responsible for academic direction, administration and the smooth running of Balad Private Schools.</p><div class="management-row principal-head-row" id="management-top"></div><div class="management-row three-management-row" id="management-bottom"></div></div></section>
-<section class="team-section" id="college-team"><div class="container"><h2>College Staff</h2><p class="team-subtitle">Meet the professionals supporting teaching and learning in the College.</p><div class="teachers-grid" id="college-grid"></div></div></section>
-<section class="team-section teachers-section" id="primary-team"><div class="container"><h2>Nursery &amp; Primary Section</h2><p class="team-subtitle">Our Nursery and Primary team supporting learners throughout their early educational journey.</p><div class="primary-grid" id="primary-grid"></div></div></section>
-<section class="team-section non-teaching-section" id="non-teaching-team"><div class="container"><h2>Non-Teaching Staff</h2><p class="team-subtitle">Our non-teaching team supporting administration, safety, operations and the daily life of the school.</p><div class="non-teaching-grid" id="nonteaching-grid"></div></div></section>
+
+  <section class="team-live-section">
+    <div class="container">
+      <div class="team-live-header">
+        <h2>Management</h2>
+        <p>Our school leaders and management team.</p>
+      </div>
+
+      <div class="team-live-grid management-top" id="management-top">
+        <div class="team-loading">Loading staff profiles...</div>
+      </div>
+
+      <div class="team-live-grid management-bottom" id="management-bottom"></div>
+    </div>
+  </section>
+
+  <section class="team-live-section">
+    <div class="container">
+      <div class="team-live-header">
+        <h2>College Staff</h2>
+        <p>Meet the professionals supporting teaching and learning in the College.</p>
+      </div>
+      <div class="team-live-grid" id="college-grid">
+        <div class="team-loading">Loading staff profiles...</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-live-section">
+    <div class="container">
+      <div class="team-live-header">
+        <h2>Primary Staff</h2>
+        <p>Meet the professionals supporting our Nursery and Primary learners.</p>
+      </div>
+      <div class="team-live-grid primary-grid" id="primary-grid">
+        <div class="team-loading">Loading staff profiles...</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-live-section">
+    <div class="container">
+      <div class="team-live-header">
+        <h2>Non-teaching Staff</h2>
+        <p>Meet the team supporting the safe and smooth running of the school.</p>
+      </div>
+      <div class="team-live-grid nonteaching-grid" id="nonteaching-grid">
+        <div class="team-loading">Loading staff profiles...</div>
+      </div>
+    </div>
+  </section>
+
 </main>
-<div class="team-modal" id="team-modal" aria-hidden="true"><div class="team-modal-card" role="dialog" aria-modal="true"><button class="team-modal-close" id="team-modal-close" type="button">×</button><img class="team-modal-photo" id="team-modal-photo" src="logo.png" alt="Staff profile"><div class="team-modal-body" id="team-modal-body"></div></div></div>
-<footer><div class="footer-bottom">© <span data-year></span> Balad Private Schools. All Rights Reserved. <span class="footer-developer">Developed by LADE</span></div></footer>
+
+<div class="team-modal" id="team-modal" aria-hidden="true">
+  <div class="team-modal-card" role="dialog" aria-modal="true" aria-labelledby="team-modal-name">
+    <button class="team-modal-close" id="team-modal-close" type="button" aria-label="Close profile">×</button>
+    <img class="team-modal-photo" id="team-modal-photo" alt="">
+    <div class="team-modal-body" id="team-modal-body"></div>
+  </div>
+</div>
+
 <script type="module">
-import {db} from "./firebase-config.js";
-import {collection,getDocs} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-const text=v=>Array.isArray(v)?v.filter(Boolean).join(" / "):String(v??"").trim();
-const category=s=>{const x=String(s.category||s.cmsCategory||"").trim().toLowerCase().replace(/[-\s]/g,"_");return ["management","college","primary","non_teaching","nonteaching"].includes(x)?x==="nonteaching"?"non_teaching":x:""};
-const photo=s=>{const x=String(s.photoUrl||s.photo||"").trim();return /^(https?:|data:image\/)/i.test(x)?x:""};
-function card(s,c){
- const name=text(s.name); if(!name)return "";
- const q=text(s.qualification||s.qualifications), sub=text(s.subjects||s.assignedSubjects||s.subject), role=text(s.position||s.role), p=photo(s);
- let details="";
- if(c==="management"||c==="college"){
-  if(q)details+=`<p class="staff-detail"><strong>Qualification:</strong> ${esc(q)}</p>`;
-  if(sub)details+=`<p class="staff-detail"><strong>Subject:</strong> ${esc(sub)}</p>`;
- }
- if((c==="management"||c==="non_teaching")&&role)details+=`<p class="position">${esc(role)}</p>`;
- return `<article class="team-card ${c==="management"?"management-card":c==="primary"?"teacher-card primary-card":c==="non_teaching"?"non-teaching-card":"teacher-card"}" data-id="${esc(s.id)}">${p?`<img class="staff-photo" src="${esc(p)}" alt="${esc(name)}">`:""}<div class="team-card-content"><h3>${esc(name)}</h3>${details}</div></article>`;
+import { db } from "./firebase-config.js";
+import {
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const esc = (value="") => String(value).replace(/[&<>"']/g, ch => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+}[ch]));
+
+function safeUrl(value=""){
+  try{
+    const url = new URL(value, location.href);
+    if(url.protocol === "http:" || url.protocol === "https:" || url.protocol === "data:")
+      return url.href;
+  }catch(e){}
+  return "";
 }
-function render(id,rows,c){const el=document.getElementById(id);if(!el)return;el.innerHTML=rows.map(x=>card(x,c)).join("");const sec=el.closest(".team-section");if(sec)sec.classList.toggle("empty-section",!rows.length)}
-function renderManagement(rows){
- const top=document.getElementById("management-top"),bottom=document.getElementById("management-bottom");
- top.innerHTML=rows.slice(0,2).map(x=>card(x,"management")).join("");bottom.innerHTML=rows.slice(2,5).map(x=>card(x,"management")).join("");
- top.style.display=rows.slice(0,2).length?"grid":"none";bottom.style.display=rows.slice(2,5).length?"grid":"none";
- const sec=document.getElementById("management");sec.classList.toggle("empty-section",!rows.length);
+
+function initials(name="Staff"){
+  return name.trim().split(/\s+/)
+    .map(x => x[0])
+    .filter(Boolean)
+    .slice(0,2)
+    .join("")
+    .toUpperCase();
 }
-let cache=[];
-async function load(){
- try{
-  const snap=await getDocs(collection(db,"publicStaff"));
-  cache=snap.docs.map(d=>({id:d.id,...d.data()})).filter(s=>s.active!==false&&category(s));
-  const g={management:[],college:[],primary:[],non_teaching:[]};
-  cache.forEach(s=>g[category(s)].push(s));
-  renderManagement(g.management);render("college-grid",g.college,"college");render("primary-grid",g.primary,"primary");render("nonteaching-grid",g.non_teaching,"non_teaching");
- }catch(e){console.error("Team load error",e)}
+
+function subjectValue(staff){
+  if(Array.isArray(staff.subjects))
+    return staff.subjects.filter(Boolean).join(" / ");
+  if(Array.isArray(staff.assignedSubjects))
+    return staff.assignedSubjects.filter(Boolean).join(" / ");
+  return staff.subject || staff.subjects || staff.assignedSubject || "";
 }
-function openProfile(s){
- const modal=document.getElementById("team-modal"),p=document.getElementById("team-modal-photo"),b=document.getElementById("team-modal-body"),q=text(s.qualification||s.qualifications),sub=text(s.subjects||s.assignedSubjects||s.subject),role=text(s.position||s.role);
- p.src=photo(s)||"logo.png";p.alt=s.name||"Staff profile";
- b.innerHTML=`<h2>${esc(s.name||"Staff Member")}</h2>${role?`<p class="team-modal-role">${esc(role)}</p>`:""}${q?`<div class="team-modal-row"><strong>Qualification:</strong> ${esc(q)}</div>`:""}${sub?`<div class="team-modal-row"><strong>Subject:</strong> ${esc(sub)}</div>`:""}`;
- modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+
+function qualificationValue(staff){
+  return staff.qualification || staff.qualifications || "";
 }
-function closeProfile(){const m=document.getElementById("team-modal");m.classList.remove("open");m.setAttribute("aria-hidden","true");document.body.style.overflow=""}
-document.addEventListener("click",e=>{const el=e.target.closest(".team-card[data-id]");if(el){const s=cache.find(x=>String(x.id)===String(el.dataset.id));if(s)openProfile(s)}});
-document.getElementById("team-modal-close").onclick=closeProfile;document.getElementById("team-modal").onclick=e=>{if(e.target.id==="team-modal")closeProfile()};document.addEventListener("keydown",e=>{if(e.key==="Escape")closeProfile()});
-load();
+
+function roleValue(staff){
+  return staff.position || staff.role || "";
+}
+
+function photoMarkup(staff, modal=false){
+  const url = safeUrl(staff.photoUrl || staff.photo || "");
+  if(url){
+    return `<img class="${modal ? "team-modal-photo" : "team-profile-photo"}"
+      src="${esc(url)}" alt="${esc(staff.name || "Staff")}">`;
+  }
+  return modal
+    ? `<div class="team-profile-placeholder team-modal-photo">${esc(initials(staff.name))}</div>`
+    : `<div class="team-profile-placeholder">${esc(initials(staff.name))}</div>`;
+}
+
+function detail(label, value){
+  if(!value) return "";
+  return `<div class="team-detail"><strong>${esc(label)}:</strong><span>${esc(value)}</span></div>`;
+}
+
+function card(staff, category){
+  const name = staff.name || "Staff";
+  const qualification = qualificationValue(staff);
+  const subject = subjectValue(staff);
+  const role = roleValue(staff);
+
+  let body = `<h3>${esc(name)}</h3>`;
+
+  if(category === "management"){
+    body += detail("Qualification", qualification);
+    body += detail("Subject", subject);
+    if(role) body += `<p class="team-profile-role">${esc(role)}</p>`;
+  }else if(category === "college"){
+    body += detail("Qualification", qualification);
+    body += detail("Subject", subject);
+  }else if(category === "non_teaching"){
+    if(role) body += `<p class="nonteaching-role">${esc(role)}</p>`;
+  }
+
+  if(category !== "primary"){
+    body += `<p class="team-click-note">Tap to view full profile →</p>`;
+  }
+
+  return `<button class="team-profile-card" type="button"
+    data-staff-id="${esc(staff.id)}">
+    ${photoMarkup(staff)}
+    <div class="team-profile-body">${body}</div>
+  </button>`;
+}
+
+const modal = document.getElementById("team-modal");
+const modalBody = document.getElementById("team-modal-body");
+const modalPhoto = document.getElementById("team-modal-photo");
+
+function openProfile(staff){
+  const role = roleValue(staff);
+  const qualification = qualificationValue(staff);
+  const subject = subjectValue(staff);
+
+  modalPhoto.outerHTML = photoMarkup(staff, true);
+  const newPhoto = document.querySelector("#team-modal .team-modal-photo");
+  newPhoto.id = "team-modal-photo";
+
+  modalBody.innerHTML = `
+    <h2 id="team-modal-name">${esc(staff.name || "Staff")}</h2>
+    ${role ? `<p class="team-modal-role">${esc(role)}</p>` : ""}
+    ${qualification ? `<div class="team-modal-row"><strong>Qualification:</strong>${esc(qualification)}</div>` : ""}
+    ${subject ? `<div class="team-modal-row"><strong>Subject:</strong>${esc(subject)}</div>` : ""}
+  `;
+
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeProfile(){
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("team-modal-close").addEventListener("click", closeProfile);
+modal.addEventListener("click", e => {
+  if(e.target === modal) closeProfile();
+});
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape") closeProfile();
+});
+
+async function loadStaff(){
+  try{
+    const snap = await getDocs(collection(db, "publicStaff"));
+    const staff = snap.docs
+      .map(doc => ({id:doc.id, ...doc.data()}))
+      .filter(s => s.active !== false);
+
+    const managementOrder = [
+      "principal",
+      "head teacher",
+      "vice principal administration",
+      "vice principal academics",
+      "administrator"
+    ];
+
+    const normalizeRole = value =>
+      String(value || "")
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[‐‑‒–—-]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    const managementRank = staffMember => {
+      const role = normalizeRole(roleValue(staffMember));
+      const exact = managementOrder.indexOf(role);
+      if(exact !== -1) return exact;
+
+      const matched = managementOrder.findIndex(item =>
+        role.includes(item) || item.includes(role)
+      );
+      return matched === -1 ? 999 : matched;
+    };
+
+    const groups = {
+      management: staff
+        .filter(s => String(s.category || "").toLowerCase() === "management")
+        .sort((a,b) => managementRank(a) - managementRank(b)),
+      college: staff.filter(s => String(s.category || "").toLowerCase() === "college"),
+      primary: staff.filter(s => String(s.category || "").toLowerCase() === "primary"),
+      non_teaching: staff.filter(s => {
+        const c = String(s.category || "").toLowerCase().replace(/[-\s]/g,"_");
+        return c === "non_teaching";
+      })
+    };
+
+    const top = document.getElementById("management-top");
+    const bottom = document.getElementById("management-bottom");
+
+    top.innerHTML = groups.management.slice(0,2).map(s => card(s,"management")).join("")
+      || `<p class="team-empty">Management profiles will be published here.</p>`;
+
+    bottom.innerHTML = groups.management.slice(2).map(s => card(s,"management")).join("");
+
+    document.getElementById("college-grid").innerHTML =
+      groups.college.map(s => card(s,"college")).join("")
+      || `<p class="team-empty">College profiles will be published here.</p>`;
+
+    document.getElementById("primary-grid").innerHTML =
+      groups.primary.map(s => card(s,"primary")).join("")
+      || `<p class="team-empty">Primary profiles will be published here.</p>`;
+
+    document.getElementById("nonteaching-grid").innerHTML =
+      groups.non_teaching.map(s => card(s,"non_teaching")).join("")
+      || `<p class="team-empty">Non-teaching profiles will be published here.</p>`;
+
+    document.querySelectorAll(".team-profile-card").forEach(button => {
+      button.addEventListener("click", () => {
+        const staffMember = staff.find(s => s.id === button.dataset.staffId);
+        if(staffMember) openProfile(staffMember);
+      });
+    });
+
+  }catch(error){
+    console.error("BALAD team loading error:", error);
+
+    const message = `<p class="team-error">Staff profiles could not be loaded right now. Please try again.</p>`;
+    document.getElementById("management-top").innerHTML = message;
+    document.getElementById("management-bottom").innerHTML = "";
+    document.getElementById("college-grid").innerHTML = message;
+    document.getElementById("primary-grid").innerHTML = message;
+    document.getElementById("nonteaching-grid").innerHTML = message;
+  }
+}
+
+loadStaff();
 </script>
-<script>
-(function(){
- const t=document.getElementById("balad-menu-toggle"),n=document.getElementById("balad-main-nav");
- if(t&&n)t.addEventListener("change",()=>n.classList.toggle("active",t.checked));
- document.querySelectorAll("[data-year]").forEach(e=>e.textContent=new Date().getFullYear());
- const track=document.getElementById("teamHeroTrack"),dots=[...document.querySelectorAll("#teamHeroDots span")];let i=0;
- setInterval(()=>{i=(i+1)%3;track.style.transform=`translateX(-${i*100}%)`;dots.forEach((d,x)=>d.classList.toggle("active",x===i))},4500);
-})();
-</script>
+
+<script src="script.js"></script>
 </body>
 </html>

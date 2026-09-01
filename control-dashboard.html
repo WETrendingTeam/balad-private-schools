@@ -7180,5 +7180,335 @@ window.createCmsAlbum=async function(){
 /* Make upload pickers available in staff modal after it is created. */
 
 </script>
+  <!-- =========================================================
+     BALAD CONTENT MANAGEMENT BUTTON FIX
+     OVERRIDE ONLY — DOES NOT DELETE EXISTING DATA
+     ========================================================= -->
+
+<style>
+/* Make Content Management controls reliably clickable */
+#section-content,
+#section-content .cms-tabs,
+#section-content .cms-tab,
+#section-content .cms-category,
+#section-content button,
+#section-content input,
+#section-content select,
+#section-content textarea {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
+}
+
+/* Keep hidden file inputs functional when triggered by buttons */
+#section-content .cms-hidden-input {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+</style>
+
+<script>
+(function(){
+
+  /* =======================================================
+     CONTENT MANAGEMENT TAB FIX
+     ======================================================= */
+
+  function openCmsView(view){
+
+    const tabs =
+      document.querySelectorAll(
+        "#section-content [data-cms-view]"
+      );
+
+    const views =
+      document.querySelectorAll(
+        "#section-content [id^='cmsView-']"
+      );
+
+    tabs.forEach(tab => {
+
+      tab.classList.toggle(
+        "active",
+        tab.dataset.cmsView === view
+      );
+
+    });
+
+    views.forEach(section => {
+
+      section.classList.toggle(
+        "hidden",
+        section.id !== "cmsView-" + view
+      );
+
+    });
+
+
+    /* Load the correct existing Content Management data */
+
+    if(view === "staff" &&
+       typeof window.loadCmsStaff === "function"){
+
+      window.loadCmsStaff();
+
+    }
+
+    if(view === "students" &&
+       typeof window.cmsStudentSchoolChanged === "function"){
+
+      window.cmsStudentSchoolChanged();
+
+    }
+
+    if(view === "pages" &&
+       typeof window.initCmsPages === "function"){
+
+      window.initCmsPages();
+
+    }
+
+    if(view === "gallery" &&
+       typeof window.loadCmsAlbums === "function"){
+
+      window.loadCmsAlbums();
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     FORCE CONTENT TABS TO WORK
+     ======================================================= */
+
+  document.addEventListener(
+    "click",
+    function(event){
+
+      const tab =
+        event.target.closest(
+          "#section-content [data-cms-view]"
+        );
+
+      if(!tab) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      openCmsView(
+        tab.dataset.cmsView
+      );
+
+    },
+    true
+  );
+
+
+
+  /* =======================================================
+     GALLERY FILE PICKER
+     ======================================================= */
+
+  window.pickCmsMedia =
+    function(area, source){
+
+      if(area !== "gallery") return;
+
+      const map = {
+
+        camera: "cmsGalleryCamera",
+
+        photos: "cmsGalleryPhotos",
+
+        files: "cmsGalleryFiles"
+
+      };
+
+      const input =
+        document.getElementById(
+          map[source]
+        );
+
+      if(!input){
+
+        console.error(
+          "BALAD Gallery input missing:",
+          map[source]
+        );
+
+        return;
+
+      }
+
+      input.click();
+
+    };
+
+
+
+  /* =======================================================
+     GALLERY FILE SELECTION
+     ======================================================= */
+
+  document.addEventListener(
+    "change",
+    function(event){
+
+      const input = event.target;
+
+      if(
+        input.id !== "cmsGalleryCamera" &&
+        input.id !== "cmsGalleryPhotos" &&
+        input.id !== "cmsGalleryFiles"
+      ){
+
+        return;
+
+      }
+
+
+      /* Let the ORIGINAL Gallery code process the files too. */
+
+      if(
+        typeof window.cmsSetGalleryFiles ===
+        "function"
+      ){
+
+        window.cmsSetGalleryFiles(
+          Array.from(input.files || [])
+        );
+
+      }
+
+    },
+    true
+  );
+
+
+
+  /* =======================================================
+     GALLERY CREATE BUTTON
+     ======================================================= */
+
+  document.addEventListener(
+    "click",
+    function(event){
+
+      const button =
+        event.target.closest(
+          "#section-content button"
+        );
+
+      if(!button) return;
+
+
+      const text =
+        (button.textContent || "")
+          .trim()
+          .toLowerCase();
+
+
+      if(
+        text.includes("create / add album")
+      ){
+
+        /*
+         * Do NOT create another album function.
+         * Use the existing one so previous albums
+         * remain untouched.
+         */
+
+        if(
+          typeof window.createCmsAlbum ===
+          "function"
+        ){
+
+          event.preventDefault();
+
+          window.createCmsAlbum();
+
+        }
+
+      }
+
+
+      if(
+        text === "refresh" &&
+        button.closest("#cmsView-gallery")
+      ){
+
+        if(
+          typeof window.loadCmsAlbums ===
+          "function"
+        ){
+
+          event.preventDefault();
+
+          window.loadCmsAlbums();
+
+        }
+
+      }
+
+    },
+    true
+  );
+
+
+
+  /* =======================================================
+     MAKE EXISTING GALLERY FUNCTIONS AVAILABLE
+     ======================================================= */
+
+  if(
+    typeof window.loadCmsAlbums ===
+    "function"
+  ){
+
+    window.loadCmsAlbums =
+      window.loadCmsAlbums;
+
+  }
+
+
+  if(
+    typeof window.createCmsAlbum ===
+    "function"
+  ){
+
+    window.createCmsAlbum =
+      window.createCmsAlbum;
+
+  }
+
+
+
+  /* =======================================================
+     INITIAL SAFETY CHECK
+     ======================================================= */
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+      /*
+       * Do not automatically create, update or delete
+       * anything. This only makes the controls clickable.
+       */
+
+      console.log(
+        "BALAD Content Management button fix active."
+      );
+
+    }
+  );
+
+})();
+</script>
 </body>
 </html>

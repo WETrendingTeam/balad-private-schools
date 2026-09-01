@@ -3,612 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- BALAD Team profile display rules: Management=name/role/qualification/subject; College=name/qualification/subject; Primary=name only; Non-teaching=name/role. -->
 <title>Meet Our Team | BALAD Private Schools</title>
 <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="BALAD Private Schools Logo">
+    <div class="school-name">
+      <h2>BALAD PRIVATE SCHOOLS</h2>
+      <p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
+      <small>"Nothing but Success"</small>
+    </div>
+  </div>
+  <button class="menu-btn" type="button" aria-label="Menu">☰</button>
+  <nav>
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="admissions.html">Admissions</a><a href="team.html">Team</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="team-hero">
+  <button class="back-btn" onclick="history.back()">← Back</button>
+  <h1>Meet Our Team</h1>
+  <p>Meet the dedicated professionals whose passion, expertise and commitment help shape every learner at BALAD Private Schools.</p>
+</section>
+
+<main>
+  <section class="team-section">
+    <div class="section-heading"><h2>Management</h2><p>Our school leaders and management team.</p></div>
+    <div id="managementGrid" class="staff-grid management-grid"><div class="loading">Loading profiles…</div></div>
+  </section>
+
+  <section class="team-section">
+    <div class="section-heading"><h2>College Staff</h2><p>Meet the professionals supporting teaching and learning in the College.</p></div>
+    <div id="collegeGrid" class="staff-grid"><div class="loading">Loading profiles…</div></div>
+  </section>
+
+  <section class="team-section">
+    <div class="section-heading"><h2>Primary Staff</h2><p>Meet the professionals supporting our Nursery and Primary learners.</p></div>
+    <div id="primaryGrid" class="staff-grid"><div class="loading">Loading profiles…</div></div>
+  </section>
+
+  <section class="team-section">
+    <div class="section-heading"><h2>Non-teaching Staff</h2><p>Meet the team supporting the safe and smooth running of the school.</p></div>
+    <div id="nonTeachingGrid" class="staff-grid"><div class="loading">Loading profiles…</div></div>
+  </section>
+</main>
+
+<div id="profileModal" class="modal" aria-hidden="true">
+ <div class="modal-card">
+  <button class="modal-close" id="modalClose" type="button">×</button>
+  <div class="modal-photo"><img id="modalImg" src="logo.png" alt=""></div>
+  <div class="modal-body">
+   <h2 id="modalName"></h2>
+   <div id="modalRole" class="modal-role"></div>
+   <div id="modalQualificationRow"><strong>Qualification</strong><p id="modalQualification"></p></div>
+   <div id="modalSubjectRow"><strong>Subject</strong><p id="modalSubject"></p></div>
+   <div id="modalSchoolRow"><strong>School</strong><p id="modalSchool"></p></div>
+  </div>
+ </div>
+</div>
 
 <style>
-/* ==========================================================
-   BALAD TEAM PAGE — CLEAN 3-COLUMN STAFF LAYOUT
-========================================================== */
-.team-live-section{
-    padding:34px 0 44px;
-}
-.team-live-header{
-    text-align:center;
-    margin-bottom:22px;
-}
-.team-live-header h2{
-    color:#075c46;
-    margin:0 0 7px;
-    font-size:clamp(1.55rem,3vw,2rem);
-}
-.team-live-header p{
-    max-width:700px;
-    margin:0 auto;
-    color:#66736e;
-    line-height:1.5;
-}
-
-/* Three staff cards across every normal row. */
-.team-live-grid{
-    width:min(100%,1080px);
-    margin:0 auto;
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:22px;
-    align-items:start;
-}
-
-/* Management: 2 centred cards on row 1, then 3 cards on row 2. */
-#managementGrid{
-    grid-template-columns:repeat(6,minmax(0,1fr));
-    gap:22px;
-}
-#managementGrid .team-profile-card{
-    grid-column:span 2;
-}
-#managementGrid .team-profile-card:nth-child(1){
-    grid-column:2 / span 2;
-}
-#managementGrid .team-profile-card:nth-child(2){
-    grid-column:4 / span 2;
-}
-#managementGrid .team-profile-card:nth-child(n+3){
-    grid-column:span 2;
-}
-
-.team-profile-card{
-    appearance:none;
-    border:1px solid #e3ebe7;
-    width:100%;
-    padding:0;
-    background:#fff;
-    border-radius:16px;
-    overflow:hidden;
-    text-align:left;
-    box-shadow:0 7px 22px rgba(15,40,30,.08);
-    cursor:pointer;
-    transition:transform .18s ease,box-shadow .18s ease;
-    color:inherit;
-}
-.team-profile-card:hover,
-.team-profile-card:focus-visible{
-    transform:translateY(-3px);
-    box-shadow:0 12px 28px rgba(15,40,30,.13);
-    outline:2px solid #075c46;
-    outline-offset:2px;
-}
-
-.team-profile-photo{
-    width:100%;
-    aspect-ratio:4 / 3;
-    height:auto;
-    object-fit:cover;
-    object-position:center;
-    display:block;
-    background:#eaf3ef;
-}
-.team-profile-body{
-    padding:14px 15px 15px;
-}
-.team-profile-body h3{
-    color:#17221e;
-    margin:0 0 5px;
-    font-size:1rem;
-    line-height:1.25;
-}
-.team-profile-position{
-    color:#075c46;
-    font-weight:800;
-    margin:0 0 9px;
-    font-size:.84rem;
-}
-.team-profile-detail{
-    margin:6px 0;
-    color:#66736e;
-    font-size:.8rem;
-    line-height:1.4;
-}
-.team-profile-detail strong{
-    color:#075c46;
-}
-.team-click-note{
-    margin-top:10px;
-    font-size:.72rem;
-    color:#8a9590;
-    font-weight:700;
-}
-
-.team-empty,
-.team-error,
-.team-loading{
-    grid-column:1/-1;
-    padding:22px;
-    text-align:center;
-    border-radius:14px;
-    background:#f5f8f6;
-    color:#66736e;
-}
-.team-error{
-    background:#fff1ef;
-    color:#a21b1b;
-}
-
-.team-modal{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:rgba(10,30,23,.68);
-}
-.team-modal.open{display:flex}
-.team-modal-card{
-    width:min(520px,100%);
-    max-height:90vh;
-    overflow:auto;
-    background:#fff;
-    border-radius:22px;
-    box-shadow:0 25px 70px rgba(0,0,0,.25);
-    position:relative;
-}
-.team-modal-close{
-    position:absolute;
-    top:12px;
-    right:12px;
-    width:38px;
-    height:38px;
-    border:0;
-    border-radius:50%;
-    background:rgba(255,255,255,.92);
-    color:#075c46;
-    font-size:24px;
-    cursor:pointer;
-    z-index:2;
-}
-.team-modal-photo{
-    width:100%;
-    height:300px;
-    object-fit:cover;
-    background:#eaf3ef;
-}
-.team-modal-body{padding:24px}
-.team-modal-body h2{color:#075c46;margin:0 0 5px}
-.team-modal-role{color:#66736e;font-weight:700;margin-bottom:20px}
-.team-modal-row{padding:13px 0;border-bottom:1px solid #e5ebe8}
-.team-modal-row:last-child{border-bottom:0}
-.team-modal-row strong{display:block;color:#075c46;margin-bottom:5px}
-
-/* Keep the three-column layout on phones too, but make each card compact. */
-@media(max-width:900px){
-    .team-live-section{padding:28px 10px 38px}
-    .team-live-grid{gap:12px}
-    #managementGrid{gap:12px}
-    .team-profile-photo{aspect-ratio:4 / 3}
-    .team-profile-body{padding:11px 10px 12px}
-    .team-profile-body h3{font-size:.86rem}
-    .team-profile-position{font-size:.72rem;margin-bottom:7px}
-    .team-profile-detail{font-size:.69rem;line-height:1.3}
-    .team-click-note{font-size:.61rem;margin-top:7px}
-}
-
-@media(max-width:560px){
-    .team-live-section{padding:24px 6px 32px}
-    .team-live-grid{gap:7px}
-    #managementGrid{gap:7px}
-    .team-profile-body{padding:9px 8px 10px}
-    .team-profile-body h3{font-size:.75rem}
-    .team-profile-position{font-size:.64rem}
-    .team-profile-detail{font-size:.59rem}
-    .team-click-note{font-size:.53rem}
-    .team-modal{padding:10px}
-    .team-modal-photo{height:240px}
-}
+:root{--green:#075c46;--red:#c5222d;--cream:#f6efe3;--text:#1d2925;--muted:#68746f}
+*{box-sizing:border-box} body{margin:0;color:var(--text);background:#fff;font-family:Arial,Helvetica,sans-serif}
+header{min-height:92px;display:flex;align-items:center;justify-content:space-between;padding:12px 4%;gap:20px;background:#fff;border-bottom:1px solid #edf0ee;position:relative;z-index:5}
+.logo{display:flex;align-items:center;gap:12px}.logo img{width:68px;height:68px;object-fit:contain}.school-name h2{margin:0;color:var(--green);font-size:20px}.school-name p{margin:5px 0;font-size:12px;color:#59645f}.school-name small{color:#d12b32;font-style:italic}
+nav{display:flex;gap:22px}nav a{color:#24332e;text-decoration:none;font-size:14px}nav a:hover{color:var(--green)}.menu-btn{display:none;border:0;background:none;color:var(--green);font-size:25px}
+.team-hero{background:var(--cream);text-align:center;padding:34px 18px 38px;position:relative;border-bottom:1px solid #eadfce}.team-hero h1{margin:8px 0 12px;font-size:clamp(2rem,5vw,3rem)}.team-hero p{max-width:760px;margin:auto;font-size:18px;line-height:1.55}.back-btn{position:absolute;left:24px;top:20px;border:0;background:#fff;color:var(--green);border-radius:24px;padding:10px 16px;box-shadow:0 4px 15px #00000012;cursor:pointer;font-weight:700}
+.team-section{padding:34px 12px 20px}.section-heading{text-align:center;margin-bottom:24px}.section-heading h2{color:var(--green);font-size:28px;margin:0 0 7px}.section-heading p{margin:0;color:var(--muted);font-size:16px}
+.staff-grid{width:min(100%,1050px);margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}.management-grid{grid-template-columns:repeat(6,minmax(0,1fr))}.management-grid .staff-card{grid-column:span 2}.management-grid .staff-card:nth-child(1){grid-column:2/span 2}.management-grid .staff-card:nth-child(2){grid-column:4/span 2}.management-grid .staff-card:nth-child(n+3){grid-column:span 2}
+.staff-card{width:100%;border:1px solid #e2e9e5;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 5px 18px #0a3b2d12;cursor:pointer;text-align:left;padding:0;transition:.18s}.staff-card:hover{transform:translateY(-2px);box-shadow:0 10px 25px #0a3b2d18}.staff-photo{width:100%;aspect-ratio:1/1;background:#edf5f1;display:flex;align-items:center;justify-content:center;overflow:hidden}.staff-photo img{width:100%;height:100%;object-fit:contain;display:block}.staff-info{padding:11px 12px 14px}.staff-info h3{margin:0 0 7px;font-size:16px;line-height:1.25}.detail{margin:6px 0;color:var(--muted);font-size:13px;line-height:1.35}.detail b{color:var(--green)}.management-role{color:var(--red);text-align:center;font-weight:900;margin:12px 0 0}.note{font-size:11px;color:#8a9490;margin-top:9px;font-weight:700}.primary-card .staff-info{text-align:center}.primary-card .staff-info h3{margin:0}.non-card .staff-info{text-align:center}.non-card .staff-role{color:var(--red);font-weight:900;text-align:center;margin:6px 0 0;font-size:13px}
+.loading,.empty,.error{grid-column:1/-1;padding:22px;text-align:center;border-radius:14px;background:#f5f8f6;color:var(--muted)}.error{background:#fff0ee;color:#aa1f24}
+.modal{position:fixed;inset:0;background:#08251d99;z-index:100;display:none;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}.modal-card{width:min(520px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:18px;position:relative}.modal-close{position:absolute;right:12px;top:12px;width:38px;height:38px;border:0;border-radius:50%;background:#fff;color:var(--green);font-size:25px;z-index:2;cursor:pointer}.modal-photo{aspect-ratio:1/1;background:#edf5f1}.modal-photo img{width:100%;height:100%;object-fit:contain}.modal-body{padding:20px}.modal-body h2{margin:0;color:var(--green)}.modal-role{color:var(--red);font-weight:900;text-align:center;margin:5px 0 18px}.modal-body strong{color:var(--green)}.modal-body p{margin:4px 0 13px;color:var(--muted)}
+@media(max-width:700px){header{min-height:78px;padding:8px 16px}.logo img{width:58px;height:58px}.school-name h2{font-size:16px}.school-name p{font-size:9px}.school-name small{font-size:9px}nav{display:none}.menu-btn{display:block}.team-hero{padding:45px 18px 30px}.team-hero h1{font-size:31px}.team-hero p{font-size:16px}.back-btn{left:14px;top:10px}.team-section{padding:28px 5px 15px}.section-heading h2{font-size:25px}.staff-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.management-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}.management-grid .staff-card{grid-column:span 2}.management-grid .staff-card:nth-child(1){grid-column:2/span 2}.management-grid .staff-card:nth-child(2){grid-column:4/span 2}.management-grid .staff-card:nth-child(n+3){grid-column:span 2}.staff-card{border-radius:10px}.staff-info{padding:8px 6px 10px}.staff-info h3{font-size:12px}.detail{font-size:9px;margin:4px 0}.management-role,.non-card .staff-role{font-size:9px}.note{font-size:7px}.section-heading p{font-size:13px}}
 </style>
 
 <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore-compat.js"></script>
-</head>
-
-<body>
-
-<header>
-    <div class="logo">
-        <img src="logo.png" alt="BALAD Private Schools Logo">
-        <div class="school-name">
-            <h2>BALAD PRIVATE SCHOOLS</h2>
-            <p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
-            <small>"Nothing but Success"</small>
-        </div>
-    </div>
-
-    <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="admissions.html">Admissions</a>
-        <a href="team.html">Meet Our Team</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-</header>
-
-<section class="page-hero">
-    <div class="page-overlay">
-        <h1>Meet Our Team</h1>
-        <p>
-            Meet the dedicated professionals whose passion, expertise and commitment
-            help shape every learner at BALAD Private Schools.
-        </p>
-    </div>
-</section>
-
-<main>
-
-<section class="team-live-section" id="management">
-    <div class="team-live-header">
-        <h2>Management</h2>
-        <p>Our school leaders and management team.</p>
-    </div>
-    <div class="team-live-grid" id="managementGrid">
-        <div class="team-loading">Loading management profiles…</div>
-    </div>
-</section>
-
-<section class="team-live-section" id="college">
-    <div class="team-live-header">
-        <h2>College Staff</h2>
-        <p>Meet the professionals supporting teaching and learning in the College.</p>
-    </div>
-    <div class="team-live-grid" id="collegeGrid">
-        <div class="team-loading">Loading College staff profiles…</div>
-    </div>
-</section>
-
-<section class="team-live-section" id="primary">
-    <div class="team-live-header">
-        <h2>Primary Staff</h2>
-        <p>Meet the professionals supporting our Nursery and Primary learners.</p>
-    </div>
-    <div class="team-live-grid" id="primaryGrid">
-        <div class="team-loading">Loading Primary staff profiles…</div>
-    </div>
-</section>
-
-<section class="team-live-section" id="non-teaching">
-    <div class="team-live-header">
-        <h2>Non-teaching Staff</h2>
-        <p>Meet the team supporting the safe and smooth running of the school.</p>
-    </div>
-    <div class="team-live-grid" id="nonTeachingGrid">
-        <div class="team-loading">Loading non-teaching profiles…</div>
-    </div>
-</section>
-
-</main>
-
-<div class="team-modal" id="teamModal" role="dialog" aria-modal="true" aria-label="Staff profile">
-    <div class="team-modal-card">
-        <button class="team-modal-close" id="teamModalClose" type="button" aria-label="Close profile">×</button>
-        <img class="team-modal-photo" id="modalPhoto" src="" alt="">
-        <div class="team-modal-body">
-            <h2 id="modalName">Staff Profile</h2>
-            <div class="team-modal-role" id="modalPosition"></div>
-
-            <div class="team-modal-row">
-                <strong>Qualification</strong>
-                <div id="modalQualification">—</div>
-            </div>
-
-            <div class="team-modal-row">
-                <strong>Subject</strong>
-                <div id="modalSubjects">—</div>
-            </div>
-
-            <div class="team-modal-row">
-                <strong>School / Section</strong>
-                <div id="modalSchool">—</div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-(function(){
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyCLU7CdFlCrLxGzRo0Z0PQOQ-6Y91ccj-M",
-        authDomain: "projectb-wetrending-space.firebaseapp.com",
-        projectId: "projectb-wetrending-space",
-        storageBucket: "projectb-wetrending-space.firebasestorage.app",
-        messagingSenderId: "106348539335",
-        appId: "1:106348539335:web:50ec676ce6d424a82c3de2"
-    };
-
-    const FALLBACK_PHOTO = "logo.png";
-
-    function esc(value){
-        return String(value ?? "")
-            .replace(/&/g,"&amp;")
-            .replace(/</g,"&lt;")
-            .replace(/>/g,"&gt;")
-            .replace(/"/g,"&quot;")
-            .replace(/'/g,"&#039;");
-    }
-
-    function valueText(value){
-        if(Array.isArray(value)) return value.filter(Boolean).join(" / ");
-        return String(value ?? "").trim();
-    }
-
-    function qualificationText(staff){
-        return valueText(
-            staff.qualification ??
-            staff.qualifications ??
-            staff.Qualification ??
-            ""
-        ) || "To be updated";
-    }
-
-    function subjectText(staff){
-        return valueText(
-            staff.subjects ??
-            staff.assignedSubjects ??
-            staff.subject ??
-            ""
-        ) || "To be updated";
-    }
-
-    function schoolText(staff){
-        const s = String(staff.school || "").toLowerCase();
-        if(s === "college" || s === "secondary") return "College";
-        if(s === "primary") return "Nursery & Primary";
-        return "BALAD Private Schools";
-    }
-
-    function categoryText(staff){
-        const c = String(staff.category || "").toLowerCase();
-        if(c === "management") return "management";
-        if(c === "college") return "college";
-        if(c === "primary") return "primary";
-        if(c === "non_teaching" || c === "non-teaching") return "non_teaching";
-
-        const role = String(staff.role || "").toLowerCase();
-        if(role === "management") return "management";
-        if(role === "other" || role === "other staff") return "non_teaching";
-
-        const school = String(staff.school || "").toLowerCase();
-        return school === "college" || school === "secondary"
-            ? "college"
-            : "primary";
-    }
-
-    function photoText(staff){
-        return String(
-            staff.photoUrl ||
-            staff.photo ||
-            FALLBACK_PHOTO
-        ).trim() || FALLBACK_PHOTO;
-    }
-
-    function renderCard(staff, index, category){
-        const photo = esc(photoText(staff));
-        const name = esc(staff.name || "Staff Member");
-        const position = esc(staff.position || staff.role || "Staff");
-        const qualification = esc(qualificationText(staff));
-        const subjects = esc(subjectText(staff));
-
-        let details = "";
-
-        if(category === "management"){
-            details = `
-                <p class="team-profile-detail"><strong>Qualification:</strong><br>${qualification}</p>
-                <p class="team-profile-detail"><strong>Subject:</strong><br>${subjects}</p>
-            `;
-        }else if(category === "college"){
-            details = `
-                <p class="team-profile-detail"><strong>Qualification:</strong><br>${qualification}</p>
-                <p class="team-profile-detail"><strong>Subject:</strong><br>${subjects}</p>
-            `;
-        }else if(category === "non_teaching"){
-            details = `<p class="team-profile-position">${position}</p>`;
-        }
-
-        return `
-            <button class="team-profile-card"
-                    type="button"
-                    data-profile-index="${index}"
-                    aria-label="Open profile for ${name}">
-                <img class="team-profile-photo"
-                     src="${photo}"
-                     alt="${name}"
-                     onerror="this.onerror=null;this.src='${FALLBACK_PHOTO}'">
-
-                <div class="team-profile-body">
-                    <h3>${name}</h3>
-                    ${category === "management" || category === "college" ? `<p class="team-profile-position">${position}</p>` : ""}
-                    ${details}
-                    <div class="team-click-note">Tap to view full profile →</div>
-                </div>
-            </button>
-        `;
-    }
-
-    function renderCategory(id, records, label){
-        const grid = document.getElementById(id);
-        const category = id === "managementGrid"
-            ? "management"
-            : id === "collegeGrid"
-                ? "college"
-                : id === "primaryGrid"
-                    ? "primary"
-                    : "non_teaching";
-
-        grid.dataset.category = category;
-
-        if(!records.length){
-            grid.innerHTML =
-                `<div class="team-empty">No ${label} profiles have been added yet.</div>`;
-            return;
-        }
-
-        grid.innerHTML =
-            records.map((staff,index) => renderCard(staff,index,category)).join("");
-
-        grid.querySelectorAll(".team-profile-card").forEach(card => {
-            card.addEventListener("click", () => {
-                const staff = records[
-                    Number(card.dataset.profileIndex)
-                ];
-                openModal(staff, category);
-            });
-        });
-    }
-
-    function openModal(staff, category){
-        const qualificationRow = document.getElementById("modalQualification").closest(".team-modal-row");
-        const subjectRow = document.getElementById("modalSubjects").closest(".team-modal-row");
-        const schoolRow = document.getElementById("modalSchool").closest(".team-modal-row");
-
-        document.getElementById("modalPhoto").src = photoText(staff);
-        document.getElementById("modalPhoto").alt = staff.name || "Staff Profile";
-        document.getElementById("modalName").textContent =
-            staff.name || "Staff Profile";
-        document.getElementById("modalPosition").textContent =
-            staff.position || staff.role || "";
-        document.getElementById("modalQualification").textContent =
-            qualificationText(staff);
-        document.getElementById("modalSubjects").textContent =
-            subjectText(staff);
-        document.getElementById("modalSchool").textContent =
-            schoolText(staff);
-
-        /* Match the same information rules used on the cards. */
-        qualificationRow.style.display =
-            (category === "management" || category === "college") ? "block" : "none";
-        subjectRow.style.display =
-            (category === "management" || category === "college") ? "block" : "none";
-        schoolRow.style.display =
-            (category === "management" || category === "college") ? "block" : "none";
-        document.getElementById("modalPosition").style.display =
-            (category === "management" || category === "non_teaching") ? "block" : "none";
-
-        document.getElementById("teamModal").classList.add("open");
-        document.body.style.overflow = "hidden";
-    }
-
-    function closeModal(){
-        document.getElementById("teamModal").classList.remove("open");
-        document.body.style.overflow = "";
-    }
-
-    document.getElementById("teamModalClose")
-        .addEventListener("click", closeModal);
-
-    document.getElementById("teamModal")
-        .addEventListener("click", function(e){
-            if(e.target === this) closeModal();
-        });
-
-    document.addEventListener("keydown", function(e){
-        if(e.key === "Escape") closeModal();
-    });
-
-    try{
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        db.collection("publicStaff")
-            .get()
-            .then(snapshot => {
-
-                const records = snapshot.docs
-                    .map(doc => ({
-                        id: doc.id,
-                        ...doc.data()
-                    }))
-                    .filter(staff => staff.active !== false);
-
-                const grouped = {
-                    management: [],
-                    college: [],
-                    primary: [],
-                    non_teaching: []
-                };
-
-                records.forEach(staff => {
-                    const category = categoryText(staff);
-                    if(grouped[category]) grouped[category].push(staff);
-                });
-
-                renderCategory(
-                    "managementGrid",
-                    grouped.management,
-                    "management"
-                );
-
-                renderCategory(
-                    "collegeGrid",
-                    grouped.college,
-                    "College"
-                );
-
-                renderCategory(
-                    "primaryGrid",
-                    grouped.primary,
-                    "Primary"
-                );
-
-                renderCategory(
-                    "nonTeachingGrid",
-                    grouped.non_teaching,
-                    "non-teaching"
-                );
-            })
-            .catch(error => {
-                console.error("BALAD team profiles error:", error);
-
-                document.querySelectorAll(".team-live-grid")
-                    .forEach(grid => {
-                        grid.innerHTML =
-                            `<div class="team-error">
-                                Staff profiles could not be loaded right now.
-                                Please try again.
-                            </div>`;
-                    });
-            });
-
-    }catch(error){
-        console.error("Firebase initialization error:", error);
-
-        document.querySelectorAll(".team-live-grid")
-            .forEach(grid => {
-                grid.innerHTML =
-                    `<div class="team-error">
-                        Staff profiles could not be loaded right now.
-                    </div>`;
-            });
-    }
-
-})();
-</script>
-
-<script src="script.js"></script>
-
-<script>
-(function(){
-  // Display-rule helper for BALAD Team profiles.
-  window.BALAD_TEAM_DISPLAY_RULES = {
-    management: ["name","role","qualification","subject"],
-    college: ["name","qualification","subject"],
-    primary: ["name"],
-    "non-teaching": ["name","role"]
-  };
-})();
+/* Uses the same BALAD Firebase project. If your project already has firebase-config.js,
+   this page can instead use that config; the publicStaff collection is read-only here. */
+const firebaseConfig={apiKey:"AIzaSyCLU7CdFlCrLxGzRo0ZPQOQ-6Y91ccj-M",authDomain:"projectb-wetrending-space.firebaseapp.com",projectId:"projectb-wetrending-space",storageBucket:"projectb-wetrending-space.firebasestorage.app",messagingSenderId:"106348539335",appId:"1:106348539335:web:50ec676ce6d424a82c3de2"};
+const fallback="logo.png";
+const $=id=>document.getElementById(id);
+const text=v=>Array.isArray(v)?v.filter(Boolean).join(" / "):String(v??"").trim();
+function cat(s){let c=text(s.category).toLowerCase().replace(/[- ]/g,"_");if(["management","college","primary","non_teaching"].includes(c))return c;let r=text(s.position||s.role).toLowerCase();if(r.includes("management")||r==="principal"||r.includes("vice principal")||r.includes("bursar"))return"management";if(text(s.school).toLowerCase()==="college")return"college";return"primary"}
+function qual(s){return text(s.qualification||s.qualifications)||"To be updated"}function subj(s){return text(s.subjects||s.subject||s.assignedSubjects)||"To be updated"}function img(s){return text(s.photoUrl||s.photo)||fallback}
+function card(s,i,c){let n=String(s.name||"Staff Member").replace(/</g,"&lt;");let p=String(s.position||s.role||"").replace(/</g,"&lt;");let q=qual(s).replace(/</g,"&lt;");let su=subj(s).replace(/</g,"&lt;");let cl="staff-card";let body="";if(c==="management")body=`<div class="detail"><b>Qualification:</b><br>${q}</div><div class="detail"><b>Subject:</b><br>${su}</div><div class="management-role">${p}</div>`;if(c==="college")body=`<div class="detail"><b>Qualification:</b><br>${q}</div><div class="detail"><b>Subject:</b><br>${su}</div>`;if(c==="primary"){cl+=" primary-card";body=""}if(c==="non_teaching"){cl+=" non-card";body=`<div class="staff-role">${p}</div>`}let note=c==="primary"?"":"<div class='note'>Tap to view full profile →</div>";return `<button class="${cl}" data-i="${i}"><div class="staff-photo"><img src="${img(s).replace(/"/g,'&quot;')}" alt="${n}" onerror="this.onerror=null;this.src='${fallback}'"></div><div class="staff-info"><h3>${n}</h3>${body}${note}</div></button>`}
+function render(id,list,c){let g=$(id);if(!list.length){g.innerHTML='<div class="empty">No profiles have been added yet.</div>';return}g.innerHTML=list.map((s,i)=>card(s,i,c)).join("");g.querySelectorAll(".staff-card").forEach(b=>b.onclick=()=>open(list[+b.dataset.i],c))}
+function open(s,c){$("modalImg").src=img(s);$("modalImg").alt=s.name||"Staff profile";$("modalName").textContent=s.name||"Staff Profile";$("modalRole").textContent=s.position||s.role||"";$("modalQualification").textContent=qual(s);$("modalSubject").textContent=subj(s);$("modalSchool").textContent=text(s.school)||"BALAD Private Schools";$("modalQualificationRow").style.display=(c==="management"||c==="college")?"block":"none";$("modalSubjectRow").style.display=(c==="management"||c==="college")?"block":"none";$("modalSchoolRow").style.display=(c==="management"||c==="college")?"block":"none";$("modalRole").style.display=(c==="management"||c==="non_teaching")?"block":"none";$("profileModal").classList.add("open");$("profileModal").setAttribute("aria-hidden","false")}
+function close(){$("profileModal").classList.remove("open");$("profileModal").setAttribute("aria-hidden","true")}
+$("modalClose").onclick=close;$("profileModal").onclick=e=>{if(e.target===$("profileModal"))close()};document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
+try{firebase.initializeApp(firebaseConfig);firebase.firestore().collection("publicStaff").get().then(snap=>{let a={management:[],college:[],primary:[],non_teaching:[]};snap.docs.map(d=>({id:d.id,...d.data()})).filter(s=>s.active!==false).forEach(s=>a[cat(s)].push(s));render("managementGrid",a.management,"management");render("collegeGrid",a.college,"college");render("primaryGrid",a.primary,"primary");render("nonTeachingGrid",a.non_teaching,"non_teaching")}).catch(e=>{console.error(e);document.querySelectorAll(".staff-grid").forEach(g=>g.innerHTML='<div class="error">Staff profiles could not be loaded right now. Please try again.</div>')})}catch(e){console.error(e)}
 </script>
 </body>
 </html>

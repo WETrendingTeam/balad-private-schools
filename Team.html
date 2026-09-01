@@ -7,13 +7,7 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* ==========================================================
-   BALAD TEAM — FINAL COMPACT LIVE VERSION
-   Management: Name / Qualification / Subject / Role
-   College: Name / Qualification / Subject
-   Primary: Name only
-   Non-teaching: Name / Role
-========================================================== */
+
 
 .team-page{
   background:#fff;
@@ -48,7 +42,7 @@
   line-height:1.55;
 }
 
-/* Sections */
+
 .team-live-section{
   padding:30px 0 20px;
 }
@@ -72,7 +66,7 @@
   line-height:1.4;
 }
 
-/* Exactly three cards across */
+
 .team-live-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -80,7 +74,7 @@
   width:100%;
 }
 
-/* Management is split 2 + 3 */
+
 .management-top{
   width:66.6667%;
   margin:0 auto 18px;
@@ -90,7 +84,7 @@
   width:100%;
 }
 
-/* Square cards with square photos */
+
 .team-profile-card{
   display:block;
   width:100%;
@@ -123,7 +117,7 @@
   aspect-ratio:1 / 1;
   height:auto;
   display:block;
-  object-fit:cover;
+  object-fit:contain;
   object-position:center;
   background:#eaf3ef;
 }
@@ -141,22 +135,22 @@
   padding:12px 13px 13px;
 }
 
-/* Names stay black */
+
 .team-profile-body h3{
   margin:0 0 7px;
-  color:#17221e;
+  color:#075c46;
   font-size:clamp(.92rem,1.55vw,1.08rem);
   line-height:1.2;
   font-weight:800;
 }
 
-/* Qualification / subject kept on one horizontal line where possible */
+
 .team-detail{
   display:flex;
   align-items:baseline;
   gap:5px;
   margin:4px 0;
-  color:#68746f;
+  color:#17221e;
   font-size:.82rem;
   line-height:1.3;
 }
@@ -165,13 +159,16 @@
   flex:0 0 auto;
   color:#075c46;
   font-weight:800;
+  font-style:italic;
 }
 
 .team-detail span{
   min-width:0;
+  color:#17221e;
+  font-weight:500;
 }
 
-/* Management role: red, centered, LAST */
+
 .team-profile-role{
   margin:10px 0 0;
   padding-top:0;
@@ -189,7 +186,7 @@
   font-weight:700;
 }
 
-/* Primary: name only */
+
 .primary-grid .team-profile-body{
   padding:11px 13px 13px;
 }
@@ -198,7 +195,7 @@
   margin:0;
 }
 
-/* Non-teaching: name + role only */
+
 .nonteaching-grid .team-profile-body h3{
   margin-bottom:6px;
 }
@@ -210,7 +207,7 @@
   font-weight:800;
 }
 
-/* Loading / empty / error */
+
 .team-loading,
 .team-empty,
 .team-error{
@@ -227,7 +224,7 @@
   background:#fff1ef;
 }
 
-/* Full profile modal */
+
 .team-modal{
   position:fixed;
   inset:0;
@@ -308,8 +305,7 @@
   margin-right:5px;
 }
 
-/* Keep three columns on normal screens; compact phones can still
-   show three cards without creating a huge vertical card stack. */
+
 @media (max-width:700px){
   .team-hero-heading{
     padding:40px 15px 34px;
@@ -340,17 +336,26 @@
   .team-detail{
     display:block;
     margin:3px 0;
+    color:#17221e;
     font-size:.66rem;
     line-height:1.25;
   }
 
   .team-detail strong{
     display:inline;
+    color:#075c46;
+    font-style:italic;
+  }
+
+  .team-detail span{
+    color:#17221e;
   }
 
   .team-profile-role{
     margin-top:6px;
+    color:#c52c2c;
     font-size:.68rem;
+    font-weight:800;
   }
 
   .team-click-note{
@@ -628,8 +633,37 @@ async function loadStaff(){
       .map(doc => ({id:doc.id, ...doc.data()}))
       .filter(s => s.active !== false);
 
+    const managementOrder = [
+      "principal",
+      "head teacher",
+      "vice principal administration",
+      "vice principal academics",
+      "administrator"
+    ];
+
+    const normalizeRole = value =>
+      String(value || "")
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[‐‑‒–—-]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    const managementRank = staffMember => {
+      const role = normalizeRole(roleValue(staffMember));
+      const exact = managementOrder.indexOf(role);
+      if(exact !== -1) return exact;
+
+      const matched = managementOrder.findIndex(item =>
+        role.includes(item) || item.includes(role)
+      );
+      return matched === -1 ? 999 : matched;
+    };
+
     const groups = {
-      management: staff.filter(s => String(s.category || "").toLowerCase() === "management"),
+      management: staff
+        .filter(s => String(s.category || "").toLowerCase() === "management")
+        .sort((a,b) => managementRank(a) - managementRank(b)),
       college: staff.filter(s => String(s.category || "").toLowerCase() === "college"),
       primary: staff.filter(s => String(s.category || "").toLowerCase() === "primary"),
       non_teaching: staff.filter(s => {

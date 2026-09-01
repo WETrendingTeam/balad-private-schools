@@ -1,101 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meet Our Team | BALAD Private Schools</title>
-<link rel="stylesheet" href="style.css">
+<title>Meet Our Team | Balad Private Schools</title>
+<link href="style.css" rel="stylesheet">
+<script defer src="script.js?v=5"></script>
+<script defer src="content-loader.js"></script>
+<style>
+.team-page .page-hero{margin:0;background:linear-gradient(120deg,var(--green-dark),var(--green));padding:55px 20px;text-align:center;color:#fff}
+.team-page .page-overlay{max-width:900px;margin:auto}.team-page .page-overlay h1{font-size:clamp(32px,4vw,52px);margin:0 0 8px}.team-page .page-overlay p{color:#fff;max-width:780px;margin:auto;line-height:1.5}
+.team-navigation{text-align:center;padding:18px 15px 0}.team-buttons{display:flex;justify-content:center;gap:12px;margin-top:16px}.team-btn{padding:10px 22px;border-radius:30px;background:var(--green);color:#fff;font-weight:800;text-decoration:none}.team-btn:not(.active){background:#fff;color:var(--green);border:1px solid var(--green)}
+.team-section,.department-section,.non-teaching-section{padding:35px 0}.team-section>.container>h2{margin:0 0 10px;text-align:center;color:var(--green);font-size:28px}.team-subtitle{text-align:center;color:var(--muted);max-width:780px;margin:0 auto 25px;font-size:14px;line-height:1.4}
+.management-row{display:grid;gap:16px;margin-bottom:16px}.principal-head-row{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px;margin-inline:auto}.three-management-row{grid-template-columns:repeat(3,minmax(0,1fr));max-width:1040px;margin-inline:auto}
+.management-card,.teacher-card,.non-teaching-card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--green);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);text-align:center;min-width:0}
+.management-card .staff-photo,.teacher-card .staff-photo{width:100%;height:190px;object-fit:cover;display:block}.management-card .staff-placeholder,.teacher-card .staff-placeholder{height:190px}
+.management-card .staff-photo,.management-card .staff-placeholder{height:220px}.staff-placeholder{margin:0;background:#e8f3ef;color:var(--green);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900}
+.team-card-content{padding:12px 14px 14px}.team-card-content h3{font-size:16px;line-height:1.25;color:#111;margin:0 0 6px}.team-card-content p{font-size:12px;color:var(--muted);margin:4px 0;line-height:1.25}.staff-detail{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.staff-detail strong{color:var(--green)}.position{color:var(--red)!important;font-weight:800!important;text-align:center;margin:6px 0 0!important}
+.department-section,.non-teaching-section{background:var(--soft)}.department-title{text-align:center;color:var(--green);font-size:22px;margin:0 auto 15px}.staff-category{margin-top:28px}.staff-category>h3{color:var(--green);font-size:22px;margin:0 0 12px}
+.teachers-grid,.primary-grid,.non-teaching-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.teacher-card .staff-photo,.teacher-card .staff-placeholder{height:170px}.teacher-card .staff-placeholder{margin:10px 10px 0}.teacher-card .team-card-content{padding:10px}.teacher-card .team-card-content h3{font-size:14px}
+.non-teaching-card{border-top-color:var(--red)}.non-teaching-card .team-card-content{padding:16px}
+@media(max-width:760px){
+.team-page .page-hero{padding:38px 15px}.team-btn{padding:9px 17px;font-size:13px}.principal-head-row{grid-template-columns:repeat(2,minmax(0,1fr))}.three-management-row,.teachers-grid,.primary-grid,.non-teaching-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.management-card .staff-photo,.management-card .staff-placeholder{height:160px}.teacher-card .staff-photo,.teacher-card .staff-placeholder{height:120px}.team-card-content{padding:9px 6px 10px}.team-card-content h3{font-size:11px}.team-card-content p{font-size:8px}.non-teaching-card .team-card-content{padding:10px 6px}
+}
+@media(max-width:430px){
+.principal-head-row{gap:8px}.three-management-row,.teachers-grid,.primary-grid,.non-teaching-grid{gap:5px}.management-card .staff-photo,.management-card .staff-placeholder{height:135px}.teacher-card .staff-photo,.teacher-card .staff-placeholder{height:95px}.management-card .team-card-content h3{font-size:9px}.management-card .team-card-content p{font-size:7px}.teacher-card .team-card-content h3,.non-teaching-card .team-card-content h3{font-size:8px}.teacher-card .team-card-content p,.non-teaching-card .team-card-content p{font-size:7px}
+}
+</style>
 </head>
-<body>
+<body class="team-page">
+
 <header>
-  <div class="logo">
-    <img src="logo.png" alt="BALAD Private Schools Logo">
-    <div class="school-name">
-      <h2>BALAD PRIVATE SCHOOLS</h2>
-      <p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
-      <small>"Nothing but Success"</small>
-    </div>
-  </div>
-  <button class="menu-btn" type="button" aria-label="Menu">☰</button>
-  <nav>
-    <a href="index.html">Home</a><a href="about.html">About</a><a href="admissions.html">Admissions</a><a href="team.html">Team</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a>
-  </nav>
+<div class="logo"><img alt="Balad Private Schools Logo" src="logo.png" data-media-key="asset-logo-png"><div class="school-name"><h2>BALAD PRIVATE SCHOOLS</h2><p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p><small>"Nothing but Success"</small></div></div>
+<input class="menu-toggle" id="balad-menu-toggle" type="checkbox">
+<label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle"><span class="menu-icon-open">☰</span><span class="menu-icon-close">×</span></label>
+<nav id="balad-main-nav"><a href="about.html">About</a><a href="admissions.html">Admissions</a><details class="academic-nav"><summary>Academic</summary><div class="academic-submenu"><a href="curriculum.html">Curriculum</a><a href="stem.html">STEM</a><a href="results.html">School Result Portal</a></div></details><a class="active" href="team.html">Meet Our Team</a><a href="facilities.html">Facilities</a><a href="gallery.html">Gallery</a><a href="news.html">News &amp; Events</a><a href="contact.html">Contact</a></nav>
 </header>
 
-<section class="team-hero">
-  <button class="back-btn" onclick="history.back()">← Back</button>
-  <h1>Meet Our Team</h1>
-  <p>Meet the dedicated professionals whose passion, expertise and commitment help shape every learner at BALAD Private Schools.</p>
-</section>
+<section class="page-hero"><div class="page-overlay"><h1>Meet Our Team</h1><p>Meet the dedicated professionals whose passion, expertise and commitment help shape every learner at Balad Private Schools.</p></div></section>
 
-<main>
-  <section class="team-section">
-    <div class="section-heading"><h2>Management</h2><p>Our school leaders and management team.</p></div>
-    <div id="managementGrid" class="staff-grid management-grid"><div class="loading">Loading profiles…</div></div>
-  </section>
+<section class="team-navigation"><div class="team-buttons"><a class="team-btn active" href="#college-team">College</a><a class="team-btn" href="#primary-team">Primary</a><a class="team-btn" href="#non-teaching-team">Non-Teaching</a></div></section>
 
-  <section class="team-section">
-    <div class="section-heading"><h2>College Staff</h2><p>Meet the professionals supporting teaching and learning in the College.</p></div>
-    <div id="collegeGrid" class="staff-grid"><div class="loading">Loading profiles…</div></div>
-  </section>
-
-  <section class="team-section">
-    <div class="section-heading"><h2>Primary Staff</h2><p>Meet the professionals supporting our Nursery and Primary learners.</p></div>
-    <div id="primaryGrid" class="staff-grid"><div class="loading">Loading profiles…</div></div>
-  </section>
-
-  <section class="team-section">
-    <div class="section-heading"><h2>Non-teaching Staff</h2><p>Meet the team supporting the safe and smooth running of the school.</p></div>
-    <div id="nonTeachingGrid" class="staff-grid"><div class="loading">Loading profiles…</div></div>
-  </section>
-</main>
-
-<div id="profileModal" class="modal" aria-hidden="true">
- <div class="modal-card">
-  <button class="modal-close" id="modalClose" type="button">×</button>
-  <div class="modal-photo"><img id="modalImg" src="logo.png" alt=""></div>
-  <div class="modal-body">
-   <h2 id="modalName"></h2>
-   <div id="modalRole" class="modal-role"></div>
-   <div id="modalQualificationRow"><strong>Qualification</strong><p id="modalQualification"></p></div>
-   <div id="modalSubjectRow"><strong>Subject</strong><p id="modalSubject"></p></div>
-   <div id="modalSchoolRow"><strong>School</strong><p id="modalSchool"></p></div>
-  </div>
- </div>
+<section class="team-section management-team" id="management"><div class="container"><h2>Management Team</h2><p class="team-subtitle">School leadership responsible for academic direction, administration and the smooth running of Balad Private Schools.</p>
+<div class="management-row principal-head-row">
+<article class="team-card management-card"><img class="staff-photo" src="principal.jpg" alt="Mr. Usman Olatunbosun" data-media-key="asset-principal-jpg"><div class="team-card-content"><h3>Mr. Usman Olatunbosun</h3><p class="staff-detail"><strong>Qualification:</strong> B.Sc.</p><p class="staff-detail"><strong>Subject:</strong> Accounting / Economics</p><p class="position">Principal</p></div></article>
+<article class="team-card management-card"><img class="staff-photo" src="vice-principal.jpg" alt="Mr. Folorunsho" data-media-key="asset-vice-principal-jpg"><div class="team-card-content"><h3>Mr. Folorunsho</h3><p class="staff-detail"><strong>Qualification:</strong> —</p><p class="staff-detail"><strong>Subject:</strong> Economics / Government</p><p class="position">Head Teacher</p></div></article>
 </div>
+<div class="management-row three-management-row">
+<article class="team-card management-card"><img class="staff-photo" src="E.Ayorinde.jpg" alt="Mrs Ayorinde" data-media-key="asset-e-ayorinde-jpg"><div class="team-card-content"><h3>Mrs Ayorinde</h3><p class="staff-detail"><strong>Qualification:</strong> —</p><p class="staff-detail"><strong>Subject:</strong> Biology / Agric. Science</p><p class="position">Vice Principal Administration</p></div></article>
+<article class="team-card management-card"><div class="staff-placeholder">TS</div><div class="team-card-content"><h3>Mrs Aremu</h3><p class="staff-detail"><strong>Qualification:</strong> B.Sc. Chemistry, PGDE in view</p><p class="staff-detail"><strong>Subject:</strong> Chemistry</p><p class="position">Vice Principal Academic</p></div></article>
+<article class="team-card management-card"><div class="staff-placeholder">TS</div><div class="team-card-content"><h3>Mrs Olorunloba</h3><p class="staff-detail"><strong>Qualification:</strong> —</p><p class="staff-detail"><strong>Subject:</strong> —</p><p class="position">School Administrative</p></div></article>
+</div></div></section>
 
-<style>
-:root{--green:#075c46;--red:#c5222d;--cream:#f6efe3;--text:#1d2925;--muted:#68746f}
-*{box-sizing:border-box} body{margin:0;color:var(--text);background:#fff;font-family:Arial,Helvetica,sans-serif}
-header{min-height:92px;display:flex;align-items:center;justify-content:space-between;padding:12px 4%;gap:20px;background:#fff;border-bottom:1px solid #edf0ee;position:relative;z-index:5}
-.logo{display:flex;align-items:center;gap:12px}.logo img{width:68px;height:68px;object-fit:contain}.school-name h2{margin:0;color:var(--green);font-size:20px}.school-name p{margin:5px 0;font-size:12px;color:#59645f}.school-name small{color:#d12b32;font-style:italic}
-nav{display:flex;gap:22px}nav a{color:#24332e;text-decoration:none;font-size:14px}nav a:hover{color:var(--green)}.menu-btn{display:none;border:0;background:none;color:var(--green);font-size:25px}
-.team-hero{background:var(--cream);text-align:center;padding:34px 18px 38px;position:relative;border-bottom:1px solid #eadfce}.team-hero h1{margin:8px 0 12px;font-size:clamp(2rem,5vw,3rem)}.team-hero p{max-width:760px;margin:auto;font-size:18px;line-height:1.55}.back-btn{position:absolute;left:24px;top:20px;border:0;background:#fff;color:var(--green);border-radius:24px;padding:10px 16px;box-shadow:0 4px 15px #00000012;cursor:pointer;font-weight:700}
-.team-section{padding:34px 12px 20px}.section-heading{text-align:center;margin-bottom:24px}.section-heading h2{color:var(--green);font-size:28px;margin:0 0 7px}.section-heading p{margin:0;color:var(--muted);font-size:16px}
-.staff-grid{width:min(100%,1050px);margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}.management-grid{grid-template-columns:repeat(6,minmax(0,1fr))}.management-grid .staff-card{grid-column:span 2}.management-grid .staff-card:nth-child(1){grid-column:2/span 2}.management-grid .staff-card:nth-child(2){grid-column:4/span 2}.management-grid .staff-card:nth-child(n+3){grid-column:span 2}
-.staff-card{width:100%;border:1px solid #e2e9e5;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 5px 18px #0a3b2d12;cursor:pointer;text-align:left;padding:0;transition:.18s}.staff-card:hover{transform:translateY(-2px);box-shadow:0 10px 25px #0a3b2d18}.staff-photo{width:100%;aspect-ratio:1/1;background:#edf5f1;display:flex;align-items:center;justify-content:center;overflow:hidden}.staff-photo img{width:100%;height:100%;object-fit:contain;display:block}.staff-info{padding:11px 12px 14px}.staff-info h3{margin:0 0 7px;font-size:16px;line-height:1.25}.detail{margin:6px 0;color:var(--muted);font-size:13px;line-height:1.35}.detail b{color:var(--green)}.management-role{color:var(--red);text-align:center;font-weight:900;margin:12px 0 0}.note{font-size:11px;color:#8a9490;margin-top:9px;font-weight:700}.primary-card .staff-info{text-align:center}.primary-card .staff-info h3{margin:0}.non-card .staff-info{text-align:center}.non-card .staff-role{color:var(--red);font-weight:900;text-align:center;margin:6px 0 0;font-size:13px}
-.loading,.empty,.error{grid-column:1/-1;padding:22px;text-align:center;border-radius:14px;background:#f5f8f6;color:var(--muted)}.error{background:#fff0ee;color:#aa1f24}
-.modal{position:fixed;inset:0;background:#08251d99;z-index:100;display:none;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}.modal-card{width:min(520px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:18px;position:relative}.modal-close{position:absolute;right:12px;top:12px;width:38px;height:38px;border:0;border-radius:50%;background:#fff;color:var(--green);font-size:25px;z-index:2;cursor:pointer}.modal-photo{aspect-ratio:1/1;background:#edf5f1}.modal-photo img{width:100%;height:100%;object-fit:contain}.modal-body{padding:20px}.modal-body h2{margin:0;color:var(--green)}.modal-role{color:var(--red);font-weight:900;text-align:center;margin:5px 0 18px}.modal-body strong{color:var(--green)}.modal-body p{margin:4px 0 13px;color:var(--muted)}
-@media(max-width:700px){header{min-height:78px;padding:8px 16px}.logo img{width:58px;height:58px}.school-name h2{font-size:16px}.school-name p{font-size:9px}.school-name small{font-size:9px}nav{display:none}.menu-btn{display:block}.team-hero{padding:45px 18px 30px}.team-hero h1{font-size:31px}.team-hero p{font-size:16px}.back-btn{left:14px;top:10px}.team-section{padding:28px 5px 15px}.section-heading h2{font-size:25px}.staff-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.management-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}.management-grid .staff-card{grid-column:span 2}.management-grid .staff-card:nth-child(1){grid-column:2/span 2}.management-grid .staff-card:nth-child(2){grid-column:4/span 2}.management-grid .staff-card:nth-child(n+3){grid-column:span 2}.staff-card{border-radius:10px}.staff-info{padding:8px 6px 10px}.staff-info h3{font-size:12px}.detail{font-size:9px;margin:4px 0}.management-role,.non-card .staff-role{font-size:9px}.note{font-size:7px}.section-heading p{font-size:13px}}
-</style>
+<section class="department-section teachers-section" id="college-team"><div class="container"><h2 class="department-title">College Teaching Staff</h2>
+<div class="staff-category"><h3>Science &amp; Technology Department</h3><div class="teachers-grid">
+<article class="team-card teacher-card"><img alt="Ms. Mubarak Suliat" class="staff-photo" src="teacher1.jpg" data-media-key="asset-teacher1-jpg"><div class="team-card-content"><h3>Ms. Mubarak Suliat</h3><p class="staff-detail"><strong>Qualification:</strong> —</p><p class="staff-detail"><strong>Subject:</strong> Mathematics / Further Mathematics</p></div></article>
+<article class="team-card teacher-card"><div class="staff-placeholder">TS</div><div class="team-card-content"><h3>Science Teacher 2</h3><p class="staff-detail"><strong>Qualification:</strong> —</p><p class="staff-detail"><strong>Subject:</strong> Details to be updated</p></div></article>
+<article class="team-card teacher-card"><div class="staff-placeholder">TS</div><div class="team-card-content"><h3>Science Teacher 3</h3><p class="staff-detail"><strong>Qualification:</strong> —</p><p class="staff-detail"><strong>Subject:</strong> Details to be updated</p></div></article>
+</div></div>
+<div class="staff-category"><h3>Business Department</h3><div class="teachers-grid">
+<article class="team-card teacher-card"><div class="staff-placeholder">TS</div><div class="team-card-content"><h3>Business Teacher 1</h3><p class="staff-detail"><strong>Qualification:</strong> —</p><p class="staff-detail"><strong>Subject:</strong> Details to be updated</p></div></article>
+<article class="team-card teacher-card"><div class="staff-placeholder">TS</div><div class="team-card-content"><h3>Business Teacher 2</h3><p class="staff-detail"><strong>Qualification:</strong> —</p><p class="staff-detail"><strong>Subject:</strong> Details to be updated</p></div></article>
+<article class="team-card teacher-card"><div class="staff-placeholder">TS</div><div class="team-card-content"><h3>Business Teacher 3</h3><p class="staff-detail"><strong>Qualification:</strong> —</p><p class="staff-detail"><strong>Subject:</strong> Details to be updated</p></div></article>
+</div></div>
+<div class="staff-category"><h3>Humanities Department</h3><div class="teachers-grid">
+<article class="team-card teacher-card"><div class="staff-placeholder">TS</div><div class="team-card-content"><h3>Humanities Teacher 1</h3><p class="staff-detail"><strong>Qualification:</strong> —</p><p class="staff-detail"><strong>Subject:</strong> Details to be updated</p></div></article>
+<article class="team-card teacher-card"><div class="staff-placeholder">TS</div><div class="team-card-content"><h3>Humanities Teacher 2</h3><p class="staff-detail"><strong>Qualification:</strong> —</p><p class="staff-detail"><strong>Subject:</strong> Details to be updated</p></div></article>
+<article class="team-card teacher-card"><div class="staff-placeholder">TS</div><div class="team-card-content"><h3>Humanities Teacher 3</h3><p class="staff-detail"><strong>Qualification:</strong> —</p><p class="staff-detail"><strong>Subject:</strong> Details to be updated</p></div></article>
+</div></div></div></section>
 
-<script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore-compat.js"></script>
-<script>
-/* Uses the same BALAD Firebase project. If your project already has firebase-config.js,
-   this page can instead use that config; the publicStaff collection is read-only here. */
-const firebaseConfig={apiKey:"AIzaSyCLU7CdFlCrLxGzRo0ZPQOQ-6Y91ccj-M",authDomain:"projectb-wetrending-space.firebaseapp.com",projectId:"projectb-wetrending-space",storageBucket:"projectb-wetrending-space.firebasestorage.app",messagingSenderId:"106348539335",appId:"1:106348539335:web:50ec676ce6d424a82c3de2"};
-const fallback="logo.png";
-const $=id=>document.getElementById(id);
-const text=v=>Array.isArray(v)?v.filter(Boolean).join(" / "):String(v??"").trim();
-function cat(s){let c=text(s.category).toLowerCase().replace(/[- ]/g,"_");if(["management","college","primary","non_teaching"].includes(c))return c;let r=text(s.position||s.role).toLowerCase();if(r.includes("management")||r==="principal"||r.includes("vice principal")||r.includes("bursar"))return"management";if(text(s.school).toLowerCase()==="college")return"college";return"primary"}
-function qual(s){return text(s.qualification||s.qualifications)||"To be updated"}function subj(s){return text(s.subjects||s.subject||s.assignedSubjects)||"To be updated"}function img(s){return text(s.photoUrl||s.photo)||fallback}
-function card(s,i,c){let n=String(s.name||"Staff Member").replace(/</g,"&lt;");let p=String(s.position||s.role||"").replace(/</g,"&lt;");let q=qual(s).replace(/</g,"&lt;");let su=subj(s).replace(/</g,"&lt;");let cl="staff-card";let body="";if(c==="management")body=`<div class="detail"><b>Qualification:</b><br>${q}</div><div class="detail"><b>Subject:</b><br>${su}</div><div class="management-role">${p}</div>`;if(c==="college")body=`<div class="detail"><b>Qualification:</b><br>${q}</div><div class="detail"><b>Subject:</b><br>${su}</div>`;if(c==="primary"){cl+=" primary-card";body=""}if(c==="non_teaching"){cl+=" non-card";body=`<div class="staff-role">${p}</div>`}let note=c==="primary"?"":"<div class='note'>Tap to view full profile →</div>";return `<button class="${cl}" data-i="${i}"><div class="staff-photo"><img src="${img(s).replace(/"/g,'&quot;')}" alt="${n}" onerror="this.onerror=null;this.src='${fallback}'"></div><div class="staff-info"><h3>${n}</h3>${body}${note}</div></button>`}
-function render(id,list,c){let g=$(id);if(!list.length){g.innerHTML='<div class="empty">No profiles have been added yet.</div>';return}g.innerHTML=list.map((s,i)=>card(s,i,c)).join("");g.querySelectorAll(".staff-card").forEach(b=>b.onclick=()=>open(list[+b.dataset.i],c))}
-function open(s,c){$("modalImg").src=img(s);$("modalImg").alt=s.name||"Staff profile";$("modalName").textContent=s.name||"Staff Profile";$("modalRole").textContent=s.position||s.role||"";$("modalQualification").textContent=qual(s);$("modalSubject").textContent=subj(s);$("modalSchool").textContent=text(s.school)||"BALAD Private Schools";$("modalQualificationRow").style.display=(c==="management"||c==="college")?"block":"none";$("modalSubjectRow").style.display=(c==="management"||c==="college")?"block":"none";$("modalSchoolRow").style.display=(c==="management"||c==="college")?"block":"none";$("modalRole").style.display=(c==="management"||c==="non_teaching")?"block":"none";$("profileModal").classList.add("open");$("profileModal").setAttribute("aria-hidden","false")}
-function close(){$("profileModal").classList.remove("open");$("profileModal").setAttribute("aria-hidden","true")}
-$("modalClose").onclick=close;$("profileModal").onclick=e=>{if(e.target===$("profileModal"))close()};document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
-try{firebase.initializeApp(firebaseConfig);firebase.firestore().collection("publicStaff").get().then(snap=>{let a={management:[],college:[],primary:[],non_teaching:[]};snap.docs.map(d=>({id:d.id,...d.data()})).filter(s=>s.active!==false).forEach(s=>a[cat(s)].push(s));render("managementGrid",a.management,"management");render("collegeGrid",a.college,"college");render("primaryGrid",a.primary,"primary");render("nonTeachingGrid",a.non_teaching,"non_teaching")}).catch(e=>{console.error(e);document.querySelectorAll(".staff-grid").forEach(g=>g.innerHTML='<div class="error">Staff profiles could not be loaded right now. Please try again.</div>')})}catch(e){console.error(e)}
-</script>
+<section class="team-section primary-team" id="primary-team"><div class="container"><h2>Nursery &amp; Primary Section</h2><p class="team-subtitle">Our Nursery and Primary team supporting learners throughout their early educational journey.</p><div class="primary-grid">
+''' + ''.join(f'<article class="team-card teacher-card"><div class="staff-placeholder">TS</div><div class="team-card-content"><h3>Primary Teacher {i}</h3></div></article>' for i in range(1,21)) + '''
+</div></div></section>
+
+<section class="non-teaching-section" id="non-teaching-team"><div class="container"><h2 class="department-title">Non-Teaching Staff</h2><p class="team-subtitle">Our non-teaching team supporting administration, safety, operations and the daily life of the school.</p><div class="non-teaching-grid">
+<article class="team-card non-teaching-card"><div class="team-card-content"><h3>Security Staff</h3><p class="position">Security</p></div></article>
+<article class="team-card non-teaching-card"><div class="team-card-content"><h3>Administrative Staff</h3><p class="position">Administration</p></div></article>
+<article class="team-card non-teaching-card"><div class="team-card-content"><h3>Support Staff</h3><p class="position">Support</p></div></article>
+</div></div></section>
+
+<footer><div class="footer-bottom">© <span data-year></span> Balad Private Schools. All Rights Reserved. <span class="footer-developer">Developed by <a href="https://wa.me/2349164435249" target="_blank" rel="noopener">LADE</a></span></div></footer>
 </body>
 </html>

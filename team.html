@@ -848,6 +848,39 @@
     white-space:nowrap !important;
   }
 }
+
+   /* =========================================
+   PRINCIPAL + HEAD TEACHER — OVERRIDE ONLY
+   ========================================= */
+
+#management-top{
+  width:100% !important;
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:18px !important;
+}
+
+#management-top .team-profile-card{
+  width:100% !important;
+  max-width:none !important;
+}
+
+
+/* PHONE */
+@media (max-width:700px){
+
+  #management-top{
+    width:100% !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:9px !important;
+  }
+
+  #management-top .team-profile-card{
+    width:100% !important;
+    max-width:none !important;
+  }
+
+}
 </style>
 </head>
 

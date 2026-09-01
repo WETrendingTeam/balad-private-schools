@@ -375,6 +375,131 @@
     font-size:.86rem;
   }
 }
+  /* =====================================================
+   BALAD TEAM — KEEP ALL CARD TEXT ON ONE LINE
+   Does NOT change card size or card layout
+   ===================================================== */
+
+.team-profile-body{
+  text-align:center;
+}
+
+/* Staff name */
+.team-profile-body h3{
+  color:#075c46 !important;
+  font-weight:800 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:clip !important;
+}
+
+/* Qualification / Subject block */
+.team-profile-body .team-detail{
+  display:block !important;
+  width:100% !important;
+  text-align:center !important;
+  margin:6px 0 !important;
+  line-height:1.25 !important;
+}
+
+/* Label */
+.team-profile-body .team-detail strong{
+  display:block !important;
+  width:100% !important;
+  color:#075c46 !important;
+  font-weight:800 !important;
+  font-style:italic !important;
+  white-space:nowrap !important;
+  margin-bottom:2px !important;
+}
+
+/* Value — NEVER wrap */
+.team-profile-body .team-detail span{
+  display:block !important;
+  width:100% !important;
+  color:#222 !important;
+  font-weight:500 !important;
+  white-space:nowrap !important;
+  overflow:visible !important;
+  line-height:1.25 !important;
+}
+
+/* Position */
+.team-profile-body .team-profile-role{
+  color:#c52c2c !important;
+  font-weight:800 !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+  overflow:visible !important;
+}
+
+/* Keep the management cards equal and clean */
+.management-top .team-profile-card,
+.management-bottom .team-profile-card{
+  height:100%;
+}
+
+/* Mobile */
+@media(max-width:700px){
+
+  .team-profile-body h3{
+    font-size:.72rem !important;
+    white-space:nowrap !important;
+  }
+
+  .team-profile-body .team-detail{
+    font-size:.66rem !important;
+    white-space:nowrap !important;
+  }
+
+  .team-profile-body .team-detail strong{
+    font-size:.66rem !important;
+    white-space:nowrap !important;
+  }
+
+  .team-profile-body .team-detail span{
+    font-size:.66rem !important;
+    white-space:nowrap !important;
+  }
+
+  .team-profile-body .team-profile-role{
+    font-size:.68rem !important;
+    white-space:nowrap !important;
+  }
+}
+  /* =========================================
+   PRINCIPAL + HEAD TEACHER — OVERRIDE ONLY
+   ========================================= */
+
+#management-top{
+  width:100% !important;
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:18px !important;
+}
+
+#management-top .team-profile-card{
+  width:100% !important;
+  max-width:none !important;
+}
+
+
+/* PHONE */
+@media (max-width:700px){
+
+  #management-top{
+    width:100% !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:9px !important;
+  }
+
+  #management-top .team-profile-card{
+    width:100% !important;
+    max-width:none !important;
+  }
+
+}
+  
 </style>
 </head>
 

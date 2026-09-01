@@ -1180,6 +1180,36 @@ tr:hover td{
   }
 }
 
+  .cms-thumb{
+  width:60px !important;
+  height:70px !important;
+  max-width:60px !important;
+  max-height:70px !important;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+  border-radius:8px;
+  border:1px solid var(--line);
+}
+
+#cmsStaffTable td:first-child{
+  width:72px;
+  min-width:72px;
+  max-width:72px;
+}
+
+#cmsStaffTable td:first-child .cms-thumb{
+  width:60px !important;
+  height:70px !important;
+}
+
+#cmsStaffTable tr{
+  height:82px;
+}
+
+#cmsStaffTable td{
+  vertical-align:middle;
+}
 </style>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>

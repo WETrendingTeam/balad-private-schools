@@ -7510,5 +7510,155 @@ window.createCmsAlbum=async function(){
 
 })();
 </script>
+  <!-- =========================================================
+     BALAD GALLERY BUTTON FIX — FINAL
+     Does NOT delete or replace existing albums
+     ========================================================= -->
+
+<script>
+(function () {
+
+  function fixGalleryButtons() {
+
+    /* ---------------------------------------------
+       CREATE / ADD ALBUM
+       --------------------------------------------- */
+
+    const createButton =
+      document.querySelector(
+        '#cmsView-gallery button.btn-primary'
+      );
+
+    if (createButton) {
+
+      /* Remove the old inline handler */
+      createButton.removeAttribute("onclick");
+
+      /* Prevent this fix from being attached twice */
+      if (!createButton.dataset.baladGalleryFixed) {
+
+        createButton.dataset.baladGalleryFixed = "true";
+
+        createButton.addEventListener(
+          "click",
+          async function (event) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (
+              typeof window.createCmsAlbum !==
+              "function"
+            ) {
+
+              alert(
+                "Gallery system is still loading. Please try again."
+              );
+
+              return;
+            }
+
+            try {
+
+              await window.createCmsAlbum();
+
+            } catch (error) {
+
+              console.error(
+                "BALAD Gallery error:",
+                error
+              );
+
+              alert(
+                error?.message ||
+                "Unable to publish album."
+              );
+
+            }
+
+          }
+        );
+
+      }
+
+    }
+
+
+    /* ---------------------------------------------
+       REFRESH BUTTON
+       --------------------------------------------- */
+
+    const refreshButton =
+      document.querySelector(
+        '#cmsView-gallery .card-head button'
+      );
+
+    if (refreshButton) {
+
+      refreshButton.removeAttribute("onclick");
+
+      if (!refreshButton.dataset.baladRefreshFixed) {
+
+        refreshButton.dataset.baladRefreshFixed = "true";
+
+        refreshButton.addEventListener(
+          "click",
+          function (event) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (
+              typeof window.loadCmsAlbums ===
+              "function"
+            ) {
+
+              window.loadCmsAlbums();
+
+            }
+
+          }
+        );
+
+      }
+
+    }
+
+  }
+
+
+  /* Run when page is ready */
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      fixGalleryButtons
+    );
+
+  } else {
+
+    fixGalleryButtons();
+
+  }
+
+
+  /*
+   * Run again whenever Content Management
+   * is opened dynamically.
+   */
+
+  setTimeout(
+    fixGalleryButtons,
+    500
+  );
+
+  setTimeout(
+    fixGalleryButtons,
+    1500
+  );
+
+
+})();
+</script>
 </body>
 </html>

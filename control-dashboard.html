@@ -6626,7 +6626,7 @@ function initContentManagement(){
     cmsStaffPhotoFile=e.target.files?.[0]||null; cmsRenderStaffPhotoNote();
   }));
   ["cmsGalleryCamera","cmsGalleryPhotos","cmsGalleryFiles"].forEach(id=>document.getElementById(id)?.addEventListener("change",e=>cmsSetGalleryFiles(collectInputFiles(e.target))));
-  initCmsPages(); loadCmsStaff(); syncCmsStaff();
+  initCmsPages(); loadCmsStaff();
 }
 
 async function syncCmsStaff(){
@@ -6927,6 +6927,7 @@ window.saveCmsStaff=async function(){
 
   try{
     const old=cmsStaffEditingId?cmsStaffCache.find(x=>x.id===cmsStaffEditingId):null;
+    if(!auth.currentUser) throw new Error("Your Control session has expired. Sign in again.");
     const name=val("cmsStaffName");
 
     if(!name) throw new Error("Staff name is required.");
@@ -6982,22 +6983,7 @@ window.saveCmsStaff=async function(){
       updatedAt:serverTimestamp()
     };
 
-    if(old?.accountUid){
-      await setDoc(
-        doc(db,"staff",old.accountUid),
-        {
-          name,
-          assignedSubjects:subjects,
-          position:role,
-          qualification,
-          cmsCategory:category,
-          photoUrl,
-          updatedAt:serverTimestamp()
-        },
-        {merge:true}
-      );
-      data.accountUid=old.accountUid;
-    }
+    if(old?.accountUid) data.accountUid=old.accountUid;
 
     await setDoc(
       doc(db,"publicStaff",id),

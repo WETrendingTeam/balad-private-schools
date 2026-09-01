@@ -8,7 +8,6 @@
 
 <style>
 
-
 .team-page{
   background:#fff;
   color:#17221e;
@@ -42,7 +41,6 @@
   line-height:1.55;
 }
 
-
 .team-live-section{
   padding:30px 0 20px;
 }
@@ -66,14 +64,12 @@
   line-height:1.4;
 }
 
-
 .team-live-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:18px;
   width:100%;
 }
-
 
 .management-top{
   width:66.6667%;
@@ -83,7 +79,6 @@
 .management-bottom{
   width:100%;
 }
-
 
 .team-profile-card{
   display:block;
@@ -111,6 +106,8 @@
   outline-offset:2px;
 }
 
+/* KEEP EXISTING IMAGE SIZE / CARD STRUCTURE */
+
 .team-profile-photo,
 .team-profile-placeholder{
   width:100%;
@@ -135,57 +132,60 @@
   padding:12px 13px 13px;
 }
 
+/* STAFF NAME */
 
 .team-profile-body h3{
   margin:0 0 7px;
-  color:#075c46;
+  color:#075c46 !important;
   font-size:clamp(.92rem,1.55vw,1.08rem);
   line-height:1.2;
-  font-weight:800;
+  font-weight:800 !important;
 }
 
+/* QUALIFICATION / SUBJECT */
 
 .team-detail{
   display:flex;
   align-items:baseline;
   gap:5px;
   margin:4px 0;
-  color:#17221e;
+  color:#17221e !important;
   font-size:.82rem;
   line-height:1.3;
 }
 
 .team-detail strong{
   flex:0 0 auto;
-  color:#075c46;
-  font-weight:800;
-  font-style:italic;
+  color:#075c46 !important;
+  font-weight:800 !important;
+  font-style:italic !important;
 }
 
 .team-detail span{
   min-width:0;
-  color:#17221e;
-  font-weight:500;
+  color:#17221e !important;
+  font-weight:500 !important;
+  font-style:normal !important;
 }
 
+/* POSITION / ROLE */
 
 .team-profile-role{
   margin:10px 0 0;
   padding-top:0;
-  color:#c52c2c;
+  color:#c52c2c !important;
   text-align:center;
-  font-weight:800;
+  font-weight:800 !important;
   font-size:.9rem;
   line-height:1.25;
 }
 
 .team-click-note{
   margin:8px 0 0;
-  color:#8a9590;
+  color:#68746f;
   font-size:.72rem;
   font-weight:700;
 }
-
 
 .primary-grid .team-profile-body{
   padding:11px 13px 13px;
@@ -194,7 +194,6 @@
 .primary-grid .team-profile-body h3{
   margin:0;
 }
-
 
 .nonteaching-grid .team-profile-body h3{
   margin-bottom:6px;
@@ -206,7 +205,6 @@
   font-size:.84rem;
   font-weight:800;
 }
-
 
 .team-loading,
 .team-empty,
@@ -223,7 +221,6 @@
   color:#a21b1b;
   background:#fff1ef;
 }
-
 
 .team-modal{
   position:fixed;
@@ -292,7 +289,7 @@
 .team-modal-row{
   padding:8px 0;
   border-bottom:1px solid #e5ebe8;
-  color:#68746f;
+  color:#17221e;
   line-height:1.4;
 }
 
@@ -305,8 +302,12 @@
   margin-right:5px;
 }
 
+/* MOBILE
+   Card dimensions and grid remain unchanged.
+*/
 
 @media (max-width:700px){
+
   .team-hero-heading{
     padding:40px 15px 34px;
   }
@@ -331,36 +332,42 @@
   .team-profile-body h3{
     font-size:.72rem;
     margin-bottom:5px;
+    color:#075c46 !important;
+    font-weight:800 !important;
   }
 
   .team-detail{
     display:block;
     margin:3px 0;
-    color:#17221e;
+    color:#17221e !important;
     font-size:.66rem;
     line-height:1.25;
   }
 
   .team-detail strong{
     display:inline;
-    color:#075c46;
-    font-style:italic;
+    color:#075c46 !important;
+    font-weight:800 !important;
+    font-style:italic !important;
   }
 
   .team-detail span{
-    color:#17221e;
+    color:#17221e !important;
+    font-weight:500 !important;
+    font-style:normal !important;
   }
 
   .team-profile-role{
     margin-top:6px;
-    color:#c52c2c;
+    color:#c52c2c !important;
     font-size:.68rem;
-    font-weight:800;
+    font-weight:800 !important;
   }
 
   .team-click-note{
     font-size:.58rem;
     margin-top:5px;
+    color:#68746f;
   }
 
   .nonteaching-role{
@@ -375,345 +382,1225 @@
     font-size:.86rem;
   }
 }
+
 </style>
 </head>
 
 <body class="team-page" data-cms-page="team">
 
 <header>
+
   <div class="logo">
-    <img alt="BALAD Private Schools Logo" src="images/logo.png" data-media-key="asset-logo-png">
+
+    <img
+      alt="BALAD Private Schools Logo"
+      src="images/logo.png"
+      data-media-key="asset-logo-png"
+    >
+
     <div class="school-name">
+
       <h2>BALAD PRIVATE SCHOOLS</h2>
-      <p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
-      <small>"Nothing but Success"</small>
+
+      <p>
+        Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre
+      </p>
+
+      <small>
+        "Nothing but Success"
+      </small>
+
     </div>
+
   </div>
 
-  <input class="menu-toggle" id="balad-menu-toggle" type="checkbox">
-  <label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle">
+  <input
+    class="menu-toggle"
+    id="balad-menu-toggle"
+    type="checkbox"
+  >
+
+  <label
+    aria-label="Open menu"
+    class="menu-btn"
+    for="balad-menu-toggle"
+  >
+
     <span class="menu-icon-open">☰</span>
     <span class="menu-icon-close">×</span>
+
   </label>
 
   <nav id="balad-main-nav">
+
     <a href="index.html">Home</a>
+
     <a href="about.html">About</a>
+
     <details class="academic-nav school-nav">
+
       <summary>Schools</summary>
+
       <div class="academic-submenu">
-        <a href="nursery-primary.html">Balad Nursery &amp; Primary</a>
-        <a href="comprehensive-college.html">Balad Comprehensive College</a>
+
+        <a href="nursery-primary.html">
+          Balad Nursery &amp; Primary
+        </a>
+
+        <a href="comprehensive-college.html">
+          Balad Comprehensive College
+        </a>
+
       </div>
+
     </details>
+
     <a href="cbt-centre.html">CBT Centre</a>
+
     <a href="admissions.html">Admissions</a>
+
     <details class="academic-nav">
+
       <summary>Academics</summary>
+
       <div class="academic-submenu">
+
         <a href="curriculum.html">Curriculum</a>
+
         <a href="stem.html">STEM</a>
+
         <a href="results.html">Result Portal</a>
+
       </div>
+
     </details>
-    <a class="active" href="team.html">Meet Our Team</a>
+
+    <a class="active" href="team.html">
+      Meet Our Team
+    </a>
+
     <a href="facilities.html">Facilities</a>
+
     <a href="gallery.html">Gallery</a>
+
     <a href="news.html">News &amp; Events</a>
+
     <a href="alumni.html">Alumni</a>
-    <a class="nav-login-button" href="control-login.html">LOGIN</a>
-    <a class="nav-contact-button" href="contact.html">CONTACT US</a>
+
+    <a class="nav-login-button" href="control-login.html">
+      LOGIN
+    </a>
+
+    <a class="nav-contact-button" href="contact.html">
+      CONTACT US
+    </a>
+
   </nav>
+
 </header>
 
+
 <section class="team-hero-shell">
+
   <div class="team-hero-heading">
-    <p class="team-hero-eyebrow">Meet Our Team</p>
-    <p>Meet the dedicated professionals whose passion, expertise and commitment help shape every learner at BALAD Private Schools.</p>
+
+    <p class="team-hero-eyebrow">
+      Meet Our Team
+    </p>
+
+    <p>
+      Meet the dedicated professionals whose passion,
+      expertise and commitment help shape every learner
+      at BALAD Private Schools.
+    </p>
+
   </div>
+
 </section>
+
 
 <main>
 
+  <!-- MANAGEMENT -->
+
   <section class="team-live-section">
+
     <div class="container">
+
       <div class="team-live-header">
-        <h2>Management</h2>
-        <p>Our school leaders and management team.</p>
+
+        <h2>
+          Management
+        </h2>
+
+        <p>
+          Our school leaders and management team.
+        </p>
+
       </div>
 
-      <div class="team-live-grid management-top" id="management-top">
-        <div class="team-loading">Loading staff profiles...</div>
+
+      <div
+        class="team-live-grid management-top"
+        id="management-top"
+      >
+
+        <div class="team-loading">
+          Loading staff profiles...
+        </div>
+
       </div>
 
-      <div class="team-live-grid management-bottom" id="management-bottom"></div>
+
+      <div
+        class="team-live-grid management-bottom"
+        id="management-bottom"
+      ></div>
+
     </div>
+
   </section>
 
-  <section class="team-live-section">
-    <div class="container">
-      <div class="team-live-header">
-        <h2>College Staff</h2>
-        <p>Meet the professionals supporting teaching and learning in the College.</p>
-      </div>
-      <div class="team-live-grid" id="college-grid">
-        <div class="team-loading">Loading staff profiles...</div>
-      </div>
-    </div>
-  </section>
+
+  <!-- COLLEGE -->
 
   <section class="team-live-section">
+
     <div class="container">
+
       <div class="team-live-header">
-        <h2>Primary Staff</h2>
-        <p>Meet the professionals supporting our Nursery and Primary learners.</p>
+
+        <h2>
+          College Staff
+        </h2>
+
+        <p>
+          Meet the professionals supporting teaching
+          and learning in the College.
+        </p>
+
       </div>
-      <div class="team-live-grid primary-grid" id="primary-grid">
-        <div class="team-loading">Loading staff profiles...</div>
+
+
+      <div
+        class="team-live-grid"
+        id="college-grid"
+      >
+
+        <div class="team-loading">
+          Loading staff profiles...
+        </div>
+
       </div>
+
     </div>
+
   </section>
 
+
+  <!-- PRIMARY -->
+
   <section class="team-live-section">
+
     <div class="container">
+
       <div class="team-live-header">
-        <h2>Non-teaching Staff</h2>
-        <p>Meet the team supporting the safe and smooth running of the school.</p>
+
+        <h2>
+          Primary Staff
+        </h2>
+
+        <p>
+          Meet the professionals supporting our Nursery
+          and Primary learners.
+        </p>
+
       </div>
-      <div class="team-live-grid nonteaching-grid" id="nonteaching-grid">
-        <div class="team-loading">Loading staff profiles...</div>
+
+
+      <div
+        class="team-live-grid primary-grid"
+        id="primary-grid"
+      >
+
+        <div class="team-loading">
+          Loading staff profiles...
+        </div>
+
       </div>
+
     </div>
+
+  </section>
+
+
+  <!-- NON-TEACHING -->
+
+  <section class="team-live-section">
+
+    <div class="container">
+
+      <div class="team-live-header">
+
+        <h2>
+          Non-teaching Staff
+        </h2>
+
+        <p>
+          Meet the team supporting the safe and smooth
+          running of the school.
+        </p>
+
+      </div>
+
+
+      <div
+        class="team-live-grid nonteaching-grid"
+        id="nonteaching-grid"
+      >
+
+        <div class="team-loading">
+          Loading staff profiles...
+        </div>
+
+      </div>
+
+    </div>
+
   </section>
 
 </main>
 
-<div class="team-modal" id="team-modal" aria-hidden="true">
-  <div class="team-modal-card" role="dialog" aria-modal="true" aria-labelledby="team-modal-name">
-    <button class="team-modal-close" id="team-modal-close" type="button" aria-label="Close profile">×</button>
-    <img class="team-modal-photo" id="team-modal-photo" alt="">
-    <div class="team-modal-body" id="team-modal-body"></div>
+
+<!-- PROFILE MODAL -->
+
+<div
+  class="team-modal"
+  id="team-modal"
+  aria-hidden="true"
+>
+
+  <div
+    class="team-modal-card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="team-modal-name"
+  >
+
+    <button
+      class="team-modal-close"
+      id="team-modal-close"
+      type="button"
+      aria-label="Close profile"
+    >
+      ×
+    </button>
+
+    <img
+      class="team-modal-photo"
+      id="team-modal-photo"
+      alt=""
+    >
+
+    <div
+      class="team-modal-body"
+      id="team-modal-body"
+    ></div>
+
   </div>
+
 </div>
 
+
 <script type="module">
+
 import { db } from "./firebase-config.js";
+
 import {
   collection,
   getDocs
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const esc = (value="") => String(value).replace(/[&<>"']/g, ch => ({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-}[ch]));
+
+/* =========================================
+   SECURITY / HTML ESCAPING
+   ========================================= */
+
+const esc = (value="") =>
+  String(value).replace(/[&<>"']/g, ch => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  }[ch]));
+
+
+/* =========================================
+   SAFE IMAGE URL
+   ========================================= */
 
 function safeUrl(value=""){
+
   try{
-    const url = new URL(value, location.href);
-    if(url.protocol === "http:" || url.protocol === "https:" || url.protocol === "data:")
+
+    const url =
+      new URL(value, location.href);
+
+    if(
+      url.protocol === "http:" ||
+      url.protocol === "https:" ||
+      url.protocol === "data:"
+    ){
+
       return url.href;
+
+    }
+
   }catch(e){}
+
   return "";
+
 }
 
+
+/* =========================================
+   STAFF INITIALS
+   ========================================= */
+
 function initials(name="Staff"){
-  return name.trim().split(/\s+/)
+
+  return name
+    .trim()
+    .split(/\s+/)
     .map(x => x[0])
     .filter(Boolean)
     .slice(0,2)
     .join("")
     .toUpperCase();
+
 }
+
+
+/* =========================================
+   SUBJECT VALUE
+   ========================================= */
 
 function subjectValue(staff){
-  if(Array.isArray(staff.subjects))
-    return staff.subjects.filter(Boolean).join(" / ");
-  if(Array.isArray(staff.assignedSubjects))
-    return staff.assignedSubjects.filter(Boolean).join(" / ");
-  return staff.subject || staff.subjects || staff.assignedSubject || "";
+
+  if(Array.isArray(staff.subjects)){
+
+    return staff.subjects
+      .filter(Boolean)
+      .join(" / ");
+
+  }
+
+  if(Array.isArray(staff.assignedSubjects)){
+
+    return staff.assignedSubjects
+      .filter(Boolean)
+      .join(" / ");
+
+  }
+
+  return (
+    staff.subject ||
+    staff.subjects ||
+    staff.assignedSubject ||
+    ""
+  );
+
 }
+
+
+/* =========================================
+   QUALIFICATION VALUE
+   ========================================= */
 
 function qualificationValue(staff){
-  return staff.qualification || staff.qualifications || "";
+
+  return (
+    staff.qualification ||
+    staff.qualifications ||
+    ""
+  );
+
 }
+
+
+/* =========================================
+   ROLE / POSITION
+   ========================================= */
 
 function roleValue(staff){
-  return staff.position || staff.role || "";
+
+  return (
+    staff.position ||
+    staff.role ||
+    ""
+  );
+
 }
+
+
+/* =========================================
+   PHOTO
+   ========================================= */
 
 function photoMarkup(staff, modal=false){
-  const url = safeUrl(staff.photoUrl || staff.photo || "");
+
+  const url =
+    safeUrl(
+      staff.photoUrl ||
+      staff.photo ||
+      ""
+    );
+
   if(url){
-    return `<img class="${modal ? "team-modal-photo" : "team-profile-photo"}"
-      src="${esc(url)}" alt="${esc(staff.name || "Staff")}">`;
+
+    return `
+      <img
+        class="${modal ? "team-modal-photo" : "team-profile-photo"}"
+        src="${esc(url)}"
+        alt="${esc(staff.name || "Staff")}"
+      >
+    `;
+
   }
+
   return modal
-    ? `<div class="team-profile-placeholder team-modal-photo">${esc(initials(staff.name))}</div>`
-    : `<div class="team-profile-placeholder">${esc(initials(staff.name))}</div>`;
+
+    ? `
+      <div class="team-profile-placeholder team-modal-photo">
+        ${esc(initials(staff.name))}
+      </div>
+    `
+
+    : `
+      <div class="team-profile-placeholder">
+        ${esc(initials(staff.name))}
+      </div>
+    `;
+
 }
+
+
+/* =========================================
+   STAFF DETAIL
+   ========================================= */
 
 function detail(label, value){
+
   if(!value) return "";
-  return `<div class="team-detail"><strong>${esc(label)}:</strong><span>${esc(value)}</span></div>`;
-}
 
-function card(staff, category){
-  const name = staff.name || "Staff";
-  const qualification = qualificationValue(staff);
-  const subject = subjectValue(staff);
-  const role = roleValue(staff);
+  return `
+    <div class="team-detail">
 
-  let body = `<h3>${esc(name)}</h3>`;
+      <strong>
+        ${esc(label)}:
+      </strong>
 
-  if(category === "management"){
-    body += detail("Qualification", qualification);
-    body += detail("Subject", subject);
-    if(role) body += `<p class="team-profile-role">${esc(role)}</p>`;
-  }else if(category === "college"){
-    body += detail("Qualification", qualification);
-    body += detail("Subject", subject);
-  }else if(category === "non_teaching"){
-    if(role) body += `<p class="nonteaching-role">${esc(role)}</p>`;
-  }
+      <span>
+        ${esc(value)}
+      </span>
 
-  if(category !== "primary"){
-    body += `<p class="team-click-note">Tap to view full profile →</p>`;
-  }
-
-  return `<button class="team-profile-card" type="button"
-    data-staff-id="${esc(staff.id)}">
-    ${photoMarkup(staff)}
-    <div class="team-profile-body">${body}</div>
-  </button>`;
-}
-
-const modal = document.getElementById("team-modal");
-const modalBody = document.getElementById("team-modal-body");
-const modalPhoto = document.getElementById("team-modal-photo");
-
-function openProfile(staff){
-  const role = roleValue(staff);
-  const qualification = qualificationValue(staff);
-  const subject = subjectValue(staff);
-
-  modalPhoto.outerHTML = photoMarkup(staff, true);
-  const newPhoto = document.querySelector("#team-modal .team-modal-photo");
-  newPhoto.id = "team-modal-photo";
-
-  modalBody.innerHTML = `
-    <h2 id="team-modal-name">${esc(staff.name || "Staff")}</h2>
-    ${role ? `<p class="team-modal-role">${esc(role)}</p>` : ""}
-    ${qualification ? `<div class="team-modal-row"><strong>Qualification:</strong>${esc(qualification)}</div>` : ""}
-    ${subject ? `<div class="team-modal-row"><strong>Subject:</strong>${esc(subject)}</div>` : ""}
+    </div>
   `;
 
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden","false");
-  document.body.style.overflow = "hidden";
 }
+
+
+/* =========================================
+   STAFF CARD
+   ========================================= */
+
+function card(staff, category){
+
+  const name =
+    staff.name ||
+    "Staff";
+
+  const qualification =
+    qualificationValue(staff);
+
+  const subject =
+    subjectValue(staff);
+
+  const role =
+    roleValue(staff);
+
+
+  let body = `
+    <h3>
+      ${esc(name)}
+    </h3>
+  `;
+
+
+  /* MANAGEMENT */
+
+  if(category === "management"){
+
+    body +=
+      detail(
+        "Qualification",
+        qualification
+      );
+
+    body +=
+      detail(
+        "Subject",
+        subject
+      );
+
+    if(role){
+
+      body += `
+        <p class="team-profile-role">
+          ${esc(role)}
+        </p>
+      `;
+
+    }
+
+  }
+
+
+  /* COLLEGE */
+
+  else if(category === "college"){
+
+    body +=
+      detail(
+        "Qualification",
+        qualification
+      );
+
+    body +=
+      detail(
+        "Subject",
+        subject
+      );
+
+  }
+
+
+  /* NON-TEACHING */
+
+  else if(category === "non_teaching"){
+
+    if(role){
+
+      body += `
+        <p class="nonteaching-role">
+          ${esc(role)}
+        </p>
+      `;
+
+    }
+
+  }
+
+
+  if(category !== "primary"){
+
+    body += `
+      <p class="team-click-note">
+        Tap to view full profile →
+      </p>
+    `;
+
+  }
+
+
+  return `
+    <button
+      class="team-profile-card"
+      type="button"
+      data-staff-id="${esc(staff.id)}"
+    >
+
+      ${photoMarkup(staff)}
+
+      <div class="team-profile-body">
+
+        ${body}
+
+      </div>
+
+    </button>
+  `;
+
+}
+
+
+/* =========================================
+   MODAL
+   ========================================= */
+
+const modal =
+  document.getElementById("team-modal");
+
+const modalBody =
+  document.getElementById("team-modal-body");
+
+const modalPhoto =
+  document.getElementById("team-modal-photo");
+
+
+function openProfile(staff){
+
+  const role =
+    roleValue(staff);
+
+  const qualification =
+    qualificationValue(staff);
+
+  const subject =
+    subjectValue(staff);
+
+
+  modalPhoto.outerHTML =
+    photoMarkup(
+      staff,
+      true
+    );
+
+
+  const newPhoto =
+    document.querySelector(
+      "#team-modal .team-modal-photo"
+    );
+
+
+  newPhoto.id =
+    "team-modal-photo";
+
+
+  modalBody.innerHTML = `
+
+    <h2 id="team-modal-name">
+      ${esc(staff.name || "Staff")}
+    </h2>
+
+    ${
+      role
+        ? `
+          <p class="team-modal-role">
+            ${esc(role)}
+          </p>
+        `
+        : ""
+    }
+
+    ${
+      qualification
+        ? `
+          <div class="team-modal-row">
+            <strong>
+              Qualification:
+            </strong>
+            ${esc(qualification)}
+          </div>
+        `
+        : ""
+    }
+
+    ${
+      subject
+        ? `
+          <div class="team-modal-row">
+            <strong>
+              Subject:
+            </strong>
+            ${esc(subject)}
+          </div>
+        `
+        : ""
+    }
+
+  `;
+
+
+  modal.classList.add("open");
+
+  modal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+/* =========================================
+   CLOSE MODAL
+   ========================================= */
 
 function closeProfile(){
+
   modal.classList.remove("open");
-  modal.setAttribute("aria-hidden","true");
-  document.body.style.overflow = "";
+
+  modal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.style.overflow =
+    "";
+
 }
 
-document.getElementById("team-modal-close").addEventListener("click", closeProfile);
-modal.addEventListener("click", e => {
-  if(e.target === modal) closeProfile();
-});
-document.addEventListener("keydown", e => {
-  if(e.key === "Escape") closeProfile();
-});
+
+document
+  .getElementById("team-modal-close")
+  .addEventListener(
+    "click",
+    closeProfile
+  );
+
+
+modal.addEventListener(
+  "click",
+  e => {
+
+    if(e.target === modal){
+
+      closeProfile();
+
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  e => {
+
+    if(e.key === "Escape"){
+
+      closeProfile();
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   LOAD STAFF
+   ========================================= */
 
 async function loadStaff(){
+
   try{
-    const snap = await getDocs(collection(db, "publicStaff"));
-    const staff = snap.docs
-      .map(doc => ({id:doc.id, ...doc.data()}))
-      .filter(s => s.active !== false);
 
-    const managementOrder = [
-      "principal",
-      "head teacher",
-      "vice principal administration",
-      "vice principal academics",
-      "administrator"
-    ];
-
-    const normalizeRole = value =>
-      String(value || "")
-        .toLowerCase()
-        .replace(/&/g, "and")
-        .replace(/[‐‑‒–—-]/g, " ")
-        .replace(/\s+/g, " ")
-        .trim();
-
-    const managementRank = staffMember => {
-      const role = normalizeRole(roleValue(staffMember));
-      const exact = managementOrder.indexOf(role);
-      if(exact !== -1) return exact;
-
-      const matched = managementOrder.findIndex(item =>
-        role.includes(item) || item.includes(role)
+    const snap =
+      await getDocs(
+        collection(
+          db,
+          "publicStaff"
+        )
       );
-      return matched === -1 ? 999 : matched;
-    };
+
+
+    const staff =
+      snap.docs
+        .map(doc => ({
+          id:doc.id,
+          ...doc.data()
+        }))
+        .filter(
+          s => s.active !== false
+        );
+
+
+    /* =========================================
+       MANAGEMENT HIERARCHY
+
+       1. Principal
+       2. Head Teacher
+       3. Vice Principal Administration
+       4. Vice Principal Academics
+       5. Administrator
+       ========================================= */
+
+    const managementRank =
+      staffMember => {
+
+        const role =
+          String(
+            roleValue(staffMember)
+          )
+          .toLowerCase()
+          .replace(/&/g,"and")
+          .replace(/[‐-‒–—-]/g," ")
+          .replace(/\s+/g," ")
+          .trim();
+
+
+        if(
+          role === "principal"
+        ){
+
+          return 1;
+
+        }
+
+
+        if(
+          role === "head teacher"
+        ){
+
+          return 2;
+
+        }
+
+
+        if(
+          role ===
+          "vice principal administration"
+        ){
+
+          return 3;
+
+        }
+
+
+        if(
+          role ===
+          "vice principal academics"
+        ){
+
+          return 4;
+
+        }
+
+
+        if(
+          role === "administrator"
+        ){
+
+          return 5;
+
+        }
+
+
+        return 999;
+
+      };
+
+
+    /* =========================================
+       GROUP STAFF
+       ========================================= */
 
     const groups = {
-      management: staff
-        .filter(s => String(s.category || "").toLowerCase() === "management")
-        .sort((a,b) => managementRank(a) - managementRank(b)),
-      college: staff.filter(s => String(s.category || "").toLowerCase() === "college"),
-      primary: staff.filter(s => String(s.category || "").toLowerCase() === "primary"),
-      non_teaching: staff.filter(s => {
-        const c = String(s.category || "").toLowerCase().replace(/[-\s]/g,"_");
-        return c === "non_teaching";
-      })
+
+      management:
+
+        staff
+
+          .filter(
+            s =>
+              String(
+                s.category || ""
+              )
+              .toLowerCase()
+              === "management"
+          )
+
+          .sort(
+            (a,b) =>
+              managementRank(a) -
+              managementRank(b)
+          ),
+
+
+      college:
+
+        staff.filter(
+          s =>
+            String(
+              s.category || ""
+            )
+            .toLowerCase()
+            === "college"
+        ),
+
+
+      primary:
+
+        staff.filter(
+          s =>
+            String(
+              s.category || ""
+            )
+            .toLowerCase()
+            === "primary"
+        ),
+
+
+      non_teaching:
+
+        staff.filter(s => {
+
+          const c =
+            String(
+              s.category || ""
+            )
+            .toLowerCase()
+            .replace(
+              /[-\s]/g,
+              "_"
+            );
+
+          return c === "non_teaching";
+
+        })
+
     };
 
-    const top = document.getElementById("management-top");
-    const bottom = document.getElementById("management-bottom");
 
-    top.innerHTML = groups.management.slice(0,2).map(s => card(s,"management")).join("")
-      || `<p class="team-empty">Management profiles will be published here.</p>`;
+    /* =========================================
+       MANAGEMENT TOP
 
-    bottom.innerHTML = groups.management.slice(2).map(s => card(s,"management")).join("");
+       First two positions:
+       Principal
+       Head Teacher
+       ========================================= */
 
-    document.getElementById("college-grid").innerHTML =
-      groups.college.map(s => card(s,"college")).join("")
-      || `<p class="team-empty">College profiles will be published here.</p>`;
+    const top =
+      document.getElementById(
+        "management-top"
+      );
 
-    document.getElementById("primary-grid").innerHTML =
-      groups.primary.map(s => card(s,"primary")).join("")
-      || `<p class="team-empty">Primary profiles will be published here.</p>`;
 
-    document.getElementById("nonteaching-grid").innerHTML =
-      groups.non_teaching.map(s => card(s,"non_teaching")).join("")
-      || `<p class="team-empty">Non-teaching profiles will be published here.</p>`;
+    const bottom =
+      document.getElementById(
+        "management-bottom"
+      );
 
-    document.querySelectorAll(".team-profile-card").forEach(button => {
-      button.addEventListener("click", () => {
-        const staffMember = staff.find(s => s.id === button.dataset.staffId);
-        if(staffMember) openProfile(staffMember);
+
+    top.innerHTML =
+      groups.management
+        .slice(0,2)
+        .map(
+          s =>
+            card(
+              s,
+              "management"
+            )
+        )
+        .join("")
+
+      ||
+
+      `
+        <p class="team-empty">
+          Management profiles will be published here.
+        </p>
+      `;
+
+
+    /* =========================================
+       MANAGEMENT BOTTOM
+
+       Remaining positions:
+       VP Administration
+       VP Academics
+       Administrator
+       ========================================= */
+
+    bottom.innerHTML =
+      groups.management
+        .slice(2)
+        .map(
+          s =>
+            card(
+              s,
+              "management"
+            )
+        )
+        .join("");
+
+
+    /* =========================================
+       COLLEGE
+       ========================================= */
+
+    document.getElementById(
+      "college-grid"
+    ).innerHTML =
+
+      groups.college
+        .map(
+          s =>
+            card(
+              s,
+              "college"
+            )
+        )
+        .join("")
+
+      ||
+
+      `
+        <p class="team-empty">
+          College profiles will be published here.
+        </p>
+      `;
+
+
+    /* =========================================
+       PRIMARY
+       ========================================= */
+
+    document.getElementById(
+      "primary-grid"
+    ).innerHTML =
+
+      groups.primary
+        .map(
+          s =>
+            card(
+              s,
+              "primary"
+            )
+        )
+        .join("")
+
+      ||
+
+      `
+        <p class="team-empty">
+          Primary profiles will be published here.
+        </p>
+      `;
+
+
+    /* =========================================
+       NON-TEACHING
+       ========================================= */
+
+    document.getElementById(
+      "nonteaching-grid"
+    ).innerHTML =
+
+      groups.non_teaching
+        .map(
+          s =>
+            card(
+              s,
+              "non_teaching"
+            )
+        )
+        .join("")
+
+      ||
+
+      `
+        <p class="team-empty">
+          Non-teaching profiles will be published here.
+        </p>
+      `;
+
+
+    /* =========================================
+       PROFILE CLICK
+       ========================================= */
+
+    document
+      .querySelectorAll(
+        ".team-profile-card"
+      )
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const staffMember =
+              staff.find(
+                s =>
+                  s.id ===
+                  button.dataset.staffId
+              );
+
+
+            if(staffMember){
+
+              openProfile(
+                staffMember
+              );
+
+            }
+
+          }
+        );
+
       });
-    });
+
 
   }catch(error){
-    console.error("BALAD team loading error:", error);
 
-    const message = `<p class="team-error">Staff profiles could not be loaded right now. Please try again.</p>`;
-    document.getElementById("management-top").innerHTML = message;
-    document.getElementById("management-bottom").innerHTML = "";
-    document.getElementById("college-grid").innerHTML = message;
-    document.getElementById("primary-grid").innerHTML = message;
-    document.getElementById("nonteaching-grid").innerHTML = message;
+    console.error(
+      "BALAD team loading error:",
+      error
+    );
+
+
+    const message = `
+      <p class="team-error">
+        Staff profiles could not be loaded right now.
+        Please try again.
+      </p>
+    `;
+
+
+    document.getElementById(
+      "management-top"
+    ).innerHTML =
+      message;
+
+
+    document.getElementById(
+      "management-bottom"
+    ).innerHTML =
+      "";
+
+
+    document.getElementById(
+      "college-grid"
+    ).innerHTML =
+      message;
+
+
+    document.getElementById(
+      "primary-grid"
+    ).innerHTML =
+      message;
+
+
+    document.getElementById(
+      "nonteaching-grid"
+    ).innerHTML =
+      message;
+
   }
+
 }
 
+
 loadStaff();
+
 </script>
 
 <script src="script.js"></script>
+
 </body>
 </html>

@@ -8,6 +8,10 @@
 <link href="style.css" rel="stylesheet"/>
 <script defer="" src="script.js?v=7"></script>
 <script defer="" src="content-loader.js" type="module"></script>
+<style>
+.cms-live-album .album-stack img,.cms-live-album .album-stack video{width:100%;height:100%;object-fit:cover;display:block;}
+.album-photo-grid figure video{width:100%;height:auto;display:block;border-radius:10px;}
+</style>
 </head>
 <body class="gallery-page" data-cms-page="gallery">
 <header>
@@ -228,6 +232,55 @@ document.querySelectorAll("[data-close-album]").forEach(el => {
   });
 });
 
+async function loadCmsGalleryAlbums(){
+  const grid=document.getElementById("albumGrid");
+  const count=document.getElementById("albumCount");
+  if(!grid)return;
+  try{
+    const {db}=await import("./firebase-config.js");
+    const {collection,getDocs}=await import("https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js");
+    const snap=await getDocs(collection(db,"publicGalleryAlbums"));
+    const albums=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.active!==false && Array.isArray(a.items) && a.items.length);
+    albums.sort((a,b)=>{
+      const av=a.createdAt?.seconds||0,bv=b.createdAt?.seconds||0;
+      return bv-av;
+    });
+    albums.forEach(album=>{
+      const card=document.createElement("article");
+      const titleText=String(album.title||"Album");
+      const descText=String(album.description||album.activity||"");
+      const locationText=String(album.schoolLabel||"BALAD PRIVATE SCHOOLS");
+      const searchText=`${titleText} ${descText} ${String(album.activity||"")} ${locationText}`.toLowerCase();
+      card.className="album-card cms-live-album";
+      card.dataset.search=searchText;
+      const coverItems=album.items.slice(0,3);
+      card.innerHTML=`<button class="album-cover" type="button" data-cms-album-id="${escapeHtml(album.id)}"><div class="album-stack">${coverItems.map((item,i)=>item.type==="video"?`<video src="${safeGalleryUrl(item.url)}" muted playsinline preload="metadata"></video>`:`<img src="${safeGalleryUrl(item.url)}" alt="${escapeHtml(titleText)} photo ${i+1}">`).join("")}</div></button><div class="album-meta"><span class="album-location">${escapeHtml(locationText)}</span><h2>${escapeHtml(titleText)}</h2><p>${escapeHtml(descText)}</p><span class="album-count">${album.items.length} ${album.items.length===1?"item":"items"}</span></div>`;
+      grid.appendChild(card);
+      card.querySelector(".album-cover")?.addEventListener("click",()=>openCmsAlbum(album));
+    });
+    if(count){
+      const total=grid.querySelectorAll(".album-card").length;
+      count.textContent=`${total} album${total===1?"":"s"}`;
+    }
+  }catch(error){
+    console.error("BALAD live gallery error:",error);
+  }
+}
+function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[ch]));}
+function safeGalleryUrl(value){
+  try{const u=new URL(String(value||""),location.href);return ["http:","https:"].includes(u.protocol)?u.href:"";}catch{return "";}
+}
+function openCmsAlbum(album){
+  const modal=document.getElementById("albumModal"),photos=document.getElementById("albumPhotos"),title=document.getElementById("albumModalTitle"),locationEl=document.getElementById("albumModalLocation"),desc=document.getElementById("albumModalDescription");
+  if(!modal||!photos)return;
+  title.textContent=album.title||"Album";
+  locationEl.textContent=album.schoolLabel||"BALAD PRIVATE SCHOOLS";
+  desc.textContent=album.description||album.activity||"";
+  photos.innerHTML=(album.items||[]).map((item,i)=>item.type==="video"?`<figure><video controls playsinline preload="metadata" src="${safeGalleryUrl(item.url)}"></video><figcaption>${String(i+1).padStart(2,"0")}</figcaption></figure>`:`<figure><img src="${safeGalleryUrl(item.url)}" alt="${escapeHtml(album.title||"Album")} photo ${i+1}"><figcaption>${String(i+1).padStart(2,"0")}</figcaption></figure>`).join("");
+  modal.hidden=false;
+  document.body.classList.add("album-open");
+}
+
 const search = document.getElementById("gallerySearch");
 const cards = [...document.querySelectorAll(".album-card")];
 const count = document.getElementById("albumCount");
@@ -243,6 +296,7 @@ function filterAlbums(){
 }
 search.addEventListener("input", filterAlbums);
 document.getElementById("albumReset").addEventListener("click", () => { search.value=""; filterAlbums(); });
+loadCmsGalleryAlbums();
 </script>
 <section class="cms-public-content-wrap"><div class="cms-public-content" data-cms-page="gallery" id="cms-page-content"></div></section><footer><div class="footer-bottom">© <span data-year=""></span> Balad Private Schools. All Rights Reserved. <span class="footer-developer">Developer Control · @lade</span></div></footer>
 </body>

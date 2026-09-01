@@ -7660,5 +7660,57 @@ window.createCmsAlbum=async function(){
 
 })();
 </script>
+  <script>
+/* =========================================================
+   GALLERY BUTTON FIX
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const buttons = document.querySelectorAll("button");
+
+  buttons.forEach(function (button) {
+
+    const text = button.textContent
+      .trim()
+      .toLowerCase();
+
+    if (
+      text.includes("create / add album") ||
+      text.includes("create/add album")
+    ) {
+
+      /* Remove any broken/default button behaviour */
+      button.type = "button";
+
+      button.onclick = function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        console.log("Gallery Create/Add Album clicked");
+
+        if (
+          typeof window.createCmsAlbum === "function"
+        ) {
+
+          window.createCmsAlbum();
+
+        } else {
+
+          alert(
+            "Gallery function is not loaded. Please refresh the page."
+          );
+
+        }
+
+      };
+
+    }
+
+  });
+
+});
+</script>
 </body>
 </html>

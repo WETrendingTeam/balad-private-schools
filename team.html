@@ -1263,8 +1263,6 @@
 
 </div>
 
-
-
 <!-- =======================================================
      FIREBASE / STAFF LOADER
      ======================================================= -->
@@ -1279,6 +1277,123 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+
+/* =========================================================
+   STAFF TEXT FIX
+   DOES NOT CHANGE CARD SIZE OR CARD LAYOUT
+   ========================================================= */
+
+const staffTextStyle = document.createElement("style");
+
+staffTextStyle.textContent = `
+
+/* =========================================================
+   STAFF NAME
+   ========================================================= */
+
+.team-profile-body h3{
+  color:#075c46 !important;
+  font-weight:800 !important;
+}
+
+
+/* =========================================================
+   QUALIFICATION / SUBJECT
+   LABEL = CENTERED
+   VALUE = CENTERED + ONE LINE
+   ========================================================= */
+
+.team-detail{
+  display:block !important;
+  width:100% !important;
+  margin:6px 0 !important;
+  text-align:center !important;
+  line-height:1.25 !important;
+  min-width:0 !important;
+}
+
+.team-detail strong{
+  display:block !important;
+  width:100% !important;
+  margin:0 0 3px !important;
+  text-align:center !important;
+
+  color:#075c46 !important;
+  font-weight:800 !important;
+  font-style:italic !important;
+}
+
+.team-detail .team-detail-value{
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  text-align:center !important;
+
+  color:#17221e !important;
+  font-weight:500 !important;
+  font-style:normal !important;
+
+  white-space:nowrap !important;
+  overflow:visible !important;
+
+  font-size:.82rem;
+  line-height:1.25 !important;
+}
+
+
+/* =========================================================
+   POSITION / ROLE
+   ========================================================= */
+
+.team-profile-role{
+  color:#c52c2c !important;
+  font-weight:800 !important;
+  text-align:center !important;
+}
+
+
+/* =========================================================
+   NON-TEACHING ROLE
+   ========================================================= */
+
+.nonteaching-role{
+  color:#075c46 !important;
+  font-weight:800 !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   KEEP SAME CARD DESIGN
+   ========================================================= */
+
+@media (max-width:700px){
+
+  .team-detail{
+    margin:5px 0 !important;
+  }
+
+  .team-detail strong{
+    margin-bottom:3px !important;
+  }
+
+  .team-detail .team-detail-value{
+    font-size:.66rem;
+  }
+
+  .team-profile-role{
+    font-size:.68rem !important;
+  }
+
+}
+
+`;
+
+document.head.appendChild(staffTextStyle);
 
 
 /* =========================================================
@@ -1296,7 +1411,6 @@ const esc = (value="") =>
       "'":"&#039;"
     }[ch])
   );
-
 
 
 /* =========================================================
@@ -1330,7 +1444,6 @@ function safeUrl(value=""){
 }
 
 
-
 /* =========================================================
    INITIALS
    ========================================================= */
@@ -1347,7 +1460,6 @@ function initials(name="Staff"){
     .toUpperCase();
 
 }
-
 
 
 /* =========================================================
@@ -1382,7 +1494,6 @@ function subjectValue(staff){
 }
 
 
-
 /* =========================================================
    QUALIFICATION
    ========================================================= */
@@ -1398,7 +1509,6 @@ function qualificationValue(staff){
 }
 
 
-
 /* =========================================================
    ROLE
    ========================================================= */
@@ -1412,7 +1522,6 @@ function roleValue(staff){
   );
 
 }
-
 
 
 /* =========================================================
@@ -1467,9 +1576,11 @@ function photoMarkup(staff, modal=false){
 }
 
 
-
 /* =========================================================
-   DETAIL ROW
+   DETAIL
+   LABEL ON ITS OWN LINE
+   VALUE ON ITS OWN LINE
+   VALUE NEVER WRAPS
    ========================================================= */
 
 function detail(label,value){
@@ -1483,7 +1594,7 @@ function detail(label,value){
         ${esc(label)}:
       </strong>
 
-      <span>
+      <span class="team-detail-value">
         ${esc(value)}
       </span>
 
@@ -1493,9 +1604,8 @@ function detail(label,value){
 }
 
 
-
 /* =========================================================
-   CARD
+   STAFF CARD
    ========================================================= */
 
 function card(staff,category){
@@ -1521,7 +1631,9 @@ function card(staff,category){
   `;
 
 
-  /* MANAGEMENT */
+  /* =======================================================
+     MANAGEMENT
+     ======================================================= */
 
   if(category === "management"){
 
@@ -1551,7 +1663,9 @@ function card(staff,category){
   }
 
 
-  /* COLLEGE */
+  /* =======================================================
+     COLLEGE
+     ======================================================= */
 
   else if(category === "college"){
 
@@ -1570,7 +1684,30 @@ function card(staff,category){
   }
 
 
-  /* NON-TEACHING */
+  /* =======================================================
+     PRIMARY
+     ======================================================= */
+
+  else if(category === "primary"){
+
+    body +=
+      detail(
+        "Qualification",
+        qualification
+      );
+
+    body +=
+      detail(
+        "Subject",
+        subject
+      );
+
+  }
+
+
+  /* =======================================================
+     NON-TEACHING
+     ======================================================= */
 
   else if(category === "non_teaching"){
 
@@ -1587,7 +1724,9 @@ function card(staff,category){
   }
 
 
-  /* PROFILE NOTE */
+  /* =======================================================
+     PROFILE NOTE
+     ======================================================= */
 
   if(category !== "primary"){
 
@@ -1621,6 +1760,90 @@ function card(staff,category){
 }
 
 
+/* =========================================================
+   MAKE LONG VALUES FIT ONE LINE
+   NEVER WRAP
+   REDUCE FONT SIZE IF NECESSARY
+   ========================================================= */
+
+function fitTeamText(){
+
+  document
+    .querySelectorAll(
+      ".team-detail-value"
+    )
+    .forEach(
+      element => {
+
+        const parent =
+          element.parentElement;
+
+        if(!parent) return;
+
+
+        /* Reset first */
+
+        element.style.fontSize = "";
+
+
+        /* Get current font size */
+
+        let size =
+          parseFloat(
+            getComputedStyle(
+              element
+            ).fontSize
+          );
+
+
+        const minimumSize = 7;
+
+
+        /*
+         * Reduce font size until
+         * the complete text fits.
+         */
+
+        while(
+          element.scrollWidth >
+          parent.clientWidth &&
+          size >
+          minimumSize
+        ){
+
+          size -= 0.25;
+
+          element.style.fontSize =
+            size + "px";
+
+        }
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   RUN TEXT FITTING
+   ========================================================= */
+
+function refreshTeamText(){
+
+  requestAnimationFrame(() => {
+
+    fitTeamText();
+
+    requestAnimationFrame(() => {
+
+      fitTeamText();
+
+    });
+
+  });
+
+}
+
 
 /* =========================================================
    MODAL
@@ -1642,6 +1865,9 @@ const modalPhoto =
   );
 
 
+/* =========================================================
+   OPEN PROFILE
+   ========================================================= */
 
 function openProfile(staff){
 
@@ -1675,7 +1901,10 @@ function openProfile(staff){
   modalBody.innerHTML = `
 
     <h2 id="team-modal-name">
-      ${esc(staff.name || "Staff")}
+      ${esc(
+        staff.name ||
+        "Staff"
+      )}
     </h2>
 
 
@@ -1720,12 +1949,16 @@ function openProfile(staff){
   `;
 
 
-  modal.classList.add("open");
+  modal.classList.add(
+    "open"
+  );
+
 
   modal.setAttribute(
     "aria-hidden",
     "false"
   );
+
 
   document.body.style.overflow =
     "hidden";
@@ -1733,9 +1966,8 @@ function openProfile(staff){
 }
 
 
-
 /* =========================================================
-   CLOSE MODAL
+   CLOSE PROFILE
    ========================================================= */
 
 function closeProfile(){
@@ -1755,6 +1987,9 @@ function closeProfile(){
 }
 
 
+/* =========================================================
+   MODAL BUTTON
+   ========================================================= */
 
 document
   .getElementById(
@@ -1766,11 +2001,18 @@ document
   );
 
 
+/* =========================================================
+   CLICK OUTSIDE MODAL
+   ========================================================= */
+
 modal.addEventListener(
   "click",
   e => {
 
-    if(e.target === modal){
+    if(
+      e.target ===
+      modal
+    ){
 
       closeProfile();
 
@@ -1779,12 +2021,19 @@ modal.addEventListener(
   }
 );
 
+
+/* =========================================================
+   ESCAPE KEY
+   ========================================================= */
 
 document.addEventListener(
   "keydown",
   e => {
 
-    if(e.key === "Escape"){
+    if(
+      e.key ===
+      "Escape"
+    ){
 
       closeProfile();
 
@@ -1792,7 +2041,6 @@ document.addEventListener(
 
   }
 );
-
 
 
 /* =========================================================
@@ -1814,14 +2062,16 @@ async function loadStaff(){
 
     const staff =
       snap.docs
-        .map(doc => ({
-          id:doc.id,
-          ...doc.data()
-        }))
+        .map(
+          doc => ({
+            id:doc.id,
+            ...doc.data()
+          })
+        )
         .filter(
-          s => s.active !== false
+          s =>
+            s.active !== false
         );
-
 
 
     /* =====================================================
@@ -1843,10 +2093,15 @@ async function loadStaff(){
     ];
 
 
+    /* =====================================================
+       NORMALIZE ROLE
+       ===================================================== */
 
     function normalizeRole(value){
 
-      return String(value || "")
+      return String(
+        value || ""
+      )
 
         .toLowerCase()
 
@@ -1870,8 +2125,13 @@ async function loadStaff(){
     }
 
 
+    /* =====================================================
+       MANAGEMENT RANK
+       ===================================================== */
 
-    function managementRank(staffMember){
+    function managementRank(
+      staffMember
+    ){
 
       const role =
         normalizeRole(
@@ -1881,18 +2141,24 @@ async function loadStaff(){
         );
 
 
+      /* Exact match */
+
       const exact =
         managementOrder.indexOf(
           role
         );
 
 
-      if(exact !== -1){
+      if(
+        exact !== -1
+      ){
 
         return exact;
 
       }
 
+
+      /* Partial match */
 
       const matched =
         managementOrder.findIndex(
@@ -1909,12 +2175,16 @@ async function loadStaff(){
     }
 
 
-
     /* =====================================================
        GROUP STAFF
        ===================================================== */
 
     const groups = {
+
+
+      /* ===================================================
+         MANAGEMENT
+         =================================================== */
 
       management:
 
@@ -1924,16 +2194,24 @@ async function loadStaff(){
             s =>
               String(
                 s.category || ""
-              ).toLowerCase() ===
+              )
+              .toLowerCase() ===
               "management"
           )
 
           .sort(
-            (a,b) =>
+            (
+              a,
+              b
+            ) =>
               managementRank(a) -
               managementRank(b)
           ),
 
+
+      /* ===================================================
+         COLLEGE
+         =================================================== */
 
       college:
 
@@ -1941,10 +2219,15 @@ async function loadStaff(){
           s =>
             String(
               s.category || ""
-            ).toLowerCase() ===
+            )
+            .toLowerCase() ===
             "college"
         ),
 
+
+      /* ===================================================
+         PRIMARY
+         =================================================== */
 
       primary:
 
@@ -1952,10 +2235,15 @@ async function loadStaff(){
           s =>
             String(
               s.category || ""
-            ).toLowerCase() ===
+            )
+            .toLowerCase() ===
             "primary"
         ),
 
+
+      /* ===================================================
+         NON-TEACHING
+         =================================================== */
 
       non_teaching:
 
@@ -1972,8 +2260,10 @@ async function loadStaff(){
                 "_"
               );
 
+
             return (
-              c === "non_teaching"
+              c ===
+              "non_teaching"
             );
 
           }
@@ -1982,9 +2272,8 @@ async function loadStaff(){
     };
 
 
-
     /* =====================================================
-       MANAGEMENT
+       MANAGEMENT CONTAINERS
        ===================================================== */
 
     const top =
@@ -1998,10 +2287,21 @@ async function loadStaff(){
       );
 
 
+    /* =====================================================
+       TOP MANAGEMENT
+       PRINCIPAL
+       HEAD TEACHER
+       ===================================================== */
+
     top.innerHTML =
 
       groups.management
-        .slice(0,2)
+
+        .slice(
+          0,
+          2
+        )
+
         .map(
           s =>
             card(
@@ -2009,6 +2309,7 @@ async function loadStaff(){
               "management"
             )
         )
+
         .join("")
 
       ||
@@ -2020,11 +2321,21 @@ async function loadStaff(){
       `;
 
 
+    /* =====================================================
+       REMAINING MANAGEMENT
+       VP ADMIN
+       VP ACADEMICS
+       ADMINISTRATOR
+       ===================================================== */
 
     bottom.innerHTML =
 
       groups.management
-        .slice(2)
+
+        .slice(
+          2
+        )
+
         .map(
           s =>
             card(
@@ -2032,8 +2343,8 @@ async function loadStaff(){
               "management"
             )
         )
-        .join("");
 
+        .join("");
 
 
     /* =====================================================
@@ -2047,6 +2358,7 @@ async function loadStaff(){
       .innerHTML =
 
       groups.college
+
         .map(
           s =>
             card(
@@ -2054,6 +2366,7 @@ async function loadStaff(){
               "college"
             )
         )
+
         .join("")
 
       ||
@@ -2063,7 +2376,6 @@ async function loadStaff(){
           College profiles will be published here.
         </p>
       `;
-
 
 
     /* =====================================================
@@ -2077,6 +2389,7 @@ async function loadStaff(){
       .innerHTML =
 
       groups.primary
+
         .map(
           s =>
             card(
@@ -2084,6 +2397,7 @@ async function loadStaff(){
               "primary"
             )
         )
+
         .join("")
 
       ||
@@ -2093,7 +2407,6 @@ async function loadStaff(){
           Primary profiles will be published here.
         </p>
       `;
-
 
 
     /* =====================================================
@@ -2107,6 +2420,7 @@ async function loadStaff(){
       .innerHTML =
 
       groups.non_teaching
+
         .map(
           s =>
             card(
@@ -2114,6 +2428,7 @@ async function loadStaff(){
               "non_teaching"
             )
         )
+
         .join("")
 
       ||
@@ -2123,7 +2438,6 @@ async function loadStaff(){
           Non-teaching profiles will be published here.
         </p>
       `;
-
 
 
     /* =====================================================
@@ -2149,7 +2463,9 @@ async function loadStaff(){
                 );
 
 
-              if(staffMember){
+              if(
+                staffMember
+              ){
 
                 openProfile(
                   staffMember
@@ -2163,6 +2479,36 @@ async function loadStaff(){
         }
       );
 
+
+    /* =====================================================
+       FIT ALL LONG TEXT
+       AFTER CARDS HAVE BEEN CREATED
+       ===================================================== */
+
+    refreshTeamText();
+
+
+    /* =====================================================
+       FIT AGAIN AFTER IMAGES LOAD
+       ===================================================== */
+
+    document
+      .querySelectorAll(
+        ".team-profile-photo"
+      )
+      .forEach(
+        image => {
+
+          image.addEventListener(
+            "load",
+            refreshTeamText,
+            {
+              once:true
+            }
+          );
+
+        }
+      );
 
 
   }catch(error){
@@ -2231,8 +2577,25 @@ async function loadStaff(){
 }
 
 
+/* =========================================================
+   START
+   ========================================================= */
 
 loadStaff();
+
+
+/* =========================================================
+   REFIT WHEN PHONE SIZE / ORIENTATION CHANGES
+   ========================================================= */
+
+window.addEventListener(
+  "resize",
+  () => {
+
+    refreshTeamText();
+
+  }
+);
 
 </script>
 
@@ -2241,3 +2604,4 @@ loadStaff();
 
 </body>
 </html>
+

@@ -1716,7 +1716,7 @@ Refresh
 <input accept="image/*,video/*" capture="environment" class="cms-hidden-input" id="cmsGalleryCamera" type="file"/>
 <input accept="image/*,video/*" class="cms-hidden-input" id="cmsGalleryPhotos" multiple="" type="file"/>
 <input accept="image/*,video/*" class="cms-hidden-input" id="cmsGalleryFiles" multiple="" type="file"/>
-<div class="cms-file-note">Photos and videos can be added to the same activity album.</div>
+<div class="cms-file-note" id="cmsGalleryFileNote">No media selected. Photos and videos can be added to the same activity album.</div>
 </div>
 </div>
 <div style="margin-top:14px"><button type="button" class="btn btn-primary" id="createCmsAlbumBtn">Create / Add Album</button></div>
@@ -7167,39 +7167,107 @@ window.saveCmsBlock=async function(){
 
 /* ---------- GALLERY ---------- */
 async function loadCmsAlbums(){
-  const box=document.getElementById("cmsAlbumsList");if(!box)return;
+  const box=document.getElementById("cmsAlbumsList");
+  if(!box)return;
   try{
     const snap=await getDocs(collection(db,"publicGalleryAlbums"));
     const rows=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.active!==false);
-    box.innerHTML=rows.map(a=>`<div class="card" style="margin-bottom:12px"><div class="card-body"><strong>${cmsEsc(a.title||"Album")}</strong> · ${cmsEsc(a.schoolLabel||"BALAD") }<div class="cms-file-note">${cmsEsc(a.description||a.activity||"")}</div><div class="cms-album-items">${(a.items||[]).map(p=>p.type==="video"?`<video controls src="${cmsEsc(p.url)}"></video>`:`<img src="${cmsEsc(p.url)}" alt="">`).join("")}</div></div></div>`).join("")||'<div class="notice">No albums published yet.</div>';
-  }catch(e){toast(e.message||"Unable to load albums.");}
+    box.innerHTML=rows.map(a=>`<div class="card" style="margin-bottom:12px"><div class="card-body"><strong>${cmsEsc(a.title||"Album")}</strong> · ${cmsEsc(a.schoolLabel||"BALAD")}<div class="cms-file-note">${cmsEsc(a.description||a.activity||"")}</div><div class="cms-album-items">${(a.items||[]).map(p=>p.type==="video"?`<video controls src="${cmsEsc(p.url)}"></video>`:`<img src="${cmsEsc(p.url)}" alt="">`).join("")}</div></div></div>`).join("")||'<div class="notice">No albums published yet.</div>';
+  }catch(e){
+    console.error("BALAD gallery load error:",e);
+    toast(e.message||"Unable to load albums.");
+  }
 }
 window.loadCmsAlbums=loadCmsAlbums;
+
+function getCmsGalleryFiles(){
+  const files=[];
+  ["cmsGalleryCamera","cmsGalleryPhotos","cmsGalleryFiles"].forEach(id=>{
+    const input=document.getElementById(id);
+    if(input?.files?.length) files.push(...Array.from(input.files));
+  });
+  return files;
+}
+
+function updateCmsGalleryFileNote(){
+  const files=getCmsGalleryFiles();
+  const note=document.getElementById("cmsGalleryFileNote");
+  if(note) note.textContent=files.length
+    ? `${files.length} file${files.length===1?"":"s"} selected.`
+    : "No media selected. Photos and videos can be added to the same activity album.";
+  return files;
+}
+
 window.createCmsAlbum=async function(){
+  const button=document.getElementById("createCmsAlbumBtn");
+  if(button?.disabled)return;
   try{
-    const title=val("galleryAlbumTitle").trim();if(!title)throw new Error("Album / activity name is required.");
-    if(!cmsGalleryFiles.length)throw new Error("Choose at least one photo or video.");
-    const id=`album-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,items=[];
-    for(const file of cmsGalleryFiles){
-      const url=await cmsUpload(file,`public/gallery/${id}/${Date.now()}-${file.name.replace(/[^a-z0-9.]/gi,"-")}`);
-      items.push({url,type:file.type.startsWith("video/")?"video":"image",caption:title});
+    const title=val("galleryAlbumTitle").trim();
+    if(!title)throw new Error("Album / activity name is required.");
+
+    const files=getCmsGalleryFiles();
+    if(!files.length)throw new Error("Choose at least one photo or video first.");
+
+    if(button){button.disabled=true;button.textContent="Publishing…";}
+
+    const id=`album-${Date.now()}-${Math.random().toString(36).slice(2,7)}`;
+    const items=[];
+
+    for(let i=0;i<files.length;i++){
+      const file=files[i];
+      const ext=(file.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"")||"jpg";
+      const safeName=file.name.replace(/[^a-z0-9.]/gi,"-");
+      const url=await cmsUpload(file,`public/gallery/${id}/${Date.now()}-${i}-${safeName}`);
+      items.push({url,type:String(file.type||"").startsWith("video/")?"video":"image",caption:title,name:file.name});
     }
+
     const school=val("galleryAlbumSchool");
     const schoolLabel=school==="primary"?"Nursery & Primary":school==="college"?"College":"BALAD PRIVATE SCHOOLS";
-    await setDoc(doc(db,"publicGalleryAlbums",id),{title,description:val("galleryAlbumDescription"),activity:val("galleryAlbumActivity"),school,schoolLabel,items,coverUrl:items[0]?.url||"",active:true,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
-    cmsGalleryFiles=[];["cmsGalleryCamera","cmsGalleryPhotos","cmsGalleryFiles"].forEach(x=>{const el=document.getElementById(x);if(el)el.value="";});
-    document.getElementById("cmsGalleryFileNote")?.replaceChildren(document.createTextNode("No media selected."));
-    ["galleryAlbumTitle","galleryAlbumDescription","galleryAlbumActivity"].forEach(x=>document.getElementById(x).value="");
-    toast("Album published.");loadCmsAlbums();
-  }catch(e){toast(e.message||"Unable to publish album.");}
+
+    await setDoc(doc(db,"publicGalleryAlbums",id),{
+      title,
+      description:val("galleryAlbumDescription"),
+      activity:val("galleryAlbumActivity"),
+      school,
+      schoolLabel,
+      items,
+      coverUrl:items[0]?.url||"",
+      active:true,
+      createdAt:serverTimestamp(),
+      updatedAt:serverTimestamp()
+    });
+
+    ["cmsGalleryCamera","cmsGalleryPhotos","cmsGalleryFiles"].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.value="";
+    });
+    updateCmsGalleryFileNote();
+    ["galleryAlbumTitle","galleryAlbumDescription","galleryAlbumActivity"].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.value="";
+    });
+
+    toast("Album published successfully.");
+    await loadCmsAlbums();
+  }catch(e){
+    console.error("BALAD gallery publish error:",e);
+    toast(e?.message||"Unable to publish album.");
+  }finally{
+    if(button){button.disabled=false;button.textContent="Create / Add Album";}
+  }
 };
+
+["cmsGalleryCamera","cmsGalleryPhotos","cmsGalleryFiles"].forEach(id=>{
+  document.getElementById(id)?.addEventListener("change",updateCmsGalleryFileNote);
+});
 
 const createCmsAlbumButton=document.getElementById("createCmsAlbumBtn");
 if(createCmsAlbumButton){
-  createCmsAlbumButton.addEventListener("click",async event=>{
+  createCmsAlbumButton.onclick=event=>{
     event.preventDefault();
-    if(typeof window.createCmsAlbum==="function") await window.createCmsAlbum();
-  });
+    event.stopPropagation();
+    window.createCmsAlbum();
+  };
 }
 
 /* Make upload pickers available in staff modal after it is created. */

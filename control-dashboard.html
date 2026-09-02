@@ -6730,7 +6730,7 @@ function renderCmsStaff(){
   const allRows=cmsStaffCache.filter(s=>s.category===cmsCategory);
   const rows=isNonTeaching?allRows.slice(0,6):allRows;
   body.innerHTML=rows.map(s=>{
-    const actions=`<div class="row-actions"><button class="mini-btn primary" onclick="editCmsStaff('${cmsEsc(s.id)}')">Edit</button><button class="mini-btn danger" onclick="deleteCmsStaff('${cmsEsc(s.id)}')">Remove</button></div>`;
+    const actions=`<div class="row-actions"><button class="mini-btn primary" onclick="editCmsStaff('${cmsEsc(s.id)}')">Edit</button><button class="mini-btn" onclick="moveCmsStaff('${cmsEsc(s.id)}')">Move</button><button class="mini-btn danger" onclick="deleteCmsStaff('${cmsEsc(s.id)}')">Remove</button></div>`;
     if(isNonTeaching) return `<tr>
       <td>${s.photoUrl?`<img class="cms-thumb" src="${cmsEsc(s.photoUrl)}" alt="">`:`<div class="cms-thumb" style="display:flex;align-items:center;justify-content:center;background:#eef4f0;font-weight:900">${cmsEsc((s.name||"S").slice(0,2).toUpperCase())}</div>`}</td>
       <td><strong>${cmsEsc(s.name||"—")}</strong></td>
@@ -7055,6 +7055,107 @@ window.saveCmsStaff=async function(){
       saveButton.textContent="Save Profile";
     }
   }
+};
+
+window.moveCmsStaff=async function(id){
+  const s=cmsStaffCache.find(x=>x.id===id);
+  if(!s){toast("Staff profile not found.");return;}
+
+  const oldCategory=s.category||"management";
+  const oldSchool=s.school||"both";
+  const wrap=document.getElementById("cmsMoveStaffModal")||document.createElement("div");
+
+  if(!wrap.id){
+    wrap.id="cmsMoveStaffModal";
+    wrap.className="modal-backdrop";
+    document.body.appendChild(wrap);
+  }
+
+  wrap.innerHTML=`<div class="modal">
+    <div class="modal-head">
+      <h2>Move Staff Profile</h2>
+      <button type="button" class="modal-close" id="cmsMoveStaffClose">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="notice" style="margin-bottom:15px"><strong>${cmsEsc(s.name||"Staff")}</strong><br>Move this profile to the correct staff hierarchy. Existing profile details will remain unchanged.</div>
+      <div class="form-grid">
+        <div class="field full"><label>Move to</label><select class="select" id="cmsMoveStaffCategory">
+          <option value="management">Management</option>
+          <option value="college">College Staff</option>
+          <option value="primary">Primary Staff</option>
+          <option value="non_teaching">Non-teaching Staff</option>
+        </select></div>
+        <div class="field full" id="cmsMoveStaffSchoolField"><label>School</label><select class="select" id="cmsMoveStaffSchool">
+          <option value="both">Both / School-wide</option>
+          <option value="college">College</option>
+          <option value="primary">Nursery &amp; Primary</option>
+        </select></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn" id="cmsMoveStaffCancel">Cancel</button>
+      <button type="button" class="btn btn-primary" id="cmsMoveStaffSave">Move Staff</button>
+    </div>
+  </div>`;
+
+  wrap.classList.add("open");
+
+  const categoryEl=document.getElementById("cmsMoveStaffCategory");
+  const schoolEl=document.getElementById("cmsMoveStaffSchool");
+  const schoolField=document.getElementById("cmsMoveStaffSchoolField");
+  if(categoryEl) categoryEl.value=oldCategory;
+  if(schoolEl) schoolEl.value=oldSchool;
+
+  const syncMoveSchool=()=>{
+    const cat=categoryEl?.value||oldCategory;
+    if(cat==="college"){
+      if(schoolEl) schoolEl.value="college";
+      if(schoolField) schoolField.classList.add("hidden");
+    }else if(cat==="primary"){
+      if(schoolEl) schoolEl.value="primary";
+      if(schoolField) schoolField.classList.add("hidden");
+    }else if(cat==="non_teaching"){
+      if(schoolEl) schoolEl.value="both";
+      if(schoolField) schoolField.classList.add("hidden");
+    }else{
+      if(schoolField) schoolField.classList.remove("hidden");
+    }
+  };
+
+  categoryEl?.addEventListener("change",syncMoveSchool);
+  syncMoveSchool();
+
+  const close=()=>wrap.classList.remove("open");
+  document.getElementById("cmsMoveStaffClose")?.addEventListener("click",close);
+  document.getElementById("cmsMoveStaffCancel")?.addEventListener("click",close);
+
+  document.getElementById("cmsMoveStaffSave")?.addEventListener("click",async()=>{
+    const button=document.getElementById("cmsMoveStaffSave");
+    if(button){button.disabled=true;button.textContent="Moving…";}
+    try{
+      const category=categoryEl?.value||oldCategory;
+      const school=category==="college"?"college":category==="primary"?"primary":category==="non_teaching"?"both":(schoolEl?.value||"both");
+
+      if(category==="non_teaching" && oldCategory!=="non_teaching" && cmsStaffCache.filter(x=>x.category==="non_teaching").length>=6){
+        throw new Error("Non-teaching Staff is limited to 6 slots.");
+      }
+
+      await setDoc(doc(db,"publicStaff",id),{
+        category,
+        school,
+        updatedAt:serverTimestamp()
+      },{merge:true});
+
+      close();
+      toast(`${s.name||"Staff profile"} moved successfully.`);
+      await loadCmsStaff();
+    }catch(e){
+      console.error("BALAD staff move error:",e);
+      toast(e?.message||"Unable to move staff profile.");
+    }finally{
+      if(button){button.disabled=false;button.textContent="Move Staff";}
+    }
+  });
 };
 
 window.deleteCmsStaff=async function(id){

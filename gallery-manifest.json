@@ -1,0 +1,864 @@
+{
+  "graduation": {
+    "title": "Graduation",
+    "location": "SCHOOL EVENTS",
+    "description": "Celebrating our graduates and their milestones.",
+    "items": [
+      {
+        "type": "image",
+        "url": "images/graduation/1.jpg",
+        "caption": "Graduation 1"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/2.jpg",
+        "caption": "Graduation 2"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/3.jpg",
+        "caption": "Graduation 3"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/4.jpg",
+        "caption": "Graduation 4"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/5.jpg",
+        "caption": "Graduation 5"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/6.jpg",
+        "caption": "Graduation 6"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/7.jpg",
+        "caption": "Graduation 7"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/8.jpg",
+        "caption": "Graduation 8"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/9.jpg",
+        "caption": "Graduation 9"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/10.jpg",
+        "caption": "Graduation 10"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/11.jpg",
+        "caption": "Graduation 11"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/12.jpg",
+        "caption": "Graduation 12"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/13.jpg",
+        "caption": "Graduation 13"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/14.jpg",
+        "caption": "Graduation 14"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/15.jpg",
+        "caption": "Graduation 15"
+      },
+      {
+        "type": "image",
+        "url": "images/graduation/16.jpg",
+        "caption": "Graduation 16"
+      }
+    ]
+  },
+  "prize-giving": {
+    "title": "Prize Giving",
+    "location": "ACHIEVEMENTS",
+    "description": "Celebrating excellence, awards and student achievement.",
+    "items": [
+      {
+        "type": "image",
+        "url": "images/prize-giving/1.jpg",
+        "caption": "Prize Giving 1"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/2.jpg",
+        "caption": "Prize Giving 2"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/3.jpg",
+        "caption": "Prize Giving 3"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/4.jpg",
+        "caption": "Prize Giving 4"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/5.jpg",
+        "caption": "Prize Giving 5"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/6.jpg",
+        "caption": "Prize Giving 6"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/7.jpg",
+        "caption": "Prize Giving 7"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/8.jpg",
+        "caption": "Prize Giving 8"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/9.jpg",
+        "caption": "Prize Giving 9"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/10.jpg",
+        "caption": "Prize Giving 10"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/11.jpg",
+        "caption": "Prize Giving 11"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/12.jpg",
+        "caption": "Prize Giving 12"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/13.jpg",
+        "caption": "Prize Giving 13"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/14.jpg",
+        "caption": "Prize Giving 14"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/15.jpg",
+        "caption": "Prize Giving 15"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/16.jpg",
+        "caption": "Prize Giving 16"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/17.jpg",
+        "caption": "Prize Giving 17"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/18.jpg",
+        "caption": "Prize Giving 18"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/19.jpg",
+        "caption": "Prize Giving 19"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/20.jpg",
+        "caption": "Prize Giving 20"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/21.jpg",
+        "caption": "Prize Giving 21"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/22.jpg",
+        "caption": "Prize Giving 22"
+      },
+      {
+        "type": "image",
+        "url": "images/prize-giving/23.jpg",
+        "caption": "Prize Giving 23"
+      }
+    ]
+  },
+  "sports-games": {
+    "title": "Sports & Games",
+    "location": "SCHOOL SPORTS",
+    "description": "Teamwork, discipline and healthy competition.",
+    "items": [
+      {
+        "type": "image",
+        "url": "images/sports-games/1.jpg",
+        "caption": "Sports & Games 1"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/2.jpg",
+        "caption": "Sports & Games 2"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/3.jpg",
+        "caption": "Sports & Games 3"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/4.jpg",
+        "caption": "Sports & Games 4"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/5.jpg",
+        "caption": "Sports & Games 5"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/6.jpg",
+        "caption": "Sports & Games 6"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/7.jpg",
+        "caption": "Sports & Games 7"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/8.jpg",
+        "caption": "Sports & Games 8"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/9.jpg",
+        "caption": "Sports & Games 9"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/10.jpg",
+        "caption": "Sports & Games 10"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/11.jpg",
+        "caption": "Sports & Games 11"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/12.jpg",
+        "caption": "Sports & Games 12"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/13.jpg",
+        "caption": "Sports & Games 13"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/14.jpg",
+        "caption": "Sports & Games 14"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/15.jpg",
+        "caption": "Sports & Games 15"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/16.jpg",
+        "caption": "Sports & Games 16"
+      },
+      {
+        "type": "image",
+        "url": "images/sports-games/17.jpg",
+        "caption": "Sports & Games 17"
+      }
+    ]
+  },
+  "career-day": {
+    "title": "Career Day",
+    "location": "SCHOOL EVENTS",
+    "description": "Students exploring careers, professions and future possibilities.",
+    "items": [
+      {
+        "type": "image",
+        "url": "images/career-day/1.jpg",
+        "caption": "Career Day 1"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/2.jpg",
+        "caption": "Career Day 2"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/3.jpg",
+        "caption": "Career Day 3"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/4.jpg",
+        "caption": "Career Day 4"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/5.jpg",
+        "caption": "Career Day 5"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/6.jpg",
+        "caption": "Career Day 6"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/7.jpg",
+        "caption": "Career Day 7"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/8.jpg",
+        "caption": "Career Day 8"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/9.jpg",
+        "caption": "Career Day 9"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/10.jpg",
+        "caption": "Career Day 10"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/11.jpg",
+        "caption": "Career Day 11"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/12.jpg",
+        "caption": "Career Day 12"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/13.jpg",
+        "caption": "Career Day 13"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/14.jpg",
+        "caption": "Career Day 14"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/15.jpg",
+        "caption": "Career Day 15"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/16.jpg",
+        "caption": "Career Day 16"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/17.jpg",
+        "caption": "Career Day 17"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/18.jpg",
+        "caption": "Career Day 18"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/19.jpg",
+        "caption": "Career Day 19"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/20.jpg",
+        "caption": "Career Day 20"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/21.jpg",
+        "caption": "Career Day 21"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/22.jpg",
+        "caption": "Career Day 22"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/23.jpg",
+        "caption": "Career Day 23"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/24.jpg",
+        "caption": "Career Day 24"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/25.jpg",
+        "caption": "Career Day 25"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/26.jpg",
+        "caption": "Career Day 26"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/27.jpg",
+        "caption": "Career Day 27"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/28.jpg",
+        "caption": "Career Day 28"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/29.jpg",
+        "caption": "Career Day 29"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/30.jpg",
+        "caption": "Career Day 30"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/31.jpg",
+        "caption": "Career Day 31"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/32.jpg",
+        "caption": "Career Day 32"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/33.jpg",
+        "caption": "Career Day 33"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/34.jpg",
+        "caption": "Career Day 34"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/35.jpg",
+        "caption": "Career Day 35"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/36.jpg",
+        "caption": "Career Day 36"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/37.jpg",
+        "caption": "Career Day 37"
+      },
+      {
+        "type": "image",
+        "url": "images/career-day/38.jpg",
+        "caption": "Career Day 38"
+      }
+    ]
+  },
+  "cultural-day": {
+    "title": "Cultural Day",
+    "location": "SCHOOL EVENTS",
+    "description": "Celebrating culture, heritage, creativity and tradition.",
+    "items": [
+      {
+        "type": "image",
+        "url": "images/cultural-day/1.jpg",
+        "caption": "Cultural Day 1"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/2.jpg",
+        "caption": "Cultural Day 2"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/3.jpg",
+        "caption": "Cultural Day 3"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/4.jpg",
+        "caption": "Cultural Day 4"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/5.jpg",
+        "caption": "Cultural Day 5"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/6.jpg",
+        "caption": "Cultural Day 6"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/7.jpg",
+        "caption": "Cultural Day 7"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/8.jpg",
+        "caption": "Cultural Day 8"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/9.jpg",
+        "caption": "Cultural Day 9"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/10.jpg",
+        "caption": "Cultural Day 10"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/11.jpg",
+        "caption": "Cultural Day 11"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/12.jpg",
+        "caption": "Cultural Day 12"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/13.jpg",
+        "caption": "Cultural Day 13"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/14.jpg",
+        "caption": "Cultural Day 14"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/15.jpg",
+        "caption": "Cultural Day 15"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/16.jpg",
+        "caption": "Cultural Day 16"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/17.jpg",
+        "caption": "Cultural Day 17"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/18.jpg",
+        "caption": "Cultural Day 18"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/19.jpg",
+        "caption": "Cultural Day 19"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/20.jpg",
+        "caption": "Cultural Day 20"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/21.jpg",
+        "caption": "Cultural Day 21"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/22.jpg",
+        "caption": "Cultural Day 22"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/23.jpg",
+        "caption": "Cultural Day 23"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/24.jpg",
+        "caption": "Cultural Day 24"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/25.jpg",
+        "caption": "Cultural Day 25"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/26.jpg",
+        "caption": "Cultural Day 26"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/27.jpg",
+        "caption": "Cultural Day 27"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/28.jpg",
+        "caption": "Cultural Day 28"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/29.jpg",
+        "caption": "Cultural Day 29"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/30.jpg",
+        "caption": "Cultural Day 30"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/31.jpg",
+        "caption": "Cultural Day 31"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/32.jpg",
+        "caption": "Cultural Day 32"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/33.jpg",
+        "caption": "Cultural Day 33"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/34.jpg",
+        "caption": "Cultural Day 34"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/35.jpg",
+        "caption": "Cultural Day 35"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/36.jpg",
+        "caption": "Cultural Day 36"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/37.jpg",
+        "caption": "Cultural Day 37"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/38.jpg",
+        "caption": "Cultural Day 38"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/39.jpg",
+        "caption": "Cultural Day 39"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/40.jpg",
+        "caption": "Cultural Day 40"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/41.jpg",
+        "caption": "Cultural Day 41"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/42.jpg",
+        "caption": "Cultural Day 42"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/43.jpg",
+        "caption": "Cultural Day 43"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/44.jpg",
+        "caption": "Cultural Day 44"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/45.jpg",
+        "caption": "Cultural Day 45"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/46.jpg",
+        "caption": "Cultural Day 46"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/47.jpg",
+        "caption": "Cultural Day 47"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/48.jpg",
+        "caption": "Cultural Day 48"
+      },
+      {
+        "type": "image",
+        "url": "images/cultural-day/49.jpg",
+        "caption": "Cultural Day 49"
+      }
+    ]
+  },
+  "clubs-activities": {
+    "title": "Clubs & Activities",
+    "location": "STUDENT LIFE",
+    "description": "Creativity, teamwork, projects and learning beyond the classroom.",
+    "items": [
+      {
+        "type": "image",
+        "url": "images/clubs-activities/1.jpg",
+        "caption": "Clubs & Activities 1"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/2.jpg",
+        "caption": "Clubs & Activities 2"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/3.jpg",
+        "caption": "Clubs & Activities 3"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/4.jpg",
+        "caption": "Clubs & Activities 4"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/5.jpg",
+        "caption": "Clubs & Activities 5"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/6.jpg",
+        "caption": "Clubs & Activities 6"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/7.jpg",
+        "caption": "Clubs & Activities 7"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/8.jpg",
+        "caption": "Clubs & Activities 8"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/9.jpg",
+        "caption": "Clubs & Activities 9"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/10.jpg",
+        "caption": "Clubs & Activities 10"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/11.jpg",
+        "caption": "Clubs & Activities 11"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/12.jpg",
+        "caption": "Clubs & Activities 12"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/13.jpg",
+        "caption": "Clubs & Activities 13"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/14.jpg",
+        "caption": "Clubs & Activities 14"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/15.jpg",
+        "caption": "Clubs & Activities 15"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/16.jpg",
+        "caption": "Clubs & Activities 16"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/17.jpg",
+        "caption": "Clubs & Activities 17"
+      },
+      {
+        "type": "image",
+        "url": "images/clubs-activities/18.jpg",
+        "caption": "Clubs & Activities 18"
+      },
+      {
+        "type": "video",
+        "url": "media/clubs-activities/1.mp4",
+        "caption": "Clubs & Activities video 1"
+      },
+      {
+        "type": "video",
+        "url": "media/clubs-activities/2.mov",
+        "caption": "Clubs & Activities video 2"
+      },
+      {
+        "type": "video",
+        "url": "media/clubs-activities/3.mp4",
+        "caption": "Clubs & Activities video 3"
+      }
+    ]
+  }
+}

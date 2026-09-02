@@ -1476,6 +1476,7 @@ Open Results →
 <h1 id="staffTitle">
 Staff Management
 </h1>
+<button type="button" class="btn" onclick="reorderCmsManagement()">Reorder Management</button>
 <p id="staffSubtitle">
 Select a school first.
 </p>
@@ -7031,6 +7032,7 @@ window.saveCmsStaff=async function(){
       school,
       photoUrl,
       active:true,
+      managementOrder: old?.managementOrder ?? null,
       updatedAt:serverTimestamp()
     };
 
@@ -7156,6 +7158,86 @@ window.moveCmsStaff=async function(id){
       if(button){button.disabled=false;button.textContent="Move Staff";}
     }
   });
+};
+
+
+window.reorderCmsManagement=async function(){
+  const rows=cmsStaffCache.filter(s=>s.category==="management");
+  if(rows.length<2){toast("There are not enough Management profiles to reorder.");return;}
+
+  const wrap=document.getElementById("cmsReorderManagementModal")||document.createElement("div");
+  if(!wrap.id){
+    wrap.id="cmsReorderManagementModal";
+    wrap.className="modal-backdrop";
+    document.body.appendChild(wrap);
+  }
+
+  wrap.innerHTML=`<div class="modal">
+    <div class="modal-head">
+      <h2>Reorder Management</h2>
+      <button type="button" class="modal-close" id="cmsReorderManagementClose">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="notice" style="margin-bottom:15px">
+        Arrange Management in the correct hierarchy. This changes display order only; it does not move staff between categories.
+      </div>
+      <div id="cmsManagementOrderList"></div>
+      <div style="margin-top:16px;display:flex;gap:10px;justify-content:flex-end">
+        <button type="button" class="btn" id="cmsReorderManagementCancel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="cmsReorderManagementSave">Save Order</button>
+      </div>
+    </div>
+  </div>`;
+
+  const list=wrap.querySelector("#cmsManagementOrderList");
+  let order=rows.slice().sort((a,b)=>{
+    const ao=Number.isFinite(Number(a.managementOrder))?Number(a.managementOrder):999999;
+    const bo=Number.isFinite(Number(b.managementOrder))?Number(b.managementOrder):999999;
+    return ao-bo || String(a.name||"").localeCompare(String(b.name||""));
+  });
+
+  const render=()=>{
+    list.innerHTML=order.map((s,i)=>`
+      <div class="cms-reorder-row" data-id="${cmsEsc(s.id)}"
+        style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #e5ebe8">
+        <strong style="width:28px;color:#075c46">${i+1}</strong>
+        <div style="flex:1"><strong>${cmsEsc(s.name||"Staff")}</strong><br><small>${cmsEsc(s.position||"Management")}</small></div>
+        <button type="button" class="btn cms-order-up" data-id="${cmsEsc(s.id)}" ${i===0?"disabled":""}>↑</button>
+        <button type="button" class="btn cms-order-down" data-id="${cmsEsc(s.id)}" ${i===order.length-1?"disabled":""}>↓</button>
+      </div>`).join("");
+
+    list.querySelectorAll(".cms-order-up").forEach(b=>b.onclick=()=>{
+      const i=order.findIndex(x=>x.id===b.dataset.id);
+      if(i>0){[order[i-1],order[i]]=[order[i],order[i-1]];render();}
+    });
+    list.querySelectorAll(".cms-order-down").forEach(b=>b.onclick=()=>{
+      const i=order.findIndex(x=>x.id===b.dataset.id);
+      if(i<order.length-1){[order[i+1],order[i]]=[order[i],order[i+1]];render();}
+    });
+  };
+
+  const close=()=>wrap.classList.remove("open");
+  wrap.classList.add("open");
+  render();
+
+  wrap.querySelector("#cmsReorderManagementClose").onclick=close;
+  wrap.querySelector("#cmsReorderManagementCancel").onclick=close;
+  wrap.querySelector("#cmsReorderManagementSave").onclick=async()=>{
+    const btn=wrap.querySelector("#cmsReorderManagementSave");
+    btn.disabled=true; btn.textContent="Saving…";
+    try{
+      await Promise.all(order.map((s,i)=>
+        setDoc(doc(db,"publicStaff",s.id),{managementOrder:i+1,updatedAt:serverTimestamp()},{merge:true})
+      ));
+      toast("Management order saved.");
+      close();
+      await loadCmsStaff();
+    }catch(e){
+      toast(e?.message||"Unable to save Management order.");
+    }finally{
+      btn.disabled=false; btn.textContent="Save Order";
+    }
+  };
 };
 
 window.deleteCmsStaff=async function(id){

@@ -633,6 +633,68 @@
   .home-page .section-heading{margin-bottom:18px}
   .home-page .home-section{padding:38px 5%}
 }
+
+/* ---------- GREEN + WHITE VISUAL BALANCE ---------- */
+.home-page .programme-card:nth-child(1),
+.home-page .programme-card:nth-child(4),
+.home-page .programme-card:nth-child(6){
+  background:var(--balad-green);
+  border-color:var(--balad-green);
+}
+.home-page .programme-card:nth-child(1) h3,
+.home-page .programme-card:nth-child(4) h3,
+.home-page .programme-card:nth-child(6) h3{color:#fff}
+.home-page .announcement-card:nth-child(1),
+.home-page .announcement-card:nth-child(4){
+  background:var(--balad-green);
+  border-color:var(--balad-green);
+}
+.home-page .announcement-card:nth-child(1) h3,
+.home-page .announcement-card:nth-child(4) h3,
+.home-page .announcement-card:nth-child(1) p,
+.home-page .announcement-card:nth-child(4) p{color:#fff}
+.home-page .announcement-card:nth-child(1) a,
+.home-page .announcement-card:nth-child(4) a{color:#fff;text-decoration:underline}
+.home-page .talent-card .talent-label{background:#f0f7f3}
+.home-page .life-section{background:linear-gradient(180deg,#edf6f1 0%,#f8f3e7 100%)}
+.home-page .home-section:nth-of-type(odd){background:#f7fbf8}
+.home-page .home-section:nth-of-type(even){background:#fff}
+.home-page .home-stats .home-stat:nth-child(2){background:var(--balad-green);border-color:var(--balad-green)}
+.home-page .home-stats .home-stat:nth-child(2) strong,
+.home-page .home-stats .home-stat:nth-child(2) span{color:#fff}
+
+/* ---------- DEVELOPER DROPDOWN ---------- */
+.site-footer-developer{
+  margin-top:8px;
+}
+.site-footer-developer details{
+  display:inline-block;
+}
+.site-footer-developer summary{
+  list-style:none;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:inherit;
+  font-weight:800;
+}
+.site-footer-developer summary::-webkit-details-marker{display:none}
+.site-footer-developer summary::after{content:'▾';font-size:.72em;transition:transform .18s ease}
+.site-footer-developer details[open] summary::after{transform:rotate(180deg)}
+.site-footer-developer .developer-panel{
+  margin:8px auto 0;
+  padding:9px 13px;
+  width:max-content;
+  max-width:90vw;
+  border-radius:10px;
+  background:var(--balad-green,#075c46);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(7,92,70,.18);
+  font-size:.84rem;
+}
+.site-footer-developer .developer-panel a{color:#fff!important;text-decoration:none!important;font-weight:900}
+
 </style>
 </head>
 
@@ -695,9 +757,10 @@
 
 <section class="home-hero balad-rotating-hero" aria-label="BALAD Private Schools highlights">
   <div class="hero-slides" aria-hidden="true">
-    <div class="hero-slide is-active" style="background-image:url('images/school-building2.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('images/gallery2.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('images/gallery4.jpg')"></div>
+    <div class="hero-slide is-active" style="background-image:url('images/Graduation%281%29.JPG')"></div>
+    <div class="hero-slide" style="background-image:url('images/Competition%20%281%29.JPG')"></div>
+    <div class="hero-slide" style="background-image:url('images/Inter%20house%20sport%20%281%29.JPG')"></div>
+    <div class="hero-slide" style="background-image:url('images/school-building1.jpg')"></div>
   </div>
   <div class="hero-inner">
     <div class="hero-copy">
@@ -711,9 +774,10 @@
     </div>
   </div>
   <div class="hero-dots" aria-label="Hero slideshow controls">
-    <button class="hero-dot is-active" type="button" aria-label="School building"></button>
-    <button class="hero-dot" type="button" aria-label="Students learning"></button>
-    <button class="hero-dot" type="button" aria-label="School community"></button>
+    <button class="hero-dot is-active" type="button" aria-label="Graduation"></button>
+    <button class="hero-dot" type="button" aria-label="Academic competition"></button>
+    <button class="hero-dot" type="button" aria-label="Inter-house sports"></button>
+    <button class="hero-dot" type="button" aria-label="School building"></button>
   </div>
 </section>
 
@@ -901,7 +965,12 @@
 <footer>
   <div class="footer-bottom">
     © <span data-year></span> BALAD Private Schools. All Rights Reserved.
-    <span class="footer-developer">Developer Control · @lade</span>
+    <div class="site-footer-developer">
+      <details>
+        <summary>Developer Control</summary>
+        <div class="developer-panel">@lade</div>
+      </details>
+    </div>
   </div>
 </footer>
 

@@ -8,4 +8,15 @@ function esc(v){return String(v??"").replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&
 function openTemplate(data){sessionStorage.setItem("baladResultPayload",JSON.stringify(data));const sec=data.section||"senior";location.href="result-templates/"+(sec==="primary"?"balad_nursery_result.html":sec==="junior"?"balad_comprehensive_junior_result.html":"balad_comprehensive_senior_result.html");}
 async function openResult(){const code=document.getElementById("accessCode").value.trim();const err=document.getElementById("accessError");err.innerHTML="";if(!code){err.innerHTML='<div class="error">Enter the Result Access Code.</div>';return}const btn=document.getElementById("accessBtn");btn.disabled=true;btn.textContent="Verifying...";try{const r=await fetch(API_URL+"/results",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"get_student_results_by_access_code",accessCode:code,school:selectedSchool})});const data=await r.json();if(!r.ok||!data.success)throw new Error(data.error||"Unable to load result.");data.accessCode=code;openTemplate(data);}catch(e){err.innerHTML='<div class="error">'+esc(e.message)+"</div>"}finally{btn.disabled=false;btn.textContent="View Result"}}
 document.getElementById("accessBtn").addEventListener("click",openResult);document.getElementById("accessCode").addEventListener("keydown",e=>{if(e.key==="Enter")openResult()});
-</script><section class="cms-public-content-wrap"><div class="cms-public-content" data-cms-page="student-result" id="cms-page-content"></div></section></body></html>
+</script><section class="cms-public-content-wrap"><div class="cms-public-content" data-cms-page="student-result" id="cms-page-content"></div></section><footer>
+  <div class="footer-bottom">
+    © <span data-year></span> BALAD Private Schools. All Rights Reserved.
+    <div class="site-footer-developer">
+      <details>
+        <summary>Developer Control</summary>
+        <div class="developer-panel">@lade</div>
+      </details>
+    </div>
+  </div>
+</footer>
+</body></html>

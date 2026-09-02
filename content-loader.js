@@ -89,14 +89,12 @@ function leadershipCard(s){
   const photo=s.photoUrl
     ? `<img class="school-leader-photo" src="${esc(s.photoUrl)}" alt="${esc(s.name||"School Leader")}">`
     : `<div class="school-leader-placeholder">${esc((s.name||"S").split(/\s+/).map(x=>x[0]).slice(0,2).join("").toUpperCase())}</div>`;
-  const subjects=(s.subjects||s.assignedSubjects||[]).filter(Boolean);
   return `<article class="school-leader-card">
     <div class="school-leader-media">${photo}</div>
     <div class="school-leader-content">
       <p class="school-leader-eyebrow">SCHOOL LEADERSHIP</p>
       <h3>${esc(s.name||"School Leader")}</h3>
       <p class="school-leader-role">${esc(s.position||s.role||"")}</p>
-      ${subjects.length?`<p class="school-leader-subjects"><strong>Subjects:</strong> ${subjects.map(esc).join(" / ")}</p>`:""}
     </div>
   </article>`;
 }

@@ -3447,3 +3447,15 @@ body.album-open{overflow:hidden;}
   }
   .school-leader-content{padding:20px}
 }
+
+
+/* ---------- DEVELOPER DROPDOWN GLOBAL ---------- */
+/* DEVELOPER DROPDOWN GLOBAL */
+.site-footer-developer{margin-top:8px;text-align:center}
+.site-footer-developer details{display:inline-block}
+.site-footer-developer summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-weight:800}
+.site-footer-developer summary::-webkit-details-marker{display:none}
+.site-footer-developer summary::after{content:'▾';font-size:.72em;transition:transform .18s ease}
+.site-footer-developer details[open] summary::after{transform:rotate(180deg)}
+.site-footer-developer .developer-panel{margin:8px auto 0;padding:9px 13px;width:max-content;max-width:90vw;border-radius:10px;background:#075c46;color:#fff;box-shadow:0 8px 20px rgba(7,92,70,.18);font-size:.84rem}
+.site-footer-developer .developer-panel a{color:#fff!important;text-decoration:none!important;font-weight:900}

@@ -72,61 +72,37 @@
 <section aria-label="Photo albums" class="album-grid" data-local-gallery="true" id="albumGrid">
 <article class="album-card" data-search="graduation celebrating our graduates and their milestones.">
 <button class="album-cover" data-local-album="graduation" type="button">
-<div class="album-stack">
-<img alt="Graduation cover" src="images/graduation/1.jpg"/>
-<img alt="Graduation cover" src="images/graduation/2.jpg"/>
-<img alt="Graduation cover" src="images/graduation/3.jpg"/>
-</div>
+<div class="album-stack" data-cover-stack="graduation"></div>
 </button>
 <div class="album-meta"><span class="album-location">SCHOOL EVENTS</span><h2>Graduation</h2><p>Celebrating our graduates and their milestones.</p><span class="album-count" data-album-count="graduation"></span></div>
 </article>
 <article class="album-card" data-search="prize giving celebrating excellence, awards and student achievement.">
 <button class="album-cover" data-local-album="prize-giving" type="button">
-<div class="album-stack">
-<img alt="Prize Giving cover" src="images/prize-giving/1.jpg"/>
-<img alt="Prize Giving cover" src="images/prize-giving/2.jpg"/>
-<img alt="Prize Giving cover" src="images/prize-giving/3.jpg"/>
-</div>
+<div class="album-stack" data-cover-stack="prize-giving"></div>
 </button>
 <div class="album-meta"><span class="album-location">ACHIEVEMENTS</span><h2>Prize Giving</h2><p>Celebrating excellence, awards and student achievement.</p><span class="album-count" data-album-count="prize-giving"></span></div>
 </article>
 <article class="album-card" data-search="sports &amp; games teamwork, discipline and healthy competition.">
 <button class="album-cover" data-local-album="sports-games" type="button">
-<div class="album-stack">
-<img alt="Sports &amp; Games cover" src="images/sports-games/1.jpg"/>
-<img alt="Sports &amp; Games cover" src="images/sports-games/2.jpg"/>
-<img alt="Sports &amp; Games cover" src="images/sports-games/3.jpg"/>
-</div>
+<div class="album-stack" data-cover-stack="sports-games"></div>
 </button>
 <div class="album-meta"><span class="album-location">SCHOOL SPORTS</span><h2>Sports & Games</h2><p>Teamwork, discipline and healthy competition.</p><span class="album-count" data-album-count="sports-games"></span></div>
 </article>
 <article class="album-card" data-search="career day students exploring careers, professions and future possibilities.">
 <button class="album-cover" data-local-album="career-day" type="button">
-<div class="album-stack">
-<img alt="Career Day cover" src="images/career-day/1.jpg"/>
-<img alt="Career Day cover" src="images/career-day/2.jpg"/>
-<img alt="Career Day cover" src="images/career-day/3.jpg"/>
-</div>
+<div class="album-stack" data-cover-stack="career-day"></div>
 </button>
 <div class="album-meta"><span class="album-location">SCHOOL EVENTS</span><h2>Career Day</h2><p>Students exploring careers, professions and future possibilities.</p><span class="album-count" data-album-count="career-day"></span></div>
 </article>
 <article class="album-card" data-search="cultural day celebrating culture, heritage, creativity and tradition.">
 <button class="album-cover" data-local-album="cultural-day" type="button">
-<div class="album-stack">
-<img alt="Cultural Day cover" src="images/cultural-day/1.jpg"/>
-<img alt="Cultural Day cover" src="images/cultural-day/2.jpg"/>
-<img alt="Cultural Day cover" src="images/cultural-day/3.jpg"/>
-</div>
+<div class="album-stack" data-cover-stack="cultural-day"></div>
 </button>
 <div class="album-meta"><span class="album-location">SCHOOL EVENTS</span><h2>Cultural Day</h2><p>Celebrating culture, heritage, creativity and tradition.</p><span class="album-count" data-album-count="cultural-day"></span></div>
 </article>
 <article class="album-card" data-search="clubs &amp; activities creativity, teamwork, projects and learning beyond the classroom.">
 <button class="album-cover" data-local-album="clubs-activities" type="button">
-<div class="album-stack">
-<img alt="Clubs &amp; Activities cover" src="images/clubs-activities/1.jpg"/>
-<img alt="Clubs &amp; Activities cover" src="images/clubs-activities/2.jpg"/>
-<img alt="Clubs &amp; Activities cover" src="images/clubs-activities/3.jpg"/>
-</div>
+<div class="album-stack" data-cover-stack="clubs-activities"></div>
 </button>
 <div class="album-meta"><span class="album-location">STUDENT LIFE</span><h2>Clubs & Activities</h2><p>Creativity, teamwork, projects and learning beyond the classroom.</p><span class="album-count" data-album-count="clubs-activities"></span></div>
 </article>
@@ -183,11 +159,46 @@ document.querySelectorAll("[data-close-album]").forEach(el => {
   });
 });
 
+async function imageLoads(url){
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+}
+
+async function buildAlbumCovers(albums){
+  for(const [key, album] of Object.entries(albums)){
+    const stack = document.querySelector(`[data-cover-stack="${key}"]`);
+    if(!stack) continue;
+
+    const imageItems = (album.items || []).filter(item => item.type !== "video" && item.url);
+    const usable = [];
+
+    for(const item of imageItems){
+      if(await imageLoads(item.url)){
+        usable.push(item);
+        if(usable.length === 3) break;
+      }
+    }
+
+    stack.innerHTML = usable.map((item, index) =>
+      `<img alt="${album.title} cover ${index + 1}" src="${item.url}">`
+    ).join("");
+
+    if(!usable.length){
+      stack.innerHTML = `<div class="album-cover-fallback">${album.title}</div>`;
+    }
+  }
+}
+
 fetch("gallery-manifest.json", {cache:"no-store"}).then(r=>r.json()).then(albums => {
   Object.entries(albums).forEach(([key, album]) => {
     const el = document.querySelector(`[data-album-count="${key}"]`);
     if(el) el.textContent = `${album.items.length} item${album.items.length === 1 ? "" : "s"}`;
   });
+  return buildAlbumCovers(albums);
 }).catch(console.error);
 
 const search = document.getElementById("gallerySearch");

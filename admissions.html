@@ -7,7 +7,63 @@
 <title>Admissions &amp; Enrolment | Balad Private Schools</title>
 <link href="style.css" rel="stylesheet"/>
 <script defer="" src="script.js?v=5"></script>
-<script defer="" src="content-loader.js" type="module"></script></head>
+<script defer="" src="content-loader.js" type="module"></script>
+<style>
+/* Admissions visual upgrade */
+.admission-hero{
+  position:relative;min-height:500px;overflow:hidden;
+  background:linear-gradient(135deg,#075c46,#0b7658);
+}
+.admission-hero-media{position:absolute;inset:0;background:#dfeee8}
+.admission-hero-media img{
+  width:100%;height:100%;object-fit:cover;object-position:center 20%;
+}
+.admission-hero-media::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(3,65,48,.70),rgba(3,65,48,.22) 65%,rgba(0,0,0,.08));
+}
+.admission-hero-media.fallback::before{
+  content:"BALAD PRIVATE SCHOOLS";
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.2);font-size:clamp(2rem,7vw,6rem);font-weight:900;
+}
+.admission-hero-overlay{
+  position:relative;z-index:2;min-height:500px;display:flex;align-items:center;color:#fff;
+}
+.admission-hero .eyebrow{color:#fff;font-weight:900;letter-spacing:.14em}
+.admission-hero h1{max-width:760px;font-size:clamp(2.3rem,6vw,5rem);line-height:1.02;color:#fff;margin:8px 0 15px}
+.admission-hero p:not(.eyebrow){max-width:650px;font-size:1.1rem;color:rgba(255,255,255,.94)}
+.admission-media-section{
+  background:linear-gradient(135deg,#f2f8f5 0%,#fff 62%,#f7f0e3 100%);
+}
+.admission-media-grid{
+  display:grid;grid-template-columns:1.35fr 1fr 1fr;grid-auto-rows:180px;gap:12px;
+}
+.admission-media-card{
+  position:relative;overflow:hidden;border-radius:16px;background:#dfeee8;border:1px solid var(--line);
+}
+.admission-media-card.large{grid-row:span 2}
+.admission-media-card img{width:100%;height:100%;object-fit:cover}
+.admission-media-card figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:15px;
+  color:#fff;background:linear-gradient(transparent,rgba(3,48,36,.76));
+}
+.admission-media-card figcaption strong{display:block;font-size:1rem}
+.admission-media-card figcaption span{display:block;font-size:.77rem;margin-top:2px;color:rgba(255,255,255,.9)}
+.admission-video-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.admission-video-card{overflow:hidden;border-radius:16px;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow)}
+.admission-video-card video{display:block;width:100%;height:260px;object-fit:cover;background:#eaf3ef}
+.admission-video-card>div{padding:14px 16px}
+.admission-video-card strong{color:var(--green)}
+.admission-video-card p{margin:3px 0 0;color:var(--muted);font-size:.82rem}
+@media(max-width:700px){
+  .admission-hero,.admission-hero-overlay{min-height:470px}
+  .admission-media-grid{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
+  .admission-media-card.large{grid-column:span 2;grid-row:span 2}
+  .admission-video-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
 <body data-cms-page="admissions">
 <header>
 <div class="logo">
@@ -53,32 +109,48 @@
 </nav>
 </header>
 <main>
-<section class="admission-requirements">
-<section class="admission-requirements">
+<section class="admission-hero">
+  <div class="admission-hero-media">
+    <img src="images/admission-exam.jpg" alt="Student preparing for an examination"
+         onerror="this.style.display='none';this.parentElement.classList.add('fallback')">
+  </div>
+  <div class="admission-hero-overlay">
+    <div class="container">
+      <p class="eyebrow">ADMISSIONS ARE OPEN</p>
+      <h1>Your Child’s Journey to Excellence Starts Here</h1>
+      <p>Give your child a strong foundation for learning, character and future success at BALAD Private Schools.</p>
+      <div class="hero-buttons">
+        <a class="btn" href="#admission-process">Start Your Application</a>
+        <a class="btn btn-secondary" href="#requirements">Admission Requirements</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="admission-requirements" id="requirements">
 <h2 data-text-key="admissions-text-1">Admission Requirements</h2>
 <p class="requirements-subtitle" data-text-key="admissions-text-2">
         Please prepare the following documents for admission.
     </p>
 <div class="requirements-grid">
 <div class="requirement-card">
-<h3 data-text-key="admissions-text-3">📄 Completed Admission Form</h3>
+<h3 data-text-key="admissions-text-3">Completed Admission Form</h3>
 </div>
 <div class="requirement-card">
-<h3 data-text-key="admissions-text-4">📸 Recent Passport Photographs</h3>
+<h3 data-text-key="admissions-text-4">Recent Passport Photographs</h3>
 </div>
 <div class="requirement-card">
-<h3 data-text-key="admissions-text-5">📜 Previous School Records</h3>
+<h3 data-text-key="admissions-text-5">Previous School Records</h3>
 <p data-text-key="admissions-text-6">Where applicable</p>
 </div>
 <div class="requirement-card">
-<h3 data-text-key="admissions-text-7">🪪 Birth Certificate / Identification</h3>
+<h3 data-text-key="admissions-text-7">Birth Certificate / Identification</h3>
 </div>
 <div class="requirement-card">
-<h3 data-text-key="admissions-text-8">📝 Other Required Documents</h3>
+<h3 data-text-key="admissions-text-8">Other Required Documents</h3>
 </div>
 </div>
 </section>
-<section class="admission-process">
+<section class="admission-process" id="admission-process">
 <h2 data-text-key="admissions-text-9">Admission Process</h2>
 <p class="process-subtitle" data-text-key="admissions-text-10">
 Our simple admission process guides parents smoothly from enquiry to school resumption.
@@ -165,13 +237,47 @@ Complete registration and begin your child's educational journey at Balad Privat
 </div>
 </div>
 </section>
-<section class="admission-student-gallery">
-<div class="container"><div class="section-header"><h2 data-text-key="admissions-text-26">Learning &amp; Assessment</h2><p data-text-key="admissions-text-27">Students are encouraged to approach learning, practical work and assessment with confidence and discipline.</p></div>
-<div class="admission-gallery-grid">
-<figure><img alt="Students engaged in practical learning" data-media-key="admissions-image-2" src="images/science-lab1.jpg"/><figcaption>Practical Learning</figcaption></figure>
-<figure><img alt="Students taking part in school activities" data-media-key="admissions-image-3" src="images/club-activities1.jpg"/><figcaption>Student Activities</figcaption></figure>
-<figure><img alt="Students celebrating academic achievement" data-media-key="admissions-image-4" src="images/prize-giving3.jpg"/><figcaption>Academic Achievement</figcaption></figure>
-</div></div>
+<section class="admission-media-section">
+<div class="container">
+  <div class="section-header">
+    <p class="eyebrow">LIFE &amp; LEARNING AT BALAD</p>
+    <h2>See the Experience Your Child Can Join</h2>
+    <p>From practical learning to achievement, creativity and school activities, students are encouraged to learn with confidence.</p>
+  </div>
+  <div class="admission-media-grid">
+    <figure class="admission-media-card large">
+      <img src="images/science-lab1.jpg" alt="Students engaged in practical science learning">
+      <figcaption><strong>Practical Learning</strong><span>Students learn by doing and exploring.</span></figcaption>
+    </figure>
+    <figure class="admission-media-card">
+      <img src="images/club-activities1.jpg" alt="Students taking part in creative school activities">
+      <figcaption><strong>Student Activities</strong><span>Learning continues beyond the classroom.</span></figcaption>
+    </figure>
+    <figure class="admission-media-card">
+      <img src="images/prize-giving3.jpg" alt="Students receiving academic recognition">
+      <figcaption><strong>Achievement</strong><span>Celebrating effort and excellence.</span></figcaption>
+    </figure>
+    <figure class="admission-media-card">
+      <img src="images/sports1.jpg" alt="Students participating in sports">
+      <figcaption><strong>Sports &amp; Teamwork</strong><span>Building confidence, discipline and teamwork.</span></figcaption>
+    </figure>
+    <figure class="admission-media-card">
+      <img src="images/career-day1.jpg" alt="Students during Career Day">
+      <figcaption><strong>Career Exploration</strong><span>Helping students discover possibilities.</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="admission-video-grid">
+    <article class="admission-video-card">
+      <video src="media/BALAD_Art_Clip_Second_Student_6sec.mp4" muted playsinline controls preload="metadata"></video>
+      <div><strong>Creative Learning</strong><p>A short look at practical student creativity.</p></div>
+    </article>
+    <article class="admission-video-card">
+      <video src="media/BALAD_Talent_Show_Clip.mp4" muted playsinline controls preload="metadata"></video>
+      <div><strong>Student Talent</strong><p>Confidence and creativity beyond lessons.</p></div>
+    </article>
+  </div>
+</div>
 </section>
 <section class="admission-cta">
 <h2 data-text-key="admissions-text-28">Ready to Join Balad Private Schools?</h2>

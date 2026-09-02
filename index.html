@@ -525,6 +525,63 @@
 
 /* ---------- MOBILE ---------- */
 
+
+/* ---------- BALAD HERO SLIDESHOW + GREEN/WHITE VISUAL SYSTEM ---------- */
+.home-page .home-hero{
+  background:#dfeee8;
+  border-bottom:5px solid #075c46;
+}
+.home-page .hero-slides{position:absolute;inset:0;z-index:0}
+.home-page .hero-slide{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:0;transform:scale(1.02);
+  transition:opacity 1s ease,transform 5.5s ease;
+}
+.home-page .hero-slide::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(4,75,56,.38),rgba(4,75,56,.08) 60%,rgba(0,0,0,.02));
+}
+.home-page .hero-slide.is-active{opacity:1;transform:scale(1)}
+.home-page .hero-dots{
+  position:absolute;z-index:4;left:5%;bottom:22px;
+  display:flex;gap:7px;
+}
+.home-page .hero-dot{
+  width:9px;height:9px;padding:0;border:0;border-radius:50%;
+  background:rgba(255,255,255,.62);cursor:pointer;
+}
+.home-page .hero-dot.is-active{width:25px;border-radius:8px;background:#fff}
+
+.home-page .home-section:nth-of-type(even){
+  background:linear-gradient(135deg,#f3f9f6 0%,#ffffff 72%);
+}
+.home-page .home-section:nth-of-type(odd){
+  background:linear-gradient(135deg,#fff 0%,#f8f1e4 100%);
+}
+.home-page .why-section{
+  background:linear-gradient(135deg,#075c46 0%,#0a7658 100%) !important;
+}
+.home-page .why-section .section-heading h2,
+.home-page .why-section .section-heading p{color:#fff}
+.home-page .why-card{
+  background:rgba(255,255,255,.97);
+  border-color:rgba(255,255,255,.55);
+}
+.home-page .announcement-section{
+  background:linear-gradient(135deg,#f7f1e4,#eef7f3) !important;
+}
+.home-page .life-section{
+  background:linear-gradient(135deg,#f7f1e4 0%,#eef7f3 100%) !important;
+}
+.home-page .vision-card,
+.home-page .programme-card,
+.home-page .announcement-card,
+.home-page .school-choice article{
+  background:rgba(255,255,255,.92);
+}
+.home-page .talent-card{background:#f4faf7}
+
 @media(max-width:900px){
   .home-page .highlight-grid{grid-template-columns:repeat(2,1fr)}
   .home-page .why-grid{grid-template-columns:repeat(3,1fr)}
@@ -636,7 +693,12 @@
   </div>
 </div>
 
-<section class="home-hero">
+<section class="home-hero balad-rotating-hero" aria-label="BALAD Private Schools highlights">
+  <div class="hero-slides" aria-hidden="true">
+    <div class="hero-slide is-active" style="background-image:url('images/school-building2.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('images/gallery2.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('images/gallery4.jpg')"></div>
+  </div>
   <div class="hero-inner">
     <div class="hero-copy">
       <p class="hero-kicker">WELCOME TO</p>
@@ -648,11 +710,10 @@
       </div>
     </div>
   </div>
-
-  <div class="hero-media-strip" aria-hidden="true">
-    <img src="images/Competition%20(1).JPG" alt="">
-    <img src="images/Inter%20house%20sport%20(1).JPG" alt="">
-    <img src="images/Graduation(1).JPG" alt="">
+  <div class="hero-dots" aria-label="Hero slideshow controls">
+    <button class="hero-dot is-active" type="button" aria-label="School building"></button>
+    <button class="hero-dot" type="button" aria-label="Students learning"></button>
+    <button class="hero-dot" type="button" aria-label="School community"></button>
   </div>
 </section>
 
@@ -692,17 +753,17 @@
       </article>
 
       <article class="highlight-card">
-        <video src="media/BALAD_Art_Clip_Second_Student_6sec.mp4" data-media-key="index-video-1" muted playsinline controls preload="metadata"></video>
+        <img src="images/science-lab1.jpg" alt="Students learning through practical science" data-media-key="index-image-11">
         <div class="highlight-copy"><h3>Learning Through Innovation</h3><p>Practical creativity and skills that make learning active.</p></div>
       </article>
 
       <article class="highlight-card">
-        <img src="images/Inter%20house%20sport%20(1).JPG" alt="Students taking part in inter house sports" data-media-key="index-image-3">
+        <img src="images/sports1.jpg" alt="Students taking part in school sports" data-media-key="index-image-3">
         <div class="highlight-copy"><h3>Growing Beyond the Classroom</h3><p>Building confidence, teamwork, discipline and character.</p></div>
       </article>
 
       <article class="highlight-card">
-        <img src="images/Graduation(1).JPG" alt="BALAD graduation ceremony" data-media-key="index-image-4">
+        <img src="images/club-activities3.jpg" alt="Students celebrating achievement" data-media-key="index-image-4">
         <div class="highlight-copy"><h3>A Place to Learn and Grow</h3><p>Memorable milestones and a supportive school community.</p></div>
       </article>
     </div>
@@ -784,12 +845,12 @@
     </div>
 
     <div class="life-grid">
-      <article class="life-card"><img src="images/Career.JPG" alt="Career Day" data-media-key="index-image-5"><span>Career Day</span></article>
-      <article class="life-card"><img src="images/Career%20day%281%29.JPG" alt="Career Day activity" data-media-key="index-image-6"><span>Career Exploration</span></article>
-      <article class="life-card"><img src="images/Sports%20(1).jpg" alt="Sports activity" data-media-key="index-image-7"><span>Sports &amp; Games</span></article>
-      <article class="life-card"><img src="images/Competition%20(1).JPG" alt="Competition achievement" data-media-key="index-image-8"><span>Academic Competition</span></article>
-      <article class="life-card"><img src="images/Inter%20house%20sport%20(1).JPG" alt="Inter house sports" data-media-key="index-image-9"><span>Inter-House Sports</span></article>
-      <article class="life-card"><img src="images/Graduation(1).JPG" alt="Graduation ceremony" data-media-key="index-image-10"><span>Graduation</span></article>
+      <article class="life-card"><img src="images/career-day1.jpg" alt="Career Day" data-media-key="index-image-5"><span>Career Day</span></article>
+      <article class="life-card"><img src="images/career-day2.jpg" alt="Career Day activity" data-media-key="index-image-6"><span>Career Exploration</span></article>
+      <article class="life-card"><img src="images/sports4.jpg" alt="Sports activity" data-media-key="index-image-7"><span>Sports &amp; Games</span></article>
+      <article class="life-card"><img src="images/prize-giving3.jpg" alt="Competition achievement" data-media-key="index-image-8"><span>Academic Competition</span></article>
+      <article class="life-card"><img src="images/teachers-day1.jpg" alt="Teachers and students during Teachers Day" data-media-key="index-image-9"><span>Teachers’ Day</span></article>
+      <article class="life-card"><img src="images/gallery3.jpg" alt="Students at a graduation ceremony" data-media-key="index-image-10"><span>Graduation</span></article>
     </div>
 
     <div style="text-align:center;margin-top:20px">
@@ -843,6 +904,25 @@
     <span class="footer-developer">Developer Control · @lade</span>
   </div>
 </footer>
+
+
+<script>
+(function(){
+  const hero=document.querySelector('.balad-rotating-hero');
+  if(!hero)return;
+  const slides=[...hero.querySelectorAll('.hero-slide')];
+  const dots=[...hero.querySelectorAll('.hero-dot')];
+  let i=0,timer;
+  function show(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach((s,k)=>s.classList.toggle('is-active',k===i));
+    dots.forEach((d,k)=>d.classList.toggle('is-active',k===i));
+  }
+  function start(){clearInterval(timer);timer=setInterval(()=>show(i+1),5000);}
+  dots.forEach((d,k)=>d.addEventListener('click',()=>{show(k);start();}));
+  show(0);start();
+})();
+</script>
 
 </body>
 </html>

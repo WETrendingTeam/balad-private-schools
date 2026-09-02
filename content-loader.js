@@ -76,8 +76,33 @@ function staffCard(s){
   </div></article>`;
 }
 
+function normalizeStaffRole(value){
+  return String(value || "")
+    .toLowerCase()
+    .replace(/&/g,"and")
+    .replace(/[‐‑‒–—-]/g," ")
+    .replace(/\s+/g," ")
+    .trim();
+}
+
+function leadershipCard(s){
+  const photo=s.photoUrl
+    ? `<img class="school-leader-photo" src="${esc(s.photoUrl)}" alt="${esc(s.name||"School Leader")}">`
+    : `<div class="school-leader-placeholder">${esc((s.name||"S").split(/\s+/).map(x=>x[0]).slice(0,2).join("").toUpperCase())}</div>`;
+  const subjects=(s.subjects||s.assignedSubjects||[]).filter(Boolean);
+  return `<article class="school-leader-card">
+    <div class="school-leader-media">${photo}</div>
+    <div class="school-leader-content">
+      <p class="school-leader-eyebrow">SCHOOL LEADERSHIP</p>
+      <h3>${esc(s.name||"School Leader")}</h3>
+      <p class="school-leader-role">${esc(s.position||s.role||"")}</p>
+      ${subjects.length?`<p class="school-leader-subjects"><strong>Subjects:</strong> ${subjects.map(esc).join(" / ")}</p>`:""}
+    </div>
+  </article>`;
+}
+
 async function loadPublicStaff(){
-  const targets=[...document.querySelectorAll("[data-public-staff-category],[data-public-staff-school]")];
+  const targets=[...document.querySelectorAll("[data-public-staff-category],[data-public-staff-school],[data-public-leadership-role]")];
   if(!targets.length) return;
   try{
     const snap=await getDocs(collection(db,"publicStaff"));
@@ -86,6 +111,20 @@ async function loadPublicStaff(){
       let rows=staff;
       const category=el.dataset.publicStaffCategory;
       const school=el.dataset.publicStaffSchool;
+      const leadershipRole=el.dataset.publicLeadershipRole;
+
+      if(leadershipRole){
+        const wanted=normalizeStaffRole(leadershipRole);
+        rows=rows.filter(s=>{
+          const role=normalizeStaffRole(s.position||s.role);
+          return normalizeStaffRole(s.category)==="management" && role===wanted;
+        }).slice(0,1);
+        el.innerHTML=rows.length
+          ? rows.map(leadershipCard).join("")
+          : `<p class="cms-empty">School leadership information will be published here.</p>`;
+        continue;
+      }
+
       if(category==="management") rows=rows.filter(s=>s.category==="management");
       else if(category==="college") rows=rows.filter(s=>s.category==="college");
       else if(category==="primary") rows=rows.filter(s=>s.category==="primary");

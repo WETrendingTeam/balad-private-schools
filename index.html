@@ -1,119 +1,848 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Balad Private Schools</title>
-<link href="style.css?v=6" rel="stylesheet"/>
-<script defer="" src="script.js?v=5"></script>
-<script defer="" src="content-loader.js" type="module"></script></head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BALAD Private Schools</title>
+<link rel="stylesheet" href="style.css?v=7">
+<script defer src="script.js?v=5"></script>
+<script defer src="content-loader.js" type="module"></script>
+
+<style>
+/* =========================================================
+   BALAD PRIVATE SCHOOLS — UPDATED HOME / INDEX
+   Real school media • compact layout • light visual treatment
+========================================================= */
+
+:root{
+  --balad-green:#075c46;
+  --balad-green-2:#0b7658;
+  --balad-red:#c5222d;
+  --balad-cream:#f6efe3;
+  --balad-soft:#f3f8f5;
+  --balad-ink:#17231f;
+  --balad-muted:#66736e;
+  --balad-line:#e0e9e4;
+}
+
+.home-page{
+  background:#fff;
+  color:var(--balad-ink);
+}
+
+/* ---------- HERO ---------- */
+
+.home-page .home-hero{
+  position:relative;
+  min-height:clamp(390px,55vw,610px);
+  margin:0 auto;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(7,92,70,.48),rgba(7,92,70,.14) 55%,rgba(0,0,0,.02)),
+    url("images/Competition%20(1).JPG") center/cover no-repeat;
+}
+
+.home-page .home-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.34),transparent 58%);
+  pointer-events:none;
+}
+
+.home-page .hero-inner{
+  position:relative;
+  z-index:2;
+  min-height:inherit;
+  display:flex;
+  align-items:center;
+  max-width:1180px;
+  margin:auto;
+  padding:60px 5%;
+}
+
+.home-page .hero-copy{
+  width:min(690px,100%);
+  color:#fff;
+}
+
+.home-page .hero-kicker{
+  margin:0 0 8px;
+  color:#fff;
+  font-weight:800;
+  letter-spacing:.16em;
+  font-size:.78rem;
+}
+
+.home-page .hero-copy h1{
+  margin:0;
+  font-size:clamp(2.35rem,6vw,5.2rem);
+  line-height:.96;
+  letter-spacing:-.04em;
+  color:#fff;
+  text-shadow:0 3px 18px rgba(0,0,0,.2);
+}
+
+.home-page .hero-copy p{
+  max-width:620px;
+  margin:18px 0 0;
+  font-size:clamp(1rem,1.7vw,1.25rem);
+  line-height:1.55;
+  color:rgba(255,255,255,.96);
+}
+
+.home-page .hero-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:24px;
+}
+
+.home-page .hero-buttons a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:11px 18px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:800;
+  background:#fff;
+  color:var(--balad-green);
+}
+
+.home-page .hero-buttons a.secondary{
+  background:rgba(255,255,255,.16);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.7);
+  backdrop-filter:blur(5px);
+}
+
+.home-page .hero-media-strip{
+  position:absolute;
+  z-index:3;
+  right:4%;
+  bottom:25px;
+  display:grid;
+  grid-template-columns:repeat(3,100px);
+  gap:8px;
+}
+
+.home-page .hero-media-strip img{
+  width:100px;
+  height:68px;
+  object-fit:cover;
+  border-radius:10px;
+  border:2px solid rgba(255,255,255,.8);
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+/* ---------- COMPACT STATS ---------- */
+
+.home-page .home-stats{
+  max-width:1180px;
+  margin:-22px auto 0;
+  position:relative;
+  z-index:5;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:0 5%;
+}
+
+.home-page .home-stat{
+  background:#fff;
+  border:1px solid var(--balad-line);
+  border-radius:13px;
+  padding:18px 16px;
+  box-shadow:0 10px 28px rgba(16,58,45,.08);
+}
+
+.home-page .home-stat strong{
+  display:block;
+  color:var(--balad-green);
+  font-size:1.6rem;
+}
+
+.home-page .home-stat span{
+  color:var(--balad-muted);
+  font-size:.82rem;
+}
+
+/* ---------- SHARED ---------- */
+
+.home-page .home-section{
+  padding:48px 5%;
+}
+
+.home-page .home-container{
+  max-width:1180px;
+  margin:auto;
+}
+
+.home-page .section-heading{
+  max-width:760px;
+  margin:0 auto 24px;
+  text-align:center;
+}
+
+.home-page .section-heading h2{
+  margin:0 0 7px;
+  color:var(--balad-green);
+  font-size:clamp(1.65rem,3vw,2.45rem);
+}
+
+.home-page .section-heading p{
+  margin:0;
+  color:var(--balad-muted);
+  line-height:1.55;
+}
+
+/* ---------- VISION / MISSION ---------- */
+
+.home-page .vision-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.home-page .vision-card{
+  border:1px solid var(--balad-line);
+  border-radius:16px;
+  padding:22px;
+  background:#fff;
+}
+
+.home-page .vision-card h3{
+  margin:0 0 8px;
+  color:var(--balad-green);
+}
+
+.home-page .vision-card p{
+  margin:0;
+  color:var(--balad-muted);
+  line-height:1.55;
+}
+
+/* ---------- FOUR HIGHLIGHTS ---------- */
+
+.home-page .highlight-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.home-page .highlight-card{
+  min-height:235px;
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+  background:#dfece6;
+  box-shadow:0 9px 24px rgba(16,58,45,.09);
+}
+
+.home-page .highlight-card img,
+.home-page .highlight-card video{
+  width:100%;
+  height:100%;
+  min-height:235px;
+  object-fit:cover;
+  display:block;
+}
+
+.home-page .highlight-card .highlight-copy{
+  position:absolute;
+  inset:auto 0 0;
+  padding:18px;
+  color:#fff;
+  background:linear-gradient(transparent,rgba(3,40,30,.72));
+}
+
+.home-page .highlight-card h3{
+  margin:0 0 4px;
+  color:#fff;
+  font-size:1.12rem;
+}
+
+.home-page .highlight-card p{
+  margin:0;
+  color:rgba(255,255,255,.92);
+  font-size:.8rem;
+  line-height:1.4;
+}
+
+/* ---------- WHY CHOOSE ---------- */
+
+.home-page .why-section{
+  background:var(--balad-soft);
+}
+
+.home-page .why-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+
+.home-page .why-card{
+  padding:18px 14px;
+  background:#fff;
+  border:1px solid var(--balad-line);
+  border-radius:13px;
+  text-align:center;
+}
+
+.home-page .why-card h3{
+  margin:0;
+  color:var(--balad-green);
+  font-size:.95rem;
+}
+
+/* ---------- PROGRAMMES ---------- */
+
+.home-page .programme-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.home-page .programme-card{
+  border:1px solid var(--balad-line);
+  border-radius:14px;
+  padding:20px;
+  background:#fff;
+  transition:.2s ease;
+}
+
+.home-page .programme-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(16,58,45,.08);
+}
+
+.home-page .programme-card h3{
+  margin:0;
+  color:var(--balad-green);
+  font-size:1rem;
+}
+
+/* ---------- ANNOUNCEMENTS ---------- */
+
+.home-page .announcement-section{
+  background:#faf8f2;
+}
+
+.home-page .announcement-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.home-page .announcement-card{
+  background:#fff;
+  border:1px solid var(--balad-line);
+  border-radius:14px;
+  padding:19px;
+}
+
+.home-page .announcement-card h3{
+  margin:0 0 8px;
+  color:var(--balad-green);
+  font-size:1rem;
+}
+
+.home-page .announcement-card p{
+  margin:0 0 14px;
+  color:var(--balad-muted);
+  line-height:1.45;
+  font-size:.83rem;
+}
+
+.home-page .announcement-card a{
+  display:inline-block;
+  color:var(--balad-red);
+  text-decoration:none;
+  font-weight:800;
+  font-size:.82rem;
+}
+
+/* ---------- TALENT ---------- */
+
+.home-page .talent-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.home-page .talent-card{
+  overflow:hidden;
+  border-radius:18px;
+  border:1px solid var(--balad-line);
+  background:#fff;
+  box-shadow:0 10px 25px rgba(16,58,45,.08);
+}
+
+.home-page .talent-card video{
+  width:100%;
+  height:270px;
+  display:block;
+  object-fit:cover;
+  background:#eaf3ef;
+}
+
+.home-page .talent-card .talent-label{
+  padding:13px 16px;
+}
+
+.home-page .talent-card strong{
+  color:var(--balad-green);
+}
+
+.home-page .talent-card span{
+  display:block;
+  margin-top:3px;
+  color:var(--balad-muted);
+  font-size:.78rem;
+}
+
+/* ---------- LIFE AT BALAD ---------- */
+
+.home-page .life-section{
+  background:linear-gradient(180deg,#f7f3e7,#fff);
+}
+
+.home-page .life-grid{
+  display:grid;
+  grid-template-columns:1.3fr 1fr 1fr;
+  grid-auto-rows:180px;
+  gap:12px;
+}
+
+.home-page .life-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:16px;
+  background:#eaf3ef;
+}
+
+.home-page .life-card:first-child{
+  grid-row:span 2;
+}
+
+.home-page .life-card:nth-child(4){
+  grid-column:span 2;
+}
+
+.home-page .life-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:.3s ease;
+}
+
+.home-page .life-card:hover img{
+  transform:scale(1.035);
+}
+
+.home-page .life-card::after{
+  content:"";
+  position:absolute;
+  inset:42% 0 0;
+  background:linear-gradient(transparent,rgba(3,38,29,.7));
+}
+
+.home-page .life-card span{
+  position:absolute;
+  z-index:2;
+  left:14px;
+  bottom:12px;
+  right:14px;
+  color:#fff;
+  font-weight:800;
+  font-size:.9rem;
+}
+
+/* ---------- WAEC / SCHOOLS ---------- */
+
+.home-page .waec-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:25px;
+  border-radius:18px;
+  background:var(--balad-green);
+  color:#fff;
+}
+
+.home-page .waec-box h2{
+  margin:0 0 6px;
+  color:#fff;
+}
+
+.home-page .waec-box p{
+  margin:0;
+  color:rgba(255,255,255,.88);
+}
+
+.home-page .waec-box a{
+  flex:0 0 auto;
+  background:#fff;
+  color:var(--balad-green);
+  text-decoration:none;
+  padding:11px 16px;
+  border-radius:9px;
+  font-weight:800;
+}
+
+.home-page .school-choice{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.home-page .school-choice article{
+  padding:22px;
+  border:1px solid var(--balad-line);
+  border-radius:16px;
+  background:#fff;
+}
+
+.home-page .school-choice h3{
+  margin:0 0 7px;
+  color:var(--balad-green);
+}
+
+.home-page .school-choice p{
+  color:var(--balad-muted);
+  margin:0 0 14px;
+}
+
+.home-page .school-choice a{
+  color:var(--balad-red);
+  font-weight:800;
+  text-decoration:none;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:900px){
+  .home-page .highlight-grid{grid-template-columns:repeat(2,1fr)}
+  .home-page .why-grid{grid-template-columns:repeat(3,1fr)}
+  .home-page .announcement-grid{grid-template-columns:repeat(2,1fr)}
+  .home-page .hero-media-strip{display:none}
+}
+
+@media(max-width:680px){
+  .home-page .home-hero{
+    min-height:500px;
+    border-radius:0 0 20px 20px;
+  }
+  .home-page .hero-inner{padding:42px 6% 55px;align-items:flex-end}
+  .home-page .hero-copy h1{font-size:2.65rem}
+  .home-page .home-stats{
+    grid-template-columns:repeat(2,1fr);
+    margin-top:-15px;
+    padding:0 4%;
+  }
+  .home-page .home-stat{padding:14px}
+  .home-page .vision-grid,
+  .home-page .talent-grid,
+  .home-page .school-choice{grid-template-columns:1fr}
+  .home-page .highlight-grid{grid-template-columns:1fr 1fr}
+  .home-page .highlight-card,
+  .home-page .highlight-card img,
+  .home-page .highlight-card video{min-height:190px}
+  .home-page .why-grid{grid-template-columns:1fr 1fr}
+  .home-page .programme-grid{grid-template-columns:1fr 1fr}
+  .home-page .announcement-grid{grid-template-columns:1fr 1fr}
+  .home-page .life-grid{
+    grid-template-columns:1fr 1fr;
+    grid-auto-rows:135px;
+  }
+  .home-page .life-card:first-child{
+    grid-column:span 2;
+    grid-row:span 2;
+  }
+  .home-page .life-card:nth-child(4){grid-column:span 1}
+  .home-page .talent-card video{height:220px}
+  .home-page .waec-box{display:block}
+  .home-page .waec-box a{display:inline-block;margin-top:15px}
+}
+
+@media(max-width:430px){
+  .home-page .programme-grid{grid-template-columns:1fr}
+  .home-page .announcement-grid{grid-template-columns:1fr}
+  .home-page .highlight-grid{gap:8px}
+  .home-page .section-heading{margin-bottom:18px}
+  .home-page .home-section{padding:38px 5%}
+}
+</style>
+</head>
+
 <body class="home-page" data-cms-page="index">
-<div class="announcement-bar"><div class="announcement-track">Admissions for the 2026/2027 Academic Session are now open.   •   School resumes on Monday, 14 September 2026.   •    Contact us for enquiries.</div></div>
+
 <header>
-<div class="logo"><img alt="Balad Private Schools Logo" data-media-key="index-image-1" src="images/logo.png"/><div class="school-name"><h2>BALAD PRIVATE SCHOOLS</h2><p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p><small>"Nothing but Success"</small><em class="school-status">Government Approved School • Member of NAPPS</em></div></div>
-<input class="menu-toggle" id="balad-menu-toggle" type="checkbox"/>
-<label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle">
-<span class="menu-icon-open">☰</span>
-<span class="menu-icon-close">×</span>
-</label>
-<nav id="balad-main-nav">
-<a class="active" href="index.html">Home</a>
-<a href="about.html">About</a>
-<details class="academic-nav school-nav">
-<summary>Schools</summary>
-<div class="academic-submenu">
-<a href="nursery-primary.html">Balad Nursery &amp; Primary</a>
-<a href="comprehensive-college.html">Balad Comprehensive College</a>
-</div>
-</details>
-<a href="cbt-centre.html">CBT Centre</a>
-<a href="admissions.html">Admissions</a>
-<details class="academic-nav">
-<summary>Academics</summary>
-<div class="academic-submenu">
-<a href="curriculum.html">Curriculum</a>
-<a href="stem.html">STEM</a>
-<a href="results.html">Result Portal</a>
-</div>
-</details>
-<a href="team.html">Meet Our Team</a>
-<a href="facilities.html">Facilities</a>
-<a href="gallery.html">Gallery</a>
-<a href="news.html">News &amp; Events</a>
-<a href="alumni.html">Alumni</a>
-<a class="nav-login-button" href="control-login.html">LOGIN</a>
-<a class="nav-contact-button" href="contact.html">CONTACT US</a>
-</nav>
+  <div class="logo">
+    <img src="images/logo.png" alt="BALAD Private Schools Logo" data-media-key="index-image-1">
+    <div class="school-name">
+      <h2>BALAD PRIVATE SCHOOLS</h2>
+      <p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
+      <small>"Nothing but Success"</small>
+      <em class="school-status">Government Approved School • Member of NAPPS</em>
+    </div>
+  </div>
+
+  <input class="menu-toggle" id="balad-menu-toggle" type="checkbox">
+  <label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle">
+    <span class="menu-icon-open">☰</span>
+    <span class="menu-icon-close">×</span>
+  </label>
+
+  <nav id="balad-main-nav">
+    <a class="active" href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <details class="academic-nav school-nav">
+      <summary>Schools</summary>
+      <div class="academic-submenu">
+        <a href="nursery-primary.html">Balad Nursery &amp; Primary</a>
+        <a href="comprehensive-college.html">Balad Comprehensive College</a>
+      </div>
+    </details>
+    <a href="cbt-centre.html">CBT Centre</a>
+    <a href="admissions.html">Admissions</a>
+    <details class="academic-nav">
+      <summary>Academics</summary>
+      <div class="academic-submenu">
+        <a href="curriculum.html">Curriculum</a>
+        <a href="stem.html">STEM</a>
+        <a href="results.html">Result Portal</a>
+      </div>
+    </details>
+    <a href="team.html">Meet Our Team</a>
+    <a href="facilities.html">Facilities</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="news.html">News &amp; Events</a>
+    <a href="alumni.html">Alumni</a>
+    <a class="nav-login-button" href="control-login.html">LOGIN</a>
+    <a class="nav-contact-button" href="contact.html">CONTACT US</a>
+  </nav>
 </header>
+
 <main>
-<section class="hero"><div class="hero-overlay"><div class="hero-content"><h4 data-text-key="index-text-1">WELCOME TO</h4><h1 data-text-key="home-hero-title">BALAD PRIVATE SCHOOLS</h1><p class="motto" data-text-key="home-hero-description">Inspiring Excellence, Building Character and Shaping Future Leaders.</p><div class="hero-buttons"><a class="btn" href="admissions.html">Apply for Admission</a><a class="btn btn-secondary" href="about.html">Explore Our School</a></div></div></div></section>
-<section class="stats container"><article class="stat-box"><h2 data-text-key="index-text-2">10+</h2><p data-text-key="index-text-3">Years of Excellence</p></article><article class="stat-box"><h2 data-text-key="index-text-4">350+</h2><p data-text-key="index-text-5">Students</p></article><article class="stat-box"><h2 data-text-key="index-text-6">50+</h2><p data-text-key="index-text-7">Qualified Teachers</p></article><article class="stat-box"><h2 data-text-key="index-text-8">100%</h2><p data-text-key="index-text-9">Commitment to Success</p></article></section>
-<section class="vision-mission container"><article class="vm-card"><h3 data-text-key="index-text-10">Our Vision</h3><p data-text-key="index-text-11">Balad Private Schools shall be a centre of excellence for raising every Muslim Child, Educationally and Morally.</p></article><article class="vm-card"><h3 data-text-key="index-text-12">Our Mission</h3><p data-text-key="index-text-13">Balad Private Schools aims to support students in acquiring knowledge, skills, and attitudes (KSA) to build an industrious, just, and peaceful Nigerian society, while guaranteeing success in all exams.</p></article></section><section class="home-hero-why-container">
-<section aria-label="Balad Private Schools highlights" class="home-highlight-slider"><div class="about-slides"><div class="about-slide slide-one" data-media-key="home-hero" data-media-mode="background"><div><span>BALAD PRIVATE SCHOOLS</span><h1 data-text-key="index-text-14">Excellence in Learning</h1><p data-text-key="index-text-15">A safe, disciplined and inspiring environment for every learner.</p></div></div><div class="about-slide slide-two" data-media-key="home-hero-2" data-media-mode="background"><div><span>SCIENCE &amp; TECHNOLOGY</span><h1 data-text-key="index-text-16">Learning Through Innovation</h1><p data-text-key="index-text-17">Practical learning, technology and skills for the future.</p></div></div><div class="about-slide slide-three" data-media-key="home-hero-3" data-media-mode="background"><div><span>SCHOOL LIFE</span><h1 data-text-key="index-text-18">Growing Beyond the Classroom</h1><p data-text-key="index-text-19">Building confidence, teamwork, creativity and character.</p></div></div><div class="about-slide slide-four" data-media-key="home-hero-4" data-media-mode="background"><div><span>OUR ENVIRONMENT</span><h1 data-text-key="index-text-20">A Place to Learn and Grow</h1><p data-text-key="index-text-21">Facilities designed to support academic and personal development.</p></div></div></div><div aria-hidden="true" class="slider-dots"><span></span><span></span><span></span><span></span></div></section>
-<section class="why-choose">
-<div class="container">
-<div class="section-header">
-<h2 data-text-key="index-text-22">Why Choose Balad Private Schools?</h2>
-<p data-text-key="index-text-23">We combine academic excellence, character development, a supportive environment and modern learning.</p>
+
+<div class="announcement-bar">
+  <div class="announcement-track">
+    Admissions for the 2026/2027 Academic Session are now open. • School resumes on Monday, 14 September 2026. • Contact us for enquiries.
+  </div>
 </div>
-<div class="choose-container">
-<article class="choose-card"><h3 data-text-key="index-text-24">Quality Education</h3></article>
-<article class="choose-card"><h3 data-text-key="index-text-25">Conducive Environment</h3></article>
-<article class="choose-card"><h3 data-text-key="index-text-26">Modern Learning</h3></article>
-<article class="choose-card"><h3 data-text-key="index-text-27">Excellence &amp; Discipline</h3></article>
-<article class="choose-card"><h3 data-text-key="index-text-28">Latest Announcements</h3></article>
-</div>
-</div>
+
+<section class="home-hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="hero-kicker">WELCOME TO</p>
+      <h1>BALAD PRIVATE SCHOOLS</h1>
+      <p>Inspiring excellence, building character and shaping future leaders.</p>
+      <div class="hero-buttons">
+        <a href="admissions.html">Apply for Admission</a>
+        <a class="secondary" href="about.html">Explore Our School</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-media-strip" aria-hidden="true">
+    <img src="images/Competition%20(1).JPG" alt="">
+    <img src="images/Inter%20house%20sport%20(1).JPG" alt="">
+    <img src="images/Graduation(1).JPG" alt="">
+  </div>
 </section>
+
+<section class="home-stats">
+  <article class="home-stat"><strong>10+</strong><span>Years of Excellence</span></article>
+  <article class="home-stat"><strong>350+</strong><span>Students</span></article>
+  <article class="home-stat"><strong>50+</strong><span>Qualified Teachers</span></article>
+  <article class="home-stat"><strong>100%</strong><span>Commitment to Success</span></article>
 </section>
-<section class="our-schools">
-<div class="container">
-<div class="section-header">
-<h2 data-text-key="index-text-29">Our Educational Programmes</h2>
-<p data-text-key="index-text-30">Learning opportunities for every stage of the child's educational journey.</p>
-</div>
-<div class="schools-container">
-<article class="school-card"><h3 data-text-key="index-text-31">Pre-Crèche &amp; Crèche</h3></article>
-<article class="school-card"><h3 data-text-key="index-text-32">Nursery School</h3></article>
-<article class="school-card"><h3 data-text-key="index-text-33">Primary School</h3></article>
-<article class="school-card"><h3 data-text-key="index-text-34">College</h3></article>
-<article class="school-card"><h3 data-text-key="index-text-35">CBT Centre</h3></article><article class="school-card"><h3 data-text-key="index-text-36">Arabic &amp; Tahfiz Classes</h3></article>
-</div>
-</div>
-</section><section class="latest-announcements" id="latest-news"><div class="container"><div class="section-header"><h2 data-text-key="index-text-37">Latest Announcements</h2><p data-text-key="index-text-38">Stay updated with important information and upcoming activities at Balad Private Schools.</p></div><div class="announcement-grid four"><article class="announcement-card"><h3 data-text-key="index-text-39">Admission Now Open</h3><p data-text-key="index-text-40">Admission into Pre-Crèche, Crèche, Nursery, Primary and College is now in progress.</p><a class="announcement-btn" href="admissions.html">Apply Now</a></article><article class="announcement-card"><h3 data-text-key="index-text-41">School Resumption</h3><p data-text-key="index-text-42">Parents and guardians are advised to prepare students for the new academic session.</p><a class="announcement-btn" href="news.html">Learn More</a></article><article class="announcement-card"><h3 data-text-key="index-text-43">Admission Criteria</h3><p data-text-key="index-text-44">Check the requirements for admission into our school programmes.</p><a class="announcement-btn" href="admissions.html">View Criteria</a></article><article class="announcement-card"><h3 data-text-key="index-text-45">CBT Centre Update</h3><p data-text-key="index-text-46">Modern computer-based testing facilities are available for students and public training.</p><a class="announcement-btn" href="contact.html">Enquire</a></article></div></div></section>
-<section class="student-talent-section">
-<div class="container">
-<div class="section-header">
-<h2 data-text-key="home-talent-title">Student Talent Showcase</h2>
-<p data-text-key="home-talent-description">A space to showcase the creativity, skills and talents of our students.</p>
-</div>
-<div class="talent-video-grid">
-<div class="talent-video-card">
-<video controls="" data-media-key="index-video-1" playsinline="" poster="images/gallery1.jpg" preload="metadata">
-Your browser does not support video playback.
-</video>
-<div class="talent-video-placeholder"><strong>Student Talent Showcase</strong><span></span></div>
-</div>
-<div class="talent-video-card">
-<video controls="" data-media-key="index-video-2" playsinline="" poster="images/gallery2.jpg" preload="metadata">
-Your browser does not support video playback.
-</video>
-<div class="talent-video-placeholder"><strong>Student Talent Showcase</strong><span></span></div>
-</div>
-</div>
-</div>
+
+<section class="home-section">
+  <div class="home-container">
+    <div class="vision-grid">
+      <article class="vision-card">
+        <h3>Our Vision</h3>
+        <p>Balad Private Schools shall be a centre of excellence for raising every Muslim Child, Educationally and Morally.</p>
+      </article>
+      <article class="vision-card">
+        <h3>Our Mission</h3>
+        <p>Balad Private Schools aims to support students in acquiring knowledge, skills, and attitudes to build an industrious, just and peaceful Nigerian society, while guaranteeing success in all exams.</p>
+      </article>
+    </div>
+  </div>
 </section>
-<section class="gallery-section"><div class="container"><div class="section-header"><h2 data-text-key="index-text-47">Life at Balad Private Schools</h2><p data-text-key="index-text-48">Take a glimpse into our learning environment, school events and student activities.</p></div><div class="gallery-grid home-gallery"><article class="gallery-item"><img alt="School Building" data-media-key="index-image-2" src="images/school-building1.jpg"/><p data-text-key="index-text-49">School Building</p></article><article class="gallery-item"><img alt="Science Laboratory" data-media-key="index-image-3" src="images/science-lab1.jpg"/><p data-text-key="index-text-50">Science Laboratory</p></article><article class="gallery-item"><img alt="Career Day" data-media-key="index-image-4" src="images/career-day1.jpg"/><p data-text-key="index-text-51">Career Day</p></article><article class="gallery-item"><img alt="Sports Day" data-media-key="index-image-5" src="images/sports4.jpg"/><p data-text-key="index-text-52">Sports Day</p></article><article class="gallery-item"><img alt="Teachers Day" data-media-key="index-image-6" src="images/teachers-day1.jpg"/><p data-text-key="index-text-53">Teachers' Day</p></article><article class="gallery-item"><img alt="Prize Giving" data-media-key="index-image-7" src="images/prize-giving2.jpg"/><p data-text-key="index-text-54">Prize Giving</p></article></div><a class="gallery-btn" href="gallery.html">View Full Gallery</a></div></section>
-<section class="home-waec-results">
-<div class="container">
-<div class="waec-home-card">
-<div><span class="eyebrow">ACADEMIC ACHIEVEMENT</span><h2 data-text-key="home-waec-title">See How Our Students Performed in WAEC</h2><p data-text-key="home-waec-description">Explore our students’ examination performance, achievements and WAEC results.</p></div>
-<a class="waec-home-btn" href="waec-results.html">View WAEC Results</a>
-</div>
-</div>
+
+<section class="home-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Life at BALAD</h2>
+      <p>Learning, creativity, achievement and experiences that help students grow beyond the classroom.</p>
+    </div>
+
+    <div class="highlight-grid">
+      <article class="highlight-card">
+        <img src="images/Competition%20(1).JPG" alt="Students receiving competition awards" data-media-key="index-image-2">
+        <div class="highlight-copy"><h3>Excellence in Learning</h3><p>Celebrating academic effort, achievement and a culture of excellence.</p></div>
+      </article>
+
+      <article class="highlight-card">
+        <video src="media/BALAD_Art_Clip_Second_Student_6sec.mp4" data-media-key="index-video-1" muted playsinline controls preload="metadata"></video>
+        <div class="highlight-copy"><h3>Learning Through Innovation</h3><p>Practical creativity and skills that make learning active.</p></div>
+      </article>
+
+      <article class="highlight-card">
+        <img src="images/Inter%20house%20sport%20(1).JPG" alt="Students taking part in inter house sports" data-media-key="index-image-3">
+        <div class="highlight-copy"><h3>Growing Beyond the Classroom</h3><p>Building confidence, teamwork, discipline and character.</p></div>
+      </article>
+
+      <article class="highlight-card">
+        <img src="images/Graduation(1).JPG" alt="BALAD graduation ceremony" data-media-key="index-image-4">
+        <div class="highlight-copy"><h3>A Place to Learn and Grow</h3><p>Memorable milestones and a supportive school community.</p></div>
+      </article>
+    </div>
+  </div>
 </section>
-<section class="new-schools-home" style="padding:52px 0;background:#f7fbf8"><div class="container"><div class="section-header"><h2 data-text-key="index-text-55">Our Schools</h2><p data-text-key="index-text-56">Explore each school and its dedicated information.</p></div><div class="result-choice-grid"><article class="result-choice-card"><h2 data-text-key="index-text-57">Balad Nursery &amp; Primary</h2><p data-text-key="index-text-58">School information, leadership welcome and facilities.</p><a href="nursery-primary.html">Explore School</a></article><article class="result-choice-card"><h2 data-text-key="index-text-59">Balad Comprehensive College</h2><p data-text-key="index-text-60">College information, leadership welcome and facilities.</p><a href="comprehensive-college.html">Explore College</a></article></div></div></section></main>
-<section class="cms-public-content-wrap"><div class="cms-public-content" data-cms-page="index" id="cms-page-content"></div></section><footer><div class="footer-bottom">© <span data-year=""></span> Balad Private Schools. All Rights Reserved. <span class="footer-developer">Developer Control · @lade</span></div></footer>
+
+<section class="home-section why-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Why Choose BALAD Private Schools?</h2>
+      <p>We combine academic excellence, character development, a supportive environment and modern learning.</p>
+    </div>
+    <div class="why-grid">
+      <article class="why-card"><h3>Quality Education</h3></article>
+      <article class="why-card"><h3>Conducive Environment</h3></article>
+      <article class="why-card"><h3>Modern Learning</h3></article>
+      <article class="why-card"><h3>Excellence &amp; Discipline</h3></article>
+      <article class="why-card"><h3>Latest Announcements</h3></article>
+    </div>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Our Educational Programmes</h2>
+      <p>Learning opportunities for every stage of the child's educational journey.</p>
+    </div>
+    <div class="programme-grid">
+      <article class="programme-card"><h3>Pre-Crèche &amp; Crèche</h3></article>
+      <article class="programme-card"><h3>Nursery School</h3></article>
+      <article class="programme-card"><h3>Primary School</h3></article>
+      <article class="programme-card"><h3>College</h3></article>
+      <article class="programme-card"><h3>CBT Centre</h3></article>
+      <article class="programme-card"><h3>Arabic &amp; Tahfiz Classes</h3></article>
+    </div>
+  </div>
+</section>
+
+<section class="home-section announcement-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Latest Announcements</h2>
+      <p>Stay updated with important information and upcoming activities at BALAD Private Schools.</p>
+    </div>
+    <div class="announcement-grid">
+      <article class="announcement-card"><h3>Admission Now Open</h3><p>Admission into Pre-Crèche, Crèche, Nursery, Primary and College is now in progress.</p><a href="admissions.html">Apply Now</a></article>
+      <article class="announcement-card"><h3>School Resumption</h3><p>Parents and guardians are advised to prepare students for the new academic session.</p><a href="news.html">Learn More</a></article>
+      <article class="announcement-card"><h3>Admission Criteria</h3><p>Check the requirements for admission into our school programmes.</p><a href="admissions.html">View Criteria</a></article>
+      <article class="announcement-card"><h3>CBT Centre Update</h3><p>Modern computer-based testing facilities are available for students and public training.</p><a href="contact.html">Enquire</a></article>
+    </div>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Student Talent Showcase</h2>
+      <p>A space to showcase the creativity, skills and talents of our students.</p>
+    </div>
+    <div class="talent-grid">
+      <article class="talent-card">
+        <video src="media/BALAD_Art_Clip_Second_Student_6sec.mp4" data-media-key="index-video-1" muted playsinline controls preload="metadata"></video>
+        <div class="talent-label"><strong>Creative Art</strong><span>Students expressing ideas through practical art.</span></div>
+      </article>
+      <article class="talent-card">
+        <video src="media/BALAD_Talent_Show_Clip.mp4" data-media-key="index-video-2" muted playsinline controls preload="metadata"></video>
+        <div class="talent-label"><strong>Talent Show</strong><span>Celebrating confidence, creativity and student talent.</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="home-section life-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Life at BALAD Private Schools</h2>
+      <p>Take a glimpse into our school events, achievements and student activities.</p>
+    </div>
+
+    <div class="life-grid">
+      <article class="life-card"><img src="images/Career.JPG" alt="Career Day" data-media-key="index-image-5"><span>Career Day</span></article>
+      <article class="life-card"><img src="images/Career%20day%281%29.JPG" alt="Career Day activity" data-media-key="index-image-6"><span>Career Exploration</span></article>
+      <article class="life-card"><img src="images/Sports%20(1).jpg" alt="Sports activity" data-media-key="index-image-7"><span>Sports &amp; Games</span></article>
+      <article class="life-card"><img src="images/Competition%20(1).JPG" alt="Competition achievement" data-media-key="index-image-8"><span>Academic Competition</span></article>
+      <article class="life-card"><img src="images/Inter%20house%20sport%20(1).JPG" alt="Inter house sports" data-media-key="index-image-9"><span>Inter-House Sports</span></article>
+      <article class="life-card"><img src="images/Graduation(1).JPG" alt="Graduation ceremony" data-media-key="index-image-10"><span>Graduation</span></article>
+    </div>
+
+    <div style="text-align:center;margin-top:20px">
+      <a href="gallery.html" style="display:inline-block;padding:11px 17px;border-radius:9px;background:#075c46;color:#fff;text-decoration:none;font-weight:800">View Full Gallery</a>
+    </div>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="home-container">
+    <div class="waec-box">
+      <div>
+        <h2>See How Our Students Performed in WAEC</h2>
+        <p>Explore our students’ examination performance, achievements and WAEC results.</p>
+      </div>
+      <a href="waec-results.html">View WAEC Results</a>
+    </div>
+  </div>
+</section>
+
+<section class="home-section" style="background:#f7fbf8">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Our Schools</h2>
+      <p>Explore each school and its dedicated information.</p>
+    </div>
+    <div class="school-choice">
+      <article>
+        <h3>Balad Nursery &amp; Primary</h3>
+        <p>School information, leadership welcome and facilities.</p>
+        <a href="nursery-primary.html">Explore School</a>
+      </article>
+      <article>
+        <h3>Balad Comprehensive College</h3>
+        <p>College information, leadership welcome and facilities.</p>
+        <a href="comprehensive-college.html">Explore College</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<section class="cms-public-content-wrap">
+  <div class="cms-public-content" data-cms-page="index" id="cms-page-content"></div>
+</section>
+
+<footer>
+  <div class="footer-bottom">
+    © <span data-year></span> BALAD Private Schools. All Rights Reserved.
+    <span class="footer-developer">Developer Control · @lade</span>
+  </div>
+</footer>
+
 </body>
 </html>

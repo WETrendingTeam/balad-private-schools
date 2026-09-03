@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gallery | Balad Private Schools</title>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js?v=7"></script>
+</head>
+<body class="gallery-page">
+<header>
+<div class="logo">
+<img alt="Balad Private Schools Logo" src="logo.png"/>
+<div class="school-name">
+<h2>BALAD PRIVATE SCHOOLS</h2>
+<p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
+<small>"Nothing but Success"</small>
+</div>
+</div>
+<input class="menu-toggle" id="balad-menu-toggle" type="checkbox"/>
+<label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle">
+<span class="menu-icon-open">☰</span><span class="menu-icon-close">×</span>
+</label>
+<nav id="balad-main-nav">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<details class="academic-nav school-nav">
+<summary>Schools</summary>
+<div class="academic-submenu">
+<a href="nursery-primary.html">Balad Nursery &amp; Primary</a>
+<a href="comprehensive-college.html">Balad Comprehensive College</a>
+</div>
+</details>
+<a href="cbt-centre.html">CBT Centre</a>
+<a href="admissions.html">Admissions</a>
+<details class="academic-nav">
+<summary>Academics</summary>
+<div class="academic-submenu">
+<a href="curriculum.html">Curriculum</a>
+<a href="stem.html">STEM</a>
+<a href="results.html">Result Portal</a>
+</div>
+</details>
+<a href="team.html">Meet Our Team</a>
+<a href="facilities.html">Facilities</a>
+<a class="active" href="gallery.html">Gallery</a>
+<a href="news.html">News &amp; Events</a>
+<a href="alumni.html">Alumni</a>
+<a class="nav-login-button" href="control-login.html">LOGIN</a>
+<a class="nav-contact-button" href="contact.html">CONTACT US</a>
+</nav>
+</header>
+<section class="gallery-album-hero">
+<div class="container">
+<p class="eyebrow">BALAD PRIVATE SCHOOLS</p>
+<h1>School Gallery</h1>
+<p>Browse our school memories as albums of learning, activities, achievements and special moments.</p>
+<div class="gallery-search-wrap">
+<span>⌕</span>
+<input id="gallerySearch" placeholder="Search by album, activity or event" type="search"/>
+</div>
+</div>
+</section>
+<main class="gallery-album-main">
+<div class="container">
+<div class="album-toolbar">
+<div><strong id="albumCount">6 albums</strong><span> • Balad memories</span></div>
+<button class="album-reset" id="albumReset" type="button">All Albums</button>
+</div>
+<section aria-label="Photo albums" class="album-grid" data-local-gallery="true" id="albumGrid">
+<article class="album-card" data-search="graduation celebrating our graduates and their milestones.">
+<button class="album-cover" data-local-album="graduation" type="button">
+<div class="album-stack" data-cover-stack="graduation"></div>
+</button>
+<div class="album-meta"><span class="album-location">SCHOOL EVENTS</span><h2>Graduation</h2><p>Celebrating our graduates and their milestones.</p><span class="album-count" data-album-count="graduation"></span></div>
+</article>
+<article class="album-card" data-search="prize giving celebrating excellence, awards and student achievement.">
+<button class="album-cover" data-local-album="prize-giving" type="button">
+<div class="album-stack" data-cover-stack="prize-giving"></div>
+</button>
+<div class="album-meta"><span class="album-location">ACHIEVEMENTS</span><h2>Prize Giving</h2><p>Celebrating excellence, awards and student achievement.</p><span class="album-count" data-album-count="prize-giving"></span></div>
+</article>
+<article class="album-card" data-search="sports &amp; games teamwork, discipline and healthy competition.">
+<button class="album-cover" data-local-album="sports-games" type="button">
+<div class="album-stack" data-cover-stack="sports-games"></div>
+</button>
+<div class="album-meta"><span class="album-location">SCHOOL SPORTS</span><h2>Sports & Games</h2><p>Teamwork, discipline and healthy competition.</p><span class="album-count" data-album-count="sports-games"></span></div>
+</article>
+<article class="album-card" data-search="career day students exploring careers, professions and future possibilities.">
+<button class="album-cover" data-local-album="career-day" type="button">
+<div class="album-stack" data-cover-stack="career-day"></div>
+</button>
+<div class="album-meta"><span class="album-location">SCHOOL EVENTS</span><h2>Career Day</h2><p>Students exploring careers, professions and future possibilities.</p><span class="album-count" data-album-count="career-day"></span></div>
+</article>
+<article class="album-card" data-search="cultural day celebrating culture, heritage, creativity and tradition.">
+<button class="album-cover" data-local-album="cultural-day" type="button">
+<div class="album-stack" data-cover-stack="cultural-day"></div>
+</button>
+<div class="album-meta"><span class="album-location">SCHOOL EVENTS</span><h2>Cultural Day</h2><p>Celebrating culture, heritage, creativity and tradition.</p><span class="album-count" data-album-count="cultural-day"></span></div>
+</article>
+<article class="album-card" data-search="clubs &amp; activities creativity, teamwork, projects and learning beyond the classroom.">
+<button class="album-cover" data-local-album="clubs-activities" type="button">
+<div class="album-stack" data-cover-stack="clubs-activities"></div>
+</button>
+<div class="album-meta"><span class="album-location">STUDENT LIFE</span><h2>Clubs & Activities</h2><p>Creativity, teamwork, projects and learning beyond the classroom.</p><span class="album-count" data-album-count="clubs-activities"></span></div>
+</article>
+</section>
+</div>
+</main>
+<div class="album-modal" hidden="" id="albumModal">
+<div class="album-modal-backdrop" data-close-album=""></div>
+<section aria-labelledby="albumModalTitle" aria-modal="true" class="album-modal-panel" role="dialog">
+<button aria-label="Close album" class="album-modal-close" data-close-album="" type="button">×</button>
+<span class="album-location" id="albumModalLocation">BALAD PRIVATE SCHOOLS</span>
+<h2 id="albumModalTitle">Album</h2>
+<p id="albumModalDescription"></p>
+<div class="album-photo-grid" id="albumPhotos"></div>
+</section>
+</div>
+<script>
+const modal = document.getElementById("albumModal");
+const photoGrid = document.getElementById("albumPhotos");
+const modalTitle = document.getElementById("albumModalTitle");
+const modalLocation = document.getElementById("albumModalLocation");
+const modalDescription = document.getElementById("albumModalDescription");
+
+async function openLocalAlbum(key){
+  const res = await fetch("gallery-manifest.json", {cache:"no-store"});
+  if(!res.ok) throw new Error("Gallery manifest unavailable");
+  const albums = await res.json();
+  const album = albums[key];
+  if(!album) return;
+
+  modalTitle.textContent = album.title;
+  modalLocation.textContent = album.location;
+  modalDescription.textContent = album.description;
+
+  photoGrid.innerHTML = album.items.map((item, i) => {
+    if(item.type === "video"){
+      return `<figure><video controls muted playsinline preload="metadata" src="${item.url}"></video><figcaption>${String(i+1).padStart(2,"0")}</figcaption></figure>`;
+    }
+    return `<figure><img loading="lazy" src="${item.url}" alt="${album.title} ${i+1}"><figcaption>${String(i+1).padStart(2,"0")}</figcaption></figure>`;
+  }).join("");
+
+  modal.hidden = false;
+  document.body.classList.add("album-open");
+}
+
+document.querySelectorAll("[data-local-album]").forEach(button => {
+  button.addEventListener("click", () => openLocalAlbum(button.dataset.localAlbum).catch(console.error));
+});
+
+document.querySelectorAll("[data-close-album]").forEach(el => {
+  el.addEventListener("click", () => {
+    modal.hidden = true;
+    document.body.classList.remove("album-open");
+  });
+});
+
+async function imageLoads(url){
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+}
+
+async function buildAlbumCovers(albums){
+  for(const [key, album] of Object.entries(albums)){
+    const stack = document.querySelector(`[data-cover-stack="${key}"]`);
+    if(!stack) continue;
+
+    const imageItems = (album.items || []).filter(item => item.type !== "video" && item.url);
+    const usable = [];
+
+    for(const item of imageItems){
+      if(await imageLoads(item.url)){
+        usable.push(item);
+        if(usable.length === 3) break;
+      }
+    }
+
+    stack.innerHTML = usable.map((item, index) =>
+      `<img alt="${album.title} cover ${index + 1}" src="${item.url}">`
+    ).join("");
+
+    if(!usable.length){
+      stack.innerHTML = `<div class="album-cover-fallback">${album.title}</div>`;
+    }
+  }
+}
+
+fetch("gallery-manifest.json", {cache:"no-store"}).then(r=>r.json()).then(albums => {
+  Object.entries(albums).forEach(([key, album]) => {
+    const el = document.querySelector(`[data-album-count="${key}"]`);
+    if(el) el.textContent = `${album.items.length} item${album.items.length === 1 ? "" : "s"}`;
+  });
+  return buildAlbumCovers(albums);
+}).catch(console.error);
+
+const search = document.getElementById("gallerySearch");
+const cards = [...document.querySelectorAll(".album-card")];
+const count = document.getElementById("albumCount");
+
+function filterAlbums(){
+  const term = search.value.trim().toLowerCase();
+  let visible = 0;
+  cards.forEach(card => {
+    const show = !term || card.dataset.search.includes(term);
+    card.hidden = !show;
+    if(show) visible++;
+  });
+  count.textContent = `${visible} album${visible === 1 ? "" : "s"}`;
+}
+search.addEventListener("input", filterAlbums);
+document.getElementById("albumReset").addEventListener("click", () => {
+  search.value = "";
+  filterAlbums();
+});
+</script>
+<footer><div class="footer-bottom">© <span data-year=""></span> Balad Private Schools. All Rights Reserved. <span class="footer-developer">Web developer: <a href="https://wa.me/2349164435249" target="_blank" rel="noopener noreferrer">Lade</a></span></div></footer>
+</body>
+</html>

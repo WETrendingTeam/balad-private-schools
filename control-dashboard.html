@@ -1525,7 +1525,8 @@ Refresh
 <table>
 <thead>
 <tr>
-<th>Code</th>
+<th>Staff ID</th>
+<th>Secret</th>
 <th>Name</th>
 <th>Role</th>
 <th>Class Teacher Of</th>
@@ -1555,6 +1556,11 @@ Nursery &amp; Primary:
 
 College:
 <strong>COL001 – COL050</strong>.
+
+<strong>COL001 – COL005</strong> are Management access IDs.
+<strong>COL006 – COL050</strong> are College staff IDs.
+
+Nursery &amp; Primary uses <strong>PRI001 – PRI050</strong>; there is no separate Primary Management group.
 
 Each row contains role,
 Class Teacher Of,
@@ -1598,6 +1604,7 @@ Next
 <th>Class Teacher Of</th>
 <th>Other Teaching Classes</th>
 <th>Subjects</th>
+<th>Secret Access Code</th>
 <th>Status</th>
 <th>Actions</th>
 </tr>
@@ -2901,7 +2908,7 @@ onAuthStateChanged(
    if(!user){
 
      window.location.href=
-     "staff-login.html";
+     "control-login.html";
 
      return;
    }
@@ -3043,6 +3050,10 @@ window.renderStaff=function(){
 
 <td>
 <strong>${esc(s.loginCode||"")}</strong>
+</td>
+
+<td>
+<strong>${esc(s.secretAccessCode||"—")}</strong>
 </td>
 
 <td>
@@ -3312,7 +3323,7 @@ async function(){
 
      name:"",
 
-     role:"teacher",
+     role:(selectedSchool==="secondary" && i<5)?"management":"teacher",
 
      home:"",
 
@@ -3324,7 +3335,9 @@ async function(){
 
      created:false,
 
-     uid:""
+     uid:"",
+
+     secret:""
 
    })
  );
@@ -3401,6 +3414,9 @@ async function(){
 
      r.active=
      s.active!==false;
+
+     r.secret=
+     s.secretAccessCode||"";
 
    });
 
@@ -3592,7 +3608,8 @@ ${classOptionsMulti(
 <td>
 
 <select
-class="select template-control"
+multiple
+class="select template-control multi-select"
 id="subject-${r.index}"
 onchange="
 accessSubjectChange(
@@ -3600,10 +3617,7 @@ accessSubjectChange(
  this
 )">
 
-${subjectOptions(
- r.subjects?.[0]||"",
- selectedSchool
-)}
+${(selectedSchool==="secondary"?COLLEGE_SUBJECTS:PRIMARY_SUBJECTS).map(x=>`<option value="${escAttr(x)}" ${r.subjects.includes(x)?"selected":""}>${esc(x)}</option>`).join("")}
 
 </select>
 
@@ -3630,6 +3644,13 @@ accessOtherSubjectChange(
 
 </td>
 
+
+<td>
+
+<strong>${r.secret||"—"}</strong>
+<div class="assignment-note">Management / Control only</div>
+
+</td>
 
 <td>
 
@@ -3693,7 +3714,7 @@ ${r.active?"Deactivate":"Activate"}
  ).join("")
  ||
  emptyRow(
-   8,
+   9,
    "No templates found."
  );
 
@@ -3757,33 +3778,12 @@ function(index,select){
 
 
 window.accessSubjectChange=
-function(index,value){
-
- const r=
- accessRows.find(
-   x=>x.index===index
- );
-
+function(index,select){
+ const r=accessRows.find(x=>x.index===index);
  if(!r)return;
-
- if(value==="Other"){
-
-   r.subjects=[
-     "Other",
-     ""
-   ];
-
- }else{
-
-   r.subjects=
-   value
-   ? [value]
-   : [];
-
- }
-
+ const values=Array.from(select.selectedOptions).map(x=>x.value).filter(Boolean);
+ r.subjects=values;
  renderAccessTemplates();
-
 };
 
 
@@ -3944,6 +3944,8 @@ async function(index){
 
    r.active=true;
 
+   r.secret=result.secretAccessCode||result.staff?.secretAccessCode||result.result?.secretAccessCode||r.secret||"";
+
 
    renderAccessTemplates();
 
@@ -4019,6 +4021,7 @@ async function(index){
  r.classes=[];
  r.subjects=[];
  r.active=true;
+ r.secret="";
 
 
  renderAccessTemplates();
@@ -5634,7 +5637,8 @@ async function loadSubjects(){
 
    const d=
    await worker(
-     "list_subjects"
+     "list_subjects",
+     {school:selectedSchool}
    );
 
 

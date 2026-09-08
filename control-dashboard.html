@@ -2903,7 +2903,7 @@ AUTH
 
 onAuthStateChanged(
  auth,
- user=>{
+ async user=>{
 
    if(!user){
 
@@ -2913,7 +2913,32 @@ onAuthStateChanged(
      return;
    }
 
-   loadSummary();
+   try{
+     const d=await worker("list");
+     const me=(d.staff||[]).find(s=>String(s.uid||s.id||"")===String(user.uid));
+     const role=String(me?.role||"").toLowerCase();
+
+     if(!["control","management"].includes(role)){
+       window.location.href="staff/staff-dashboard.html";
+       return;
+     }
+
+     document.getElementById("controlCodeLabel").textContent=me?.loginCode||"CONTROL001";
+     const title=document.querySelector(".brand span");
+     if(title) title.textContent=role==="management"?"Management Administration":"Control Administration";
+
+     if(role==="management"){
+       ["content","audit","settings"].forEach(section=>{
+         document.querySelector(`.nav-btn[data-section="${section}"]`)?.classList.add("hidden");
+       });
+     }
+
+     loadSummary();
+   }catch(e){
+     console.error(e);
+     await signOut(auth);
+     window.location.href="control-login.html";
+   }
  }
 );
 

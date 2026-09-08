@@ -128,7 +128,7 @@ button:disabled{
       Open Control Dashboard
     </button>
 <div aria-live="polite" class="status info" id="status">
-      Ready. Enter your Control staff code and password.
+      Ready. Enter your Staff ID and password.
     </div>
 </form>
 <a class="back" href="index.html">
@@ -282,7 +282,7 @@ button:disabled{
       =============================================== */
 
       show(
-        "Signing in to Firebase…",
+        "Signing in to BALAD…",
         "info"
       );
 
@@ -328,7 +328,7 @@ button:disabled{
       =============================================== */
 
       show(
-        "Firebase login successful. Checking Control access…",
+        "Firebase login successful. Checking staff access…",
         "info"
       );
 
@@ -550,18 +550,11 @@ button:disabled{
 
 
       if(
-        role !== "control"
+        !["control","management","teacher","class_teacher","other"].includes(role)
       ){
-
         throw new Error(
-          "This Firebase account exists, but its staff role is '" +
-          (
-            profile.role ||
-            "not set"
-          ) +
-          "'. It must be 'control'."
+          "This staff account is not authorized to use the BALAD dashboard."
         );
-
       }
 
 
@@ -601,13 +594,18 @@ button:disabled{
         "true"
       );
 
+      sessionStorage.setItem(
+        "baladStaffRole",
+        role
+      );
+
 
       /* ===============================================
          SUCCESS
       =============================================== */
 
       show(
-        "Control verified. Opening dashboard…",
+        "Staff access verified. Opening dashboard…",
         "success"
       );
 
@@ -620,10 +618,11 @@ button:disabled{
 
       setTimeout(
         function(){
-
-          window.location.href =
-            "control-dashboard.html";
-
+          if (role === "teacher" || role === "class_teacher" || role === "other") {
+            window.location.href = "staff/staff-dashboard.html";
+          } else {
+            window.location.href = "control-dashboard.html";
+          }
         },
         300
       );

@@ -433,9 +433,7 @@ async function login(event) {
     setTimeout(
       () => {
         window.location.href =
-          role === "management"
-            ? "../control-dashboard.html"
-            : "staff-dashboard.html";
+          "staff-dashboard.html";
       },
       500
     );

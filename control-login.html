@@ -618,11 +618,12 @@ button:disabled{
 
       setTimeout(
         function(){
-          if (role === "teacher" || role === "class_teacher" || role === "other") {
-            window.location.href = "staff/staff-dashboard.html";
-          } else {
-            window.location.href = "control-dashboard.html";
-          }
+
+          window.location.href =
+            (role === "control" || role === "management")
+              ? "control-dashboard.html"
+              : "staff/staff-dashboard.html";
+
         },
         300
       );

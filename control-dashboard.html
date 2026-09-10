@@ -1259,7 +1259,7 @@ Student Management
 <button class="nav-btn" data-section="idcards">
 Student ID &amp; Gate
 </button>
-<button class="nav-btn" data-section="content">
+<button class="nav-btn" data-section="content" data-control-only="true">
 Content Management
 </button>
 <button class="nav-btn" data-section="classes">
@@ -1272,10 +1272,10 @@ Subjects
 Results
 </button>
 <div class="nav-label">SYSTEM</div>
-<button class="nav-btn" data-section="audit">
+<button class="nav-btn" data-section="audit" data-control-only="true">
 Audit Logs
 </button>
-<button class="nav-btn" data-section="settings">
+<button class="nav-btn" data-section="settings" data-control-only="true">
 Control Settings
 </button>
 <button class="nav-btn danger" id="logoutBtn">
@@ -1476,7 +1476,7 @@ Open Results →
 <h1 id="staffTitle">
 Staff Management
 </h1>
-<button type="button" class="btn" onclick="reorderCmsManagement()">Reorder Management</button>
+<button type="button" class="btn" data-control-only="true" onclick="reorderCmsManagement()">Reorder Management</button>
 <p id="staffSubtitle">
 Select a school first.
 </p>
@@ -2895,6 +2895,19 @@ async function worker(action,payload={}){
 }
 
 
+function applyDashboardRoleUI(){
+  const role = String(sessionStorage.getItem("baladStaffRole") || "control").toLowerCase();
+  const isControl = role === "control";
+  document.querySelectorAll("[data-control-only=\"true\"]").forEach(el => {
+    el.style.display = isControl ? "" : "none";
+  });
+  const title = document.querySelector("#section-dashboard h1");
+  if(title) title.textContent = isControl ? "Control Dashboard" : "Management Dashboard";
+  const badge = document.getElementById("controlCodeLabel");
+  if(badge) badge.textContent = sessionStorage.getItem("baladControlLoginCode") || (isControl ? "CONTROL001" : "MANAGEMENT");
+}
+
+
 /*
 ==================================================
 AUTH
@@ -2903,7 +2916,7 @@ AUTH
 
 onAuthStateChanged(
  auth,
- async user=>{
+ user=>{
 
    if(!user){
 
@@ -2913,32 +2926,8 @@ onAuthStateChanged(
      return;
    }
 
-   try{
-     const d=await worker("list");
-     const me=(d.staff||[]).find(s=>String(s.uid||s.id||"")===String(user.uid));
-     const role=String(me?.role||"").toLowerCase();
-
-     if(!["control","management"].includes(role)){
-       window.location.href="staff/staff-dashboard.html";
-       return;
-     }
-
-     document.getElementById("controlCodeLabel").textContent=me?.loginCode||"CONTROL001";
-     const title=document.querySelector(".brand span");
-     if(title) title.textContent=role==="management"?"Management Administration":"Control Administration";
-
-     if(role==="management"){
-       ["content","audit","settings"].forEach(section=>{
-         document.querySelector(`.nav-btn[data-section="${section}"]`)?.classList.add("hidden");
-       });
-     }
-
-     loadSummary();
-   }catch(e){
-     console.error(e);
-     await signOut(auth);
-     window.location.href="control-login.html";
-   }
+   applyDashboardRoleUI();
+   loadSummary();
  }
 );
 
@@ -2949,7 +2938,7 @@ document
  "click",
  async()=>{
    await signOut(auth);
-   window.location.href="staff-login.html";
+   window.location.href="control-login.html";
  }
 );
 

@@ -3457,37 +3457,3 @@ body.album-open{overflow:hidden;}
 
 /* The homepage already has its designed content sections; suppress accidental public CMS blocks on Index. */
 body[data-cms-page="index"] .cms-public-content-wrap{display:none!important}
-
-
-/* LOGIN + CONTACT US — separate boxed actions in the mobile menu */
-@media (max-width:760px){
-  header nav#balad-main-nav > .nav-action-boxes{
-    width:100%;
-    margin:22px 0 18px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-
-  header nav#balad-main-nav > .nav-action-boxes > a{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    min-height:62px;
-    margin:0 !important;
-    padding:14px 20px !important;
-    box-sizing:border-box;
-    border:2px solid var(--green) !important;
-    border-radius:7px;
-    background:#fff !important;
-    color:var(--green) !important;
-    font-size:20px;
-    font-weight:800;
-    text-align:center;
-  }
-
-  header nav#balad-main-nav > .nav-action-boxes > a:after{
-    display:none !important;
-  }
-}

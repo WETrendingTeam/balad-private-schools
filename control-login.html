@@ -113,13 +113,13 @@ button:disabled{
 <h1>BALAD Control</h1>
 <p>
     Restricted school administration.
-    Sign in with your Control staff code and password.
+    CONTROL001 is the only Control account. COL001–COL005 are Management accounts.
   </p>
 <form id="form" novalidate="">
 <label for="code">
-      Control Staff Code
+      Control / Management Staff ID
     </label>
-<input autocomplete="username" id="code" placeholder="Enter your Control staff code" required=""/>
+<input autocomplete="username" id="code" placeholder="Enter CONTROL001 or an approved Management Staff ID" required=""/>
 <label for="password">
       Password
     </label>
@@ -128,7 +128,7 @@ button:disabled{
       Open Control Dashboard
     </button>
 <div aria-live="polite" class="status info" id="status">
-      Ready. Enter your Staff ID and password.
+      Ready. Enter CONTROL001 or an approved Management Staff ID and password.
     </div>
 </form>
 <a class="back" href="index.html">
@@ -262,7 +262,7 @@ button:disabled{
     ){
 
       show(
-        "Enter your Control staff code and password.",
+        "Enter CONTROL001 or an approved Management Staff ID and password.",
         "error"
       );
 
@@ -559,6 +559,58 @@ button:disabled{
 
 
       /* ===============================================
+         CANONICAL ACCESS ID
+         CONTROL = CONTROL001 only
+         MANAGEMENT = COL001–COL005 only
+      =============================================== */
+
+      const identityCandidates = [
+        profile.loginCode,
+        profile.staffCode,
+        profile.staffId,
+        profile.id,
+        profile.code,
+        user.email
+          ? String(user.email).split("@")[0]
+          : ""
+      ]
+        .filter(Boolean)
+        .map(value =>
+          String(value).trim().toUpperCase()
+        );
+
+      const canonicalId =
+        identityCandidates[0] || code;
+
+      if(
+        role === "control" &&
+        !identityCandidates.includes("CONTROL001")
+      ){
+        throw new Error(
+          "Control access is reserved for CONTROL001."
+        );
+      }
+
+      if(
+        role === "management" &&
+        !/^COL00[1-5]$/.test(canonicalId)
+      ){
+        throw new Error(
+          "Management access is reserved for COL001–COL005."
+        );
+      }
+
+      if(
+        role === "management" &&
+        !/^COL00[1-5]$/.test(code)
+      ){
+        throw new Error(
+          "Use the correct Management Staff ID: COL001–COL005."
+        );
+      }
+
+
+      /* ===============================================
          CHECK ACTIVE
       =============================================== */
 
@@ -618,12 +670,11 @@ button:disabled{
 
       setTimeout(
         function(){
-
-          window.location.href =
-            (role === "control" || role === "management")
-              ? "control-dashboard.html"
-              : "staff/staff-dashboard.html";
-
+          if (role === "teacher" || role === "class_teacher" || role === "other") {
+            window.location.href = "staff/staff-dashboard.html";
+          } else {
+            window.location.href = "control-dashboard.html";
+          }
         },
         300
       );

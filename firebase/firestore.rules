@@ -83,5 +83,10 @@ service cloud.firestore {
       allow read: if true;
       allow create, update, delete: if isControl();
     }
+    // Private staff secret access codes are managed only by the Cloudflare Worker.
+    // Never expose them through direct client Firestore access.
+    match /staffSecrets/{uid} {
+      allow read, create, update, delete: if false;
+    }
   }
 }

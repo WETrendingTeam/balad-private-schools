@@ -332,6 +332,13 @@ td.name,th.name{text-align:left}
 </select>
 </div>
 <div class="field">
+<label>ACADEMIC SESSION</label>
+<select id="sessionSelect">
+<option value="2026/2027">2026/2027</option>
+<option value="2025/2026">2025/2026</option>
+</select>
+</div>
+<div class="field">
 <label>TERM</label>
 <select id="termSelect">
 <option>FIRST TERM</option>
@@ -681,97 +688,68 @@ function updateSummary(students,status){
 let currentStudents=[];
 let currentClass="";
 let currentTerm="";
+let currentSession="";
 let currentPayload=null;
 
 async function loadAssignedClass(){
   try{
-    const session = getSession();
+    const session=getSession();
+    const role=String(session?.role||sessionStorage.getItem("baladStaffRole")||"").toLowerCase();
+    const params=new URLSearchParams(window.location.search);
+    const requestedSchool=String(params.get("school")||"").toLowerCase();
+    const mode=String(params.get("mode")||"class-results").toLowerCase();
 
-    const role =
-      String(
-        session?.role ||
-        sessionStorage.getItem("baladStaffRole") ||
-        ""
-      ).toLowerCase();
+    const title=document.querySelector("h2");
+    const subtitle=document.querySelector(".subtitle");
+    if(title){
+      title.textContent=mode==="approval"?"Result Approval":"Class Results";
+    }
+    if(subtitle){
+      subtitle.textContent=mode==="approval"
+        ?"Review completed class results and approve them for student result access."
+        :"Open a class result by class and term.";
+    }
+    document.getElementById("teacherName").textContent=
+      session?.name||session?.staffName||sessionStorage.getItem("baladStaffName")||
+      (role==="control"?"Control":role==="management"?"Management":"Class Teacher");
 
-    if(role !== "class_teacher"){
-      throw new Error(
-        "Only a Class Teacher can open the full class result review."
-      );
+    if(!["control","management","class_teacher"].includes(role)){
+      throw new Error("This result review is available to Control, Management and Class Teachers.");
     }
 
-    let classes =
-      Array.isArray(session?.assignedClasses)
-        ? session.assignedClasses
-        : [];
+    const select=document.getElementById("classSelect");
+    select.innerHTML="";
 
-    if(!classes.length){
-      const raw =
-        sessionStorage.getItem("baladStaffAssignedClasses");
-
-      if(raw){
-        try{
-          classes = JSON.parse(raw);
-        }catch(e){}
+    if(role==="control" || role==="management") {
+      const school=requestedSchool || (role==="management"?"college":"");
+      const data=await worker("list_classes",school?{school}:{});
+      const classes=data.classes||[];
+      classes.forEach(item=>{
+        const name=typeof item==="string"?item:(item.name||item.className||"");
+        if(!name)return;
+        const option=document.createElement("option");
+        option.value=name; option.textContent=name; select.appendChild(option);
+      });
+      if(!select.options.length) throw new Error("No classes are available for this school section yet.");
+    } else {
+      let classes=Array.isArray(session?.assignedClasses)?session.assignedClasses:[];
+      if(!classes.length){
+        const raw=sessionStorage.getItem("baladStaffAssignedClasses");
+        if(raw){try{classes=JSON.parse(raw)}catch(e){}}
       }
+      classes.forEach(item=>{
+        const name=typeof item==="string"?item:(item.className||item.class||item.name||"");
+        if(!name)return;
+        const option=document.createElement("option");
+        option.value=name; option.textContent=name; select.appendChild(option);
+      });
+      if(!select.options.length) throw new Error("No Class Teacher class assignment was found in your staff session.");
     }
 
-    if(!classes.length){
-      throw new Error(
-        "No Class Teacher class assignment was found in your staff session."
-      );
-    }
-
-    const select =
-      document.getElementById("classSelect");
-
-    select.innerHTML = "";
-
-    classes.forEach(item=>{
-      const name =
-        typeof item === "string"
-          ? item
-          : (
-              item.className ||
-              item.class ||
-              item.name ||
-              ""
-            );
-
-      if(!name) return;
-
-      const option =
-        document.createElement("option");
-
-      option.value = name;
-      option.textContent = name;
-
-      select.appendChild(option);
-    });
-
-    select.disabled =
-      select.options.length <= 1;
-
-    document.getElementById("teacherName").textContent =
-      session?.name ||
-      session?.staffName ||
-      sessionStorage.getItem("baladStaffName") ||
-      "Class Teacher";
-
-    if(!select.options.length){
-      throw new Error(
-        "No Class Teacher class assignment was found."
-      );
-    }
-
+    select.disabled=select.options.length<=1;
     await loadClassResults();
-
   }catch(error){
-    setStatus(
-      "Unable to load the Class Teacher assignment: " +
-      error.message,
-      true
-    );
+    setStatus("Unable to load classes: "+error.message,true);
   }
 }
 
@@ -782,6 +760,9 @@ async function loadClassResults(){
   const term=
     document.getElementById("termSelect").value;
 
+  const session=
+    document.getElementById("sessionSelect").value;
+
   if(!className){
     setStatus("No assigned class is available.",true);
     return;
@@ -789,6 +770,7 @@ async function loadClassResults(){
 
   currentClass=className;
   currentTerm=term;
+  currentSession=session;
 
   setStatus("Loading the complete class result...");
 
@@ -797,7 +779,8 @@ async function loadClassResults(){
       "get_class_teacher_result_review",
       {
         className,
-        term
+        term,
+        session
       }
     );
 
@@ -814,10 +797,10 @@ async function loadClassResults(){
       "Review";
 
     document.getElementById("classHeading").textContent=
-      className + " — " + term;
+      className + " — " + term + " — " + session;
 
     document.getElementById("reviewDescription").textContent=
-      "Complete class result review. Subject teachers cannot access this full-class review.";
+      "Review subject scores for the selected class. Control and Management can review and approve; Class Teachers review their assigned class.";
 
     renderStudents(currentStudents);
     updateSummary(currentStudents,status);
@@ -937,7 +920,8 @@ async function finalizeClass(){
       "finalize_class_result",
       {
         className:currentClass,
-        term:currentTerm
+        term:currentTerm,
+        session:document.getElementById("sessionSelect").value
       }
     );
 
@@ -997,7 +981,7 @@ document.getElementById("previewBtn")
       results:Array.isArray(student.results)?student.results:[],
       section,
       schoolName:section==="primary"?"BALAD NURSERY AND PRIMARY SCHOOLS":"BALAD COMPREHENSIVE COLLEGE",
-      session:(student.results?.[0]?.session || student.session || ""),
+      session:(student.results?.[0]?.session || student.session || currentSession || ""),
       term:currentTerm || "",
       accessCode:student.resultAccessCode || "",
       teacherRemark:student.teacherRemark || "",

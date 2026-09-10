@@ -70,6 +70,13 @@ button{border:0;border-radius:8px;padding:12px 18px;font-weight:700;cursor:point
 </select>
 </div>
 <div>
+<label for="session">Academic Session</label>
+<select id="session">
+<option value="2026/2027" selected>2026/2027</option>
+<option value="2025/2026">2025/2026</option>
+</select>
+</div>
+<div>
 <label for="term">Term</label>
 <select id="term">
 <option value="">Choose term</option>
@@ -127,6 +134,7 @@ const API_URL =
 const school = document.getElementById("school");
 const className = document.getElementById("className");
 const subject = document.getElementById("subject");
+const session = document.getElementById("session");
 const term = document.getElementById("term");
 const body = document.getElementById("studentsBody");
 const count = document.getElementById("countLabel");
@@ -653,6 +661,9 @@ saveButton.addEventListener(
 
             term:
               term.value,
+
+            session:
+              session.value,
 
             results
           }

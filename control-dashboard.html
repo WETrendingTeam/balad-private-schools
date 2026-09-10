@@ -1982,7 +1982,7 @@ Select a school first.
 </button>
 </div>
 <div class="workspace">
-<div class="module-card" onclick="toast('Result workflow will be connected next.')">
+<div class="module-card" onclick="openResultWorkflow('class-results')">
 <h3>
 Class Results
 </h3>
@@ -1993,23 +1993,23 @@ Open results by class, term and academic session.
 Open →
 </span>
 </div>
-<div class="module-card" onclick="toast('Teacher result entry will be connected next.')">
+<div class="module-card" onclick="openResultWorkflow('teacher-entry')">
 <h3>
 Teacher Result Entry
 </h3>
 <p>
-Connect result entry to staff assignments.
+Enter CA and Exam scores for assigned subjects and classes.
 </p>
 <span class="module-link">
 Open →
 </span>
 </div>
-<div class="module-card" onclick="toast('Result approval will be connected next.')">
+<div class="module-card" onclick="openResultWorkflow('approval')">
 <h3>
 Result Approval
 </h3>
 <p>
-Review and approve submitted results.
+Review completed class results and approve them for student access.
 </p>
 <span class="module-link">
 Open →
@@ -2834,6 +2834,21 @@ window.openSchoolModule=function(module){
  showSection(module);
 };
 
+window.openResultWorkflow=function(type){
+ if(!selectedSchool){
+   toast("Choose a school first.");
+   showSection("dashboard");
+   return;
+ }
+ const school=selectedSchool==="secondary"?"college":"primary";
+ if(type==="teacher-entry") {
+   window.location.href="subject-result-entry.html?school="+encodeURIComponent(school);
+   return;
+ }
+ const mode=type==="approval"?"approval":"class-results";
+ window.location.href="class-teacher-result-review.html?school="+encodeURIComponent(school)+"&mode="+encodeURIComponent(mode);
+};
+
 
 /*
 ==================================================
@@ -3078,10 +3093,6 @@ window.renderStaff=function(){
 </td>
 
 <td>
-<strong>${esc(s.secretAccessCode||"—")}</strong>
-</td>
-
-<td>
 ${esc(s.name||"")}
 </td>
 
@@ -3104,6 +3115,11 @@ ${esc(
  (s.assignedSubjects||[]).join(", ")
  ||"—"
 )}
+</td>
+
+<td>
+<strong>${esc(s.secretAccessCode||"—")}</strong>
+<div class="assignment-note">Control / Management</div>
 </td>
 
 <td>
@@ -6577,18 +6593,31 @@ function renderIdCardStudents(){
 }
 
 async function printStudentIdCard(id){
+  let w=null;
   try{
+    // Open the print window immediately from the user's tap so iPhone Safari does not block it.
+    w=window.open("about:blank","_blank","width=850,height=700");
+    if(!w){toast("Safari blocked the ID-card window. Allow pop-ups for this site and try again.");return;}
+    w.document.open();
+    w.document.write("<!doctype html><html><head><title>BALAD Student ID Card</title></head><body style=\"font-family:Arial,sans-serif;padding:30px\"><p>Generating student ID card…</p></body></html>");
+    w.document.close();
+
     const d=await worker("get_student_id_card",{studentId:id});
     const s=d.student||{};
-    const w=window.open("","_blank","width=850,height=650");
-    if(!w){toast("Allow pop-ups to print the ID card.");return;}
     const photo=s.passportUrl||"images/logo.png";
+    const scan=String(s.scanCode||"");
+    if(!scan) throw new Error("This student does not have a Scan Code yet. Reset/recreate the student ID data first.");
+    const safe=v=>esc(v||"—");
+    w.document.open();
     w.document.write(`<!doctype html><html><head><title>BALAD Student ID Card</title><style>
-      body{font-family:Arial,sans-serif;background:#f3f5f2;margin:0;padding:35px;display:flex;justify-content:center}.card{width:420px;border:2px solid #075c46;border-radius:18px;overflow:hidden;background:#fff}.head{background:#075c46;color:#fff;text-align:center;padding:14px}.head strong{font-size:19px}.body{padding:20px;display:flex;justify-content:center;align-items:center}.photo{width:105px;height:125px;object-fit:cover;border-radius:10px;border:1px solid #ddd}.name{font-size:20px;font-weight:800;color:#075c46;margin:2px 0 8px}.meta{font-size:12px;line-height:1.7;color:#39463f}.barcode{padding:10px 18px 18px;text-align:center;border-top:1px solid #eee}.barcode svg{width:100%;height:80px}.small{font-size:9px;color:#66716b;margin-top:4px}.foot{font-size:10px;text-align:center;color:#66716b;padding:8px 15px 15px}.print{display:block;margin:15px auto;padding:10px 20px;background:#075c46;color:#fff;border:0;border-radius:8px}@media print{body{padding:0}.print{display:none}.card{box-shadow:none}}</style></head><body>
-      <div><div class="card"><div class="head"><strong>BALAD PRIVATE SCHOOLS</strong><div style="font-size:10px;margin-top:3px">STUDENT IDENTIFICATION CARD</div></div><div class="body"><img class="photo" src="${esc(photo)}" onerror="this.src='images/logo.png'"></div><div class="barcode"><svg id="barcode"></svg><div class="small">Scan at the school gate.</div></div></div><button class="print" onclick="window.print()">Print ID Card</button></div>
-      <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"><\/script><script>JsBarcode('#barcode',${JSON.stringify(String(s.scanCode||""))},{format:'CODE128',displayValue:true,fontSize:11,height:58,margin:2});<\/script></body></html>`);
+      body{font-family:Arial,sans-serif;background:#f3f5f2;margin:0;padding:35px;display:flex;justify-content:center}.wrap{width:430px}.card{width:100%;border:2px solid #075c46;border-radius:18px;overflow:hidden;background:#fff}.head{background:#075c46;color:#fff;text-align:center;padding:14px}.head strong{font-size:19px}.head div{font-size:10px;margin-top:3px}.body{padding:18px;display:grid;grid-template-columns:105px 1fr;gap:16px;align-items:center}.photo{width:105px;height:125px;object-fit:cover;border-radius:10px;border:1px solid #ddd}.name{font-size:19px;font-weight:800;color:#075c46;margin:0 0 7px}.meta{font-size:11px;line-height:1.75;color:#39463f}.barcode{padding:10px 18px 18px;text-align:center;border-top:1px solid #eee}.barcode svg{width:100%;height:80px}.small{font-size:9px;color:#66716b;margin-top:4px}.foot{font-size:9px;text-align:center;color:#66716b;padding:8px 15px 15px}.print{display:block;margin:15px auto;padding:10px 20px;background:#075c46;color:#fff;border:0;border-radius:8px;font-weight:700}@media print{body{padding:0;background:#fff}.print{display:none}.wrap{width:430px}.card{box-shadow:none}}</style></head><body>
+      <div class="wrap"><div class="card"><div class="head"><strong>BALAD PRIVATE SCHOOLS</strong><div>STUDENT IDENTIFICATION CARD</div></div><div class="body"><img class="photo" src="${safe(photo)}" onerror="this.src='images/logo.png'"><div><div class="name">${safe(s.studentName)}</div><div class="meta"><b>Student ID:</b> ${safe(s.studentId)}<br><b>Student Slot:</b> ${safe(s.slotCode)}<br><b>Admission No.:</b> ${safe(s.admissionNumber)}<br><b>Class:</b> ${safe(s.className)}<br><b>Result Access Code:</b> ${safe(s.resultAccessCode)}</div></div></div><div class="barcode"><svg id="barcode"></svg><div class="small">Scan this barcode at the school gate.</div></div><div class="foot">Student movement is recorded automatically when the barcode is scanned.</div></div><button class="print" onclick="window.print()">Print ID Card</button></div>
+      <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"><\/script><script>try{JsBarcode('#barcode',${JSON.stringify(scan)},{format:'CODE128',displayValue:true,fontSize:11,height:58,margin:2});}catch(e){document.getElementById('barcode').outerHTML='<div style=\"padding:15px;color:#a61d1d;font-size:12px\">Unable to render barcode. Check internet connection and reload.</div>';}<\/script></body></html>`);
     w.document.close();
-  }catch(e){toast(e.message||"Unable to generate ID card.");}
+  }catch(e){
+    if(w&&!w.closed){w.document.open();w.document.write(`<p style="font-family:Arial;padding:25px;color:#a61d1d">${esc(e.message||"Unable to generate ID card.")}</p>`);w.document.close();}
+    toast(e.message||"Unable to generate ID card.");
+  }
 }
 
 async function startStudentScanner(){
@@ -6596,7 +6625,7 @@ async function startStudentScanner(){
   if(studentScanner)return;
   studentScanner=new Html5Qrcode("studentScanner");
   try{
-    await studentScanner.start({facingMode:"environment"},{fps:10,qrbox:{width:260,height:120}},async text=>{
+    await studentScanner.start({facingMode:"environment"},{fps:10,qrbox:{width:300,height:130},formatsToSupport:[Html5QrcodeSupportedFormats.CODE_128,Html5QrcodeSupportedFormats.QR_CODE]},async text=>{
       const now=Date.now();
       if(text===lastScannedCode && now-lastScanAt<5000)return;
       lastScannedCode=text;lastScanAt=now;

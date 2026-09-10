@@ -66,10 +66,47 @@
 <main class="gallery-album-main">
 <div class="container">
 <div class="album-toolbar">
-<div><strong id="albumCount">9 albums</strong><span> • Balad memories</span></div>
+<div><strong id="albumCount">6 albums</strong><span> • Balad memories</span></div>
 <button class="album-reset" id="albumReset" type="button">All Albums</button>
 </div>
-<section aria-label="Photo albums" class="album-grid" data-local-gallery="true" id="albumGrid"></section>
+<section aria-label="Photo albums" class="album-grid" data-local-gallery="true" id="albumGrid">
+<article class="album-card" data-search="graduation celebrating our graduates and their milestones.">
+<button class="album-cover" data-local-album="graduation" type="button">
+<div class="album-stack" data-cover-stack="graduation"></div>
+</button>
+<div class="album-meta"><span class="album-location">SCHOOL EVENTS</span><h2>Graduation</h2><p>Celebrating our graduates and their milestones.</p><span class="album-count" data-album-count="graduation"></span></div>
+</article>
+<article class="album-card" data-search="prize giving celebrating excellence, awards and student achievement.">
+<button class="album-cover" data-local-album="prize-giving" type="button">
+<div class="album-stack" data-cover-stack="prize-giving"></div>
+</button>
+<div class="album-meta"><span class="album-location">ACHIEVEMENTS</span><h2>Prize Giving</h2><p>Celebrating excellence, awards and student achievement.</p><span class="album-count" data-album-count="prize-giving"></span></div>
+</article>
+<article class="album-card" data-search="sports &amp; games teamwork, discipline and healthy competition.">
+<button class="album-cover" data-local-album="sports-games" type="button">
+<div class="album-stack" data-cover-stack="sports-games"></div>
+</button>
+<div class="album-meta"><span class="album-location">SCHOOL SPORTS</span><h2>Sports & Games</h2><p>Teamwork, discipline and healthy competition.</p><span class="album-count" data-album-count="sports-games"></span></div>
+</article>
+<article class="album-card" data-search="career day students exploring careers, professions and future possibilities.">
+<button class="album-cover" data-local-album="career-day" type="button">
+<div class="album-stack" data-cover-stack="career-day"></div>
+</button>
+<div class="album-meta"><span class="album-location">SCHOOL EVENTS</span><h2>Career Day</h2><p>Students exploring careers, professions and future possibilities.</p><span class="album-count" data-album-count="career-day"></span></div>
+</article>
+<article class="album-card" data-search="cultural day celebrating culture, heritage, creativity and tradition.">
+<button class="album-cover" data-local-album="cultural-day" type="button">
+<div class="album-stack" data-cover-stack="cultural-day"></div>
+</button>
+<div class="album-meta"><span class="album-location">SCHOOL EVENTS</span><h2>Cultural Day</h2><p>Celebrating culture, heritage, creativity and tradition.</p><span class="album-count" data-album-count="cultural-day"></span></div>
+</article>
+<article class="album-card" data-search="clubs &amp; activities creativity, teamwork, projects and learning beyond the classroom.">
+<button class="album-cover" data-local-album="clubs-activities" type="button">
+<div class="album-stack" data-cover-stack="clubs-activities"></div>
+</button>
+<div class="album-meta"><span class="album-location">STUDENT LIFE</span><h2>Clubs & Activities</h2><p>Creativity, teamwork, projects and learning beyond the classroom.</p><span class="album-count" data-album-count="clubs-activities"></span></div>
+</article>
+</section>
 </div>
 </main>
 <div class="album-modal" hidden="" id="albumModal">
@@ -88,111 +125,32 @@ const photoGrid = document.getElementById("albumPhotos");
 const modalTitle = document.getElementById("albumModalTitle");
 const modalLocation = document.getElementById("albumModalLocation");
 const modalDescription = document.getElementById("albumModalDescription");
-const albumGrid = document.getElementById("albumGrid");
-const albumCount = document.getElementById("albumCount");
-const albumReset = document.getElementById("albumReset");
-const gallerySearch = document.getElementById("gallerySearch");
-
-let galleryAlbums = {};
-
-function escHtml(value){
-  return String(value || "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-function imageLoads(url){
-  return new Promise(resolve => {
-    const img = new Image();
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-    img.src = url;
-  });
-}
-
-async function usableImages(album){
-  const result = [];
-  for(const item of (album.items || [])){
-    if(item.type !== "image" || !item.url) continue;
-    if(await imageLoads(item.url)){
-      result.push(item);
-    }
-  }
-  return result;
-}
-
-async function renderGallery(){
-  const response = await fetch("gallery-manifest.json", {cache:"no-store"});
-  if(!response.ok) throw new Error("Gallery manifest unavailable.");
-
-  galleryAlbums = await response.json();
-  const entries = Object.entries(galleryAlbums);
-
-  albumCount.textContent =
-    `${entries.length} album${entries.length === 1 ? "" : "s"}`;
-
-  albumGrid.innerHTML = entries.map(([key, album]) => `
-    <article class="album-card"
-      data-search="${escHtml(`${album.title} ${album.location} ${album.description}`.toLowerCase())}">
-      <button class="album-cover" data-local-album="${escHtml(key)}" type="button">
-        <div class="album-stack" data-cover-stack="${escHtml(key)}"></div>
-      </button>
-      <div class="album-meta">
-        <span class="album-location">${escHtml(album.location)}</span>
-        <h2>${escHtml(album.title)}</h2>
-        <p>${escHtml(album.description)}</p>
-        <span class="album-count" data-album-count="${escHtml(key)}">
-          ${(album.items || []).length} item${(album.items || []).length === 1 ? "" : "s"}
-        </span>
-      </div>
-    </article>
-  `).join("");
-
-  for(const [key, album] of entries){
-    const stack = document.querySelector(`[data-cover-stack="${CSS.escape(key)}"]`);
-    if(!stack) continue;
-
-    const usable = await usableImages(album);
-    stack.innerHTML = usable.slice(0,3).map((item, index) =>
-      `<img alt="${escHtml(album.title)} cover ${index + 1}" src="${item.url}">`
-    ).join("");
-
-    if(!usable.length){
-      stack.innerHTML =
-        `<div class="album-cover-fallback">${escHtml(album.title)}</div>`;
-    }
-  }
-
-  document.querySelectorAll("[data-local-album]").forEach(button => {
-    button.addEventListener("click", () => {
-      openLocalAlbum(button.dataset.localAlbum).catch(console.error);
-    });
-  });
-}
 
 async function openLocalAlbum(key){
-  const album = galleryAlbums[key];
+  const res = await fetch("gallery-manifest.json", {cache:"no-store"});
+  if(!res.ok) throw new Error("Gallery manifest unavailable");
+  const albums = await res.json();
+  const album = albums[key];
   if(!album) return;
 
   modalTitle.textContent = album.title;
   modalLocation.textContent = album.location;
   modalDescription.textContent = album.description;
 
-  const usable = await usableImages(album);
-
-  photoGrid.innerHTML = usable.map((item, i) =>
-    `<figure>
-      <img loading="lazy" src="${item.url}" alt="${escHtml(album.title)} ${i+1}">
-      <figcaption>${String(i+1).padStart(2,"0")}</figcaption>
-    </figure>`
-  ).join("");
+  photoGrid.innerHTML = album.items.map((item, i) => {
+    if(item.type === "video"){
+      return `<figure><video controls muted playsinline preload="metadata" src="${item.url}"></video><figcaption>${String(i+1).padStart(2,"0")}</figcaption></figure>`;
+    }
+    return `<figure><img loading="lazy" src="${item.url}" alt="${album.title} ${i+1}"><figcaption>${String(i+1).padStart(2,"0")}</figcaption></figure>`;
+  }).join("");
 
   modal.hidden = false;
   document.body.classList.add("album-open");
 }
+
+document.querySelectorAll("[data-local-album]").forEach(button => {
+  button.addEventListener("click", () => openLocalAlbum(button.dataset.localAlbum).catch(console.error));
+});
 
 document.querySelectorAll("[data-close-album]").forEach(el => {
   el.addEventListener("click", () => {
@@ -201,33 +159,68 @@ document.querySelectorAll("[data-close-album]").forEach(el => {
   });
 });
 
-function filterAlbums(){
-  const term = gallerySearch.value.trim().toLowerCase();
-  let visible = 0;
+async function imageLoads(url){
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+}
 
-  document.querySelectorAll(".album-card").forEach(card => {
+async function buildAlbumCovers(albums){
+  for(const [key, album] of Object.entries(albums)){
+    const stack = document.querySelector(`[data-cover-stack="${key}"]`);
+    if(!stack) continue;
+
+    const imageItems = (album.items || []).filter(item => item.type !== "video" && item.url);
+    const usable = [];
+
+    for(const item of imageItems){
+      if(await imageLoads(item.url)){
+        usable.push(item);
+        if(usable.length === 3) break;
+      }
+    }
+
+    stack.innerHTML = usable.map((item, index) =>
+      `<img alt="${album.title} cover ${index + 1}" src="${item.url}">`
+    ).join("");
+
+    if(!usable.length){
+      stack.innerHTML = `<div class="album-cover-fallback">${album.title}</div>`;
+    }
+  }
+}
+
+fetch("gallery-manifest.json", {cache:"no-store"}).then(r=>r.json()).then(albums => {
+  Object.entries(albums).forEach(([key, album]) => {
+    const el = document.querySelector(`[data-album-count="${key}"]`);
+    if(el) el.textContent = `${album.items.length} item${album.items.length === 1 ? "" : "s"}`;
+  });
+  return buildAlbumCovers(albums);
+}).catch(console.error);
+
+const search = document.getElementById("gallerySearch");
+const cards = [...document.querySelectorAll(".album-card")];
+const count = document.getElementById("albumCount");
+
+function filterAlbums(){
+  const term = search.value.trim().toLowerCase();
+  let visible = 0;
+  cards.forEach(card => {
     const show = !term || card.dataset.search.includes(term);
     card.hidden = !show;
     if(show) visible++;
   });
-
-  albumCount.textContent =
-    `${visible} album${visible === 1 ? "" : "s"}`;
+  count.textContent = `${visible} album${visible === 1 ? "" : "s"}`;
 }
-
-gallerySearch.addEventListener("input", filterAlbums);
-
-albumReset.addEventListener("click", () => {
-  gallerySearch.value = "";
+search.addEventListener("input", filterAlbums);
+document.getElementById("albumReset").addEventListener("click", () => {
+  search.value = "";
   filterAlbums();
 });
-
-renderGallery().catch(error => {
-  console.error("BALAD gallery error:", error);
-  albumGrid.innerHTML =
-    `<p class="gallery-error">The gallery could not be loaded. Please try again.</p>`;
-});
-
+</script>
 <section class="cms-public-content-wrap"><div class="cms-public-content" data-cms-page="gallery" id="cms-page-content"></div></section><footer><div class="footer-bottom">© <span data-year=""></span> Balad Private Schools. All Rights Reserved. <span class="footer-developer">Developer Control · @lade</span></div></footer>
 </body>
 </html>

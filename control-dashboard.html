@@ -3096,6 +3096,10 @@ window.renderStaff=function(){
 </td>
 
 <td>
+<strong>${esc(s.secretAccessCode||"—")}</strong>
+</td>
+
+<td>
 ${esc(s.name||"")}
 </td>
 
@@ -3118,11 +3122,6 @@ ${esc(
  (s.assignedSubjects||[]).join(", ")
  ||"—"
 )}
-</td>
-
-<td>
-<strong>${esc(s.secretAccessCode||"—")}</strong>
-<div class="assignment-note">Control / Management</div>
 </td>
 
 <td>
@@ -3367,7 +3366,7 @@ async function(){
 
      name:"",
 
-     role:(selectedSchool==="secondary" && i<5)?"management":"teacher",
+     role:(selectedSchool==="secondary" && i<4)?"management":"teacher",
 
      home:"",
 
@@ -3521,14 +3520,29 @@ window.applyCollege2026Setup=async function(){
 
  try{
    await worker("reset_college_staff_setup",{});
-   const result=await worker("bulk_create_staff",{staff:setup});
-   const lines=(result.created||[]).map(x=>`${x.loginCode}: ${x.temporaryPassword||"password generated"} | Secret: ${x.secretAccessCode||""}`);
-   const failed=(result.failed||[]).map(x=>`FAILED ${x.loginCode}: ${x.error}`);
-   alert("2026/27 College setup complete.\n\n"+lines.join("\n")+(failed.length?"\n\n"+failed.join("\n"):""));
+
+   // Cloudflare Workers have a per-invocation subrequest limit.
+   // Create the approved College list in small batches so the setup
+   // remains reliable without changing the existing createStaff logic.
+   const batchSize=4;
+   const created=[];
+   const failed=[];
+
+   for(let i=0;i<setup.length;i+=batchSize){
+     const batch=setup.slice(i,i+batchSize);
+     const result=await worker("bulk_create_staff",{staff:batch});
+     created.push(...(result.created||[]));
+     failed.push(...(result.failed||[]));
+     toast(`College setup: ${Math.min(i+batchSize,setup.length)} of ${setup.length}`);
+   }
+
+   const lines=created.map(x=>`${x.loginCode}: ${x.temporaryPassword||"password generated"} | Secret: ${x.secretAccessCode||""}`);
+   const failLines=failed.map(x=>`FAILED ${x.loginCode}: ${x.error}`);
+   alert(`2026/27 College setup complete.\n\nCreated: ${created.length}\nFailed: ${failed.length}\n\n`+lines.join("\n")+(failLines.length?"\n\n"+failLines.join("\n"):""));
    await buildAccessTemplates();
    loadStaff();
    loadSummary();
-   toast(`Created ${result.summary?.created||0} College staff accounts.`);
+   toast(`Created ${created.length} College staff accounts.`);
  }catch(e){
    toast(e.message||"College staff setup failed.");
  }

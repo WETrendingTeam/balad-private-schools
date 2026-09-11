@@ -7,7 +7,15 @@
 <body><header><div class="header-inner"><div class="brand"><h1>BALAD PRIVATE SCHOOLS</h1><p>Staff Dashboard</p></div><button id="logout" class="logout">Log Out</button></div></header>
 <main class="wrap"><section class="hero"><h2 id="welcome">Welcome</h2><p id="identity" class="muted"></p><span id="role" class="pill"></span></section>
 <section class="card"><h2>Your Assigned Work</h2><div class="grid"><div class="tile"><strong>Classes</strong><span id="classes">Loading...</span></div><div class="tile"><strong>Subjects</strong><span id="subjects">Loading...</span></div><div class="tile"><strong>Account Status</strong><span id="status">Loading...</span></div></div></section>
-<section class="card"><h2>Staff Tools</h2><div class="actions"><a class="btn" href="../results.html" style="text-decoration:none">Student Result Portal</a></div><p class="muted" style="margin-top:14px">Your available school-management features will appear here as the next BALAD modules are connected.</p><div class="notice">Control manages staff accounts, permissions, classes and subjects. Staff cannot access Control settings.</div></section>
+<section class="card"><h2>Staff Tools</h2>
+<div id="staffTools" class="grid">
+<div class="tile" id="classManagementTile" style="display:none"><strong>Class Management</strong><span id="classManagementText"></span><div class="actions" style="margin-top:12px"><button class="btn" id="classManagementBtn" type="button">Open Class Management</button></div></div>
+<div class="tile" id="subjectEntryTile" style="display:none"><strong>Subject Result Entry</strong><span id="subjectEntryText"></span><div class="actions" style="margin-top:12px"><button class="btn" id="subjectEntryBtn" type="button">Open Result Entry</button></div></div>
+<div class="tile" id="classReviewTile" style="display:none"><strong>Class Result Review</strong><span id="classReviewText"></span><div class="actions" style="margin-top:12px"><button class="btn" id="classReviewBtn" type="button">Open Class Review</button></div></div>
+<div class="tile"><strong>Student Result Portal</strong><span>View student results.</span><div class="actions" style="margin-top:12px"><a class="btn" href="../results.html" style="text-decoration:none">Open Result Portal</a></div></div>
+</div>
+<div id="noTeachingTools" class="notice" style="display:none;margin-top:14px">No teaching tools are assigned to this account.</div>
+</section>
 </main><footer>© <span id="year"></span> BALAD Private Schools. All Rights Reserved.</footer>
 <script type="module">
 import { auth, db } from "../firebase-config.js";
@@ -15,6 +23,51 @@ import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-
 import { signOut } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 const uid=localStorage.getItem("baladStaffUid");if(!uid)location.href="staff-login.html";
 document.getElementById("year").textContent=new Date().getFullYear();
-async function load(){try{const snap=await getDoc(doc(db,"staff",uid));if(!snap.exists())throw new Error("Staff profile not found.");const p=snap.data();if(p.active!==true||!["teacher","class_teacher","management","other"].includes(String(p.role||"").toLowerCase()))throw new Error("Account is not authorized.");document.getElementById("welcome").textContent=`Welcome, ${p.name||p.loginCode||"Staff"}`;document.getElementById("identity").textContent=`Login code: ${p.loginCode||"—"}`;document.getElementById("role").textContent=String(p.role||"Staff").toUpperCase();document.getElementById("classes").textContent=(p.assignedClasses||[]).join(", ")||"No classes assigned";document.getElementById("subjects").textContent=(p.assignedSubjects||[]).join(", ")||"No subjects assigned";document.getElementById("status").textContent="Active";}catch(e){localStorage.clear();alert(e.message||"Unable to load staff profile.");location.href="staff-login.html";}}
+async function load(){
+try{
+const snap=await getDoc(doc(db,"staff",uid));
+if(!snap.exists())throw new Error("Staff profile not found.");
+const p=snap.data();
+const role=String(p.role||"").toLowerCase();
+if(p.active!==true||!["teacher","class_teacher","management","other"].includes(role))throw new Error("Account is not authorized.");
+const assignedClasses=Array.isArray(p.assignedClasses)?p.assignedClasses:[];
+const assignedSubjects=Array.isArray(p.assignedSubjects)?p.assignedSubjects:[];
+const homeroom=p.homeroom||p.classTeacherOf||"";
+document.getElementById("welcome").textContent=`Welcome, ${p.name||p.loginCode||"Staff"}`;
+document.getElementById("identity").textContent=`Login code: ${p.loginCode||"—"}`;
+document.getElementById("role").textContent=role.toUpperCase();
+document.getElementById("classes").textContent=assignedClasses.join(", ")||"No classes assigned";
+document.getElementById("subjects").textContent=assignedSubjects.join(", ")||"No subjects assigned";
+document.getElementById("status").textContent="Active";
+
+const classManagementTile=document.getElementById("classManagementTile");
+const subjectEntryTile=document.getElementById("subjectEntryTile");
+const classReviewTile=document.getElementById("classReviewTile");
+const noTeachingTools=document.getElementById("noTeachingTools");
+const isTeaching=["teacher","class_teacher","management"].includes(role);
+const isClassTeacher=["class_teacher","management"].includes(role) && !!homeroom;
+const hasSubjects=assignedSubjects.length>0;
+
+if(isTeaching && assignedClasses.length){
+classManagementTile.style.display="";
+document.getElementById("classManagementText").textContent=`Assigned classes: ${assignedClasses.join(", ")}`;
+document.getElementById("classManagementBtn").onclick=()=>location.href="../results.html";
+}
+if(isTeaching && hasSubjects){
+subjectEntryTile.style.display="";
+document.getElementById("subjectEntryText").textContent=`Subjects: ${assignedSubjects.join(", ")}`;
+document.getElementById("subjectEntryBtn").onclick=()=>location.href="../results.html";
+}
+if(isClassTeacher){
+classReviewTile.style.display="";
+document.getElementById("classReviewText").textContent=`Class Teacher: ${homeroom}`;
+document.getElementById("classReviewBtn").onclick=()=>location.href="../results.html";
+}
+if(!isTeaching || (!assignedClasses.length && !hasSubjects)) noTeachingTools.style.display="";
+}catch(e){
+localStorage.clear();
+alert(e.message||"Unable to load staff profile.");
+location.href="staff-login.html";
+}}
 document.getElementById("logout").onclick=async()=>{try{await signOut(auth)}finally{localStorage.removeItem("baladStaffUid");localStorage.removeItem("baladStaffIdToken");localStorage.removeItem("baladStaffRole");localStorage.removeItem("baladStaffName");localStorage.removeItem("baladStaffLoginCode");location.href="staff-login.html";}};load();
 </script></body></html>

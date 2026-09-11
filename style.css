@@ -3492,34 +3492,42 @@ body[data-cms-page="index"] .cms-public-content-wrap{display:none!important}
   }
 }
 
-/* Final mobile navigation action boxes */
-@media (max-width:760px){
-  header nav#balad-main-nav .nav-action-boxes{
-    width:100%!important;
-    display:flex!important;
-    flex-direction:column!important;
-    gap:10px!important;
-    margin:22px 0 18px!important;
-    padding:0!important;
+/* FINAL MOBILE MENU ACTION BOXES — LOGIN / CONTACT US */
+@media (max-width:1100px){
+  header nav#balad-main-nav > .nav-action-boxes{
+    width:100%;
+    margin:22px 0 18px;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+    border:0;
   }
-  header nav#balad-main-nav .nav-action-boxes a.nav-login-button,
-  header nav#balad-main-nav .nav-action-boxes a.nav-contact-button{
-    display:flex!important;
-    align-items:center!important;
-    justify-content:center!important;
-    width:100%!important;
-    min-height:62px!important;
-    margin:0!important;
-    padding:14px 20px!important;
-    border:2px solid var(--green)!important;
-    border-radius:10px!important;
-    background:#fff!important;
-    color:var(--green)!important;
-    font-size:18px!important;
-    font-weight:800!important;
-    text-align:center!important;
-    text-decoration:none!important;
+
+  header nav#balad-main-nav > .nav-action-boxes > a.nav-login-button,
+  header nav#balad-main-nav > .nav-action-boxes > a.nav-contact-button{
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+    width:100% !important;
+    min-height:62px !important;
+    margin:0 !important;
+    padding:14px 20px !important;
+    box-sizing:border-box;
+    border:2px solid var(--green) !important;
+    border-radius:10px !important;
+    background:#fff !important;
+    color:var(--green) !important;
+    font-size:18px !important;
+    font-weight:800 !important;
+    text-align:center;
+    text-decoration:none;
   }
-  header nav#balad-main-nav .nav-action-boxes a.nav-login-button:after,
-  header nav#balad-main-nav .nav-action-boxes a.nav-contact-button:after{display:none!important}
+
+  header nav#balad-main-nav > .nav-action-boxes > a.nav-login-button:after,
+  header nav#balad-main-nav > .nav-action-boxes > a.nav-contact-button:after{
+    display:none !important;
+    content:none !important;
+  }
 }

@@ -1557,8 +1557,8 @@ Nursery &amp; Primary:
 College:
 <strong>COL001 – COL050</strong>.
 
-<strong>COL001 – COL005</strong> are Management access IDs.
-<strong>COL006 – COL050</strong> are College staff IDs.
+<strong>COL001 – COL004</strong> are Management access IDs.
+<strong>COL005 – COL050</strong> are College staff IDs.
 
 Nursery &amp; Primary uses <strong>PRI001 – PRI050</strong>; there is no separate Primary Management group.
 
@@ -1577,6 +1577,9 @@ Staff Access — 50 Templates
 </h3>
 <button class="btn btn-small" onclick="buildAccessTemplates()">
 Refresh Templates
+</button>
+<button class="btn btn-small btn-primary" onclick="applyCollege2026Setup()">
+Apply 2026/27 College Setup
 </button>
 </div>
 <div class="card-body">
@@ -3093,11 +3096,6 @@ window.renderStaff=function(){
 </td>
 
 <td>
-<strong>${esc(s.secretAccessCode||"—")}</strong>
-<div class="assignment-note">Control / Management</div>
-</td>
-
-<td>
 ${esc(s.name||"")}
 </td>
 
@@ -3120,6 +3118,11 @@ ${esc(
  (s.assignedSubjects||[]).join(", ")
  ||"—"
 )}
+</td>
+
+<td>
+<strong>${esc(s.secretAccessCode||"—")}</strong>
+<div class="assignment-note">Control / Management</div>
 </td>
 
 <td>
@@ -3470,6 +3473,65 @@ async function(){
 
  }
 
+};
+
+
+/*
+==================================================
+2026/27 COLLEGE STAFF BULK SETUP
+==================================================
+*/
+
+window.applyCollege2026Setup=async function(){
+
+ if(selectedSchool!=="secondary"){
+   toast("Select College first.");
+   return;
+ }
+
+ const ok=confirm(
+   "This will reset all existing non-control College staff accounts and recreate the 2026/27 College staff list using the approved hierarchy. Primary staff and CONTROL001 will not be touched. Continue?"
+ );
+ if(!ok)return;
+
+ const setup=[
+  {loginCode:"COL001",name:"Mr Usman",role:"management",homeroom:"",assignedClasses:["SS2","SS3","SS3","JSS3"],assignedSubjects:["Economics","Accounting","Mathematics"]},
+  {loginCode:"COL002",name:"Mr Folorunsho",role:"management",homeroom:"",assignedClasses:["SS1","SS3","SS1","SS1","SS1","SS2"],assignedSubjects:["Economics","Marketing","Government","Commerce"]},
+  {loginCode:"COL003",name:"Mrs Ayorinde",role:"management",homeroom:"",assignedClasses:["JSS2","JSS3","SS1","SS2","SS3","SS2","SS3"],assignedSubjects:["Agricultural Science","Biology"]},
+  {loginCode:"COL004",name:"Mrs Aremu",role:"management",homeroom:"",assignedClasses:["SS1","SS2","SS3","SS1","JSS2","JSS3"],assignedSubjects:["Chemistry","Biology","Basic Science"]},
+  {loginCode:"COL005",name:"Mrs Owolowo",role:"teacher",homeroom:"",assignedClasses:["JSS1","JSS2","JSS3","SS1","SS2","SS3"],assignedSubjects:["Garment Making","Home Economics","Foods & Nutrition"]},
+  {loginCode:"COL006",name:"Mrs Kehinde",role:"teacher",homeroom:"",assignedClasses:["SS1","SS2","SS2","SS3","JSS1","JSS2","JSS3"],assignedSubjects:["Government","Civic Education","History"]},
+  {loginCode:"COL007",name:"Mrs Adedeji",role:"class_teacher",homeroom:"JSS3",assignedClasses:["JSS3","SS1","SS2","JSS1","JSS2","SS3"],assignedSubjects:["Accounting","Business Studies","Commerce"]},
+  {loginCode:"COL008",name:"Miss Mubarak",role:"class_teacher",homeroom:"SS2",assignedClasses:["SS2","SS3","JSS1"],assignedSubjects:["Further Mathematics","Mathematics"]},
+  {loginCode:"COL009",name:"Mr Bernard",role:"teacher",homeroom:"",assignedClasses:["SS2","SS3","JSS2","JSS3"],assignedSubjects:["ICT","Basic Technology","Physical & Health Education"]},
+  {loginCode:"COL010",name:"Miss Showunmi",role:"class_teacher",homeroom:"JSS2",assignedClasses:["JSS2","SS1","SS2","SS3"],assignedSubjects:["English Studies","English Language","Literature in English"]},
+  {loginCode:"COL011",name:"Miss Osho",role:"class_teacher",homeroom:"SS3",assignedClasses:["SS3","JSS1","JSS2","JSS3","SS1"],assignedSubjects:["English Studies","Civic Education"]},
+  {loginCode:"COL012",name:"Mrs Abe",role:"class_teacher",homeroom:"SS1",assignedClasses:["SS1","SS2","SS3"],assignedSubjects:["English Studies","English Language","Literature in English"]},
+  {loginCode:"COL013",name:"Mr Kenneth",role:"class_teacher",homeroom:"JSS1",assignedClasses:["JSS1","JSS3","SS1","JSS2"],assignedSubjects:["ICT","Physical & Health Education","Integrated Science","Further Mathematics"]},
+  {loginCode:"COL014",name:"Mrs Muhammed",role:"teacher",homeroom:"",assignedClasses:["JSS1","JSS2","SS1"],assignedSubjects:["Physical & Health Education","Mathematics"]},
+  {loginCode:"COL015",name:"Mr Quadri",role:"teacher",homeroom:"",assignedClasses:["JSS1","JSS2","JSS3","SS1","SS2","SS3"],assignedSubjects:["Yoruba"]},
+  {loginCode:"COL016",name:"Mrs Glory",role:"teacher",homeroom:"",assignedClasses:["JSS1","JSS2","JSS3"],assignedSubjects:["Creative & Cultural Arts (CCA)"]},
+  {loginCode:"COL017",name:"Miss Togun",role:"teacher",homeroom:"",assignedClasses:["JSS1","JSS2","JSS3","SS1","SS2","SS3"],assignedSubjects:["Diction"]},
+  {loginCode:"COL018",name:"Mr Isa",role:"teacher",homeroom:"",assignedClasses:["JSS1","JSS2","JSS3","SS1","SS2","SS3"],assignedSubjects:["Islamic Religious Studies (IRS)","Arabic"]},
+  {loginCode:"COL019",name:"Mr Hazeem",role:"teacher",homeroom:"",assignedClasses:["JSS1","JSS2","JSS3"],assignedSubjects:["French"]},
+  {loginCode:"COL020",name:"Mr Emiola",role:"teacher",homeroom:"",assignedClasses:["SS1","SS2","SS3"],assignedSubjects:["Physics"]},
+  {loginCode:"COL021",name:"Ustaz Alli",role:"teacher",homeroom:"",assignedClasses:["JSS1","JSS2","JSS3"],assignedSubjects:["Arabic"]},
+  {loginCode:"COL022",name:"Mrs Olorunloba",role:"other",homeroom:"",assignedClasses:[],assignedSubjects:[]}
+ ];
+
+ try{
+   await worker("reset_college_staff_setup",{});
+   const result=await worker("bulk_create_staff",{staff:setup});
+   const lines=(result.created||[]).map(x=>`${x.loginCode}: ${x.temporaryPassword||"password generated"} | Secret: ${x.secretAccessCode||""}`);
+   const failed=(result.failed||[]).map(x=>`FAILED ${x.loginCode}: ${x.error}`);
+   alert("2026/27 College setup complete.\n\n"+lines.join("\n")+(failed.length?"\n\n"+failed.join("\n"):""));
+   await buildAccessTemplates();
+   loadStaff();
+   loadSummary();
+   toast(`Created ${result.summary?.created||0} College staff accounts.`);
+ }catch(e){
+   toast(e.message||"College staff setup failed.");
+ }
 };
 
 

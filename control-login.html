@@ -550,10 +550,10 @@ button:disabled{
 
 
       if(
-        !["control","management"].includes(role)
+        !["control","management","teacher","class_teacher","other"].includes(role)
       ){
         throw new Error(
-          "This is a Staff account. Please use Staff Login."
+          "This staff account is not authorized to use the BALAD dashboard."
         );
       }
 
@@ -618,7 +618,11 @@ button:disabled{
 
       setTimeout(
         function(){
-          window.location.href = "control-dashboard.html";
+          if (role === "teacher" || role === "class_teacher" || role === "other") {
+            window.location.href = "staff/staff-dashboard.html";
+          } else {
+            window.location.href = "control-dashboard.html";
+          }
         },
         300
       );

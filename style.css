@@ -3491,3 +3491,35 @@ body[data-cms-page="index"] .cms-public-content-wrap{display:none!important}
     display:none !important;
   }
 }
+
+/* Final mobile navigation action boxes */
+@media (max-width:760px){
+  header nav#balad-main-nav .nav-action-boxes{
+    width:100%!important;
+    display:flex!important;
+    flex-direction:column!important;
+    gap:10px!important;
+    margin:22px 0 18px!important;
+    padding:0!important;
+  }
+  header nav#balad-main-nav .nav-action-boxes a.nav-login-button,
+  header nav#balad-main-nav .nav-action-boxes a.nav-contact-button{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:100%!important;
+    min-height:62px!important;
+    margin:0!important;
+    padding:14px 20px!important;
+    border:2px solid var(--green)!important;
+    border-radius:10px!important;
+    background:#fff!important;
+    color:var(--green)!important;
+    font-size:18px!important;
+    font-weight:800!important;
+    text-align:center!important;
+    text-decoration:none!important;
+  }
+  header nav#balad-main-nav .nav-action-boxes a.nav-login-button:after,
+  header nav#balad-main-nav .nav-action-boxes a.nav-contact-button:after{display:none!important}
+}

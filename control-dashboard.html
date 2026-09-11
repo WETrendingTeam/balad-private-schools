@@ -3093,6 +3093,11 @@ window.renderStaff=function(){
 </td>
 
 <td>
+<strong>${esc(s.secretAccessCode||"—")}</strong>
+<div class="assignment-note">Control / Management</div>
+</td>
+
+<td>
 ${esc(s.name||"")}
 </td>
 
@@ -3115,11 +3120,6 @@ ${esc(
  (s.assignedSubjects||[]).join(", ")
  ||"—"
 )}
-</td>
-
-<td>
-<strong>${esc(s.secretAccessCode||"—")}</strong>
-<div class="assignment-note">Control / Management</div>
 </td>
 
 <td>

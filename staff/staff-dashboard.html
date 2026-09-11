@@ -1,73 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>BALAD Staff Dashboard</title>
-<style>
-:root{--green:#075c46;--red:#e32629;--ink:#17211d;--muted:#66716c;--line:#dbe5e0;--soft:#f4f8f6}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f8f6;color:var(--ink)}header{background:var(--green);color:#fff;padding:18px 20px}.header-inner{max-width:1050px;margin:auto;display:flex;justify-content:space-between;gap:15px;align-items:center}.brand h1{font-size:20px;margin:0}.brand p{font-size:12px;opacity:.85;margin:4px 0 0}.logout{background:#fff;color:var(--green);border:0;border-radius:9px;padding:10px 14px;font-weight:800;cursor:pointer}.wrap{max-width:1050px;margin:auto;padding:25px 18px 50px}.hero,.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(7,65,45,.06);margin-bottom:17px}.hero h2,.card h2{color:var(--green);margin:0 0 7px}.muted{color:var(--muted);line-height:1.55}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.tile{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:17px}.tile strong{display:block;color:var(--green);margin-bottom:6px}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#e8f7ef;color:var(--green);font-size:12px;font-weight:800}.notice{background:#fff7e6;border:1px solid #f0d99a;color:#76540a;border-radius:12px;padding:13px;line-height:1.45}.btn{border:0;border-radius:10px;padding:11px 15px;background:var(--green);color:#fff;font-weight:800;cursor:pointer}.actions{display:flex;gap:10px;flex-wrap:wrap}footer{text-align:center;padding:25px;color:#777;font-size:13px}@media(max-width:700px){.grid{grid-template-columns:1fr}.header-inner{align-items:flex-start;flex-direction:column}}
-</style></head>
-<body><header><div class="header-inner"><div class="brand"><h1>BALAD PRIVATE SCHOOLS</h1><p>Staff Dashboard</p></div><button id="logout" class="logout">Log Out</button></div></header>
-<main class="wrap"><section class="hero"><h2 id="welcome">Welcome</h2><p id="identity" class="muted"></p><span id="role" class="pill"></span></section>
-<section class="card"><h2>Your Assigned Work</h2><div class="grid"><div class="tile"><strong>Classes</strong><span id="classes">Loading...</span></div><div class="tile"><strong>Subjects</strong><span id="subjects">Loading...</span></div><div class="tile"><strong>Account Status</strong><span id="status">Loading...</span></div></div></section>
-<section class="card"><h2>Staff Tools</h2>
-<div id="staffTools" class="grid">
-<div class="tile" id="classManagementTile" style="display:none"><strong>Class Management</strong><span id="classManagementText"></span><div class="actions" style="margin-top:12px"><button class="btn" id="classManagementBtn" type="button">Open Class Management</button></div></div>
-<div class="tile" id="subjectEntryTile" style="display:none"><strong>Subject Result Entry</strong><span id="subjectEntryText"></span><div class="actions" style="margin-top:12px"><button class="btn" id="subjectEntryBtn" type="button">Open Result Entry</button></div></div>
-<div class="tile" id="classReviewTile" style="display:none"><strong>Class Result Review</strong><span id="classReviewText"></span><div class="actions" style="margin-top:12px"><button class="btn" id="classReviewBtn" type="button">Open Class Review</button></div></div>
-<div class="tile"><strong>Student Result Portal</strong><span>View student results.</span><div class="actions" style="margin-top:12px"><a class="btn" href="../results.html" style="text-decoration:none">Open Result Portal</a></div></div>
-</div>
-<div id="noTeachingTools" class="notice" style="display:none;margin-top:14px">No teaching tools are assigned to this account.</div>
-</section>
-</main><footer>© <span id="year"></span> BALAD Private Schools. All Rights Reserved.</footer>
-<script type="module">
-import { auth, db } from "../firebase-config.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-import { signOut } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-const uid=localStorage.getItem("baladStaffUid");if(!uid)location.href="staff-login.html";
-document.getElementById("year").textContent=new Date().getFullYear();
-async function load(){
-try{
-const snap=await getDoc(doc(db,"staff",uid));
-if(!snap.exists())throw new Error("Staff profile not found.");
-const p=snap.data();
-const role=String(p.role||"").toLowerCase();
-if(p.active!==true||!["teacher","class_teacher","management","other"].includes(role))throw new Error("Account is not authorized.");
-const assignedClasses=Array.isArray(p.assignedClasses)?p.assignedClasses:[];
-const assignedSubjects=Array.isArray(p.assignedSubjects)?p.assignedSubjects:[];
-const homeroom=p.homeroom||p.classTeacherOf||"";
-document.getElementById("welcome").textContent=`Welcome, ${p.name||p.loginCode||"Staff"}`;
-document.getElementById("identity").textContent=`Login code: ${p.loginCode||"—"}`;
-document.getElementById("role").textContent=role.toUpperCase();
-document.getElementById("classes").textContent=assignedClasses.join(", ")||"No classes assigned";
-document.getElementById("subjects").textContent=assignedSubjects.join(", ")||"No subjects assigned";
-document.getElementById("status").textContent="Active";
-
-const classManagementTile=document.getElementById("classManagementTile");
-const subjectEntryTile=document.getElementById("subjectEntryTile");
-const classReviewTile=document.getElementById("classReviewTile");
-const noTeachingTools=document.getElementById("noTeachingTools");
-const isTeaching=["teacher","class_teacher","management"].includes(role);
-const isClassTeacher=["class_teacher","management"].includes(role) && !!homeroom;
-const hasSubjects=assignedSubjects.length>0;
-
-if(isTeaching && assignedClasses.length){
-classManagementTile.style.display="";
-document.getElementById("classManagementText").textContent=`Assigned classes: ${assignedClasses.join(", ")}`;
-document.getElementById("classManagementBtn").onclick=()=>location.href="../results.html";
-}
-if(isTeaching && hasSubjects){
-subjectEntryTile.style.display="";
-document.getElementById("subjectEntryText").textContent=`Subjects: ${assignedSubjects.join(", ")}`;
-document.getElementById("subjectEntryBtn").onclick=()=>location.href="../results.html";
-}
-if(isClassTeacher){
-classReviewTile.style.display="";
-document.getElementById("classReviewText").textContent=`Class Teacher: ${homeroom}`;
-document.getElementById("classReviewBtn").onclick=()=>location.href="../results.html";
-}
-if(!isTeaching || (!assignedClasses.length && !hasSubjects)) noTeachingTools.style.display="";
-}catch(e){
-localStorage.clear();
-alert(e.message||"Unable to load staff profile.");
-location.href="staff-login.html";
-}}
-document.getElementById("logout").onclick=async()=>{try{await signOut(auth)}finally{localStorage.removeItem("baladStaffUid");localStorage.removeItem("baladStaffIdToken");localStorage.removeItem("baladStaffRole");localStorage.removeItem("baladStaffName");localStorage.removeItem("baladStaffLoginCode");location.href="staff-login.html";}};load();
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>BALAD Staff Dashboard</title><style>
+:root{--g:#075c46;--ink:#17211d;--muted:#66716c;--line:#dbe5e0;--soft:#f4f8f6}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f8f6;color:var(--ink)}header{background:var(--g);color:#fff;padding:18px 20px}.hi{max-width:1050px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px}.brand h1{font-size:20px;margin:0}.brand p{font-size:12px;opacity:.85;margin:4px 0}.logout{background:#fff;color:var(--g);border:0;border-radius:9px;padding:10px 14px;font-weight:800;cursor:pointer}.wrap{max-width:1050px;margin:auto;padding:25px 18px 50px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(7,65,45,.06);margin-bottom:17px}.card h2{color:var(--g);margin:0 0 12px}.muted{color:var(--muted);line-height:1.55}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.tile{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:17px}.tile strong{display:block;color:var(--g);margin-bottom:7px}.tile p{margin:0;color:#4d5b55;line-height:1.45;font-size:14px}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#e8f7ef;color:var(--g);font-size:12px;font-weight:800}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:10px;padding:10px 14px;background:var(--g);color:#fff;font-weight:800;text-decoration:none;margin-top:12px}.notice{background:#fff7e6;border:1px solid #f0d99a;color:#76540a;border-radius:12px;padding:13px}footer{text-align:center;padding:25px;color:#777;font-size:13px}@media(max-width:700px){.grid{grid-template-columns:1fr}.hi{align-items:flex-start;flex-direction:column}.logout{align-self:flex-end}}
+</style></head><body><header><div class="hi"><div class="brand"><h1>BALAD PRIVATE SCHOOLS</h1><p>Staff Dashboard</p></div><button id="logout" class="logout">Log Out</button></div></header><main class="wrap"><section class="card"><h2 id="welcome">Welcome</h2><p id="identity" class="muted"></p><span id="role" class="pill"></span></section><section class="card"><h2>Your Assigned Work</h2><div class="grid"><div class="tile"><strong>Teaching Classes</strong><p id="classes">Loading...</p></div><div class="tile"><strong>Teaching Subjects</strong><p id="subjects">Loading...</p></div><div class="tile"><strong>Account Status</strong><p id="status">Loading...</p></div></div></section><section class="card"><h2>Staff Tools</h2><div id="staffTools" class="grid"></div><div id="noTools" class="notice" style="display:none">No staff tools are assigned to this account.</div></section></main><footer>© <span id="year"></span> BALAD Private Schools. All Rights Reserved.</footer><script type="module">
+import{auth,db}from"../firebase-config.js";import{doc,getDoc}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";import{signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+const uid=localStorage.getItem("baladStaffUid");if(!uid)location.href="staff-login.html";document.getElementById("year").textContent=new Date().getFullYear();
+function addTool(title,text,href){const e=document.createElement("div");e.className="tile";e.innerHTML='<strong>'+title+'</strong><p>'+text+'</p><a class="btn" href="'+href+'">Open</a>';document.getElementById("staffTools").appendChild(e)}
+async function load(){try{const snap=await getDoc(doc(db,"staff",uid));if(!snap.exists())throw Error("Staff profile not found.");const p=snap.data(),role=String(p.role||"").toLowerCase(),classes=Array.isArray(p.assignedClasses)?p.assignedClasses:[],subjects=Array.isArray(p.assignedSubjects)?p.assignedSubjects:[],home=p.homeroom||p.classTeacherOf||"";if(p.active!==true||!["teacher","class_teacher","management","other"].includes(role))throw Error("Account is not authorized.");document.getElementById("welcome").textContent="Welcome, "+(p.name||p.loginCode||"Staff");document.getElementById("identity").textContent="Login code: "+(p.loginCode||"—");document.getElementById("role").textContent=role.toUpperCase();document.getElementById("classes").textContent=classes.join(", ")||"No teaching classes assigned";document.getElementById("subjects").textContent=subjects.join(", ")||"No teaching subjects assigned";document.getElementById("status").textContent="Active";
+if(role==="class_teacher"&&home){addTool("My Class Management","Manage "+home+": create students, edit biodata and upload passport photos.","class-management.html");addTool("Class Result Review","Review the complete "+home+" class result.","../class-teacher-result-review.html");}
+if((role==="teacher"||role==="class_teacher"||role==="management")&&subjects.length){addTool("Subject Result Entry","Enter results only for your assigned subjects and classes.","../subject-result-entry.html");}
+addTool("Student Result Portal","View the school result portal.","../results.html");if(!document.getElementById("staffTools").children.length)document.getElementById("noTools").style.display="";
+}catch(e){localStorage.clear();alert(e.message||"Unable to load staff profile.");location.href="staff-login.html"}}
+document.getElementById("logout").onclick=async()=>{try{await signOut(auth)}finally{["baladStaffUid","baladStaffIdToken","baladStaffRole","baladStaffName","baladStaffLoginCode"].forEach(k=>localStorage.removeItem(k));location.href="staff-login.html"}};load();
 </script></body></html>

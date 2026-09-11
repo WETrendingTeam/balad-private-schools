@@ -3,9 +3,14 @@ service firebase.storage {
   match /b/{bucket}/o {
     function signedIn() { return request.auth != null; }
     function staffDoc() { return firestore.get(/databases/(default)/documents/staff/$(request.auth.uid)); }
-    function isControl() { return signedIn() && staffDoc().data.active == true && staffDoc().data.role == "control"; }
+    function isControl() { return signedIn() && staffDoc().data.active == true && staffDoc().data.role == 'control'; }
+    function isClassTeacherForStudent(studentId) {
+      return signedIn() &&
+        staffDoc().data.active == true &&
+        staffDoc().data.role == 'class_teacher' &&
+        firestore.get(/databases/(default)/documents/students/$(studentId)).data.classTeacherUid == request.auth.uid;
+    }
 
-    // Public website media: anyone may view; only CONTROL001 may upload/change.
     match /public/staff/{fileName=**} {
       allow read: if true;
       allow write: if isControl();
@@ -19,7 +24,14 @@ service firebase.storage {
       allow write: if isControl();
     }
 
-    // Existing student passport storage used by the Student/ID system.
+    // Class Teachers can upload/read passports only after the student profile
+    // has been assigned to that Class Teacher by the Worker.
+    match /students/passports/{studentId}/{fileName} {
+      allow read: if true;
+      allow write: if isControl() || isClassTeacherForStudent(studentId);
+    }
+
+    // Existing flat passport paths remain Control-only for compatibility.
     match /students/passports/{fileName=**} {
       allow read, write: if isControl();
     }

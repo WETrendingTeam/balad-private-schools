@@ -4187,27 +4187,6 @@ header{
   background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(18,57,44,.28) 100%) !important;
 }
 
-/* Clean alternating green / white / cream rhythm on every page. */
-section:nth-of-type(3n+1){
-  background:linear-gradient(135deg,#ffffff 0%,#f8fbf8 100%);
-}
-section:nth-of-type(3n+2){
-  background:linear-gradient(135deg,#f7f0e2 0%,#fffaf1 100%);
-}
-section:nth-of-type(3n){
-  background:linear-gradient(135deg,#2f775f 0%,#5b9a7f 100%);
-}
-
-/* Keep text readable when a section is green. */
-section:nth-of-type(3n) h1,
-section:nth-of-type(3n) h2,
-section:nth-of-type(3n) h3,
-section:nth-of-type(3n) p,
-section:nth-of-type(3n) li,
-section:nth-of-type(3n) .section-header h2{
-  color:inherit;
-}
-
 /* Cards remain crisp instead of floating in a white haze. */
 .vm-card,.choose-card,.announcement-card,.school-card,.contact-item,
 .value-card,.facility-card,.requirement-card,.process-card,.news-card,
@@ -4305,4 +4284,143 @@ footer{
   section:nth-of-type(3n+1){background:#ffffff;}
   section:nth-of-type(3n+2){background:#f7f0e2;}
   section:nth-of-type(3n){background:linear-gradient(135deg,#2f775f 0%,#5b9a7f 100%);}
+}
+
+
+/* =========================================================
+   BALAD GLOBAL READABILITY CORRECTION — STYLE ONLY
+   Keep gradients sharp while preserving readable text on every surface.
+========================================================= */
+
+/* Light page surfaces must never inherit white text. */
+.about-history,
+.facilities,
+.academic,
+.welcome-card,
+.about-vision-mission,
+.latest-announcements,
+.gallery-section,
+.why-choose,
+.contact,
+.core-values,
+.management-team,
+.department-section,
+.result-choice-page,
+.teachers-section,
+.primary-team{
+  color:#263831;
+}
+
+.about-history h1,.about-history h2,.about-history h3,
+.facilities h1,.facilities h2,.facilities h3,
+.academic h1,.academic h2,.academic h3,
+.welcome-card h1,.welcome-card h2,.welcome-card h3,
+.about-vision-mission h1,.about-vision-mission h2,.about-vision-mission h3,
+.latest-announcements h1,.latest-announcements h2,.latest-announcements h3,
+.gallery-section h1,.gallery-section h2,.gallery-section h3,
+.why-choose h1,.why-choose h2,.why-choose h3,
+.contact h1,.contact h2,.contact h3,
+.core-values h1,.core-values h2,.core-values h3,
+.management-team h1,.management-team h2,.management-team h3,
+.department-section h1,.department-section h2,.department-section h3,
+.result-choice-page h1,.result-choice-page h2,.result-choice-page h3,
+.teachers-section h1,.teachers-section h2,.teachers-section h3,
+.primary-team h1,.primary-team h2,.primary-team h3{
+  color:#286b55;
+}
+
+.about-history p,.facilities p,.academic p,.welcome-card p,
+.about-vision-mission p,.latest-announcements p,.gallery-section p,
+.why-choose p,.contact p,.core-values p,.management-team p,
+.department-section p,.result-choice-page p,.teachers-section p,
+.primary-team p{
+  color:#52605a;
+}
+
+/* About page: crisp cream gradient with dark readable typography. */
+body[data-cms-page="about"] .proprietor-message{
+  background:linear-gradient(120deg,#f5ecdc 0%,#fffaf1 48%,#e4eee7 100%) !important;
+  color:#263831 !important;
+}
+body[data-cms-page="about"] .proprietor-content h2{
+  color:#286b55 !important;
+}
+body[data-cms-page="about"] .proprietor-content .proprietor-quote{
+  color:#9e4039 !important;
+  border-left-color:#3b856b !important;
+}
+body[data-cms-page="about"] .proprietor-content > p:not(.proprietor-quote):not(.signature){
+  color:#3f4d47 !important;
+}
+body[data-cms-page="about"] .proprietor-content .signature{
+  color:#4b5852 !important;
+  border-top-color:#cbd9d1 !important;
+}
+body[data-cms-page="about"] .proprietor-content .signature strong{
+  color:#a13f39 !important;
+}
+body[data-cms-page="about"] .facilities{
+  background:linear-gradient(135deg,#fffaf1 0%,#f6efdf 52%,#e8f1eb 100%) !important;
+  color:#263831 !important;
+}
+body[data-cms-page="about"] .facilities h2,
+body[data-cms-page="about"] .facilities-subtitle{
+  color:#286b55 !important;
+}
+body[data-cms-page="about"] .facility-card h3{color:#286b55 !important;}
+body[data-cms-page="about"] .facility-card p{color:#52605a !important;}
+
+/* Standard content-page heroes: green gradient + white text. */
+section.new-page-hero{
+  background:linear-gradient(120deg,#286b55 0%,#3f856c 55%,#72a58e 100%) !important;
+  color:#fff !important;
+}
+section.new-page-hero .hero-inner,
+section.new-page-hero .hero-inner h1,
+section.new-page-hero .hero-inner p,
+section.new-page-hero .hero-inner .eyebrow{
+  color:#fff !important;
+}
+
+.page-hero{
+  background:linear-gradient(120deg,#286b55 0%,#3f856c 55%,#72a58e 100%) !important;
+  color:#fff !important;
+}
+.page-hero .page-overlay h1,.page-hero .page-overlay p{color:#fff !important;}
+
+/* Cards on light backgrounds: never let placeholder/body text become white. */
+.announcement-card,.why-card,.week-card,.welcome-card,
+.facility-card,.academic-card,.value-card,.requirement-card,
+.process-card,.news-card,.contact-card,.school-card,.choose-card{
+  color:#263831;
+}
+.announcement-card h3,.why-card h3,.week-card h3,.welcome-card h2,
+.facility-card h3,.academic-card h3,.value-card h3,.requirement-card h3,
+.process-card h3,.news-card h3,.contact-card h3,.school-card h3,.choose-card h3{
+  color:#286b55 !important;
+}
+.announcement-card p,.why-card p,.week-card p,.welcome-card p,
+.facility-card p,.academic-card p,.value-card p,.requirement-card p,
+.process-card p,.news-card p,.contact-card p,.school-card p,.choose-card p{
+  color:#52605a !important;
+}
+
+/* Image-based heroes retain white typography over the photograph. */
+.team-hero-shell,.team-hero-shell h1,.team-hero-shell h2,.team-hero-shell p,
+.home-page .home-hero,.home-page .home-hero h1,.home-page .home-hero p,
+.hero,.hero .hero-content,.hero .hero-content h1,.hero .hero-content p{
+  color:#fff;
+}
+
+/* Keep intentional green feature strips white. */
+.about-cta,.about-cta h1,.about-cta h2,.about-cta h3,.about-cta p,
+.admissions,.admissions h1,.admissions h2,.admissions h3,.admissions p,
+footer,footer h1,footer h2,footer h3,footer p,footer a,footer span{
+  color:#fff !important;
+}
+
+@media(max-width:760px){
+  body[data-cms-page="about"] .proprietor-content h2{font-size:28px;}
+  body[data-cms-page="about"] .proprietor-content > p:not(.proprietor-quote):not(.signature){font-size:15px;line-height:1.7;}
+  body[data-cms-page="about"] .facilities-subtitle{color:#52605a !important;}
 }

@@ -697,6 +697,56 @@
 }
 .site-footer-developer .developer-panel a{color:#fff!important;text-decoration:none!important;font-weight:900}
 
+
+/* =========================================================
+   BALAD NEW HOMEPAGE FEATURES
+========================================================= */
+.home-page .section-kicker{margin:0 0 6px;color:var(--balad-red);font-size:.7rem;font-weight:900;letter-spacing:.14em}
+.spotlight-section{background:#f7fbf8}
+.spotlight-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.spotlight-card{display:grid;grid-template-columns:42% 58%;overflow:hidden;border:1px solid var(--balad-line);border-radius:18px;background:#fff;box-shadow:0 10px 25px rgba(16,58,45,.08)}
+.spotlight-media{min-height:245px;background:#eaf3ef}
+.spotlight-media img{width:100%;height:100%;object-fit:cover}
+.spotlight-content{padding:22px;display:flex;flex-direction:column;justify-content:center}
+.spotlight-tag{color:var(--balad-red);font-size:.68rem;font-weight:900;letter-spacing:.12em}
+.spotlight-content h3{margin:7px 0;color:var(--balad-green);font-size:1.25rem}
+.spotlight-content p{margin:0;color:var(--balad-muted);font-size:.86rem;line-height:1.5}
+.spotlight-content a{margin-top:14px;color:var(--balad-red);font-size:.8rem;font-weight:900;text-decoration:none}
+.week-section{background:#fff}
+.week-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:12px}
+.week-card{overflow:hidden;border:1px solid var(--balad-line);border-radius:16px;background:#fff;box-shadow:0 8px 22px rgba(16,58,45,.07)}
+.week-card img{width:100%;height:175px;object-fit:cover}
+.week-card>div{padding:15px}
+.week-card span{color:var(--balad-red);font-size:.66rem;font-weight:900;letter-spacing:.12em}
+.week-card h3{margin:5px 0;color:var(--balad-green);font-size:1rem}
+.week-card p{margin:0;color:var(--balad-muted);font-size:.8rem;line-height:1.45}
+.week-more{text-align:center;margin-top:16px}.week-more a{color:var(--balad-red);font-size:.82rem;font-weight:900;text-decoration:none}
+
+/* Temporary Back-to-School welcome */
+.back-to-school-popup{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:18px}
+.back-to-school-popup[hidden]{display:none}
+.back-to-school-backdrop{position:absolute;inset:0;background:rgba(3,30,23,.68);backdrop-filter:blur(4px)}
+.back-to-school-modal{position:relative;z-index:1;width:min(680px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;border:1px solid #dbe8e2;box-shadow:0 25px 70px rgba(0,0,0,.25);padding:25px}
+.back-to-school-close{position:absolute;right:14px;top:12px;width:38px;height:38px;border:1px solid #d9e5df;border-radius:50%;background:#fff;color:var(--balad-green);font-size:25px;line-height:1;cursor:pointer}
+.back-to-school-brand{font-size:.7rem;font-weight:900;letter-spacing:.14em;color:var(--balad-green)}
+.back-to-school-kicker{margin:13px 0 2px;color:var(--balad-red);font-size:.72rem;font-weight:900;letter-spacing:.16em}
+.back-to-school-modal h2{margin:0;color:var(--balad-green);font-size:clamp(1.55rem,4vw,2.25rem)}
+.back-to-school-media{position:relative;margin:18px 0;border-radius:16px;overflow:hidden;background:#eaf3ef}
+.back-to-school-media img{width:100%;height:270px;object-fit:cover}
+.back-to-school-media::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(3,40,30,.72))}
+.back-to-school-media-note{position:absolute;z-index:2;left:18px;right:18px;bottom:15px;color:#fff;display:flex;flex-direction:column}
+.back-to-school-media-note strong{font-size:1.05rem}.back-to-school-media-note span{font-size:.78rem;color:rgba(255,255,255,.9)}
+.back-to-school-message{margin:0;color:var(--balad-muted);line-height:1.55;font-size:.9rem}
+.back-to-school-actions{display:flex;justify-content:flex-end;gap:9px;flex-wrap:wrap;margin-top:18px}
+.back-to-school-actions a,.back-to-school-actions button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 15px;border-radius:9px;font-weight:900;font-size:.78rem;text-decoration:none;cursor:pointer}
+.back-to-school-actions a{background:var(--balad-green);color:#fff}.back-to-school-actions button{background:#fff;color:var(--balad-green);border:1px solid var(--balad-green)}
+body.back-to-school-open{overflow:hidden}
+@media(max-width:760px){
+ .spotlight-grid{grid-template-columns:1fr}.spotlight-card{grid-template-columns:1fr}.spotlight-media{height:190px;min-height:190px}
+ .week-grid{grid-template-columns:1fr}.week-card img{height:180px}
+ .back-to-school-modal{padding:20px;border-radius:18px}.back-to-school-media img{height:220px}.back-to-school-actions{display:grid;grid-template-columns:1fr}.back-to-school-actions a,.back-to-school-actions button{width:100%}
+}
+
 </style>
 </head>
 
@@ -750,6 +800,29 @@
 
 <main>
 
+<!-- BALAD BACK-TO-SCHOOL WELCOME — temporary first-week campaign -->
+<div class="back-to-school-popup" id="backToSchoolPopup" hidden aria-hidden="true">
+  <div class="back-to-school-backdrop" data-close-back-to-school></div>
+  <section class="back-to-school-modal" role="dialog" aria-modal="true" aria-labelledby="backToSchoolTitle">
+    <button class="back-to-school-close" type="button" aria-label="Close welcome" data-close-back-to-school>×</button>
+    <div class="back-to-school-brand">BALAD PRIVATE SCHOOLS</div>
+    <p class="back-to-school-kicker">WELCOME BACK</p>
+    <h2 id="backToSchoolTitle">2026/2027 Academic Session</h2>
+    <div class="back-to-school-media">
+      <img src="images/school-building1.jpg" alt="BALAD Private Schools" />
+      <div class="back-to-school-media-note">
+        <strong>Back to school at BALAD</strong>
+        <span>Our welcome video and first-week moments will appear here.</span>
+      </div>
+    </div>
+    <p class="back-to-school-message">A new session. New goals. New possibilities. Welcome back to our students, parents and staff.</p>
+    <div class="back-to-school-actions">
+      <a href="#this-week-at-balad" data-close-back-to-school>View First-Week Moments</a>
+      <button type="button" data-close-back-to-school>Enter Website</button>
+    </div>
+  </section>
+</div>
+
 <div class="announcement-bar">
   <div class="announcement-track">
     Admissions for the 2026/2027 Academic Session are now open. • School resumes on Monday, 14 September 2026. • Contact us for enquiries.
@@ -787,6 +860,36 @@
   <article class="home-stat"><strong>350+</strong><span>Students</span></article>
   <article class="home-stat"><strong>50+</strong><span>Qualified Teachers</span></article>
   <article class="home-stat"><strong>100%</strong><span>Commitment to Success</span></article>
+</section>
+
+<section class="home-section spotlight-section" id="balad-spotlight">
+  <div class="home-container">
+    <div class="section-heading">
+      <p class="section-kicker">RECOGNITION • COMMUNITY • EXCELLENCE</p>
+      <h2>BALAD Spotlight</h2>
+      <p>Meet the people and moments making a difference in the BALAD community.</p>
+    </div>
+    <div class="spotlight-grid">
+      <article class="spotlight-card">
+        <div class="spotlight-media"><img src="images/Competition%20(1).JPG" alt="BALAD student achievement"></div>
+        <div class="spotlight-content">
+          <span class="spotlight-tag">STUDENT SPOTLIGHT</span>
+          <h3>Celebrating Our Students</h3>
+          <p>Outstanding effort, character, creativity and achievement deserve to be celebrated.</p>
+          <a href="news.html">View Spotlight →</a>
+        </div>
+      </article>
+      <article class="spotlight-card">
+        <div class="spotlight-media"><img src="images/teachers-day1.jpg" alt="BALAD teachers and students"></div>
+        <div class="spotlight-content">
+          <span class="spotlight-tag">TEACHER SPOTLIGHT</span>
+          <h3>Celebrating Our Teachers</h3>
+          <p>Recognising the dedication, guidance and everyday impact of our teachers.</p>
+          <a href="team.html">Meet Our Team →</a>
+        </div>
+      </article>
+    </div>
+  </div>
 </section>
 
 <section class="home-section">
@@ -880,6 +983,31 @@
       <article class="announcement-card"><h3>Admission Criteria</h3><p>Check the requirements for admission into our school programmes.</p><a href="admissions.html">View Criteria</a></article>
       <article class="announcement-card"><h3>CBT Centre Update</h3><p>Modern computer-based testing facilities are available for students and public training.</p><a href="contact.html">Enquire</a></article>
     </div>
+  </div>
+</section>
+
+<section class="home-section week-section" id="this-week-at-balad">
+  <div class="home-container">
+    <div class="section-heading">
+      <p class="section-kicker">SCHOOL LIFE • UPDATES • MOMENTS</p>
+      <h2>This Week at BALAD</h2>
+      <p>A quick look at the activities, people and moments happening around our schools.</p>
+    </div>
+    <div class="week-grid">
+      <article class="week-card">
+        <img src="images/career-day1.jpg" alt="BALAD school activity">
+        <div><span>ACTIVITY</span><h3>Learning Beyond the Classroom</h3><p>Practical experiences and activities that help students learn by doing.</p></div>
+      </article>
+      <article class="week-card">
+        <img src="images/prize-giving3.jpg" alt="BALAD academic achievement">
+        <div><span>ACHIEVEMENT</span><h3>Celebrating Excellence</h3><p>Recognising effort, progress and the achievements of our school community.</p></div>
+      </article>
+      <article class="week-card">
+        <img src="images/sports4.jpg" alt="BALAD sports activity">
+        <div><span>SCHOOL LIFE</span><h3>More Than the Classroom</h3><p>Teamwork, confidence, discipline and memorable school experiences.</p></div>
+      </article>
+    </div>
+    <div class="week-more"><a href="news.html">See More from BALAD →</a></div>
   </div>
 </section>
 
@@ -985,5 +1113,23 @@
 })();
 </script>
 
+
+<script>
+(function(){
+  const popup=document.getElementById('backToSchoolPopup');
+  if(!popup)return;
+  // Resumption is Monday 14 September 2026. The campaign ends after the first week.
+  const start=new Date(2026,8,14,0,0,0);
+  const end=new Date(2026,8,21,0,0,0);
+  const now=new Date();
+  if(now<start || now>=end)return;
+  popup.hidden=false;
+  popup.setAttribute('aria-hidden','false');
+  document.body.classList.add('back-to-school-open');
+  const close=()=>{popup.hidden=true;popup.setAttribute('aria-hidden','true');document.body.classList.remove('back-to-school-open');};
+  popup.querySelectorAll('[data-close-back-to-school]').forEach(el=>el.addEventListener('click',close));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!popup.hidden)close();});
+})();
+</script>
 </body>
 </html>

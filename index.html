@@ -789,7 +789,7 @@
 
 <main>
 
-<div id="backSchoolOverlay" class="back-school-overlay" hidden aria-modal="true" role="dialog" aria-labelledby="backSchoolTitle">
+<div id="backSchoolOverlay" class="back-school-overlay" aria-modal="true" role="dialog" aria-labelledby="backSchoolTitle">
   <div class="back-school-modal">
     <button class="back-school-close" type="button" aria-label="Close Back-to-School welcome" id="backSchoolClose">×</button>
     <div class="back-school-head">
@@ -818,7 +818,8 @@
 
 <section class="home-hero balad-rotating-hero" aria-label="BALAD Private Schools highlights">
   <div class="hero-slides" aria-hidden="true">
-    <div class="hero-slide is-active" style="background-image:url('images/Graduation%281%29.JPG')"></div>
+    <div class="hero-slide is-active" style="background-image:url('images/balad-school-hero.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('images/Graduation%281%29.JPG')"></div>
     <div class="hero-slide" style="background-image:url('images/Competition%20%281%29.JPG')"></div>
     <div class="hero-slide" style="background-image:url('images/Inter%20house%20sport%20%281%29.JPG')"></div>
     <div class="hero-slide" style="background-image:url('images/school-building1.jpg')"></div>
@@ -835,7 +836,8 @@
     </div>
   </div>
   <div class="hero-dots" aria-label="Hero slideshow controls">
-    <button class="hero-dot is-active" type="button" aria-label="Graduation"></button>
+    <button class="hero-dot is-active" type="button" aria-label="School building"></button>
+    <button class="hero-dot" type="button" aria-label="Graduation"></button>
     <button class="hero-dot" type="button" aria-label="Academic competition"></button>
     <button class="hero-dot" type="button" aria-label="Inter-house sports"></button>
     <button class="hero-dot" type="button" aria-label="School building"></button>
@@ -1056,7 +1058,40 @@
 </footer>
 
 
+<style>
+/* ---------- FINAL INDEX VISUAL BALANCE ---------- */
+.home-page .vision-card:nth-child(even),
+.home-page .why-card:nth-child(even),
+.home-page .programme-card:nth-child(even),
+.home-page .announcement-card:nth-child(even),
+.home-page .school-choice article:nth-child(even){
+  background:var(--balad-green);
+  border-color:var(--balad-green);
+  color:#fff;
+}
+.home-page .vision-card:nth-child(even) h3,
+.home-page .why-card:nth-child(even) h3,
+.home-page .programme-card:nth-child(even) h3,
+.home-page .announcement-card:nth-child(even) h3,
+.home-page .school-choice article:nth-child(even) h3{color:#fff}
+.home-page .vision-card:nth-child(even) p,
+.home-page .announcement-card:nth-child(even) p,
+.home-page .school-choice article:nth-child(even) p{color:rgba(255,255,255,.9)}
+.home-page .announcement-card:nth-child(even) a,
+.home-page .school-choice article:nth-child(even) a{color:#fff}
+</style>
+
 <script>
+(function(){
+  const overlay=document.getElementById('backSchoolOverlay');
+  const close=document.getElementById('backSchoolClose');
+  const enter=document.getElementById('backSchoolEnterBtn');
+  function hidePopup(){ if(overlay) overlay.hidden=true; }
+  if(close) close.addEventListener('click',hidePopup);
+  if(enter) enter.addEventListener('click',hidePopup);
+  if(overlay) overlay.addEventListener('click',e=>{ if(e.target===overlay) hidePopup(); });
+})();
+
 (function(){
   const hero=document.querySelector('.balad-rotating-hero');
   if(!hero)return;

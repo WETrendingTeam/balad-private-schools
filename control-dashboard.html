@@ -1675,6 +1675,7 @@ Refresh
 <button class="cms-tab" data-cms-view="students">Student Photos</button>
 <button class="cms-tab" data-cms-view="pages">Pages</button>
 <button class="cms-tab" data-cms-view="gallery">Gallery</button>
+<button class="cms-tab" data-cms-view="homepage">Homepage</button>
 </div>
 <div id="cmsView-staff">
 <div class="notice" style="margin-bottom:15px"><strong>Staff profiles.</strong> Manage the public Meet Our Team profiles separately from staff login permissions. Existing staff accounts can be synced into the public profiles.</div>
@@ -1709,6 +1710,26 @@ Refresh
 <div class="cms-toolbar"><select class="select" id="cmsPageSelect" onchange="loadCmsPageEditor()"></select></div>
 <div id="cmsPageEditor"></div>
 </div>
+<div class="hidden" id="cmsView-homepage">
+<div class="notice" style="margin-bottom:15px"><strong>Homepage Features.</strong> Manage the temporary Back-to-School welcome, BALAD Spotlight and This Week at BALAD. These controls only affect the public homepage.</div>
+<div class="card" style="margin-bottom:16px"><div class="card-head"><h3>Back-to-School Welcome</h3></div><div class="card-body">
+<div class="cms-inline-form">
+<div class="field"><label>Title</label><input class="input" id="homeBsTitle" value="WELCOME BACK"></div>
+<div class="field"><label>Subtitle</label><input class="input" id="homeBsSubtitle" value="2026/2027 Academic Session"></div>
+<div class="field"><label>Start</label><input class="input" id="homeBsStart" type="datetime-local" value="2026-09-12T00:00"></div>
+<div class="field"><label>End</label><input class="input" id="homeBsEnd" type="datetime-local" value="2026-09-20T00:00"></div>
+<div class="field full"><label>Welcome message</label><textarea class="input" id="homeBsBody" rows="3">A new session. New goals. New possibilities. Welcome back to our students, parents and staff.</textarea></div>
+<div class="field full"><label>Video / photo gallery</label><div class="cms-media-actions"><button type="button" onclick="pickHomeMedia('backToSchool','camera')">Camera</button><button type="button" onclick="pickHomeMedia('backToSchool','photos')">Photos</button><button type="button" onclick="pickHomeMedia('backToSchool','files')">Files</button></div><input id="homeBsCamera" class="cms-hidden-input" type="file" accept="image/*,video/*" capture="environment"><input id="homeBsPhotos" class="cms-hidden-input" type="file" accept="image/*,video/*" multiple><input id="homeBsFiles" class="cms-hidden-input" type="file" accept="image/*,video/*" multiple><div class="cms-file-note" id="homeBsNote">No new media selected.</div></div>
+</div><div style="margin-top:12px"><button class="btn btn-primary" type="button" onclick="saveHomepageBackToSchool()">Save Back-to-School</button><button class="btn" type="button" onclick="closeHomepageWelcomeNow()">Disable Welcome</button></div>
+</div></div>
+<div class="card" style="margin-bottom:16px"><div class="card-head"><h3>BALAD Spotlight</h3></div><div class="card-body">
+<div class="cms-inline-form"><div class="field"><label>Label</label><input class="input" id="homeSpotLabel" value="BALAD SPOTLIGHT"></div><div class="field"><label>Title</label><input class="input" id="homeSpotTitle" placeholder="e.g. Meet Sarah Ade"></div><div class="field full"><label>Story</label><textarea class="input" id="homeSpotBody" rows="4" placeholder="Short story about the student, teacher, achievement or talent."></textarea></div><div class="field full"><label>Photo / video</label><div class="cms-media-actions"><button type="button" onclick="pickHomeMedia('spotlight','camera')">Camera</button><button type="button" onclick="pickHomeMedia('spotlight','photos')">Photos</button><button type="button" onclick="pickHomeMedia('spotlight','files')">Files</button></div><input id="homeSpotCamera" class="cms-hidden-input" type="file" accept="image/*,video/*" capture="environment"><input id="homeSpotPhotos" class="cms-hidden-input" type="file" accept="image/*,video/*"><input id="homeSpotFiles" class="cms-hidden-input" type="file" accept="image/*,video/*"><div class="cms-file-note" id="homeSpotNote">No new media selected.</div></div></div><div style="margin-top:12px"><button class="btn btn-primary" type="button" onclick="saveHomepageSpotlight()">Publish Spotlight</button><button class="btn" type="button" onclick="clearHomepageFeature('spotlight')">Clear Spotlight</button></div>
+</div></div>
+<div class="card"><div class="card-head"><h3>This Week at BALAD</h3></div><div class="card-body"><div class="notice">Use up to three slots. These cards are intentionally not linked to News or Meet Our Team. They remain on the homepage until you replace or clear them.</div>
+<div id="homepageWeekEditors"></div>
+</div></div>
+</div>
+
 <div class="hidden" id="cmsView-gallery">
 <div class="notice" style="margin-bottom:15px"><strong>School Gallery.</strong> Create separate albums for each school activity and upload multiple photos/videos directly.</div>
 <div class="card"><div class="card-body">
@@ -6799,6 +6820,7 @@ function initContentManagement(){
     if(tab.dataset.cmsView==="students")cmsStudentSchoolChanged();
     if(tab.dataset.cmsView==="pages")initCmsPages();
     if(tab.dataset.cmsView==="gallery")loadCmsAlbums();
+    if(tab.dataset.cmsView==="homepage")loadHomepageFeatures();
   }));
   document.querySelectorAll("[data-cms-category]").forEach(b=>b.addEventListener("click",()=>{
     document.querySelectorAll("[data-cms-category]").forEach(x=>x.classList.remove("active"));
@@ -7485,6 +7507,69 @@ window.saveCmsBlock=async function(){
     toast("New page content published.");document.getElementById("cmsBlockTitle").value="";document.getElementById("cmsBlockBody").value="";loadCmsPageEditor();
   }catch(e){toast(e.message||"Unable to publish content.");}
 };
+
+
+/* ---------- HOMEPAGE FEATURES ---------- */
+let homepageMedia={backToSchool:[],spotlight:null,week:[null,null,null]};
+function homeFiles(kind){
+  const ids=kind==="backToSchool"?["homeBsCamera","homeBsPhotos","homeBsFiles"]:kind==="spotlight"?["homeSpotCamera","homeSpotPhotos","homeSpotFiles"]:[];
+  return ids.flatMap(id=>Array.from(document.getElementById(id)?.files||[]));
+}
+function pickHomeMedia(kind,source){
+  const base=kind==="backToSchool"?"homeBs":kind==="spotlight"?"homeSpot":"";
+  if(!base)return;
+  const id=source==="camera"?base+"Camera":source==="photos"?base+"Photos":base+"Files";
+  document.getElementById(id)?.click();
+}
+window.pickHomeMedia=pickHomeMedia;
+function bindHomeMediaNotes(){
+  ["homeBsCamera","homeBsPhotos","homeBsFiles","homeSpotCamera","homeSpotPhotos","homeSpotFiles"].forEach(id=>document.getElementById(id)?.addEventListener("change",()=>{
+    const isBs=id.startsWith("homeBs"); const files=homeFiles(isBs?"backToSchool":"spotlight"); const note=document.getElementById(isBs?"homeBsNote":"homeSpotNote"); if(note)note.textContent=files.length?`${files.length} file${files.length===1?"":"s"} selected.`:"No new media selected.";
+  }));
+}
+function homepageDateValue(v){
+  if(!v)return "";
+  const d=new Date(v); return isNaN(d)?v:d.toISOString();
+}
+async function uploadHomeFile(file,folder){
+  return cmsUpload(file,`public/homepage/${folder}-${Date.now()}-${String(file.name||"media").replace(/[^a-z0-9.]/gi,"-")}`);
+}
+async function saveHomepageBackToSchool(){
+  try{
+    const files=homeFiles("backToSchool"); const items=[];
+    for(const file of files){items.push({url:await uploadHomeFile(file,"back-to-school"),type:file.type.startsWith("video/")?"video":"image",caption:file.name});}
+    const id="homepage-back-to-school";
+    const previous=(await getDocs(collection(db,"publicContent"))).docs.find(d=>d.id===id)?.data()||{};
+    await setDoc(doc(db,"publicContent",id),{feature:"backToSchool",type:"homepageFeature",active:true,startAt:homepageDateValue(document.getElementById("homeBsStart").value),endAt:homepageDateValue(document.getElementById("homeBsEnd").value),title:val("homeBsTitle"),subtitle:val("homeBsSubtitle"),body:val("homeBsBody"),items:items.length?items:(previous.items||[]),updatedAt:serverTimestamp()},{merge:true});
+    localStorage.removeItem("balad-back-school-closed-"+homepageDateValue(document.getElementById("homeBsEnd").value));
+    toast("Back-to-School content saved."); loadHomepageFeatures();
+  }catch(e){toast(e.message||"Unable to save Back-to-School content.");}
+}
+window.saveHomepageBackToSchool=saveHomepageBackToSchool;
+async function closeHomepageWelcomeNow(){try{await setDoc(doc(db,"publicContent","homepage-back-to-school"),{type:"homepageFeature",feature:"backToSchool",active:false,updatedAt:serverTimestamp()},{merge:true});toast("Back-to-School welcome disabled.");}catch(e){toast(e.message);}}
+window.closeHomepageWelcomeNow=closeHomepageWelcomeNow;
+async function saveHomepageSpotlight(){
+  try{const files=homeFiles("spotlight");let mediaUrl="",mediaType="";if(files[0]){mediaUrl=await uploadHomeFile(files[0],"spotlight");mediaType=files[0].type.startsWith("video/")?"video":"image";}
+    const previous=(await getDocs(collection(db,"publicContent"))).docs.find(d=>d.id==="homepage-spotlight")?.data()||{};
+    await setDoc(doc(db,"publicContent","homepage-spotlight"),{feature:"spotlight",type:"homepageFeature",active:true,label:val("homeSpotLabel")||"BALAD SPOTLIGHT",title:val("homeSpotTitle"),body:val("homeSpotBody"),mediaUrl:mediaUrl||previous.mediaUrl||"",mediaType:mediaType||previous.mediaType||"",updatedAt:serverTimestamp()},{merge:true});toast("Spotlight published.");loadHomepageFeatures();
+  }catch(e){toast(e.message||"Unable to publish Spotlight.");}}
+window.saveHomepageSpotlight=saveHomepageSpotlight;
+async function clearHomepageFeature(feature){try{const id=feature==="spotlight"?"homepage-spotlight":"homepage-back-to-school";await setDoc(doc(db,"publicContent",id),{type:"homepageFeature",feature,active:false,updatedAt:serverTimestamp()},{merge:true});toast("Homepage feature cleared.");loadHomepageFeatures();}catch(e){toast(e.message);}}
+window.clearHomepageFeature=clearHomepageFeature;
+function renderHomepageWeekEditors(existing){
+  const root=document.getElementById("homepageWeekEditors");if(!root)return;
+  root.innerHTML=[0,1,2].map(i=>{const w=existing[i]||{};return `<div class="card" style="margin-top:12px"><div class="card-body"><h4 style="margin-bottom:10px">Slot ${i+1}</h4><div class="cms-inline-form"><div class="field"><label>Title</label><input class="input" id="homeWeekTitle${i}" value="${cmsEsc(w.title||"")}" placeholder="e.g. Career Day"></div><div class="field full"><label>Short description</label><textarea class="input" id="homeWeekBody${i}" rows="2" placeholder="What happened this week?">${cmsEsc(w.body||"")}</textarea></div><div class="field full"><label>Photo / video</label><div class="cms-media-actions"><button type="button" onclick="pickWeekMedia(${i},'camera')">Camera</button><button type="button" onclick="pickWeekMedia(${i},'photos')">Photos</button><button type="button" onclick="pickWeekMedia(${i},'files')">Files</button></div><input id="homeWeekCamera${i}" class="cms-hidden-input" type="file" accept="image/*,video/*" capture="environment"><input id="homeWeekPhotos${i}" class="cms-hidden-input" type="file" accept="image/*,video/*"><input id="homeWeekFiles${i}" class="cms-hidden-input" type="file" accept="image/*,video/*"><div class="cms-file-note" id="homeWeekNote${i}">${w.mediaUrl?"Existing media will remain unless a new file is selected.":"No media selected."}</div></div></div><div style="margin-top:10px"><button class="btn btn-primary" type="button" onclick="saveHomepageWeek(${i})">Save Slot ${i+1}</button><button class="btn" type="button" onclick="clearHomepageWeek(${i})">Clear</button></div></div></div>`;}).join("");
+  [0,1,2].forEach(i=>["Camera","Photos","Files"].forEach(src=>document.getElementById(`homeWeek${src}${i}`)?.addEventListener("change",()=>{const input=document.getElementById(`homeWeek${src}${i}`);const note=document.getElementById(`homeWeekNote${i}`);if(note&&input.files?.length)note.textContent=input.files[0].name;})));
+}
+function pickWeekMedia(i,source){const id=source==="camera"?`homeWeekCamera${i}`:source==="photos"?`homeWeekPhotos${i}`:`homeWeekFiles${i}`;document.getElementById(id)?.click();}
+window.pickWeekMedia=pickWeekMedia;
+async function saveHomepageWeek(i){try{const files=["Camera","Photos","Files"].flatMap(src=>Array.from(document.getElementById(`homeWeek${src}${i}`)?.files||[]));let mediaUrl="",mediaType="";if(files[0]){mediaUrl=await uploadHomeFile(files[0],`week-${i+1}`);mediaType=files[0].type.startsWith("video/")?"video":"image";}const id=`homepage-week-${i+1}`;const previous=(await getDocs(collection(db,"publicContent"))).docs.find(d=>d.id===id)?.data()||{};await setDoc(doc(db,"publicContent",id),{feature:"week",type:"homepageFeature",active:true,order:i+1,title:val(`homeWeekTitle${i}`),body:val(`homeWeekBody${i}`),mediaUrl:mediaUrl||previous.mediaUrl||"",mediaType:mediaType||previous.mediaType||"",updatedAt:serverTimestamp()},{merge:true});toast(`This Week slot ${i+1} saved.`);loadHomepageFeatures();}catch(e){toast(e.message||"Unable to save this slot.");}}
+window.saveHomepageWeek=saveHomepageWeek;
+async function clearHomepageWeek(i){try{await setDoc(doc(db,"publicContent",`homepage-week-${i+1}`),{type:"homepageFeature",feature:"week",active:false,updatedAt:serverTimestamp()},{merge:true});toast(`Slot ${i+1} cleared.`);loadHomepageFeatures();}catch(e){toast(e.message);}}
+window.clearHomepageWeek=clearHomepageWeek;
+async function loadHomepageFeatures(){
+  try{const snap=await getDocs(collection(db,"publicContent"));const rows=snap.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.type==="homepageFeature");const bs=rows.find(x=>x.feature==="backToSchool")||{};document.getElementById("homeBsTitle")&&(document.getElementById("homeBsTitle").value=bs.title||"WELCOME BACK");document.getElementById("homeBsSubtitle")&&(document.getElementById("homeBsSubtitle").value=bs.subtitle||"2026/2027 Academic Session");document.getElementById("homeBsBody")&&(document.getElementById("homeBsBody").value=bs.body||"A new session. New goals. New possibilities. Welcome back to our students, parents and staff.");if(bs.startAt)document.getElementById("homeBsStart").value=new Date(bs.startAt).toISOString().slice(0,16);if(bs.endAt)document.getElementById("homeBsEnd").value=new Date(bs.endAt).toISOString().slice(0,16);const sp=rows.find(x=>x.feature==="spotlight")||{};document.getElementById("homeSpotLabel").value=sp.label||"BALAD SPOTLIGHT";document.getElementById("homeSpotTitle").value=sp.title||"";document.getElementById("homeSpotBody").value=sp.body||"";renderHomepageWeekEditors(rows.filter(x=>x.feature==="week"&&x.active!==false).sort((a,b)=>(a.order||0)-(b.order||0)));bindHomeMediaNotes();}catch(e){toast(e.message||"Unable to load homepage features.");}}
+window.loadHomepageFeatures=loadHomepageFeatures;
 
 /* ---------- GALLERY ---------- */
 async function loadCmsAlbums(){

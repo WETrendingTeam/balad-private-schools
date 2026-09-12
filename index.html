@@ -523,6 +523,44 @@
   text-decoration:none;
 }
 
+
+/* ---------- HOMEPAGE FEATURE MODULES ---------- */
+.home-page .homepage-feature-section{background:#fff}
+.home-page .spotlight-card{display:grid;grid-template-columns:minmax(240px,380px) 1fr;gap:22px;align-items:stretch;border:1px solid var(--balad-line);border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 12px 30px rgba(16,58,45,.08)}
+.home-page .spotlight-media{min-height:260px;background:linear-gradient(135deg,#eaf4ef,#f7f1e4);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.home-page .spotlight-media img,.home-page .spotlight-media video{width:100%;height:100%;min-height:260px;object-fit:cover;display:block}
+.home-page .spotlight-placeholder{padding:30px;text-align:center;color:var(--balad-muted)}
+.home-page .spotlight-copy{padding:28px;display:flex;flex-direction:column;justify-content:center}
+.home-page .spotlight-kicker{margin:0 0 7px;color:var(--balad-red);font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.home-page .spotlight-copy h3{margin:0 0 10px;color:var(--balad-green);font-size:clamp(1.35rem,3vw,2rem)}
+.home-page .spotlight-copy p{margin:0;color:var(--balad-muted);line-height:1.6}
+.home-page .week-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.home-page .week-card{min-height:210px;border:1px solid var(--balad-line);border-radius:17px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.home-page .week-media{height:145px;background:linear-gradient(135deg,#edf6f1,#f7f1e4);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.home-page .week-media img,.home-page .week-media video{width:100%;height:100%;object-fit:cover;display:block}
+.home-page .week-placeholder{padding:20px;text-align:center;color:var(--balad-muted);font-size:.84rem;line-height:1.45}
+.home-page .week-copy{padding:13px 15px}
+.home-page .week-copy h3{margin:0;color:var(--balad-green);font-size:1rem}
+.home-page .week-copy p{margin:5px 0 0;color:var(--balad-muted);font-size:.8rem;line-height:1.45}
+.home-page .back-school-overlay{position:fixed;inset:0;z-index:9999;background:rgba(7,40,31,.64);display:flex;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(5px)}
+.home-page .back-school-modal{width:min(760px,100%);max-height:min(92vh,780px);overflow:auto;background:#fff;border-radius:24px;box-shadow:0 25px 80px rgba(0,0,0,.28);position:relative;border:1px solid rgba(7,92,70,.16)}
+.home-page .back-school-close{position:absolute;right:13px;top:13px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.92);color:var(--balad-green);font-size:24px;font-weight:900;z-index:3;cursor:pointer}
+.home-page .back-school-head{padding:30px 30px 18px;text-align:center;background:linear-gradient(135deg,#edf7f2,#f8f0e2)}
+.home-page .back-school-head .kicker{margin:0 0 5px;color:var(--balad-red);font-size:.75rem;font-weight:900;letter-spacing:.14em}
+.home-page .back-school-head h2{margin:0;color:var(--balad-green);font-size:clamp(1.8rem,5vw,3rem)}
+.home-page .back-school-head p{margin:8px auto 0;color:var(--balad-muted);max-width:560px;line-height:1.5}
+.home-page .back-school-gallery{display:grid;grid-template-columns:1fr;gap:8px;padding:18px 22px 0}
+.home-page .back-school-gallery figure{margin:0;border-radius:15px;overflow:hidden;background:#eaf3ef;min-height:230px}
+.home-page .back-school-gallery img,.home-page .back-school-gallery video{width:100%;height:100%;min-height:230px;max-height:430px;object-fit:cover;display:block}
+.home-page .back-school-empty{min-height:230px;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;color:var(--balad-muted)}
+.home-page .back-school-body{padding:18px 30px 28px;text-align:center}
+.home-page .back-school-body p{margin:0;color:var(--balad-muted);line-height:1.55}
+.home-page .back-school-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:17px}
+.home-page .back-school-actions button{border:0;border-radius:10px;padding:11px 17px;font-weight:800;cursor:pointer;background:var(--balad-green);color:#fff}
+.home-page .back-school-actions button.secondary{background:#eef5f1;color:var(--balad-green)}
+@media(max-width:700px){.home-page .spotlight-card{grid-template-columns:1fr}.home-page .spotlight-media{min-height:220px}.home-page .spotlight-media img,.home-page .spotlight-media video{min-height:220px}.home-page .week-grid{grid-template-columns:1fr 1fr}.home-page .back-school-head{padding:27px 22px 16px}.home-page .back-school-body{padding:16px 22px 24px}}
+@media(max-width:480px){.home-page .week-grid{grid-template-columns:1fr}.home-page .week-card{min-height:190px}.home-page .back-school-gallery{padding:14px 14px 0}.home-page .back-school-gallery figure,.home-page .back-school-gallery img,.home-page .back-school-gallery video{min-height:190px}}
+
 /* ---------- MOBILE ---------- */
 
 
@@ -697,56 +735,6 @@
 }
 .site-footer-developer .developer-panel a{color:#fff!important;text-decoration:none!important;font-weight:900}
 
-
-/* =========================================================
-   BALAD NEW HOMEPAGE FEATURES
-========================================================= */
-.home-page .section-kicker{margin:0 0 6px;color:var(--balad-red);font-size:.7rem;font-weight:900;letter-spacing:.14em}
-.spotlight-section{background:#f7fbf8}
-.spotlight-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.spotlight-card{display:grid;grid-template-columns:42% 58%;overflow:hidden;border:1px solid var(--balad-line);border-radius:18px;background:#fff;box-shadow:0 10px 25px rgba(16,58,45,.08)}
-.spotlight-media{min-height:245px;background:#eaf3ef}
-.spotlight-media img{width:100%;height:100%;object-fit:cover}
-.spotlight-content{padding:22px;display:flex;flex-direction:column;justify-content:center}
-.spotlight-tag{color:var(--balad-red);font-size:.68rem;font-weight:900;letter-spacing:.12em}
-.spotlight-content h3{margin:7px 0;color:var(--balad-green);font-size:1.25rem}
-.spotlight-content p{margin:0;color:var(--balad-muted);font-size:.86rem;line-height:1.5}
-.spotlight-content a{margin-top:14px;color:var(--balad-red);font-size:.8rem;font-weight:900;text-decoration:none}
-.week-section{background:#fff}
-.week-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:12px}
-.week-card{overflow:hidden;border:1px solid var(--balad-line);border-radius:16px;background:#fff;box-shadow:0 8px 22px rgba(16,58,45,.07)}
-.week-card img{width:100%;height:175px;object-fit:cover}
-.week-card>div{padding:15px}
-.week-card span{color:var(--balad-red);font-size:.66rem;font-weight:900;letter-spacing:.12em}
-.week-card h3{margin:5px 0;color:var(--balad-green);font-size:1rem}
-.week-card p{margin:0;color:var(--balad-muted);font-size:.8rem;line-height:1.45}
-.week-more{text-align:center;margin-top:16px}.week-more a{color:var(--balad-red);font-size:.82rem;font-weight:900;text-decoration:none}
-
-/* Temporary Back-to-School welcome */
-.back-to-school-popup{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:18px}
-.back-to-school-popup[hidden]{display:none}
-.back-to-school-backdrop{position:absolute;inset:0;background:rgba(3,30,23,.68);backdrop-filter:blur(4px)}
-.back-to-school-modal{position:relative;z-index:1;width:min(680px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;border:1px solid #dbe8e2;box-shadow:0 25px 70px rgba(0,0,0,.25);padding:25px}
-.back-to-school-close{position:absolute;right:14px;top:12px;width:38px;height:38px;border:1px solid #d9e5df;border-radius:50%;background:#fff;color:var(--balad-green);font-size:25px;line-height:1;cursor:pointer}
-.back-to-school-brand{font-size:.7rem;font-weight:900;letter-spacing:.14em;color:var(--balad-green)}
-.back-to-school-kicker{margin:13px 0 2px;color:var(--balad-red);font-size:.72rem;font-weight:900;letter-spacing:.16em}
-.back-to-school-modal h2{margin:0;color:var(--balad-green);font-size:clamp(1.55rem,4vw,2.25rem)}
-.back-to-school-media{position:relative;margin:18px 0;border-radius:16px;overflow:hidden;background:#eaf3ef}
-.back-to-school-media img{width:100%;height:270px;object-fit:cover}
-.back-to-school-media::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(3,40,30,.72))}
-.back-to-school-media-note{position:absolute;z-index:2;left:18px;right:18px;bottom:15px;color:#fff;display:flex;flex-direction:column}
-.back-to-school-media-note strong{font-size:1.05rem}.back-to-school-media-note span{font-size:.78rem;color:rgba(255,255,255,.9)}
-.back-to-school-message{margin:0;color:var(--balad-muted);line-height:1.55;font-size:.9rem}
-.back-to-school-actions{display:flex;justify-content:flex-end;gap:9px;flex-wrap:wrap;margin-top:18px}
-.back-to-school-actions a,.back-to-school-actions button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 15px;border-radius:9px;font-weight:900;font-size:.78rem;text-decoration:none;cursor:pointer}
-.back-to-school-actions a{background:var(--balad-green);color:#fff}.back-to-school-actions button{background:#fff;color:var(--balad-green);border:1px solid var(--balad-green)}
-body.back-to-school-open{overflow:hidden}
-@media(max-width:760px){
- .spotlight-grid{grid-template-columns:1fr}.spotlight-card{grid-template-columns:1fr}.spotlight-media{height:190px;min-height:190px}
- .week-grid{grid-template-columns:1fr}.week-card img{height:180px}
- .back-to-school-modal{padding:20px;border-radius:18px}.back-to-school-media img{height:220px}.back-to-school-actions{display:grid;grid-template-columns:1fr}.back-to-school-actions a,.back-to-school-actions button{width:100%}
-}
-
 </style>
 </head>
 
@@ -800,27 +788,26 @@ body.back-to-school-open{overflow:hidden}
 
 <main>
 
-<!-- BALAD BACK-TO-SCHOOL WELCOME — temporary first-week campaign -->
-<div class="back-to-school-popup" id="backToSchoolPopup" hidden aria-hidden="true">
-  <div class="back-to-school-backdrop" data-close-back-to-school></div>
-  <section class="back-to-school-modal" role="dialog" aria-modal="true" aria-labelledby="backToSchoolTitle">
-    <button class="back-to-school-close" type="button" aria-label="Close welcome" data-close-back-to-school>×</button>
-    <div class="back-to-school-brand">BALAD PRIVATE SCHOOLS</div>
-    <p class="back-to-school-kicker">WELCOME BACK</p>
-    <h2 id="backToSchoolTitle">2026/2027 Academic Session</h2>
-    <div class="back-to-school-media">
-      <img src="images/school-building1.jpg" alt="BALAD Private Schools" />
-      <div class="back-to-school-media-note">
-        <strong>Back to school at BALAD</strong>
-        <span>Our welcome video and first-week moments will appear here.</span>
+<!-- Temporary Back-to-School welcome: active 12–19 September 2026 unless Control changes the dates. -->
+<div id="backSchoolOverlay" class="back-school-overlay" hidden aria-modal="true" role="dialog" aria-labelledby="backSchoolTitle">
+  <div class="back-school-modal">
+    <button class="back-school-close" type="button" aria-label="Close Back-to-School welcome" id="backSchoolClose">×</button>
+    <div class="back-school-head">
+      <p class="kicker">BALAD PRIVATE SCHOOLS</p>
+      <h2 id="backSchoolTitle">WELCOME BACK</h2>
+      <p id="backSchoolSubtitle">2026/2027 Academic Session</p>
+    </div>
+    <div id="backSchoolGallery" class="back-school-gallery">
+      <div class="back-school-empty">Back-to-School moments will appear here.<br>Control Management can upload the welcome video or photo gallery.</div>
+    </div>
+    <div class="back-school-body">
+      <p id="backSchoolBody">A new session. New goals. New possibilities. Welcome back to our students, parents and staff.</p>
+      <div class="back-school-actions">
+        <button type="button" class="secondary" id="backSchoolGalleryBtn">View First-Week Moments</button>
+        <button type="button" id="backSchoolEnterBtn">Enter Website</button>
       </div>
     </div>
-    <p class="back-to-school-message">A new session. New goals. New possibilities. Welcome back to our students, parents and staff.</p>
-    <div class="back-to-school-actions">
-      <a href="#this-week-at-balad" data-close-back-to-school>View First-Week Moments</a>
-      <button type="button" data-close-back-to-school>Enter Website</button>
-    </div>
-  </section>
+  </div>
 </div>
 
 <div class="announcement-bar">
@@ -860,36 +847,6 @@ body.back-to-school-open{overflow:hidden}
   <article class="home-stat"><strong>350+</strong><span>Students</span></article>
   <article class="home-stat"><strong>50+</strong><span>Qualified Teachers</span></article>
   <article class="home-stat"><strong>100%</strong><span>Commitment to Success</span></article>
-</section>
-
-<section class="home-section spotlight-section" id="balad-spotlight">
-  <div class="home-container">
-    <div class="section-heading">
-      <p class="section-kicker">RECOGNITION • COMMUNITY • EXCELLENCE</p>
-      <h2>BALAD Spotlight</h2>
-      <p>Meet the people and moments making a difference in the BALAD community.</p>
-    </div>
-    <div class="spotlight-grid">
-      <article class="spotlight-card">
-        <div class="spotlight-media"><img src="images/Competition%20(1).JPG" alt="BALAD student achievement"></div>
-        <div class="spotlight-content">
-          <span class="spotlight-tag">STUDENT SPOTLIGHT</span>
-          <h3>Celebrating Our Students</h3>
-          <p>Outstanding effort, character, creativity and achievement deserve to be celebrated.</p>
-          <a href="news.html">View Spotlight →</a>
-        </div>
-      </article>
-      <article class="spotlight-card">
-        <div class="spotlight-media"><img src="images/teachers-day1.jpg" alt="BALAD teachers and students"></div>
-        <div class="spotlight-content">
-          <span class="spotlight-tag">TEACHER SPOTLIGHT</span>
-          <h3>Celebrating Our Teachers</h3>
-          <p>Recognising the dedication, guidance and everyday impact of our teachers.</p>
-          <a href="team.html">Meet Our Team →</a>
-        </div>
-      </article>
-    </div>
-  </div>
 </section>
 
 <section class="home-section">
@@ -971,6 +928,33 @@ body.back-to-school-open{overflow:hidden}
   </div>
 </section>
 
+<section class="home-section homepage-feature-section" id="balad-spotlight-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>BALAD Spotlight</h2>
+      <p>Celebrating the people, achievements, talents and stories that make BALAD special.</p>
+    </div>
+    <div id="baladSpotlight" class="spotlight-card">
+      <div class="spotlight-media"><div class="spotlight-placeholder"><strong>Spotlight coming soon</strong><br>Featured students, teachers, achievements and talents will appear here.</div></div>
+      <div class="spotlight-copy"><p class="spotlight-kicker">BALAD SPOTLIGHT</p><h3>Waiting for this week's feature</h3><p>This space is ready for a new spotlight story from the BALAD community.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="home-section homepage-feature-section" id="balad-week-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>This Week at BALAD</h2>
+      <p>A simple place to share the week's activities, moments and achievements.</p>
+    </div>
+    <div id="baladWeekGrid" class="week-grid">
+      <article class="week-card"><div class="week-media"><div class="week-placeholder">Waiting for a new BALAD moment.</div></div><div class="week-copy"><h3>Week Moment</h3><p>Content will be added from Control Management.</p></div></article>
+      <article class="week-card"><div class="week-media"><div class="week-placeholder">Waiting for a new BALAD activity.</div></div><div class="week-copy"><h3>School Activity</h3><p>Content will be added from Control Management.</p></div></article>
+      <article class="week-card"><div class="week-media"><div class="week-placeholder">Waiting for a new BALAD achievement.</div></div><div class="week-copy"><h3>Achievement</h3><p>Content will be added from Control Management.</p></div></article>
+    </div>
+  </div>
+</section>
+
 <section class="home-section announcement-section">
   <div class="home-container">
     <div class="section-heading">
@@ -986,31 +970,6 @@ body.back-to-school-open{overflow:hidden}
   </div>
 </section>
 
-<section class="home-section week-section" id="this-week-at-balad">
-  <div class="home-container">
-    <div class="section-heading">
-      <p class="section-kicker">SCHOOL LIFE • UPDATES • MOMENTS</p>
-      <h2>This Week at BALAD</h2>
-      <p>A quick look at the activities, people and moments happening around our schools.</p>
-    </div>
-    <div class="week-grid">
-      <article class="week-card">
-        <img src="images/career-day1.jpg" alt="BALAD school activity">
-        <div><span>ACTIVITY</span><h3>Learning Beyond the Classroom</h3><p>Practical experiences and activities that help students learn by doing.</p></div>
-      </article>
-      <article class="week-card">
-        <img src="images/prize-giving3.jpg" alt="BALAD academic achievement">
-        <div><span>ACHIEVEMENT</span><h3>Celebrating Excellence</h3><p>Recognising effort, progress and the achievements of our school community.</p></div>
-      </article>
-      <article class="week-card">
-        <img src="images/sports4.jpg" alt="BALAD sports activity">
-        <div><span>SCHOOL LIFE</span><h3>More Than the Classroom</h3><p>Teamwork, confidence, discipline and memorable school experiences.</p></div>
-      </article>
-    </div>
-    <div class="week-more"><a href="news.html">See More from BALAD →</a></div>
-  </div>
-</section>
-
 <section class="home-section">
   <div class="home-container">
     <div class="section-heading">
@@ -1019,11 +978,11 @@ body.back-to-school-open{overflow:hidden}
     </div>
     <div class="talent-grid">
       <article class="talent-card">
-        <video src="media/BALAD_Art_Clip_Second_Student_6sec.mp4" data-media-key="index-video-1" muted playsinline controls preload="metadata"></video>
+        <video src="media/BALAD_Art_Clip_Second_Student_6sec.mp4" poster="images/Career.JPG" data-media-key="index-video-1" muted playsinline controls preload="metadata"></video>
         <div class="talent-label"><strong>Creative Art</strong><span>Students expressing ideas through practical art.</span></div>
       </article>
       <article class="talent-card">
-        <video src="media/BALAD_Talent_Show_Clip.mp4" data-media-key="index-video-2" muted playsinline controls preload="metadata"></video>
+        <video src="media/BALAD_Talent_Show_Clip.mp4" poster="images/club-activities4.jpg" data-media-key="index-video-2" muted playsinline controls preload="metadata"></video>
         <div class="talent-label"><strong>Talent Show</strong><span>Celebrating confidence, creativity and student talent.</span></div>
       </article>
     </div>
@@ -1113,23 +1072,5 @@ body.back-to-school-open{overflow:hidden}
 })();
 </script>
 
-
-<script>
-(function(){
-  const popup=document.getElementById('backToSchoolPopup');
-  if(!popup)return;
-  // Resumption is Monday 14 September 2026. The campaign ends after the first week.
-  const start=new Date(2026,8,14,0,0,0);
-  const end=new Date(2026,8,21,0,0,0);
-  const now=new Date();
-  if(now<start || now>=end)return;
-  popup.hidden=false;
-  popup.setAttribute('aria-hidden','false');
-  document.body.classList.add('back-to-school-open');
-  const close=()=>{popup.hidden=true;popup.setAttribute('aria-hidden','true');document.body.classList.remove('back-to-school-open');};
-  popup.querySelectorAll('[data-close-back-to-school]').forEach(el=>el.addEventListener('click',close));
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!popup.hidden)close();});
-})();
-</script>
 </body>
 </html>

@@ -107,12 +107,12 @@ function renderHomepageFeatures(items){
     gallery.innerHTML='<div class="back-school-empty" aria-hidden="true"></div>';
     if(galleryBtn) galleryBtn.hidden=true;
   }
-  const close=()=>{popup.hidden=true;};
+  const close=()=>{localStorage.setItem(key,"1");popup.hidden=true;};
   window.closeBaladBackSchool=close;
   document.getElementById("backSchoolClose")?.addEventListener("click",close);
-
+  document.getElementById("backSchoolEnterBtn")?.addEventListener("click",close);
   document.getElementById("backSchoolGalleryBtn")?.addEventListener("click",()=>gallery.scrollIntoView({behavior:"smooth",block:"center"}));
-
+  popup.addEventListener("click",e=>{if(e.target===popup) close();});
   popup.hidden=false;
 }
 

@@ -3797,3 +3797,512 @@ footer{
   background:var(--soft);
 }
 
+
+/* ==========================================================
+   BALAD ABOUT PAGE — SHARP GRADIENT RESTYLE
+   VISUAL ONLY: no content, links, scripts or functionality changed.
+========================================================== */
+body[data-cms-page="about"]{
+  background:#fff;
+}
+
+body[data-cms-page="about"] .about-history,
+body[data-cms-page="about"] .proprietor-message,
+body[data-cms-page="about"] .facilities,
+body[data-cms-page="about"] .academic,
+body[data-cms-page="about"] .about-cta{
+  position:relative;
+  overflow:hidden;
+}
+
+/* Remove the washed-out/cloudy look and give each section a crisp surface. */
+body[data-cms-page="about"] .why-choose{
+  background:#fff !important;
+  padding:0 !important;
+}
+
+body[data-cms-page="about"] .about-history{
+  padding:46px 0 52px;
+  background:linear-gradient(120deg,#f7f0e3 0%,#ffffff 48%,#e1eee7 100%);
+  border-top:1px solid #d7e4dc;
+  border-bottom:1px solid #d7e4dc;
+}
+
+body[data-cms-page="about"] .history-container{
+  width:min(94%,1120px);
+  margin:auto;
+  display:grid;
+  grid-template-columns:minmax(280px,1fr) minmax(320px,1.15fr);
+  gap:42px;
+  align-items:center;
+}
+
+body[data-cms-page="about"] .history-image{
+  padding:8px;
+  border-radius:24px;
+  background:linear-gradient(145deg,#2f765f,#78aa92 55%,#f2dfbd);
+  box-shadow:none;
+}
+
+body[data-cms-page="about"] .history-image img{
+  width:100%;
+  height:330px;
+  object-fit:cover;
+  border-radius:18px;
+  border:3px solid #fff;
+}
+
+body[data-cms-page="about"] .history-text{
+  padding:4px 0;
+}
+
+body[data-cms-page="about"] .history-text h2{
+  display:inline-block;
+  color:#235947;
+  font-size:clamp(28px,3.2vw,40px);
+  line-height:1.1;
+  margin-bottom:14px;
+  padding-bottom:8px;
+  border-bottom:4px solid #b84d45;
+}
+
+body[data-cms-page="about"] .history-text p{
+  color:#263831;
+  font-size:clamp(15px,1.35vw,18px);
+  line-height:1.72;
+  margin:0;
+}
+
+body[data-cms-page="about"] .proprietor-message{
+  padding:58px 0 64px;
+  background:linear-gradient(125deg,#235947 0%,#3b856b 55%,#72a88f 100%);
+  border:0;
+}
+
+body[data-cms-page="about"] .proprietor-container{
+  width:min(94%,1120px);
+  margin:auto;
+  background:transparent;
+  padding:0;
+}
+
+body[data-cms-page="about"] .proprietor-content{
+  max-width:1050px;
+}
+
+body[data-cms-page="about"] .proprietor-content h2{
+  color:#fff;
+  font-size:clamp(28px,3.8vw,48px);
+  margin-bottom:24px;
+}
+
+body[data-cms-page="about"] .proprietor-content .proprietor-quote{
+  border-left:7px solid #f7f0e3;
+  padding:12px 0 12px 22px;
+  margin:0 0 25px;
+  color:#fff1e2;
+  font-size:clamp(17px,1.8vw,24px);
+  line-height:1.55;
+}
+
+body[data-cms-page="about"] .proprietor-content > p:not(.proprietor-quote):not(.signature){
+  color:#fff;
+  font-size:clamp(15px,1.35vw,18px);
+  line-height:1.75;
+  margin-bottom:22px;
+}
+
+body[data-cms-page="about"] .proprietor-content .signature{
+  margin-top:28px;
+  color:#fff;
+  font-size:18px;
+  line-height:1.65;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.42);
+}
+
+body[data-cms-page="about"] .proprietor-content .signature strong{
+  color:#fff1df;
+  font-size:clamp(18px,2vw,24px);
+}
+
+body[data-cms-page="about"] .facilities{
+  padding:54px 0 58px;
+  background:linear-gradient(135deg,#fffaf0 0%,#f7f0e3 48%,#ffffff 100%);
+}
+
+body[data-cms-page="about"] .facilities h2,
+body[data-cms-page="about"] .academic h2{
+  color:#286b55;
+  font-size:clamp(27px,3vw,38px);
+  text-align:center;
+  margin-bottom:8px;
+}
+
+body[data-cms-page="about"] .facilities-subtitle,
+body[data-cms-page="about"] .academic-subtitle{
+  color:#4f5f58;
+  max-width:720px;
+  margin:0 auto 28px;
+  text-align:center;
+  font-size:15px;
+}
+
+body[data-cms-page="about"] .facilities-grid{
+  width:min(94%,1120px);
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+
+body[data-cms-page="about"] .facility-card{
+  min-height:175px;
+  padding:22px 20px;
+  border:1px solid #c9ddd3;
+  border-top:5px solid #3b856b;
+  border-radius:16px;
+  background:linear-gradient(145deg,#fff,#f4f8f2);
+  box-shadow:none;
+}
+
+body[data-cms-page="about"] .facility-card h3{
+  color:#286b55;
+  font-size:17px;
+  margin-bottom:7px;
+}
+
+body[data-cms-page="about"] .facility-card p{
+  color:#56645e;
+  font-size:13px;
+  line-height:1.6;
+}
+
+body[data-cms-page="about"] .facility-home-btn{
+  background:linear-gradient(90deg,#235947,#3b856b);
+  color:#fff;
+  border-radius:10px;
+  box-shadow:none;
+  padding:11px 20px;
+}
+
+body[data-cms-page="about"] .academic{
+  padding:56px 0 60px;
+  background:linear-gradient(120deg,#e5f0e9 0%,#ffffff 52%,#f7f0e3 100%);
+}
+
+body[data-cms-page="about"] .academic-grid{
+  width:min(94%,1120px);
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:15px;
+}
+
+body[data-cms-page="about"] .academic-card{
+  padding:21px 18px;
+  min-height:165px;
+  border:1px solid #cfdfd6;
+  border-radius:15px;
+  background:#fff;
+  box-shadow:none;
+}
+
+body[data-cms-page="about"] .academic-card h3{
+  color:#235947;
+  font-size:16px;
+  margin-bottom:7px;
+}
+
+body[data-cms-page="about"] .academic-card p{
+  color:#58665f;
+  font-size:13px;
+  line-height:1.6;
+}
+
+body[data-cms-page="about"] .about-cta{
+  width:100%;
+  padding:54px 20px 58px;
+  text-align:center;
+  background:linear-gradient(120deg,#235947 0%,#3b856b 62%,#8aae9c 100%);
+  color:#fff;
+}
+
+body[data-cms-page="about"] .about-cta h2{
+  color:#fff;
+  font-size:clamp(25px,3vw,38px);
+  margin-bottom:9px;
+}
+
+body[data-cms-page="about"] .about-cta p{
+  color:#f6fbf8;
+  max-width:700px;
+  margin:0 auto 20px;
+  font-size:15px;
+}
+
+body[data-cms-page="about"] .about-cta .cta-btn{
+  display:inline-block;
+  background:#f7f0e3;
+  color:#235947;
+  border-radius:10px;
+  padding:12px 24px;
+  font-weight:800;
+  box-shadow:none;
+}
+
+/* Keep the page crisp on phones — no foggy shadows or oversized empty gaps. */
+@media(max-width:760px){
+  body[data-cms-page="about"] .about-history{
+    padding:25px 0 32px;
+  }
+  body[data-cms-page="about"] .history-container{
+    grid-template-columns:1fr;
+    gap:22px;
+  }
+  body[data-cms-page="about"] .history-image img{
+    height:265px;
+  }
+  body[data-cms-page="about"] .history-text h2{
+    font-size:28px;
+    margin-bottom:10px;
+  }
+  body[data-cms-page="about"] .history-text p{
+    font-size:14px;
+    line-height:1.62;
+  }
+  body[data-cms-page="about"] .proprietor-message{
+    padding:34px 0 40px;
+  }
+  body[data-cms-page="about"] .proprietor-content h2{
+    font-size:28px;
+    margin-bottom:18px;
+  }
+  body[data-cms-page="about"] .proprietor-content .proprietor-quote{
+    font-size:16px;
+    padding-left:15px;
+    border-left-width:5px;
+  }
+  body[data-cms-page="about"] .proprietor-content > p:not(.proprietor-quote):not(.signature){
+    font-size:14px;
+    line-height:1.65;
+  }
+  body[data-cms-page="about"] .proprietor-content .signature{
+    font-size:14px;
+  }
+  body[data-cms-page="about"] .facilities,
+  body[data-cms-page="about"] .academic{
+    padding:34px 0 38px;
+  }
+  body[data-cms-page="about"] .facilities-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+  }
+  body[data-cms-page="about"] .facility-card{
+    min-height:150px;
+    padding:15px 12px;
+  }
+  body[data-cms-page="about"] .facility-card h3{
+    font-size:13px;
+  }
+  body[data-cms-page="about"] .facility-card p{
+    font-size:10px;
+    line-height:1.45;
+  }
+  body[data-cms-page="about"] .academic-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+  }
+  body[data-cms-page="about"] .academic-card{
+    min-height:140px;
+    padding:14px 11px;
+  }
+  body[data-cms-page="about"] .academic-card h3{
+    font-size:13px;
+  }
+  body[data-cms-page="about"] .academic-card p{
+    font-size:10px;
+    line-height:1.45;
+  }
+  body[data-cms-page="about"] .about-cta{
+    padding:36px 18px 40px;
+  }
+  body[data-cms-page="about"] .about-cta h2{
+    font-size:25px;
+  }
+  body[data-cms-page="about"] .about-cta p{
+    font-size:13px;
+  }
+}
+
+/* =========================================================
+   BALAD GLOBAL SHARP GRADIENT THEME — STYLE ONLY
+   Applies consistently across all public pages.
+   No content, scripts, links, data or functionality changed.
+========================================================= */
+:root{
+  --balad-g1:#2f775f;
+  --balad-g2:#5b9a7f;
+  --balad-g3:#dfece3;
+  --balad-cream:#f7f0e2;
+  --balad-cream2:#fffaf1;
+  --balad-white:#ffffff;
+}
+
+/* Remove the washed/cloudy page feel. Use crisp, controlled gradients. */
+html,body{
+  background:linear-gradient(180deg,#ffffff 0%,#fbfaf6 46%,#f7f0e2 100%);
+}
+
+main,
+.page-content,
+section{
+  background-image:none;
+}
+
+/* Header stays clean and sharp. */
+header{
+  background:linear-gradient(180deg,#ffffff 0%,#f8fbf8 100%) !important;
+  box-shadow:0 2px 12px rgba(35,89,71,.08) !important;
+}
+
+/* Inner-page hero */
+.page-hero,
+.facility-page-title,
+.team-title-strip{
+  background:linear-gradient(115deg,#286b55 0%,#3f856c 52%,#78a991 100%) !important;
+}
+
+/* General image heroes: sharper green treatment, no milky white wash. */
+.hero{
+  background-image:
+    linear-gradient(90deg,rgba(30,91,69,.48) 0%,rgba(44,105,82,.16) 58%,rgba(0,0,0,0) 100%),
+    url('images/school.jpg') !important;
+}
+
+.home-page .home-hero::before{
+  background:linear-gradient(90deg,rgba(30,91,69,.34) 0%,rgba(30,91,69,.10) 55%,rgba(30,91,69,0) 100%) !important;
+}
+.home-page .home-hero::after{
+  background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(18,57,44,.28) 100%) !important;
+}
+
+/* Clean alternating green / white / cream rhythm on every page. */
+section:nth-of-type(3n+1){
+  background:linear-gradient(135deg,#ffffff 0%,#f8fbf8 100%);
+}
+section:nth-of-type(3n+2){
+  background:linear-gradient(135deg,#f7f0e2 0%,#fffaf1 100%);
+}
+section:nth-of-type(3n){
+  background:linear-gradient(135deg,#2f775f 0%,#5b9a7f 100%);
+}
+
+/* Keep text readable when a section is green. */
+section:nth-of-type(3n) h1,
+section:nth-of-type(3n) h2,
+section:nth-of-type(3n) h3,
+section:nth-of-type(3n) p,
+section:nth-of-type(3n) li,
+section:nth-of-type(3n) .section-header h2{
+  color:inherit;
+}
+
+/* Cards remain crisp instead of floating in a white haze. */
+.vm-card,.choose-card,.announcement-card,.school-card,.contact-item,
+.value-card,.facility-card,.requirement-card,.process-card,.news-card,
+.contact-card,.featured-news-card,.enquiry-form,.result-student-card,
+.role-card,.result-login,.facility-page-card,.team-card,.management-card,
+.teacher-card,.welcome-card,.cbt-team-card,.alumni-video-card,
+.alumni-community-wrap,.result-choice-card,.academic-info-card{
+  background:linear-gradient(145deg,#ffffff 0%,#fbfaf5 100%) !important;
+  box-shadow:0 8px 22px rgba(35,89,71,.10) !important;
+  border-color:#d9e4dd !important;
+}
+
+/* Green feature cards should be visibly green, not faded. */
+.home-page .school-card:nth-child(even),
+.home-page .choose-card:nth-child(even),
+.stat-box:nth-child(3n),
+.team-btn.active,
+.result-school-tab.active{
+  background:linear-gradient(135deg,#286b55 0%,#4b9175 100%) !important;
+  border-color:#286b55 !important;
+}
+
+/* Cream feature areas */
+.about-vision-mission,
+.proprietor-message,
+.facilities,
+.academic,
+.teachers-section,
+.primary-team,
+.result-choice-page,
+.waec-summary{
+  background:linear-gradient(135deg,#f7f0e2 0%,#fffaf1 100%) !important;
+}
+
+/* White areas remain clean, not cloudy. */
+.about-history,
+.team-navigation,
+.management-team,
+.department-section,
+.gallery-section,
+.why-choose,
+.core-values,
+.contact,
+.result-page,
+.result-portal{
+  background:linear-gradient(180deg,#ffffff 0%,#f8fbf8 100%) !important;
+}
+
+/* Green feature strips */
+.about-cta,
+.admissions,
+.admission-content,
+footer{
+  background:linear-gradient(120deg,#286b55 0%,#3f856c 55%,#6b9f88 100%) !important;
+}
+
+/* Remove milky overlays from common image sections. */
+.about-slide:before{
+  background:linear-gradient(90deg,rgba(30,91,69,.72) 0%,rgba(30,91,69,.34) 58%,rgba(30,91,69,.08) 100%) !important;
+}
+
+/* Buttons and controls */
+.btn,.admission-btn,.gallery-btn,.facility-home-btn,
+.waec-home-btn{
+  background:linear-gradient(135deg,#286b55 0%,#4b9175 100%) !important;
+  border-color:#286b55 !important;
+}
+.btn:hover,.admission-btn:hover,.gallery-btn:hover,.facility-home-btn:hover,
+.waec-home-btn:hover{
+  background:linear-gradient(135deg,#205b48 0%,#3c7d64 100%) !important;
+}
+
+/* Typography remains sharp. */
+.section-header h2,.why-choose h2,.latest-announcements h2,
+.gallery-section h2,.contact h2,.team-title-strip h1,
+.facility-page-title h1,.facility-page-card-body h2{
+  color:#286b55;
+}
+
+/* Inputs: clean white surfaces with no glow/fog. */
+.form-group input,.form-group select,.form-group textarea,
+.result-login input{
+  background:#ffffff !important;
+  box-shadow:none !important;
+  border-color:#cfded5 !important;
+}
+
+/* Mobile: preserve the same sharp gradient rhythm without oversized blank areas. */
+@media(max-width:760px){
+  section:nth-of-type(3n+1),
+  section:nth-of-type(3n+2),
+  section:nth-of-type(3n){
+    background-image:none;
+  }
+  section:nth-of-type(3n+1){background:#ffffff;}
+  section:nth-of-type(3n+2){background:#f7f0e2;}
+  section:nth-of-type(3n){background:linear-gradient(135deg,#2f775f 0%,#5b9a7f 100%);}
+}

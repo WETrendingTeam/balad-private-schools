@@ -56,7 +56,7 @@ function renderBlock(block){
 
 function renderFeatureMedia(item, cls=""){
   const url=safeUrl(item.url||"");
-  if(!url) return `<div class="${cls}spotlight-placeholder">No media uploaded yet.<br>Control Management can add a photo or video.</div>`;
+  if(!url) return `<div class="${cls}spotlight-placeholder"><strong>Coming Soon</strong></div>`;
   if(item.mediaType==="video") return `<video class="${cls}" controls muted playsinline preload="metadata" src="${esc(url)}"></video>`;
   return `<img class="${cls}" src="${esc(url)}" alt="${esc(item.title||"BALAD feature")}">`;
 }
@@ -68,8 +68,8 @@ function renderHomepageFeatures(items){
   if(spotlightRoot && spotlight){
     const media=spotlight.mediaUrl ? (spotlight.mediaType==="video"
       ? `<video controls muted playsinline preload="metadata" src="${esc(safeUrl(spotlight.mediaUrl))}"></video>`
-      : `<img src="${esc(safeUrl(spotlight.mediaUrl))}" alt="${esc(spotlight.title||"BALAD Spotlight")}">`) : `<div class="spotlight-placeholder"><strong>No media uploaded yet</strong><br>Control Management can add the Spotlight photo or video.</div>`;
-    spotlightRoot.innerHTML=`<div class="spotlight-media">${media}</div><div class="spotlight-copy"><p class="spotlight-kicker">${esc(spotlight.label||"BALAD SPOTLIGHT")}</p><h3>${esc(spotlight.title||"BALAD Spotlight")}</h3><p>${esc(spotlight.body||"A new BALAD story will appear here.").replace(/\n/g,"<br>")}</p></div>`;
+      : `<img src="${esc(safeUrl(spotlight.mediaUrl))}" alt="${esc(spotlight.title||"BALAD Spotlight")}">`) : `<div class="spotlight-placeholder"><strong>Coming Soon</strong></div>`;
+    spotlightRoot.innerHTML=`<div class="spotlight-media">${media}</div><div class="spotlight-copy"><p class="spotlight-kicker">${esc(spotlight.label||"BALAD SPOTLIGHT")}</p><h3>${esc(spotlight.title||"BALAD Spotlight")}</h3><p>${esc(spotlight.body||"").replace(/\n/g,"<br>")}</p></div>`;
   }
   const weekRoot=document.getElementById("baladWeekGrid");
   if(weekRoot){
@@ -77,8 +77,8 @@ function renderHomepageFeatures(items){
     if(week.length){
       weekRoot.innerHTML=week.map((w,i)=>{
         const url=safeUrl(w.mediaUrl||"");
-        const media=url ? (w.mediaType==="video" ? `<video muted playsinline preload="metadata" src="${esc(url)}"></video>` : `<img src="${esc(url)}" alt="${esc(w.title||"This Week at BALAD")}">`) : `<div class="week-placeholder">No media uploaded yet.<br>Control Management can add one.</div>`;
-        return `<article class="week-card"><div class="week-media">${media}</div><div class="week-copy"><h3>${esc(w.title||["Week Moment","School Activity","Achievement"][i]||"BALAD Moment")}</h3><p>${esc(w.body||"A new BALAD moment will appear here.").replace(/\n/g,"<br>")}</p></div></article>`;
+        const media=url ? (w.mediaType==="video" ? `<video muted playsinline preload="metadata" src="${esc(url)}"></video>` : `<img src="${esc(url)}" alt="${esc(w.title||"This Week at BALAD")}">`) : `<div class="week-placeholder">Coming Soon</div>`;
+        return `<article class="week-card"><div class="week-media">${media}</div><div class="week-copy"><h3>${esc(w.title||["Week Moment","School Activity","Achievement"][i]||"BALAD Moment")}</h3><p>${esc(w.body||"").replace(/\n/g,"<br>")}</p></div></article>`;
       }).join("");
     }
   }
@@ -88,7 +88,7 @@ function renderHomepageFeatures(items){
   const now=new Date();
   let bs=featureItems.find(x=>x.feature==="backToSchool");
   if(!bs){
-    bs={active:true,startAt:"2026-09-12T00:00:00+01:00",endAt:"2026-09-20T00:00:00+01:00",title:"WELCOME BACK",subtitle:"2026/2027 Academic Session",body:"A new session. New goals. New possibilities. Welcome back to our students, parents and staff.",items:[]};
+    bs={active:true,startAt:"2026-09-12T00:00:00+01:00",endAt:"2026-09-20T00:00:00+01:00",title:"WELCOME TO THE 2026/2027 SCHOOL YEAR",subtitle:"2026/2027 Academic Session",body:"A new session. New goals. New possibilities. Welcome back to our students, parents and staff.",items:[]};
   }
   const start=new Date(bs.startAt||"2026-09-12T00:00:00+01:00"), end=new Date(bs.endAt||"2026-09-20T00:00:00+01:00");
   const key="balad-back-school-closed-"+(bs.endAt||"2026-09-20");
@@ -99,13 +99,20 @@ function renderHomepageFeatures(items){
   document.getElementById("backSchoolBody").textContent=bs.body||"Welcome back to BALAD Private Schools.";
   const gallery=document.getElementById("backSchoolGallery");
   const mediaItems=Array.isArray(bs.items)?bs.items:[];
+  const galleryBtn=document.getElementById("backSchoolGalleryBtn");
   if(mediaItems.length){
     gallery.innerHTML=mediaItems.slice(0,5).map(m=>m.type==="video"?`<figure><video controls muted playsinline preload="metadata" src="${esc(safeUrl(m.url))}"></video></figure>`:`<figure><img src="${esc(safeUrl(m.url))}" alt="${esc(m.caption||"Back-to-School moment")}"></figure>`).join("");
+    if(galleryBtn) galleryBtn.hidden=false;
+  } else {
+    gallery.innerHTML='<div class="back-school-empty" aria-hidden="true"></div>';
+    if(galleryBtn) galleryBtn.hidden=true;
   }
   const close=()=>{localStorage.setItem(key,"1");popup.hidden=true;};
-  document.getElementById("backSchoolClose")?.addEventListener("click",close,{once:true});
-  document.getElementById("backSchoolEnterBtn")?.addEventListener("click",close,{once:true});
-  document.getElementById("backSchoolGalleryBtn")?.addEventListener("click",()=>gallery.scrollIntoView({behavior:"smooth",block:"center"}),{once:true});
+  window.closeBaladBackSchool=close;
+  document.getElementById("backSchoolClose")?.addEventListener("click",close);
+  document.getElementById("backSchoolEnterBtn")?.addEventListener("click",close);
+  document.getElementById("backSchoolGalleryBtn")?.addEventListener("click",()=>gallery.scrollIntoView({behavior:"smooth",block:"center"}));
+  popup.addEventListener("click",e=>{if(e.target===popup) close();});
   popup.hidden=false;
 }
 

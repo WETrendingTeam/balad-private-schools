@@ -3531,3 +3531,269 @@ body[data-cms-page="index"] .cms-public-content-wrap{display:none!important}
     content:none !important;
   }
 }
+
+
+/* =========================================================
+   BALAD SITE VISUAL REFRESH — STYLE ONLY
+   Green / White / Cream alternating rhythm.
+   No layout content, links, scripts, Firebase or form behavior changed.
+========================================================= */
+:root{
+  --green:#3b856b;
+  --green-dark:#286b55;
+  --green-deep:#235947;
+  --red:#b84d45;
+  --red-dark:#9e3f39;
+  --ink:#263831;
+  --muted:#68756f;
+  --soft:#edf4ef;
+  --cream:#f7f0e3;
+  --cream-2:#fbf7ef;
+  --line:#dfe8e2;
+  --white:#fff;
+  --shadow:0 12px 34px rgba(38,88,70,.09);
+  --radius:18px;
+}
+
+/* Global */
+body{
+  background:#fff;
+  color:var(--ink);
+}
+::selection{
+  background:rgba(59,133,107,.18);
+  color:var(--green-deep);
+}
+a{transition:color .2s ease,background .2s ease,border-color .2s ease,transform .2s ease}
+
+/* Header — clean white */
+header{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  box-shadow:0 3px 18px rgba(38,88,70,.05);
+}
+.school-name h2{color:var(--green-deep)}
+.menu-btn{color:var(--green)}
+
+/* Announcement — lighter green */
+.announcement-bar{
+  background:var(--green);
+  height:36px;
+}
+
+/* Standard hero on inner pages — green but not dark */
+.page-hero{
+  background:linear-gradient(135deg,var(--green),#73a990);
+  padding:62px 20px;
+}
+.page-overlay h1{color:#fff}
+
+/* Homepage hero — preserve photography, very light overlay */
+.home-page .home-hero{
+  box-shadow:0 18px 45px rgba(38,88,70,.13);
+}
+.home-page .home-hero::before{
+  background:
+    linear-gradient(90deg,rgba(22,73,57,.22),rgba(22,73,57,.06) 48%,rgba(22,73,57,0) 82%),
+    linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.20));
+}
+.home-page .home-hero::after{
+  background:linear-gradient(0deg,rgba(0,0,0,.18),transparent 55%);
+}
+
+/* General hero used by other pages */
+.hero{
+  background:
+    linear-gradient(90deg,rgba(28,86,66,.26),rgba(28,86,66,.04)),
+    url('images/school.jpg') center/cover no-repeat;
+}
+
+/* Buttons — softer, less red-heavy */
+.btn,.admission-btn,.gallery-btn{
+  background:var(--green);
+  border-color:var(--green);
+}
+.btn:hover,.admission-btn:hover,.gallery-btn:hover{
+  background:var(--green-dark);
+  border-color:var(--green-dark);
+}
+.btn-secondary{
+  background:rgba(255,255,255,.13);
+  border-color:#fff;
+}
+
+/* Cards */
+.vm-card,.choose-card,.announcement-card,.school-card,.contact-item,
+.value-card,.facility-card,.requirement-card,.process-card,.news-card,.contact-card,
+.featured-news-card,.enquiry-form,.result-student-card,.role-card,.result-login{
+  border-color:var(--line);
+  box-shadow:var(--shadow);
+}
+.vm-card h3,.choose-card h3,.school-card h3,.announcement-card h3,.contact-item h3,
+.section-header h2,.why-choose h2,.latest-announcements h2,.gallery-section h2,.contact h2{
+  color:var(--green-deep);
+}
+
+/* White → cream → soft green section rhythm */
+.our-schools{
+  background:var(--cream);
+}
+.why-choose{
+  background:#fff;
+}
+.latest-announcements{
+  background:var(--soft);
+}
+.admissions{
+  background:var(--cream-2);
+}
+.gallery-section{
+  background:#fff;
+}
+.contact{
+  background:var(--cream);
+}
+.core-values{
+  background:#fff;
+}
+
+/* Alternate cards subtly instead of huge blocks of green */
+.home-page .school-card:nth-child(even),
+.home-page .choose-card:nth-child(even){
+  background:var(--green);
+  border-color:var(--green);
+  color:#fff;
+}
+.home-page .school-card:nth-child(even) h3,
+.home-page .choose-card:nth-child(even) h3{
+  color:#fff;
+}
+.home-page .school-card:nth-child(even) p,
+.home-page .choose-card:nth-child(even) p{
+  color:rgba(255,255,255,.9);
+}
+
+/* Stats */
+.stat-box{
+  background:#fff;
+  border-color:var(--line);
+  box-shadow:var(--shadow);
+}
+.stat-box h2{color:var(--green-deep)}
+
+/* Quick actions */
+.action-btn{
+  background:#fff;
+  color:var(--green-deep);
+  border-color:var(--line);
+}
+.action-btn:hover{
+  border-color:var(--green);
+  background:var(--soft);
+}
+
+/* Gallery */
+.gallery-item{
+  border-color:var(--line);
+  box-shadow:var(--shadow);
+}
+.gallery-item p{color:var(--green-deep)}
+
+/* Admissions */
+.admission-content{color:var(--green-deep)}
+.admission-content h2{color:var(--green-deep)}
+
+/* Footer — green accent, not near-black */
+footer{
+  background:var(--green-deep);
+}
+
+/* Team */
+.team-navigation{background:#fff}
+.team-btn{
+  background:var(--green);
+}
+.team-btn:not(.active){
+  color:var(--green-deep);
+  border-color:var(--green);
+}
+.management-card,.teacher-card{
+  border-color:var(--line);
+  border-top-color:var(--green);
+  box-shadow:var(--shadow);
+}
+.team-card-content h3{color:var(--green-deep)}
+.position{color:var(--red)!important}
+.staff-placeholder{
+  background:var(--soft);
+  color:var(--green-deep);
+}
+.teachers-section{
+  background:var(--cream);
+}
+
+/* Forms */
+.form-group input,.form-group select,.form-group textarea,
+.result-login input{
+  border-color:#d5e1da;
+  background:#fff;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus,
+.result-login input:focus{
+  outline:2px solid rgba(59,133,107,.16);
+  border-color:var(--green);
+}
+
+/* Result portal — keep function, refresh visual treatment */
+.result-role-note{
+  background:var(--soft);
+  border-left-color:var(--green);
+}
+.result-school-tab{
+  border-color:var(--green);
+  color:var(--green-deep);
+}
+.result-school-tab.active{
+  background:var(--green);
+}
+.result-class-card{
+  color:var(--green-deep);
+}
+.result-avatar{
+  background:var(--soft);
+  color:var(--green-deep);
+}
+.result-login button{
+  background:var(--green);
+}
+
+/* Mobile nav */
+@media(max-width:760px){
+  nav{
+    background:#fff;
+    box-shadow:0 12px 25px rgba(38,88,70,.10);
+  }
+}
+
+/* =========================================================
+   Homepage final rhythm overrides
+========================================================= */
+.home-page .our-schools{
+  background:var(--green);
+}
+.home-page .why-choose{
+  background:#fff;
+}
+.home-page .latest-announcements{
+  background:var(--cream);
+}
+.home-page .gallery-section{
+  background:#fff;
+}
+.home-page .admissions{
+  background:var(--cream);
+}
+.home-page .contact{
+  background:var(--soft);
+}
+

@@ -1163,6 +1163,86 @@
 }
 </style>
 
+
+<style id="balad-final-index-balance">
+:root{
+  --balad-green:#2f7d62;
+  --balad-green-soft:#e8f2ec;
+  --balad-green-pale:#f1f7f3;
+  --balad-cream:#f6efe1;
+  --balad-cream-deep:#eadfc9;
+  --balad-ink:#263a32;
+  --balad-muted:#68766f;
+}
+
+/* Let the actual photographs show through */
+.home-page .home-hero::before{
+  background:
+    linear-gradient(90deg,rgba(18,63,48,.25) 0%,rgba(18,63,48,.08) 45%,rgba(18,63,48,0) 78%),
+    linear-gradient(180deg,rgba(0,0,0,0) 48%,rgba(0,0,0,.28) 100%);
+}
+.home-page .home-hero::after{
+  background:linear-gradient(0deg,rgba(0,0,0,.22),transparent 52%);
+}
+.home-page .hero-copy h1{
+  text-shadow:0 3px 16px rgba(0,0,0,.24);
+}
+.home-page .hero-buttons a.secondary{
+  background:rgba(255,255,255,.13);
+}
+
+/* Green → white → cream → green → white → cream rhythm */
+.home-page .home-stats{
+  margin-top:-28px;
+}
+.home-page .home-stat{
+  background:#fff;
+}
+.home-page > section.home-section:nth-of-type(1){
+  background:#fff;
+}
+.home-page > section.home-section:nth-of-type(2){
+  background:var(--balad-cream);
+}
+.home-page .why-section{
+  background:var(--balad-green-soft);
+}
+.home-page .announcement-section{
+  background:var(--balad-cream);
+}
+.home-page .life-section{
+  background:linear-gradient(180deg,#fff,var(--balad-cream));
+}
+.home-page .homepage-feature-section{
+  background:#fff;
+}
+
+/* Use green as an accent, not the whole page */
+.home-page .vision-card:nth-child(even),
+.home-page .why-card:nth-child(even),
+.home-page .programme-card:nth-child(even){
+  background:var(--balad-green);
+}
+.home-page .announcement-card:nth-child(even),
+.home-page .school-choice article:nth-child(even){
+  background:var(--balad-cream);
+}
+.home-page .waec-box{
+  background:var(--balad-green);
+}
+
+/* Popup stays visually lighter */
+.home-page .back-school-overlay{
+  background:rgba(22,48,39,.62);
+}
+.home-page .back-school-head{
+  background:linear-gradient(135deg,#f1f7f3,#f6efe1);
+}
+.home-page .back-school-gallery{
+  background:#e8f2ec;
+}
+</style>
+
 </head>
 
 <body class="home-page" data-cms-page="index">

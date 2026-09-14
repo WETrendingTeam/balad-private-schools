@@ -91,8 +91,7 @@ function renderHomepageFeatures(items){
     bs={active:true,startAt:"2026-09-12T00:00:00+01:00",endAt:"2026-09-20T00:00:00+01:00",title:"WELCOME TO THE 2026/2027 SCHOOL YEAR",subtitle:"2026/2027 Academic Session",body:"A new session. New goals. New possibilities. Welcome back to our students, parents and staff.",items:[]};
   }
   const start=new Date(bs.startAt||"2026-09-12T00:00:00+01:00"), end=new Date(bs.endAt||"2026-09-20T00:00:00+01:00");
-  const key="balad-back-school-closed-"+(bs.endAt||"2026-09-20");
-  const shouldShow=bs.active!==false && now>=start && now<end && localStorage.getItem(key)!=="1";
+  const shouldShow=bs.active!==false && now>=start && now<end;
   if(!shouldShow){popup.hidden=true;return;}
   document.getElementById("backSchoolTitle").textContent=bs.title||"WELCOME BACK";
   document.getElementById("backSchoolSubtitle").textContent=bs.subtitle||"2026/2027 Academic Session";
@@ -107,12 +106,11 @@ function renderHomepageFeatures(items){
     gallery.innerHTML='<div class="back-school-empty" aria-hidden="true"></div>';
     if(galleryBtn) galleryBtn.hidden=true;
   }
-  const close=()=>{localStorage.setItem(key,"1");popup.hidden=true;};
+  const close=()=>{popup.hidden=true;};
   window.closeBaladBackSchool=close;
   document.getElementById("backSchoolClose")?.addEventListener("click",close);
   document.getElementById("backSchoolEnterBtn")?.addEventListener("click",close);
   document.getElementById("backSchoolGalleryBtn")?.addEventListener("click",()=>gallery.scrollIntoView({behavior:"smooth",block:"center"}));
-  popup.addEventListener("click",e=>{if(e.target===popup) close();});
   popup.hidden=false;
 }
 

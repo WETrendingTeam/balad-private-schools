@@ -97,7 +97,19 @@ function renderHomepageFeatures(items){
   document.getElementById("backSchoolSubtitle").textContent=bs.subtitle||"2026/2027 Academic Session";
   document.getElementById("backSchoolBody").textContent=bs.body||"Welcome back to BALAD Private Schools.";
   const gallery=document.getElementById("backSchoolGallery");
-  const mediaItems=Array.isArray(bs.items)?bs.items:[];
+  const fallbackMedia=[
+    {url:"images/back-to-school-01.jpg",type:"image",caption:"Back-to-School"},
+    {url:"images/back-to-school-02.jpg",type:"image",caption:"Back-to-School"},
+    {url:"images/back-to-school-03.jpg",type:"image",caption:"Back-to-School"},
+    {url:"images/back-to-school-04.jpg",type:"image",caption:"Back-to-School"},
+    {url:"images/back-to-school-05.jpg",type:"image",caption:"Back-to-School"},
+    {url:"images/back-to-school-06.jpg",type:"image",caption:"Back-to-School"},
+    {url:"images/back-to-school-07.jpg",type:"image",caption:"Back-to-School"},
+    {url:"images/back-to-school-video-01.mov",type:"video",caption:"Back-to-School"},
+    {url:"images/back-to-school-video-02.mov",type:"video",caption:"Back-to-School"},
+    {url:"images/back-to-school-video-03.mov",type:"video",caption:"Back-to-School"}
+  ];
+  const mediaItems=Array.isArray(bs.items)&&bs.items.length?bs.items:fallbackMedia;
   const galleryBtn=document.getElementById("backSchoolGalleryBtn");
   if(mediaItems.length){
     gallery.innerHTML=mediaItems.map(m=>m.type==="video"?`<figure><video controls muted playsinline preload="metadata" src="${esc(safeUrl(m.url))}"></video></figure>`:`<figure><img src="${esc(safeUrl(m.url))}" alt="${esc(m.caption||"Back-to-School moment")}"></figure>`).join("");

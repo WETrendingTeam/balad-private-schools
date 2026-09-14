@@ -536,3 +536,207 @@ body{
     width:100% !important;
   }
 }
+
+/* =========================================================
+   BALAD — PRECISE HEADER / HERO / ACTION CLEANUP
+   CSS ONLY. Do not alter system behaviour.
+========================================================= */
+
+/* Restore the existing floating Back-to-top arrow that script.js creates. */
+.site-top-button{
+  position:fixed !important;
+  right:22px !important;
+  bottom:82px !important;
+  z-index:9998 !important;
+  width:52px !important;
+  height:52px !important;
+  border:0 !important;
+  border-radius:50% !important;
+  background:#087052 !important;
+  color:#fff !important;
+  font-size:28px !important;
+  line-height:1 !important;
+  display:none !important;
+  align-items:center !important;
+  justify-content:center !important;
+  box-shadow:0 8px 20px rgba(7,86,63,.20) !important;
+}
+.site-top-button.show{display:flex !important;}
+.site-top-button:hover{background:#07563f !important;color:#fff !important;}
+
+@media(max-width:760px){
+  .site-top-button{
+    right:18px !important;
+    bottom:78px !important;
+    width:48px !important;
+    height:48px !important;
+    font-size:25px !important;
+  }
+
+  /* Header: logo + school identity + single hamburger, cleanly aligned. */
+  header{
+    position:relative !important;
+    height:112px !important;
+    min-height:112px !important;
+    box-sizing:border-box !important;
+    padding:12px 18px !important;
+    display:flex !important;
+    align-items:center !important;
+    background:#fff !important;
+    overflow:visible !important;
+  }
+  header .logo{
+    height:100% !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+    min-width:0 !important;
+  }
+  header .logo img{
+    width:62px !important;
+    height:62px !important;
+    object-fit:contain !important;
+    flex:0 0 62px !important;
+  }
+  header .school-name{
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+    min-width:0 !important;
+    line-height:1.1 !important;
+  }
+  header .school-name h2{
+    margin:0 !important;
+    font-size:17px !important;
+    line-height:1.1 !important;
+    letter-spacing:.1px !important;
+    white-space:nowrap !important;
+  }
+  header .school-name p{
+    margin:4px 0 0 !important;
+    font-size:8px !important;
+    line-height:1.2 !important;
+    white-space:nowrap !important;
+  }
+  header .school-name small{
+    margin:3px 0 0 !important;
+    font-size:8px !important;
+    line-height:1.1 !important;
+    white-space:nowrap !important;
+  }
+  header .school-name .school-status{
+    margin:4px 0 0 !important;
+    font-size:8px !important;
+    line-height:1.1 !important;
+    white-space:nowrap !important;
+    font-style:normal !important;
+  }
+
+  /* Keep the menu icon on the right. */
+  header .menu-btn{
+    position:relative !important;
+    z-index:1002 !important;
+    margin-left:auto !important;
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+    padding:0 !important;
+    display:grid !important;
+    place-items:center !important;
+    border:0 !important;
+    background:transparent !important;
+    color:#087052 !important;
+    font-size:27px !important;
+    line-height:1 !important;
+  }
+
+  /* Menu opens as a proper dropdown panel — never as links squeezed into header. */
+  header #balad-main-nav{
+    position:absolute !important;
+    top:100% !important;
+    left:12px !important;
+    right:12px !important;
+    z-index:1001 !important;
+    display:none !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:0 !important;
+    padding:10px !important;
+    background:#fff !important;
+    border:1px solid #dfe8e2 !important;
+    border-radius:0 0 16px 16px !important;
+    box-shadow:0 14px 30px rgba(7,86,63,.14) !important;
+    overflow:auto !important;
+    max-height:70vh !important;
+  }
+  header #balad-menu-toggle:checked ~ #balad-main-nav{
+    display:flex !important;
+  }
+  header #balad-main-nav > a,
+  header #balad-main-nav summary{
+    display:flex !important;
+    align-items:center !important;
+    min-height:42px !important;
+    padding:10px 12px !important;
+    box-sizing:border-box !important;
+    color:#07563f !important;
+    background:#fff !important;
+    border-radius:9px !important;
+    text-decoration:none !important;
+  }
+  header #balad-main-nav > a:hover,
+  header #balad-main-nav > a.active,
+  header #balad-main-nav summary:hover{
+    background:#f7f0e3 !important;
+    color:#07563f !important;
+  }
+  header #balad-main-nav details{
+    margin:0 !important;
+  }
+  header #balad-main-nav .academic-submenu{
+    display:flex !important;
+    flex-direction:column !important;
+    padding:4px 8px 8px 18px !important;
+  }
+  header #balad-main-nav .academic-submenu a{
+    padding:8px 10px !important;
+    color:#52615b !important;
+  }
+
+  /* Four announcement actions: all compact red action cards. */
+  .home-page .announcement-card a,
+  .home-page .announcement-grid .announcement-card a{
+    display:inline-flex !important;
+    width:auto !important;
+    min-height:30px !important;
+    padding:7px 10px !important;
+    margin-top:7px !important;
+    border-radius:7px !important;
+    background:#c83f3a !important;
+    color:#fff !important;
+    border:1px solid #c83f3a !important;
+    font-size:12px !important;
+    font-weight:800 !important;
+    line-height:1 !important;
+    text-decoration:none !important;
+    box-shadow:none !important;
+  }
+  .home-page .announcement-card a:hover,
+  .home-page .announcement-grid .announcement-card a:hover{
+    background:#a8322e !important;
+    color:#fff !important;
+  }
+}
+
+/* Remove only the remaining milky/white image haze. */
+.home-page .home-hero,
+.home-page .home-hero::before,
+.home-page .home-hero::after{
+  background-blend-mode:normal !important;
+}
+.home-page .home-hero::before{
+  background:linear-gradient(90deg,rgba(5,86,63,.40) 0%,rgba(5,86,63,.13) 58%,rgba(5,86,63,0) 100%) !important;
+}
+.home-page .home-hero::after{
+  background:linear-gradient(0deg,rgba(0,0,0,.10),rgba(0,0,0,0) 65%) !important;
+}

@@ -97,27 +97,11 @@ function renderHomepageFeatures(items){
   document.getElementById("backSchoolSubtitle").textContent=bs.subtitle||"2026/2027 Academic Session";
   document.getElementById("backSchoolBody").textContent=bs.body||"Welcome back to BALAD Private Schools.";
   const gallery=document.getElementById("backSchoolGallery");
-  const fallbackMedia=[
-    {url:"images/back-to-school-01.jpg",type:"image",caption:"Back-to-School"},
-    {url:"images/back-to-school-02.jpg",type:"image",caption:"Back-to-School"},
-    {url:"images/back-to-school-03.jpg",type:"image",caption:"Back-to-School"},
-    {url:"images/back-to-school-04.jpg",type:"image",caption:"Back-to-School"},
-    {url:"images/back-to-school-05.jpg",type:"image",caption:"Back-to-School"},
-    {url:"images/back-to-school-06.jpg",type:"image",caption:"Back-to-School"},
-    {url:"images/back-to-school-07.jpg",type:"image",caption:"Back-to-School"},
-    {url:"images/back-to-school-video-01.mov",type:"video",caption:"Back-to-School"},
-    {url:"images/back-to-school-video-02.mov",type:"video",caption:"Back-to-School"},
-    {url:"images/back-to-school-video-03.mov",type:"video",caption:"Back-to-School"}
-  ];
-  // Back-to-School popup uses the exact BALAD media uploaded for this feature.
-  // Keep videos silent and inline; controls let visitors play them manually.
-  const mediaItems=fallbackMedia;
+  // Back-to-School popup: show images only. Videos are intentionally excluded.
+  const mediaItems=(Array.isArray(bs.items)?bs.items:[]).filter(m=>m && m.type!=="video" && m.url);
   const galleryBtn=document.getElementById("backSchoolGalleryBtn");
   if(mediaItems.length){
-    gallery.innerHTML=mediaItems.map((m,i)=>m.type==="video"
-      ? `<figure class="back-school-media back-school-video-card"><video muted playsinline controls preload="metadata" src="${esc(safeUrl(m.url))}"></video><figcaption>Back-to-School video</figcaption></figure>`
-      : `<figure class="back-school-media ${i===0?"back-school-feature-photo":""}"><img src="${esc(safeUrl(m.url))}" alt="${esc(m.caption||"Back-to-School moment")}" loading="lazy"></figure>`
-    ).join("");
+    gallery.innerHTML=mediaItems.slice(0,5).map(m=>`<figure><img src="${esc(safeUrl(m.url))}" alt="${esc(m.caption||"Back-to-School moment")}"></figure>`).join("");
     if(galleryBtn) galleryBtn.hidden=false;
   } else {
     gallery.innerHTML='<div class="back-school-empty" aria-hidden="true"></div>';
@@ -129,6 +113,37 @@ function renderHomepageFeatures(items){
   document.getElementById("backSchoolEnterBtn")?.addEventListener("click",close);
   document.getElementById("backSchoolGalleryBtn")?.addEventListener("click",()=>gallery.scrollIntoView({behavior:"smooth",block:"center"}));
   popup.hidden=false;
+}
+
+function renderPrimaryClassroomFacility(){
+  const page=document.body.dataset.cmsPage || location.pathname.split("/").pop()?.replace(".html","");
+  if(page!=="nursery-primary") return;
+  const card=document.querySelector(".facilities-wrap .facility-proto-card");
+  if(!card) return;
+  const images=[1,2,3,4,5].map(n=>`images/primary-facilities/primary-classroom-${n}.jpg`);
+  card.innerHTML=`
+    <div class="primary-facility-gallery">
+      ${images.map((src,i)=>`<img src="${src}" alt="BALAD Primary School classroom ${i+1}" loading="lazy">`).join("")}
+    </div>
+    <div class="primary-facility-copy">
+      <h3>Primary School Classrooms</h3>
+      <p>Bright and welcoming learning spaces designed to support focused learning, creativity and everyday classroom activities.</p>
+    </div>`;
+
+  if(!document.getElementById("primaryFacilityGalleryStyles")){
+    const style=document.createElement("style");
+    style.id="primaryFacilityGalleryStyles";
+    style.textContent=`
+      .primary-facility-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:8px;background:#f6f3e8;border-radius:16px;overflow:hidden}
+      .primary-facility-gallery img{display:block;width:100%;height:150px;object-fit:cover;border-radius:11px;box-shadow:0 3px 12px rgba(0,0,0,.10)}
+      .primary-facility-gallery img:first-child{grid-column:1 / -1;height:220px}
+      .primary-facility-copy{padding:14px 4px 2px}
+      .primary-facility-copy h3{margin:0 0 7px}
+      .primary-facility-copy p{margin:0;line-height:1.6}
+      @media(max-width:600px){.primary-facility-gallery img{height:105px}.primary-facility-gallery img:first-child{height:170px}}
+    `;
+    document.head.appendChild(style);
+  }
 }
 
 async function loadPublicContent(){
@@ -260,5 +275,6 @@ async function loadGallery(){
 
 document.addEventListener("DOMContentLoaded",()=>{
   renderHomepageFeatures([]);
+  renderPrimaryClassroomFacility();
   loadPublicContent(); loadPublicStaff(); loadGallery();
 });

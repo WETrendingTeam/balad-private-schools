@@ -292,3 +292,247 @@ body[data-cms-page="about"] .proprietor-content .signature strong{color:var(--gr
     padding-bottom:90px;
   }
 }
+
+/* =========================================================
+   BALAD FINAL VISUAL CLEANUP — CSS ONLY
+   Requested:
+   - clean/organized mobile header
+   - remove milky/cloudy white visual treatment
+   - sharp GREEN / WHITE / CREAM / RED palette
+   - red only for action buttons
+   - small card treatment for action links
+   - no functional/system changes
+========================================================= */
+
+/* Clean, solid page surfaces — no washed-out white gradients. */
+body{
+  background:#fff !important;
+}
+.home-page .home-section,
+.home-page .our-schools,
+.home-page .why-choose,
+.home-page .gallery-section,
+.home-page .contact{
+  background:#fff !important;
+  background-image:none !important;
+}
+.home-page .latest-announcements,
+.home-page .admissions,
+.proprietor-message,
+.facilities{
+  background:var(--cream) !important;
+  background-image:none !important;
+}
+.home-page .why-section{
+  background:var(--green) !important;
+  background-image:none !important;
+}
+
+/* Remove pale/white haze from image overlays. */
+.home-page .home-hero::before{
+  background:linear-gradient(90deg,rgba(5,86,63,.52) 0%,rgba(5,86,63,.20) 58%,rgba(5,86,63,.04) 100%) !important;
+}
+.home-page .home-hero::after{
+  background:linear-gradient(0deg,rgba(0,0,0,.16),rgba(0,0,0,0)) !important;
+}
+
+/* Keep image cards sharp — no translucent white wash. */
+.home-page .gallery-item,
+.home-page .week-card,
+.home-page .week-media,
+.home-page .week-copy{
+  background:#fff !important;
+  opacity:1 !important;
+}
+
+/* ---------- MOBILE HEADER: clean original BALAD arrangement ---------- */
+@media(max-width:760px){
+  header{
+    min-height:116px !important;
+    padding:12px 16px !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+    background:#fff !important;
+    border-bottom:2px solid var(--green) !important;
+    box-shadow:none !important;
+  }
+  .logo{
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+    flex:1 1 auto !important;
+    min-width:0 !important;
+  }
+  .logo img{
+    width:62px !important;
+    height:62px !important;
+    flex:0 0 62px !important;
+  }
+  .school-name{
+    min-width:0 !important;
+    overflow:hidden !important;
+  }
+  .school-name h2{
+    font-size:17px !important;
+    line-height:1.08 !important;
+    white-space:nowrap !important;
+    color:var(--green) !important;
+  }
+  .school-name p{
+    display:block !important;
+    margin-top:4px !important;
+    font-size:8px !important;
+    line-height:1.2 !important;
+    white-space:nowrap !important;
+    color:#444 !important;
+  }
+  .school-name small{
+    display:block !important;
+    margin-top:3px !important;
+    font-size:9px !important;
+    line-height:1.1 !important;
+    white-space:nowrap !important;
+    color:var(--red) !important;
+  }
+  .school-name .school-status{
+    display:block !important;
+    margin-top:4px !important;
+    font-size:9px !important;
+    line-height:1.15 !important;
+    white-space:nowrap !important;
+    color:var(--green) !important;
+  }
+
+  /* Checkbox stays functional but invisible. */
+  .menu-toggle{
+    position:absolute !important;
+    opacity:0 !important;
+    pointer-events:none !important;
+  }
+  .menu-btn{
+    display:grid !important;
+    place-items:center !important;
+    width:42px !important;
+    height:42px !important;
+    flex:0 0 42px !important;
+    margin-left:auto !important;
+    border:0 !important;
+    background:#fff !important;
+    color:var(--green) !important;
+    font-size:28px !important;
+    line-height:1 !important;
+  }
+  .menu-icon-open{display:inline-block !important}
+  .menu-icon-close{display:none !important}
+  #balad-menu-toggle:checked + .menu-btn .menu-icon-open{display:none !important}
+  #balad-menu-toggle:checked + .menu-btn .menu-icon-close{display:inline-block !important}
+
+  nav{
+    position:absolute !important;
+    left:0 !important;
+    right:0 !important;
+    top:100% !important;
+    z-index:100 !important;
+    background:#fff !important;
+    border-top:1px solid var(--line) !important;
+    border-bottom:2px solid var(--green) !important;
+    box-shadow:0 12px 24px rgba(7,86,63,.10) !important;
+  }
+  /* The original checkbox controls the menu; preserve that behavior. */
+  #balad-menu-toggle:not(:checked) ~ nav{display:none !important}
+  #balad-menu-toggle:checked ~ nav{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    padding:12px 18px !important;
+    gap:2px !important;
+  }
+  nav a{
+    padding:10px 4px !important;
+    color:var(--green-dark) !important;
+  }
+  nav a.active,
+  nav a:hover{
+    color:var(--green) !important;
+  }
+}
+
+/* ---------- ACTION LINKS: compact cards ---------- */
+.announcement-btn{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-height:32px !important;
+  padding:7px 11px !important;
+  border:1px solid var(--red) !important;
+  border-radius:8px !important;
+  background:var(--red) !important;
+  color:#fff !important;
+  font-weight:800 !important;
+  text-decoration:none !important;
+  line-height:1 !important;
+  box-shadow:none !important;
+}
+.announcement-btn:hover{
+  background:var(--red-dark) !important;
+  color:#fff !important;
+}
+
+/* Other small homepage action cards/links. */
+.home-page .action-btn{
+  min-height:56px !important;
+  padding:10px 12px !important;
+  border-radius:12px !important;
+  background:#fff !important;
+  color:var(--green) !important;
+  border:1px solid var(--line) !important;
+  box-shadow:none !important;
+}
+
+/* Navigation action buttons: red is reserved for actions. */
+.nav-action-boxes{
+  display:flex !important;
+  align-items:center !important;
+  gap:8px !important;
+}
+.nav-login-button,
+.nav-contact-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-height:34px !important;
+  padding:7px 11px !important;
+  border-radius:8px !important;
+  background:var(--red) !important;
+  color:#fff !important;
+  border:1px solid var(--red) !important;
+}
+.nav-login-button:hover,
+.nav-contact-button:hover{
+  background:var(--red-dark) !important;
+  color:#fff !important;
+}
+
+/* Keep green cards crisp; never use white translucent overlays. */
+.home-page .home-stat,
+.home-page .stat-box,
+.home-page .school-card,
+.home-page .choose-card,
+.home-page .announcement-card{
+  box-shadow:0 6px 18px rgba(7,86,63,.08) !important;
+}
+
+/* Mobile: compact cards remain readable and separated. */
+@media(max-width:760px){
+  .nav-action-boxes{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:8px !important;
+    margin-top:6px !important;
+  }
+  .nav-login-button,
+  .nav-contact-button{
+    width:100% !important;
+  }
+}

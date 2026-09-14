@@ -112,7 +112,7 @@ function renderHomepageFeatures(items){
   const mediaItems=Array.isArray(bs.items)&&bs.items.length?bs.items:fallbackMedia;
   const galleryBtn=document.getElementById("backSchoolGalleryBtn");
   if(mediaItems.length){
-    gallery.innerHTML=mediaItems.map(m=>m.type==="video"?`<figure><video controls muted playsinline preload="metadata" src="${esc(safeUrl(m.url))}"></video></figure>`:`<figure><img src="${esc(safeUrl(m.url))}" alt="${esc(m.caption||"Back-to-School moment")}"></figure>`).join("");
+    gallery.innerHTML=mediaItems.map(m=>m.type==="video"?`<figure><video muted playsinline preload="metadata" src="${esc(safeUrl(m.url))}"></video></figure>`:`<figure><img src="${esc(safeUrl(m.url))}" alt="${esc(m.caption||"Back-to-School moment")}"></figure>`).join("");
     if(galleryBtn) galleryBtn.hidden=false;
   } else {
     gallery.innerHTML='<div class="back-school-empty" aria-hidden="true"></div>';

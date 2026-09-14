@@ -120,7 +120,7 @@ function renderPrimaryClassroomFacility(){
   if(page!=="nursery-primary") return;
   const card=document.querySelector(".facilities-wrap .facility-proto-card");
   if(!card) return;
-  const images=[1,2,3,4,5].map(n=>`images/primary-facilities/primary-classroom-${n}.jpg`);
+  const images=[1,2,3,4,5].map(n=>`images/primary-classroom-${n}.jpg`);
   card.innerHTML=`
     <div class="primary-facility-gallery">
       ${images.map((src,i)=>`<img src="${src}" alt="BALAD Primary School classroom ${i+1}" loading="lazy">`).join("")}

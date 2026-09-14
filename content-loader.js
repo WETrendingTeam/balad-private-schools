@@ -109,7 +109,8 @@ function renderHomepageFeatures(items){
     {url:"images/back-to-school-video-02.mov",type:"video",caption:"Back-to-School"},
     {url:"images/back-to-school-video-03.mov",type:"video",caption:"Back-to-School"}
   ];
-  const mediaItems=Array.isArray(bs.items)&&bs.items.length?bs.items:fallbackMedia;
+  const configuredMedia=Array.isArray(bs.items)?bs.items.filter(m=>m && safeUrl(m.url||"")):[];
+  const mediaItems=configuredMedia.length?configuredMedia:fallbackMedia;
   const galleryBtn=document.getElementById("backSchoolGalleryBtn");
   if(mediaItems.length){
     gallery.innerHTML=mediaItems.map(m=>m.type==="video"?`<figure><video muted playsinline preload="metadata" src="${esc(safeUrl(m.url))}"></video></figure>`:`<figure><img src="${esc(safeUrl(m.url))}" alt="${esc(m.caption||"Back-to-School moment")}"></figure>`).join("");

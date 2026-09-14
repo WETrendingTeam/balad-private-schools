@@ -277,3 +277,18 @@ body[data-cms-page="about"] .proprietor-content .signature strong{color:var(--gr
 .home-page .announcement-grid .announcement-card:nth-child(even) a{
   color:var(--red) !important;
 }
+
+/* BALAD HERO HEIGHT — requested visual adjustment only */
+.home-page .home-hero{
+  min-height:clamp(760px,88vh,900px);
+}
+@media (max-width:700px){
+  .home-page .home-hero{
+    min-height:900px;
+  }
+  .home-page .hero-inner{
+    min-height:900px;
+    padding-top:260px;
+    padding-bottom:90px;
+  }
+}

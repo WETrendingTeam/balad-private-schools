@@ -91,7 +91,7 @@ function renderHomepageFeatures(items){
     bs={active:true,startAt:"2026-09-12T00:00:00+01:00",endAt:"2026-09-20T00:00:00+01:00",title:"WELCOME TO THE 2026/2027 SCHOOL YEAR",subtitle:"2026/2027 Academic Session",body:"A new session. New goals. New possibilities. Welcome back to our students, parents and staff.",items:[]};
   }
   const start=new Date(bs.startAt||"2026-09-12T00:00:00+01:00"), end=new Date(bs.endAt||"2026-09-20T00:00:00+01:00");
-  const shouldShow=bs.active!==false && now>=start && now<end;
+  const shouldShow=now>=start && now<end;
   if(!shouldShow){popup.hidden=true;return;}
   document.getElementById("backSchoolTitle").textContent=bs.title||"WELCOME BACK";
   document.getElementById("backSchoolSubtitle").textContent=bs.subtitle||"2026/2027 Academic Session";
@@ -104,7 +104,7 @@ function renderHomepageFeatures(items){
     if(galleryBtn) galleryBtn.hidden=false;
   } else {
     gallery.innerHTML='<div class="back-school-empty" aria-hidden="true"></div>';
-    if(galleryBtn) galleryBtn.hidden=true;
+    if(galleryBtn) galleryBtn.hidden=false;
   }
   const close=()=>{popup.hidden=true;};
   window.closeBaladBackSchool=close;
@@ -242,5 +242,6 @@ async function loadGallery(){
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
+  renderHomepageFeatures([]);
   loadPublicContent(); loadPublicStaff(); loadGallery();
 });

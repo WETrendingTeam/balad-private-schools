@@ -226,3 +226,54 @@ body[data-cms-page="about"] .proprietor-content .signature strong{color:var(--gr
 /* Keep light sections readable without changing their content. */
 .graduation-album .section-heading h2,
 .graduation-album .section-heading p{color:#263831;}
+
+/* BALAD HOMEPAGE CARD CORRECTIONS — requested visual changes only */
+.home-page .home-stats .home-stat:nth-child(4){
+  background:var(--green) !important;
+  color:#fff !important;
+  border-color:var(--green) !important;
+}
+.home-page .home-stats .home-stat:nth-child(4) strong,
+.home-page .home-stats .home-stat:nth-child(4) span{
+  color:#fff !important;
+}
+
+.home-page .programme-grid .programme-card{
+  background:var(--green) !important;
+  color:#fff !important;
+  border-color:var(--green) !important;
+}
+.home-page .programme-grid .programme-card h3,
+.home-page .programme-grid .programme-card p,
+.home-page .programme-grid .programme-card a{
+  color:#fff !important;
+}
+
+.home-page .announcement-grid .announcement-card{
+  border-color:var(--line);
+}
+.home-page .announcement-grid .announcement-card:nth-child(odd){
+  background:var(--green) !important;
+  color:#fff !important;
+}
+.home-page .announcement-grid .announcement-card:nth-child(odd) h3,
+.home-page .announcement-grid .announcement-card:nth-child(odd) p{
+  color:#fff !important;
+}
+.home-page .announcement-grid .announcement-card:nth-child(odd) a{
+  color:#fff !important;
+  text-decoration:underline;
+}
+.home-page .announcement-grid .announcement-card:nth-child(even){
+  background:#fff !important;
+  color:var(--ink) !important;
+}
+.home-page .announcement-grid .announcement-card:nth-child(even) h3{
+  color:var(--green) !important;
+}
+.home-page .announcement-grid .announcement-card:nth-child(even) p{
+  color:var(--muted) !important;
+}
+.home-page .announcement-grid .announcement-card:nth-child(even) a{
+  color:var(--red) !important;
+}

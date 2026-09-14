@@ -109,11 +109,15 @@ function renderHomepageFeatures(items){
     {url:"images/back-to-school-video-02.mov",type:"video",caption:"Back-to-School"},
     {url:"images/back-to-school-video-03.mov",type:"video",caption:"Back-to-School"}
   ];
-  const configuredMedia=Array.isArray(bs.items)?bs.items.filter(m=>m && safeUrl(m.url||"")):[];
-  const mediaItems=configuredMedia.length?configuredMedia:fallbackMedia;
+  // Back-to-School popup uses the exact BALAD media uploaded for this feature.
+  // Keep videos silent and inline; controls let visitors play them manually.
+  const mediaItems=fallbackMedia;
   const galleryBtn=document.getElementById("backSchoolGalleryBtn");
   if(mediaItems.length){
-    gallery.innerHTML=mediaItems.map(m=>m.type==="video"?`<figure><video muted playsinline preload="metadata" src="${esc(safeUrl(m.url))}"></video></figure>`:`<figure><img src="${esc(safeUrl(m.url))}" alt="${esc(m.caption||"Back-to-School moment")}"></figure>`).join("");
+    gallery.innerHTML=mediaItems.map((m,i)=>m.type==="video"
+      ? `<figure class="back-school-media back-school-video-card"><video muted playsinline controls preload="metadata" src="${esc(safeUrl(m.url))}"></video><figcaption>Back-to-School video</figcaption></figure>`
+      : `<figure class="back-school-media ${i===0?"back-school-feature-photo":""}"><img src="${esc(safeUrl(m.url))}" alt="${esc(m.caption||"Back-to-School moment")}" loading="lazy"></figure>`
+    ).join("");
     if(galleryBtn) galleryBtn.hidden=false;
   } else {
     gallery.innerHTML='<div class="back-school-empty" aria-hidden="true"></div>';

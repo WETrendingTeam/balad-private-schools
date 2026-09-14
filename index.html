@@ -786,6 +786,106 @@
   border-radius:8px;
   padding:7px 10px;
 }
+
+/* TARGETED HOMEPAGE POLISH — SPOTLIGHT, COMING SOON & SCHOOL CHOICE ONLY */
+.home-page #balad-spotlight-section .spotlight-card{
+  background:linear-gradient(135deg,#075c46 0%,#0b765a 100%);
+  border-color:#075c46;
+  box-shadow:0 14px 32px rgba(7,92,70,.14);
+}
+.home-page #balad-spotlight-section .spotlight-media{
+  background:linear-gradient(135deg,#eaf4ef 0%,#f7f1e4 100%);
+  min-height:220px;
+}
+.home-page #balad-spotlight-section .spotlight-placeholder{
+  padding:14px 22px;
+  border-radius:12px;
+  background:#075c46;
+  color:#fff;
+  font-weight:900;
+  letter-spacing:.02em;
+  box-shadow:0 8px 18px rgba(7,92,70,.15);
+}
+.home-page #balad-spotlight-section .spotlight-copy{
+  background:#075c46;
+  color:#fff;
+  padding:24px;
+}
+.home-page #balad-spotlight-section .spotlight-copy .spotlight-kicker{
+  color:#dceee7;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+.home-page #balad-spotlight-section .spotlight-copy h3{
+  color:#fff;
+}
+.home-page #balad-spotlight-section .spotlight-copy p{
+  color:#f3faf7;
+}
+
+/* Keep the Coming Soon week cards styled instead of plain white. */
+.home-page #balad-week-section .week-card{
+  background:#fff;
+  border-color:var(--balad-line);
+  box-shadow:0 10px 24px rgba(16,58,45,.07);
+}
+.home-page #balad-week-section .week-media{
+  background:linear-gradient(135deg,#eaf4ef 0%,#f7f1e4 100%) !important;
+}
+.home-page #balad-week-section .week-placeholder{
+  padding:10px 16px;
+  border-radius:10px;
+  background:#075c46;
+  color:#fff;
+  font-weight:800;
+}
+.home-page #balad-week-section .week-copy{
+  background:#fff !important;
+}
+.home-page #balad-week-section .week-copy h3{
+  color:#075c46;
+}
+
+/* Compact school-choice cards with white readable copy. */
+.home-page .school-choice{
+  gap:12px;
+}
+.home-page .school-choice article{
+  padding:16px 18px;
+  border-color:#075c46;
+  border-radius:14px;
+  background:#075c46;
+  box-shadow:0 8px 20px rgba(7,92,70,.10);
+}
+.home-page .school-choice h3,
+.home-page .school-choice p{
+  color:#fff;
+}
+.home-page .school-choice h3{
+  margin-bottom:6px;
+}
+.home-page .school-choice p{
+  margin-bottom:10px;
+  font-size:.9rem;
+}
+.home-page .school-choice a{
+  display:inline-block;
+  padding:7px 10px;
+  border-radius:8px;
+  background:var(--balad-red);
+  color:#fff;
+  font-size:.82rem;
+  font-weight:800;
+}
+@media (max-width:700px){
+  .home-page .school-choice article{
+    padding:14px 15px;
+  }
+  .home-page #balad-spotlight-section .spotlight-copy{
+    padding:20px;
+  }
+}
+
 </style>
 </head>
 
@@ -979,22 +1079,6 @@
     </div>
   </div>
 </section>
-
-<section class="home-section homepage-feature-section" id="balad-spotlight-section">
-  <div class="home-container">
-    <div class="section-heading">
-      <h2>BALAD Spotlight</h2>
-      <p>Celebrating the people, achievements, talents and stories that make BALAD special.</p>
-    </div>
-    <div id="baladSpotlight" class="spotlight-card">
-      <div class="spotlight-media"><div class="spotlight-placeholder"><strong>Coming Soon</strong></div></div>
-      <div class="spotlight-copy"><p class="spotlight-kicker">BALAD SPOTLIGHT</p><h3>Coming Soon</h3><p></p></div>
-    </div>
-  </div>
-</section>
-
-
-
 <section class="home-section homepage-feature-section" id="balad-week-section">
   <div class="home-container">
     <div class="section-heading">
@@ -1082,6 +1166,19 @@
     </div>
   </div>
 </section>
+<section class="home-section homepage-feature-section" id="balad-spotlight-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>BALAD Spotlight</h2>
+      <p>Celebrating the people, achievements, talents and stories that make BALAD special.</p>
+    </div>
+    <div id="baladSpotlight" class="spotlight-card">
+      <div class="spotlight-media"><div class="spotlight-placeholder"><strong>Coming Soon</strong></div></div>
+      <div class="spotlight-copy"><p class="spotlight-kicker">BALAD SPOTLIGHT</p><h3>Coming Soon</h3><p></p></div>
+    </div>
+  </div>
+</section>
+
 
 <section class="home-section announcement-section">
   <div class="home-container">

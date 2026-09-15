@@ -1581,9 +1581,7 @@ Refresh Templates
 <button class="btn btn-small btn-primary" onclick="applyCollege2026Setup()">
 Apply 2026/27 College Setup
 </button>
-<button class="btn btn-small btn-primary" onclick="applyPrimary2026Setup()">
-Apply 2026/27 Primary Setup
-</button>
+<button class="btn btn-small btn-primary" onclick="applyPrimary2026Setup()">Apply 2026/27 Primary Setup</button>
 </div>
 <div class="card-body">
 <div class="access-toolbar">
@@ -3513,53 +3511,40 @@ window.applyPrimary2026Setup=async function(){
  }
 
  const ok=confirm(
-   "This will create the approved 2026/27 Primary staff list only for PRI001–PRI011. Existing Primary accounts will NOT be reset, overwritten, or changed. College staff and CONTROL001 will NOT be touched. Continue?"
+   "This will create only the missing 2026/27 Primary staff accounts. Existing Primary staff and all College staff will not be touched. Continue?"
  );
  if(!ok)return;
 
  const setup=[
-  {loginCode:"PRI001",school:"primary",name:"Mrs Suleiman",role:"teacher",homeroom:"Playground",assignedClasses:[],assignedSubjects:[]},
-  {loginCode:"PRI002",school:"primary",name:"Mrs AbdulSalam",role:"class_teacher",homeroom:"KG",assignedClasses:[],assignedSubjects:[]},
-  {loginCode:"PRI003",school:"primary",name:"Mrs Abe",role:"class_teacher",homeroom:"Nursery",assignedClasses:[],assignedSubjects:[]},
-  {loginCode:"PRI004",school:"primary",name:"Mrs Olaniyan",role:"class_teacher",homeroom:"Nursery 2",assignedClasses:[],assignedSubjects:[]},
-  {loginCode:"PRI005",school:"primary",name:"Mrs Adebayo",role:"class_teacher",homeroom:"Basic 1",assignedClasses:[],assignedSubjects:[]},
-  {loginCode:"PRI006",school:"primary",name:"Mrs Babalola",role:"class_teacher",homeroom:"Basic 2",assignedClasses:[],assignedSubjects:[]},
-  {loginCode:"PRI007",school:"primary",name:"Mrs Balogun",role:"class_teacher",homeroom:"Basic 2",assignedClasses:[],assignedSubjects:[]},
-  {loginCode:"PRI008",school:"primary",name:"Mrs YUSUFF",role:"class_teacher",homeroom:"Basic 3",assignedClasses:[],assignedSubjects:[]},
-  {loginCode:"PRI009",school:"primary",name:"Mrs Kareem",role:"class_teacher",homeroom:"Basic 4",assignedClasses:[],assignedSubjects:[]},
-  {loginCode:"PRI010",school:"primary",name:"Mrs Muhammed",role:"class_teacher",homeroom:"Basic 5A",assignedClasses:[],assignedSubjects:[]},
-  {loginCode:"PRI011",school:"primary",name:"Mrs Owoyemi",role:"class_teacher",homeroom:"Basic 5B",assignedClasses:[],assignedSubjects:[]}
+  {loginCode:"PRI001",school:"primary",name:"Mrs Suleiman",role:"class_teacher",homeroom:"Playground",assignedClasses:["Playground"],assignedSubjects:["English Language","Mathematics","Basic Science","Basic Technology","Social Studies","Civic Education","Computer Studies","Agricultural Science","Home Economics","Religious Studies","Physical & Health Education","French","Creative Arts","Other"]},
+  {loginCode:"PRI002",school:"primary",name:"Mrs AbdulSalam",role:"class_teacher",homeroom:"KG",assignedClasses:["KG"],assignedSubjects:["English Language","Mathematics","Basic Science","Basic Technology","Social Studies","Civic Education","Computer Studies","Agricultural Science","Home Economics","Religious Studies","Physical & Health Education","French","Creative Arts","Other"]},
+  {loginCode:"PRI003",school:"primary",name:"Mrs Abe",role:"class_teacher",homeroom:"Nursery",assignedClasses:["Nursery"],assignedSubjects:["English Language","Mathematics","Basic Science","Basic Technology","Social Studies","Civic Education","Computer Studies","Agricultural Science","Home Economics","Religious Studies","Physical & Health Education","French","Creative Arts","Other"]},
+  {loginCode:"PRI004",school:"primary",name:"Mrs Olaniyan",role:"class_teacher",homeroom:"Nursery 2",assignedClasses:["Nursery 2"],assignedSubjects:["English Language","Mathematics","Basic Science","Basic Technology","Social Studies","Civic Education","Computer Studies","Agricultural Science","Home Economics","Religious Studies","Physical & Health Education","French","Creative Arts","Other"]},
+  {loginCode:"PRI005",school:"primary",name:"Mrs Adebayo",role:"class_teacher",homeroom:"Basic 1",assignedClasses:["Basic 1"],assignedSubjects:["English Language","Mathematics","Basic Science","Basic Technology","Social Studies","Civic Education","Computer Studies","Agricultural Science","Home Economics","Religious Studies","Physical & Health Education","French","Creative Arts","Other"]},
+  {loginCode:"PRI006",school:"primary",name:"Mrs Babalola",role:"class_teacher",homeroom:"Basic 2",assignedClasses:["Basic 2"],assignedSubjects:["English Language","Mathematics","Basic Science","Basic Technology","Social Studies","Civic Education","Computer Studies","Agricultural Science","Home Economics","Religious Studies","Physical & Health Education","French","Creative Arts","Other"]},
+  {loginCode:"PRI007",school:"primary",name:"Mrs Balogun",role:"class_teacher",homeroom:"Basic 2",assignedClasses:["Basic 2"],assignedSubjects:["English Language","Mathematics","Basic Science","Basic Technology","Social Studies","Civic Education","Computer Studies","Agricultural Science","Home Economics","Religious Studies","Physical & Health Education","French","Creative Arts","Other"]},
+  {loginCode:"PRI008",school:"primary",name:"Mrs YUSUFF",role:"class_teacher",homeroom:"Basic 3",assignedClasses:["Basic 3"],assignedSubjects:["English Language","Mathematics","Basic Science","Basic Technology","Social Studies","Civic Education","Computer Studies","Agricultural Science","Home Economics","Religious Studies","Physical & Health Education","French","Creative Arts","Other"]},
+  {loginCode:"PRI009",school:"primary",name:"Mrs Kareem",role:"class_teacher",homeroom:"Basic 4",assignedClasses:["Basic 4"],assignedSubjects:["English Language","Mathematics","Basic Science","Basic Technology","Social Studies","Civic Education","Computer Studies","Agricultural Science","Home Economics","Religious Studies","Physical & Health Education","French","Creative Arts","Other"]},
+  {loginCode:"PRI010",school:"primary",name:"Mrs Muhammed",role:"class_teacher",homeroom:"Basic 5A",assignedClasses:["Basic 5A"],assignedSubjects:["English Language","Mathematics","Basic Science","Basic Technology","Social Studies","Civic Education","Computer Studies","Agricultural Science","Home Economics","Religious Studies","Physical & Health Education","French","Creative Arts","Other"]},
+  {loginCode:"PRI011",school:"primary",name:"Mrs Owoyemi",role:"class_teacher",homeroom:"Basic 5B",assignedClasses:["Basic 5B"],assignedSubjects:["English Language","Mathematics","Basic Science","Basic Technology","Social Studies","Civic Education","Computer Studies","Agricultural Science","Home Economics","Religious Studies","Physical & Health Education","French","Creative Arts","Other"]}
  ];
 
  try{
-   const existingResult=await worker("list_staff",{school:"primary"});
-   const existing=new Set((existingResult.staff||[]).map(x=>String(x.loginCode||x.staffCode||"").toUpperCase()));
-   const pending=setup.filter(x=>!existing.has(x.loginCode));
-
-   if(!pending.length){
-     alert("Primary setup checked. PRI001–PRI011 already exist, so nothing was changed.");
-     await buildAccessTemplates();
-     loadStaff();
-     loadSummary();
-     return;
-   }
-
-   const result=await worker("bulk_create_staff",{staff:pending});
+   const existing=await api("list_staff",{school:"primary",includeSecrets:true});
+   const existingCodes=new Set((existing.staff||existing||[]).map(x=>String(x.loginCode||x.staffCode||"").toUpperCase()));
+   const missing=setup.filter(x=>!existingCodes.has(x.loginCode));
+   if(!missing.length){ toast("No new Primary staff accounts were needed."); return; }
+   const result=await api("bulk_create_staff",{staff:missing});
    const created=result.created||[];
    const failed=result.failed||[];
-   const lines=created.map(x=>`${x.loginCode}: ${x.temporaryPassword||"password generated"} | Secret: ${x.secretAccessCode||""}`);
-   const failLines=failed.map(x=>`FAILED ${x.loginCode}: ${x.error}`);
-
-   alert(`2026/27 Primary setup complete.\n\nCreated: ${created.length}\nSkipped existing: ${setup.length-pending.length}\nFailed: ${failed.length}\n\n`+lines.join("\n")+(failLines.length?"\n\n"+failLines.join("\n"):""));
-   await buildAccessTemplates();
-   loadStaff();
-   loadSummary();
-   toast(`Created ${created.length} Primary staff accounts.`);
+   if(created.length){ toast(`${created.length} Primary staff account${created.length===1?"":"s"} created.`); }
+   if(failed.length){ console.error("Primary setup failures",failed); toast(`${created.length} created; ${failed.length} failed. Check the staff results.`); }
+   await loadStaff();
  }catch(e){
+   console.error(e);
    toast(e.message||"Primary staff setup failed.");
  }
 };
-
 
 window.applyCollege2026Setup=async function(){
 

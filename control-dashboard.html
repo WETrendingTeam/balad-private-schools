@@ -1581,6 +1581,9 @@ Refresh Templates
 <button class="btn btn-small btn-primary" onclick="applyCollege2026Setup()">
 Apply 2026/27 College Setup
 </button>
+<button class="btn btn-small btn-primary" onclick="applyPrimary2026Setup()">
+Apply 2026/27 Primary Setup
+</button>
 </div>
 <div class="card-body">
 <div class="access-toolbar">
@@ -3501,6 +3504,62 @@ async function(){
 2026/27 COLLEGE STAFF BULK SETUP
 ==================================================
 */
+
+window.applyPrimary2026Setup=async function(){
+
+ if(selectedSchool!=="primary"){
+   toast("Select Nursery & Primary first.");
+   return;
+ }
+
+ const ok=confirm(
+   "This will create the approved 2026/27 Primary staff list only for PRI001–PRI011. Existing Primary accounts will NOT be reset, overwritten, or changed. College staff and CONTROL001 will NOT be touched. Continue?"
+ );
+ if(!ok)return;
+
+ const setup=[
+  {loginCode:"PRI001",school:"primary",name:"Mrs Suleiman",role:"teacher",homeroom:"Playground",assignedClasses:[],assignedSubjects:[]},
+  {loginCode:"PRI002",school:"primary",name:"Mrs AbdulSalam",role:"class_teacher",homeroom:"KG",assignedClasses:[],assignedSubjects:[]},
+  {loginCode:"PRI003",school:"primary",name:"Mrs Abe",role:"class_teacher",homeroom:"Nursery",assignedClasses:[],assignedSubjects:[]},
+  {loginCode:"PRI004",school:"primary",name:"Mrs Olaniyan",role:"class_teacher",homeroom:"Nursery 2",assignedClasses:[],assignedSubjects:[]},
+  {loginCode:"PRI005",school:"primary",name:"Mrs Adebayo",role:"class_teacher",homeroom:"Basic 1",assignedClasses:[],assignedSubjects:[]},
+  {loginCode:"PRI006",school:"primary",name:"Mrs Babalola",role:"class_teacher",homeroom:"Basic 2",assignedClasses:[],assignedSubjects:[]},
+  {loginCode:"PRI007",school:"primary",name:"Mrs Balogun",role:"class_teacher",homeroom:"Basic 2",assignedClasses:[],assignedSubjects:[]},
+  {loginCode:"PRI008",school:"primary",name:"Mrs YUSUFF",role:"class_teacher",homeroom:"Basic 3",assignedClasses:[],assignedSubjects:[]},
+  {loginCode:"PRI009",school:"primary",name:"Mrs Kareem",role:"class_teacher",homeroom:"Basic 4",assignedClasses:[],assignedSubjects:[]},
+  {loginCode:"PRI010",school:"primary",name:"Mrs Muhammed",role:"class_teacher",homeroom:"Basic 5A",assignedClasses:[],assignedSubjects:[]},
+  {loginCode:"PRI011",school:"primary",name:"Mrs Owoyemi",role:"class_teacher",homeroom:"Basic 5B",assignedClasses:[],assignedSubjects:[]}
+ ];
+
+ try{
+   const existingResult=await worker("list_staff",{school:"primary"});
+   const existing=new Set((existingResult.staff||[]).map(x=>String(x.loginCode||x.staffCode||"").toUpperCase()));
+   const pending=setup.filter(x=>!existing.has(x.loginCode));
+
+   if(!pending.length){
+     alert("Primary setup checked. PRI001–PRI011 already exist, so nothing was changed.");
+     await buildAccessTemplates();
+     loadStaff();
+     loadSummary();
+     return;
+   }
+
+   const result=await worker("bulk_create_staff",{staff:pending});
+   const created=result.created||[];
+   const failed=result.failed||[];
+   const lines=created.map(x=>`${x.loginCode}: ${x.temporaryPassword||"password generated"} | Secret: ${x.secretAccessCode||""}`);
+   const failLines=failed.map(x=>`FAILED ${x.loginCode}: ${x.error}`);
+
+   alert(`2026/27 Primary setup complete.\n\nCreated: ${created.length}\nSkipped existing: ${setup.length-pending.length}\nFailed: ${failed.length}\n\n`+lines.join("\n")+(failLines.length?"\n\n"+failLines.join("\n"):""));
+   await buildAccessTemplates();
+   loadStaff();
+   loadSummary();
+   toast(`Created ${created.length} Primary staff accounts.`);
+ }catch(e){
+   toast(e.message||"Primary staff setup failed.");
+ }
+};
+
 
 window.applyCollege2026Setup=async function(){
 

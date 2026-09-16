@@ -68,6 +68,11 @@ button{border:0;border-radius:8px;padding:12px 18px;font-weight:700;cursor:point
 <select id="subject">
 <option value="">Choose subject</option>
 </select>
+<div id="customSubjectWrap" style="display:none;margin-top:8px">
+<label>Subject Name
+<input id="customSubject" type="text" maxlength="120" placeholder="Enter the missing subject">
+</label>
+</div>
 </div>
 <div>
 <label for="session">Academic Session</label>
@@ -136,6 +141,21 @@ const className = document.getElementById("className");
 const subject = document.getElementById("subject");
 const session = document.getElementById("session");
 const term = document.getElementById("term");
+const customSubject = document.getElementById("customSubject");
+const customSubjectWrap = document.getElementById("customSubjectWrap");
+
+function getSelectedSubject() {
+  if (subject.value === "Other") {
+    return customSubject.value.trim();
+  }
+  return subject.value.trim();
+}
+
+function updateCustomSubject() {
+  const isOther = subject.value === "Other";
+  customSubjectWrap.style.display = isOther ? "block" : "none";
+  if (!isOther) customSubject.value = "";
+}
 const body = document.getElementById("studentsBody");
 const count = document.getElementById("countLabel");
 const saveButton = document.getElementById("saveButton");
@@ -149,13 +169,12 @@ const schoolData = {
   primary: {
     title: "BALAD NURSERY AND PRIMARY SCHOOLS",
     subtitle: "Primary grading: A++ / A+ / A / B / C / D / F",
-    classes: ["Primary 1","Primary 2","Primary 3","Primary 4","Primary 5","Primary 6"],
+    classes: ["Crèche","Nursery 1","Nursery 2","Primary 1","Primary 2","Primary 3","Primary 4","Primary 5","Primary 6","Playground","KG","Nursery","Basic 1","Basic 2","Basic 3","Basic 4","Basic 5A","Basic 5B"],
     subjects: [
-      "English Language","Mathematics","Basic Science","Social Studies",
-      "Cultural and Creative Arts","Computer Studies","French","Arabic",
-      "Islamic Religious Studies","Christian Religious Studies",
-      "Physical and Health Education","Handwriting","Quantitative Reasoning",
-      "Verbal Reasoning","Yoruba"
+      "National Value Education","Arabic","Basic Science and Technology",
+      "Cultural and Creative Art","Diction","English Language","French",
+      "Handwriting","History and Geography","ICT","Islamic Religious Studies",
+      "Mathematics","Prevocational Studies","Quran","Yoruba","Other"
     ]
   },
   junior: {
@@ -167,7 +186,7 @@ const schoolData = {
       "Social Studies","Civic Education","ICT","Agricultural Science",
       "Home Economics","Physical & Health Education","Islamic Religious Studies",
       "French","Arabic","Business Studies","Cultural & Creative Arts",
-      "Security Education","Yoruba","History"
+      "Security Education","Yoruba","History","Other"
     ]
   },
   senior: {
@@ -179,7 +198,7 @@ const schoolData = {
       "Physics","Agricultural Science","Economics","Government",
       "Literature in English","Commerce","Financial Accounting","Geography",
       "History","Christian Religious Studies","Islamic Religious Studies",
-      "Computer Science","Further Mathematics","French","Arabic","Yoruba"
+      "Computer Science","Further Mathematics","French","Arabic","Yoruba","Other"
     ]
   }
 };
@@ -431,6 +450,7 @@ function populateSchoolOptions() {
   });
 
   applyTeacherAssignments();
+  updateCustomSubject();
 
   render();
 }
@@ -477,6 +497,7 @@ function applyTeacherAssignments() {
     if (!option.value) return;
 
     option.hidden =
+      option.value !== "Other" &&
       assignedSubjects.length > 0 &&
       !assignedSubjects.includes(
         option.value.trim().toLowerCase()
@@ -516,7 +537,7 @@ function render() {
     className.value || "—";
 
   document.getElementById("subjectLabel").textContent =
-    subject.value || "—";
+    getSelectedSubject() || "—";
 
   document.getElementById("termLabel").textContent =
     term.value
@@ -526,7 +547,7 @@ function render() {
   if (
     !school.value ||
     !className.value ||
-    !subject.value ||
+    !getSelectedSubject() ||
     !term.value
   ) {
     body.innerHTML =
@@ -559,6 +580,14 @@ className.addEventListener(
 
 subject.addEventListener(
   "change",
+  () => {
+    updateCustomSubject();
+    render();
+  }
+);
+
+customSubject.addEventListener(
+  "input",
   render
 );
 
@@ -574,7 +603,7 @@ saveButton.addEventListener(
     if (
       !school.value ||
       !className.value ||
-      !subject.value ||
+      !getSelectedSubject() ||
       !term.value
     ) {
       setStatus(
@@ -657,7 +686,10 @@ saveButton.addEventListener(
               className.value,
 
             subject:
-              subject.value,
+              getSelectedSubject(),
+
+            customSubject:
+              subject.value === "Other",
 
             term:
               term.value,

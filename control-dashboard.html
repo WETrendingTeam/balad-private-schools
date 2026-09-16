@@ -1581,6 +1581,7 @@ Refresh Templates
 <button class="btn btn-small btn-primary" onclick="applyCollege2026Setup()">
 Apply 2026/27 College Setup
 </button>
+<button class="btn btn-small btn-primary" onclick="applyPrimary2026Setup()">Apply 2026/27 Primary Setup</button>
 </div>
 <div class="card-body">
 <div class="access-toolbar">
@@ -2218,10 +2219,11 @@ Other Teaching Classes
 <label>
 Subjects
 </label>
-<select class="select" id="staffSubjects" onchange="subjectOtherChanged('staffSubjects','staffOtherSubject')">
-<option value="">
-Select subject
-</option>
+<div class="subject-select-actions" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+<button type="button" class="btn btn-small" onclick="selectAllStaffSubjects()">Select All Subjects</button>
+<button type="button" class="btn btn-small" onclick="clearAllStaffSubjects()">Clear All</button>
+</div>
+<select class="select multi-select" id="staffSubjects" multiple onchange="subjectOtherChanged('staffSubjects','staffOtherSubject')">
 </select>
 <input class="input custom-subject-box hidden" id="staffOtherSubject" placeholder="Type the subject not listed"/>
 </div>
@@ -2606,7 +2608,16 @@ const PRIMARY_CLASSES=[
  "Primary 3",
  "Primary 4",
  "Primary 5",
- "Primary 6"
+ "Primary 6",
+ "Playground",
+ "KG",
+ "Nursery",
+ "Basic 1",
+ "Basic 2",
+ "Basic 3",
+ "Basic 4",
+ "Basic 5A",
+ "Basic 5B"
 ];
 
 const COLLEGE_CLASSES=[
@@ -3501,6 +3512,98 @@ async function(){
 2026/27 COLLEGE STAFF BULK SETUP
 ==================================================
 */
+
+window.applyPrimary2026Setup=async function(){
+
+ if(selectedSchool!=="primary"){
+   toast("Select Nursery & Primary first.");
+   return;
+ }
+
+ const ok=confirm(
+   "This will create only the missing 2026/27 Primary staff accounts. Existing Primary staff and all College staff will not be touched. Continue?"
+ );
+ if(!ok)return;
+
+ const allSubjects=[
+  "National Value Education","Arabic","Basic Science and Technology",
+  "Cultural and Creative Art","Diction","English Language","French",
+  "Handwriting","History and Geography","ICT","Islamic Religious Studies",
+  "Mathematics","Prevocational Studies","Quran","Yoruba","Other"
+ ];
+
+ const setup=[
+  ["PRI001","Mrs Suleiman","Playground"],
+  ["PRI002","Mrs AbdulSalam","KG"],
+  ["PRI003","Mrs Abe","Nursery"],
+  ["PRI004","Mrs Olaniyan","Nursery 2"],
+  ["PRI005","Mrs Adebayo","Basic 1"],
+  ["PRI006","Mrs Babalola","Basic 2"],
+  ["PRI007","Mrs Balogun","Basic 2"],
+  ["PRI008","Mrs YUSUFF","Basic 3"],
+  ["PRI009","Mrs Kareem","Basic 4"],
+  ["PRI010","Mrs Muhammed","Basic 5A"],
+  ["PRI011","Mrs Owoyemi","Basic 5B"]
+ ].map(([loginCode,name,homeroom])=>({
+   loginCode,
+   school:"primary",
+   name,
+   role:"class_teacher",
+   homeroom,
+   assignedClasses:[homeroom],
+   assignedSubjects:[...allSubjects]
+ }));
+
+ try{
+   // Use the existing authenticated Worker path. The previous Primary setup
+   // called an undefined `api()` helper, so nothing reached the Worker.
+   const existingResult=await worker("list_staff",{school:"primary",includeSecrets:true});
+   const existingCodes=new Set(
+     (existingResult.staff||[]).map(x=>String(x.loginCode||x.staffCode||"").toUpperCase())
+   );
+
+   const missing=setup.filter(x=>!existingCodes.has(x.loginCode));
+   if(!missing.length){
+     toast("All 2026/27 Primary staff accounts already exist.");
+     return;
+   }
+
+   const created=[];
+   const failed=[];
+   const batchSize=4;
+
+   for(let i=0;i<missing.length;i+=batchSize){
+     const batch=missing.slice(i,i+batchSize);
+     const result=await worker("bulk_create_staff",{staff:batch});
+     created.push(...(result.created||[]));
+     failed.push(...(result.failed||[]));
+     toast(`Primary setup: ${Math.min(i+batchSize,missing.length)} of ${missing.length}`);
+   }
+
+   const createdLines=created.map(x=>
+     `${x.loginCode}: ${x.temporaryPassword||"password generated"} | Secret: ${x.secretAccessCode||""}`
+   );
+   const failedLines=failed.map(x=>
+     `FAILED ${x.loginCode}: ${x.error||"Unable to create staff."}`
+   );
+
+   alert(
+     `2026/27 Primary setup complete.\n\n`+
+     `Created: ${created.length}\nFailed: ${failed.length}\n\n`+
+     createdLines.join("\n")+
+     (failedLines.length?"\n\n"+failedLines.join("\n"):"")
+   );
+
+   await buildAccessTemplates();
+   loadStaff();
+   loadSummary();
+   toast(`Created ${created.length} Primary staff account${created.length===1?"":"s"}.`);
+
+ }catch(e){
+   console.error("Primary setup error",e);
+   toast(e.message||"Primary staff setup failed.");
+ }
+};
 
 window.applyCollege2026Setup=async function(){
 
@@ -4415,33 +4518,17 @@ async function(){
    );
 
 
-   const selectedSubject=
-   val("staffSubjects");
+   const selectedSubjects=selectedValues("staffSubjects");
 
+   let subjects=selectedSubjects.filter(x=>x!=="Other");
 
-   let subjects=[];
-
-
-   if(selectedSubject==="Other"){
-
-     const custom=
-     val("staffOtherSubject");
-
+   if(selectedSubjects.includes("Other")){
+     const custom=val("staffOtherSubject");
      if(!custom){
-
-       toast(
-         "Type the custom subject."
-       );
-
+       toast("Type the custom subject.");
        return;
      }
-
-     subjects=[custom];
-
-   }else if(selectedSubject){
-
-     subjects=[selectedSubject];
-
+     subjects.push(custom);
    }
 
 
@@ -5965,6 +6052,7 @@ function subjectOptions(
  selected="",
  school=selectedSchool
 ){
+ const selectedList=Array.isArray(selected)?selected:[selected];
 
  const list=
  school==="secondary"
@@ -5981,7 +6069,7 @@ list.map(
  s=>
  `<option
  value="${escAttr(s)}"
- ${selected===s?"selected":""}>
+ ${selectedList.includes(s)?"selected":""}>
  ${esc(s)}
  </option>`
 ).join("");
@@ -6100,7 +6188,7 @@ function populateStaffSubjectSelector(){
 
 
  select.innerHTML=
- subjectOptions("",selectedSchool);
+ subjectOptions([],selectedSchool);
 
  document
  .getElementById("staffOtherSubject")
@@ -6117,30 +6205,26 @@ SUBJECT OTHER
 
 window.subjectOtherChanged=
 function(selectId,otherId){
+ const select=document.getElementById(selectId);
+ const other=document.getElementById(otherId);
+ if(!select || !other)return;
+ const hasOther=Array.from(select.selectedOptions).some(o=>o.value==="Other");
+ if(hasOther){ other.classList.remove("hidden"); }
+ else { other.classList.add("hidden"); other.value=""; }
+};
 
- const select=
- document
- .getElementById(selectId);
+window.selectAllStaffSubjects=function(){
+ const select=document.getElementById("staffSubjects");
+ if(!select)return;
+ Array.from(select.options).forEach(o=>{ if(o.value) o.selected=true; });
+ subjectOtherChanged("staffSubjects","staffOtherSubject");
+};
 
- const other=
- document
- .getElementById(otherId);
-
-
- if(
-   select.value==="Other"
- ){
-
-   other.classList.remove("hidden");
-
- }else{
-
-   other.classList.add("hidden");
-
-   other.value="";
-
- }
-
+window.clearAllStaffSubjects=function(){
+ const select=document.getElementById("staffSubjects");
+ if(!select)return;
+ Array.from(select.options).forEach(o=>o.selected=false);
+ subjectOtherChanged("staffSubjects","staffOtherSubject");
 };
 
 
@@ -6381,7 +6465,7 @@ msg=>{
 let studentClassSelection={className:"",placement:""};
 let pendingStudentImport=[];
 
-const BALAD_PRIMARY_CLASSES=["Crèche","Nursery 1","Nursery 2","Primary 1","Primary 2","Primary 3","Primary 4","Primary 5","Primary 6"];
+const BALAD_PRIMARY_CLASSES=["Crèche","Nursery 1","Nursery 2","Primary 1","Primary 2","Primary 3","Primary 4","Primary 5","Primary 6","Playground","KG","Nursery","Basic 1","Basic 2","Basic 3","Basic 4","Basic 5A","Basic 5B"];
 const BALAD_COLLEGE_JUNIOR=["JSS 1","JSS 2","JSS 3"];
 const BALAD_COLLEGE_SENIOR=["SS 1","SS 2","SS 3"];
 const BALAD_PRIMARY_ARMS=["A","B"];

@@ -1581,7 +1581,6 @@ Refresh Templates
 <button class="btn btn-small btn-primary" onclick="applyCollege2026Setup()">
 Apply 2026/27 College Setup
 </button>
-<button class="btn btn-small btn-primary" onclick="applyPrimary2026Setup()">Apply 2026/27 Primary Setup</button>
 </div>
 <div class="card-body">
 <div class="access-toolbar">
@@ -3502,98 +3501,6 @@ async function(){
 2026/27 COLLEGE STAFF BULK SETUP
 ==================================================
 */
-
-window.applyPrimary2026Setup=async function(){
-
- if(selectedSchool!=="primary"){
-   toast("Select Nursery & Primary first.");
-   return;
- }
-
- const ok=confirm(
-   "This will create only the missing 2026/27 Primary staff accounts. Existing Primary staff and all College staff will not be touched. Continue?"
- );
- if(!ok)return;
-
- const allSubjects=[
-  "English Language","Mathematics","Basic Science","Basic Technology",
-  "Social Studies","Civic Education","Computer Studies","Agricultural Science",
-  "Home Economics","Religious Studies","Physical & Health Education","French",
-  "Creative Arts","Other"
- ];
-
- const setup=[
-  ["PRI001","Mrs Suleiman","Playground"],
-  ["PRI002","Mrs AbdulSalam","KG"],
-  ["PRI003","Mrs Abe","Nursery"],
-  ["PRI004","Mrs Olaniyan","Nursery 2"],
-  ["PRI005","Mrs Adebayo","Basic 1"],
-  ["PRI006","Mrs Babalola","Basic 2"],
-  ["PRI007","Mrs Balogun","Basic 2"],
-  ["PRI008","Mrs YUSUFF","Basic 3"],
-  ["PRI009","Mrs Kareem","Basic 4"],
-  ["PRI010","Mrs Muhammed","Basic 5A"],
-  ["PRI011","Mrs Owoyemi","Basic 5B"]
- ].map(([loginCode,name,homeroom])=>({
-   loginCode,
-   school:"primary",
-   name,
-   role:"class_teacher",
-   homeroom,
-   assignedClasses:[homeroom],
-   assignedSubjects:[...allSubjects]
- }));
-
- try{
-   // Use the existing authenticated Worker path. The previous Primary setup
-   // called an undefined `api()` helper, so nothing reached the Worker.
-   const existingResult=await worker("list_staff",{school:"primary",includeSecrets:true});
-   const existingCodes=new Set(
-     (existingResult.staff||[]).map(x=>String(x.loginCode||x.staffCode||"").toUpperCase())
-   );
-
-   const missing=setup.filter(x=>!existingCodes.has(x.loginCode));
-   if(!missing.length){
-     toast("All 2026/27 Primary staff accounts already exist.");
-     return;
-   }
-
-   const created=[];
-   const failed=[];
-   const batchSize=4;
-
-   for(let i=0;i<missing.length;i+=batchSize){
-     const batch=missing.slice(i,i+batchSize);
-     const result=await worker("bulk_create_staff",{staff:batch});
-     created.push(...(result.created||[]));
-     failed.push(...(result.failed||[]));
-     toast(`Primary setup: ${Math.min(i+batchSize,missing.length)} of ${missing.length}`);
-   }
-
-   const createdLines=created.map(x=>
-     `${x.loginCode}: ${x.temporaryPassword||"password generated"} | Secret: ${x.secretAccessCode||""}`
-   );
-   const failedLines=failed.map(x=>
-     `FAILED ${x.loginCode}: ${x.error||"Unable to create staff."}`
-   );
-
-   alert(
-     `2026/27 Primary setup complete.\n\n`+
-     `Created: ${created.length}\nFailed: ${failed.length}\n\n`+
-     createdLines.join("\n")+
-     (failedLines.length?"\n\n"+failedLines.join("\n"):"")
-   );
-
-   await buildAccessTemplates();
-   loadStaff();
-   loadSummary();
-   toast(`Created ${created.length} Primary staff account${created.length===1?"":"s"}.`);
-
- }catch(e){
-   console.error("Primary setup error",e);
-   toast(e.message||"Primary staff setup failed.");
- }
-};
 
 window.applyCollege2026Setup=async function(){
 

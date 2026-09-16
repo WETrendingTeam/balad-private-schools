@@ -2,7 +2,16 @@
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>My Class | BALAD</title>
 <style>
 :root{--green:#075c46;--red:#e32629;--ink:#17211d;--muted:#66716c;--line:#dbe5e0;--soft:#f4f8f6}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f8f6;color:var(--ink)}header{background:var(--green);color:#fff;padding:18px 20px}.head{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}.head h1{font-size:20px;margin:0}.head p{font-size:12px;margin:4px 0 0;opacity:.85}.head a,.head button{background:#fff;color:var(--green);border:0;border-radius:9px;padding:10px 14px;font-weight:800;text-decoration:none;cursor:pointer}.wrap{max-width:1100px;margin:auto;padding:22px 18px 50px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 8px 24px rgba(7,65,45,.06)}h2{color:var(--green);margin:0 0 12px}.muted{color:var(--muted);line-height:1.5}.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.full{grid-column:1/-1}label{font-weight:800;font-size:13px;color:#34423b}input,select{width:100%;margin-top:6px;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:15px}button.primary{background:var(--green);color:#fff;border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer}.photo{display:flex;gap:14px;align-items:center}.preview{width:78px;height:78px;border-radius:12px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}.photo-choice-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.photo-choice{background:#fff;border:1px solid var(--green);color:var(--green);border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer}.photo-hidden{display:none}.photo-picker small{display:block;margin-top:7px;color:var(--muted)}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.status{padding:10px 12px;border-radius:10px;background:#e8f7ef;color:var(--green);display:none}.error{background:#fdecec;color:#b42323}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}.table th{color:var(--green);background:var(--soft)}.thumb{width:44px;height:44px;border-radius:8px;object-fit:cover;background:var(--soft)}.edit{background:#fff;border:1px solid var(--green);color:var(--green);border-radius:8px;padding:7px 10px;font-weight:800;cursor:pointer}@media(max-width:700px){.form{grid-template-columns:1fr}.full{grid-column:auto}.head{align-items:flex-start;flex-direction:column}}
-</style></head><body>
+
+.bulk-panel{display:none;margin-top:14px;border-top:1px solid var(--line);padding-top:16px}
+.bulk-note{background:#fff8e6;border:1px solid #ead9a2;color:#6b581d;border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.45;margin-bottom:12px}
+.bulk-row{display:grid;grid-template-columns:48px 1.3fr 1fr 1fr;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+.bulk-row select{margin-top:0}
+.bulk-row .bulk-no{font-weight:800;color:var(--green)}
+.bulk-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.bulk-results{margin-top:12px;white-space:pre-line;font-size:13px;line-height:1.5}
+@media(max-width:700px){.bulk-row{grid-template-columns:34px 1fr 1fr}.bulk-row .bulk-adm{grid-column:2/-1;color:var(--muted)}}
+.delete{border:1px solid var(--red);background:#fff;color:var(--red);border-radius:8px;padding:7px 10px;font-weight:700;cursor:pointer}</style></head><body>
 <header><div class="head"><div><h1>BALAD PRIVATE SCHOOLS</h1><p>My Class Management</p></div><div><a href="staff-dashboard.html">← Staff Dashboard</a></div></div></header>
 <main class="wrap">
 <section class="card"><h2 id="title">My Class</h2><p class="muted" id="intro">Loading your Class Teacher assignment…</p></section>
@@ -14,8 +23,27 @@
 <div class="full"><label>Address<input id="address"></label></div>
 <div class="full photo photo-picker"><img id="preview" class="preview" src="../images/logo.png" alt="Passport preview"><div><label>Choose Photo</label><div class="photo-choice-row"><button type="button" class="photo-choice" id="takePhoto">Take Photo</button><button type="button" class="photo-choice" id="photoLibrary">Photo Library</button><button type="button" class="photo-choice" id="browseFiles">Browse Files</button></div><input id="photo" class="photo-hidden" type="file" accept="image/*"><input id="photoCamera" class="photo-hidden" type="file" accept="image/*" capture="environment"><input id="photoFiles" class="photo-hidden" type="file"><small>Choose from Camera, Photos or Files.</small></div></div>
 <div class="full"><button class="primary" type="submit" id="createBtn">Create Student</button></div></form><div id="createStatus" class="status"></div></section>
+
+<section class="card" id="bulkCard">
+  <div class="toolbar">
+    <h2 style="margin-right:auto">Bulk Add SS2 Students</h2>
+    <button class="primary" id="bulkToggle" type="button">Open Bulk Add</button>
+  </div>
+  <div id="bulkPanel" class="bulk-panel">
+    <div class="bulk-note">
+      The students below are pre-filled from the list you approved. Select <b>Science, Arts or Commercial</b> for each student, then tap <b>Create All Students</b>. No. 21 is intentionally left out for now. Photos are not included.
+    </div>
+    <div id="bulkRows"></div>
+    <div class="bulk-actions">
+      <button class="primary" id="bulkCreateBtn" type="button">Create All Students</button>
+      <button type="button" class="head" id="bulkCloseBtn">Close</button>
+    </div>
+    <div id="bulkStatus" class="bulk-results"></div>
+  </div>
+</section>
+
 <section class="card"><div class="toolbar"><h2 style="margin-right:auto">Students in My Class</h2><button class="primary" id="refreshBtn" type="button">Refresh</button></div><div class="table-wrap"><table class="table"><thead><tr><th>Photo</th><th>Name</th><th>Admission No.</th><th>Gender</th><th>Action</th></tr></thead><tbody id="students"><tr><td colspan="5">Loading…</td></tr></tbody></table></div><div id="listStatus" class="status"></div></section>
-<section class="card" id="editCard" style="display:none"><h2>Edit Student</h2><form id="editForm" class="form"><input id="editId" type="hidden"><div><label>Student Name<input id="editName" required></label></div><div><label>Admission Number<input id="editAdmission" required></label></div><div><label>Gender<select id="editGender"><option value="">Select</option><option>Male</option><option>Female</option></select></label></div><div><label>Date of Birth<input id="editDob" type="date"></label></div><div><label>Guardian Name<input id="editGuardian"></label></div><div><label>Guardian Phone<input id="editPhone"></label></div><div class="full"><label>Address<input id="editAddress"></label></div><div class="full photo-picker"><label>Change Passport Photo</label><div class="photo-choice-row"><button type="button" class="photo-choice" id="editTakePhoto">Take Photo</button><button type="button" class="photo-choice" id="editPhotoLibrary">Photo Library</button><button type="button" class="photo-choice" id="editBrowseFiles">Browse Files</button></div><input id="editPhotoCamera" class="photo-hidden" type="file" accept="image/*" capture="environment"><input id="editPhotoLibraryInput" class="photo-hidden" type="file" accept="image/*"><input id="editPhotoFiles" class="photo-hidden" type="file"><small>Choose from Camera, Photos or Files.</small></div><div class="full"><button class="primary" type="submit" id="editBtn">Save Changes</button></div></form><div id="editStatus" class="status"></div></section>
+<section class="card" id="editCard" style="display:none"><h2>Edit Student</h2><form id="editForm" class="form"><input id="editId" type="hidden"><div><label>Student Name<input id="editName" required></label></div><div><label>Admission Number<input id="editAdmission" required></label></div><div><label>Gender<select id="editGender"><option value="">Select</option><option>Male</option><option>Female</option></select></label></div><div><label>Date of Birth<input id="editDob" type="date"></label></div><div><label>Guardian Name<input id="editGuardian"></label></div><div><label>Guardian Phone<input id="editPhone"></label></div><div class="full"><label>Address<input id="editAddress"></label></div><div class="full photo-picker"><label>Change Passport Photo</label><div class="photo-choice-row"><button type="button" class="photo-choice" id="editTakePhoto">Take Photo</button><button type="button" class="photo-choice" id="editPhotoLibrary">Photo Library</button><button type="button" class="photo-choice" id="editBrowseFiles">Browse Files</button></div><input id="editPhotoCamera" class="photo-hidden" type="file" accept="image/*" capture="environment"><input id="editPhotoLibraryInput" class="photo-hidden" type="file" accept="image/*"><input id="editPhotoFiles" class="photo-hidden" type="file"><div id="editPhotoPreviewWrap" style="display:none;margin-top:10px"><img id="editPhotoPreview" class="thumb" alt="Selected passport photo"><div id="editPhotoName" style="font-size:13px;margin-top:5px;color:var(--muted)"></div></div><small>Choose from Camera, Photos or Files.</small></div><div class="full"><button class="primary" type="submit" id="editBtn">Save Changes</button></div></form><div id="editStatus" class="status"></div></section>
 </main>
 <script type="module">
 import {auth} from "../firebase-config.js";
@@ -39,18 +67,83 @@ async function load(){
  await list();
 }
 async function list(){try{const d=await worker("list_students",{school,className});students=d.students||[];render();}catch(e){document.getElementById("students").innerHTML=`<tr><td colspan="5">${esc(e.message)}</td></tr>`;}}
-function render(){document.getElementById("students").innerHTML=students.length?students.map(s=>`<tr><td>${s.passportUrl?`<img class="thumb" src="${esc(s.passportUrl)}">`:`—`}</td><td>${esc(s.studentName)}</td><td>${esc(s.admissionNumber)}</td><td>${esc(s.gender||"—")}</td><td><button class="edit" data-id="${esc(s.studentId)}">Edit</button></td></tr>`).join(""):`<tr><td colspan="5">No students in ${esc(className)} yet.</td></tr>`;document.querySelectorAll(".edit").forEach(b=>b.onclick=()=>openEdit(b.dataset.id));}
+function render(){document.getElementById("students").innerHTML=students.length?students.map(s=>`<tr><td>${s.passportUrl?`<img class="thumb" src="${esc(s.passportUrl)}">`:`—`}</td><td>${esc(s.studentName)}</td><td>${esc(s.admissionNumber)}</td><td>${esc(s.gender||"—")}</td><td><button class="edit" data-id="${esc(s.studentId)}">Edit</button> <button class="delete" data-id="${esc(s.studentId)}" data-name="${esc(s.studentName)}" type="button">Delete</button></td></tr>`).join(""):`<tr><td colspan="5">No students in ${esc(className)} yet.</td></tr>`;document.querySelectorAll(".edit").forEach(b=>b.onclick=()=>openEdit(b.dataset.id));document.querySelectorAll(".delete").forEach(b=>b.onclick=()=>deleteStudent(b.dataset.id,b.dataset.name));}
 async function upload(file,studentId){if(!file)return "";const ext=(file.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"").toLowerCase()||"jpg";const r=ref(storage,`students/passports/${studentId}/${Date.now()}.${ext}`);await uploadBytes(r,file);return await getDownloadURL(r)}
 document.getElementById("createForm").onsubmit=async e=>{e.preventDefault();const isSenior=/\bSS\s*[123]\b/i.test(className),department=document.getElementById("department").value;if(isSenior&&!department){msg("createStatus","Please select Science, Arts or Commercial department.",true);return}document.getElementById("createBtn").disabled=true;try{const d=await worker("create_student",{school,className,student:{school,className,studentName:document.getElementById("studentName").value.trim(),admissionNumber:document.getElementById("admissionNumber").value.trim(),gender:document.getElementById("gender").value,dateOfBirth:document.getElementById("dob").value,guardianName:document.getElementById("guardianName").value.trim(),guardianPhone:document.getElementById("guardianPhone").value.trim(),address:document.getElementById("address").value.trim(),department:isSenior?department:""}});const st=d.student;if(selectedPhoto){const url=await upload(selectedPhoto,st.studentId);await worker("update_student",{studentId:st.studentId,updates:{passportUrl:url}})}document.getElementById("createForm").reset();selectedPhoto=null;document.getElementById("preview").src="../images/logo.png";msg("createStatus",`${st.studentName} was created successfully.`);await list()}catch(e){msg("createStatus",e.message,true)}finally{document.getElementById("createBtn").disabled=false}}
 let selectedPhoto=null;function setSelectedPhoto(f){if(!f)return;selectedPhoto=f;document.getElementById("preview").src=URL.createObjectURL(f)}
 document.getElementById("photo").onchange=()=>setSelectedPhoto(document.getElementById("photo").files[0]);document.getElementById("photoCamera").onchange=()=>setSelectedPhoto(document.getElementById("photoCamera").files[0]);document.getElementById("photoFiles").onchange=()=>setSelectedPhoto(document.getElementById("photoFiles").files[0]);document.getElementById("takePhoto").onclick=()=>document.getElementById("photoCamera").click();document.getElementById("photoLibrary").onclick=()=>document.getElementById("photo").click();document.getElementById("browseFiles").onclick=()=>document.getElementById("photoFiles").click();
-async function openEdit(id){const d=students.find(x=>x.studentId===id);if(!d)return;document.getElementById("editCard").style.display="block";document.getElementById("editId").value=d.studentId;document.getElementById("editName").value=d.studentName||"";document.getElementById("editAdmission").value=d.admissionNumber||"";document.getElementById("editGender").value=d.gender||"";document.getElementById("editDob").value=d.dateOfBirth||"";document.getElementById("editGuardian").value=d.guardianName||"";document.getElementById("editPhone").value=d.guardianPhone||"";document.getElementById("editAddress").value=d.address||"";document.getElementById("editCard").scrollIntoView({behavior:"smooth"})}
+async function openEdit(id){const d=students.find(x=>x.studentId===id);if(!d)return;editSelectedFile=null;document.getElementById("editCard").style.display="block";document.getElementById("editId").value=d.studentId;document.getElementById("editName").value=d.studentName||"";document.getElementById("editAdmission").value=d.admissionNumber||"";document.getElementById("editGender").value=d.gender||"";document.getElementById("editDob").value=d.dateOfBirth||"";document.getElementById("editGuardian").value=d.guardianName||"";document.getElementById("editPhone").value=d.guardianPhone||"";document.getElementById("editAddress").value=d.address||"";document.getElementById("editPhotoPreviewWrap").style.display=d.passportUrl?"block":"none";document.getElementById("editPhotoPreview").src=d.passportUrl||"";document.getElementById("editPhotoName").textContent=d.passportUrl?"Current passport photo":"";document.getElementById("editCard").scrollIntoView({behavior:"smooth"})}
 let editSelectedFile=null;
-function bindEditPhotoInput(id){document.getElementById(id).onchange=()=>{editSelectedFile=document.getElementById(id).files[0]||null}}
+function bindEditPhotoInput(id){document.getElementById(id).onchange=()=>{const f=document.getElementById(id).files[0]||null;if(!f)return;editSelectedFile=f;document.getElementById("editPhotoPreviewWrap").style.display="block";document.getElementById("editPhotoPreview").src=URL.createObjectURL(f);document.getElementById("editPhotoName").textContent=f.name+" selected"}}
 document.getElementById("editTakePhoto").onclick=()=>document.getElementById("editPhotoCamera").click();
 document.getElementById("editPhotoLibrary").onclick=()=>document.getElementById("editPhotoLibraryInput").click();
 document.getElementById("editBrowseFiles").onclick=()=>document.getElementById("editPhotoFiles").click();
 bindEditPhotoInput("editPhotoCamera");bindEditPhotoInput("editPhotoLibraryInput");bindEditPhotoInput("editPhotoFiles");
+async function deleteStudent(id,name){if(!confirm(`Delete ${name}? This cannot be undone.`))return;try{await worker("delete_student",{studentId:id});msg("listStatus",`${name} was deleted successfully.`);document.getElementById("editCard").style.display="none";await list()}catch(e){msg("listStatus",e.message,true)}}
 document.getElementById("editForm").onsubmit=async e=>{e.preventDefault();document.getElementById("editBtn").disabled=true;try{const updates={studentName:document.getElementById("editName").value.trim(),admissionNumber:document.getElementById("editAdmission").value.trim(),gender:document.getElementById("editGender").value,dateOfBirth:document.getElementById("editDob").value,guardianName:document.getElementById("editGuardian").value.trim(),guardianPhone:document.getElementById("editPhone").value.trim(),address:document.getElementById("editAddress").value.trim(),className};if(editSelectedFile)updates.passportUrl=await upload(editSelectedFile,document.getElementById("editId").value);await worker("update_student",{studentId:document.getElementById("editId").value,updates});msg("editStatus","Student profile updated successfully.");editSelectedFile=null;await list()}catch(e){msg("editStatus",e.message,true)}finally{document.getElementById("editBtn").disabled=false}};
+
+const BULK_DATA = [{"no":4,"name":"ATOLANI SULTAN","adm":"BCC/151/25","dob":"2012-04-25","guardian":"MR & MRS ATOLANI","phone":"08030670611","address":"16, SONGO SANYA MAIN STREET, IKORODU, LAGOS"},{"no":5,"name":"AKERELE HAWAWU","adm":"BCC/006/22","dob":"2012-09-10","guardian":"MR & MRS AKERELE","phone":"08088338324","address":"23, OLUSHOLA CHRISTIAN STREET, IKORODU, LAGOS"},{"no":6,"name":"ADETORO WAHAB","adm":"BCC/137/26","dob":"2011-11-09","guardian":"MR & MRS ADETORO","phone":"08027607825","address":"16, UNITY ESTATE, ELEPE PHASE 1, IKORODU, LAGOS"},{"no":7,"name":"OLADELE RODDIYAH","adm":"BCC/014/22","dob":"2010-11-25","guardian":"MR & MRS OLADELE","phone":"0703972603","address":"23, OLUDORE OKE SOYA STREET, IKORODU, LAGOS"},{"no":8,"name":"LAWAL FARIZAH","adm":"BCC/012/22","dob":"2011-11-07","guardian":"MR & MRS LAWAL","phone":"09153252269","address":"20, AKEEM OLORUN STREET, IKORODU, LAGOS"},{"no":9,"name":"SALAUDEEN ABDULMALIK","adm":"BCC/019/22","dob":"2012-10-30","guardian":"MR & MRS SALAUDEEN","phone":"08035686285","address":"14, SAMUEL A... STREET, IKORODU, LAGOS"},{"no":10,"name":"OLADEMEGI IDRIS","adm":"BCC/142/26","dob":"2012-09-12","guardian":"MR & MRS OLADEMEGI","phone":"0706266139","address":"78, ISAYIDE SHOSUNBI STREET, IKORODU, LAGOS"},{"no":11,"name":"ADESANYA ADURAGBEMI","adm":"BCC/141/26","dob":"2012-09-09","guardian":"MR & MRS ADESANYA","phone":"09036605692","address":"3, IYERA ROAD, ISAWO, IKORODU, LAGOS"},{"no":12,"name":"ALIMI BASIT","adm":"BCC/135/26","dob":"2012-10-18","guardian":"MR & MRS ALIMI","phone":"08036734661","address":"1, ALIMSON STREET, IKORODU, LAGOS"},{"no":13,"name":"ADEBAYO MUIZ","adm":"BCC/007/22","dob":"2011-09-15","guardian":"MR & MRS ADEBAYO","phone":"07066433664","address":"12, ISOBUORE STREET, IKORODU, LAGOS"},{"no":14,"name":"YISAU IBRAHIM","adm":"BCC/022/22","dob":"2009-12-06","guardian":"MR & MRS YISAU","phone":"07044758361","address":"18, ISHOWO STREET, IKORODU, LAGOS"},{"no":15,"name":"OKUNIYI ABDULBASIT","adm":"BCC/015/22","dob":"2013-01-03","guardian":"MR & MRS OKUNIYI","phone":"08033608575","address":"17, IFELODUN STREET, IKORODU, LAGOS"},{"no":16,"name":"NURDEEN ABDULRAUF","adm":"BCC/015/22","dob":"2012-09-03","guardian":"MR & MRS NURDEEN","phone":"08033608575","address":"14, AKIN SANYA STREET, IKORODU, LAGOS"},{"no":17,"name":"AKANBI RASAQ","adm":"BCC/055/22","dob":"2012-12-09","guardian":"MR & MRS AKANBI","phone":"08023336809","address":"21, OJOKORO ROAD, IKORODU, LAGOS"},{"no":18,"name":"BELLO MUBARAK","adm":"BCC/009/22","dob":"2011-11-03","guardian":"MR & MRS BELLO","phone":"0803221425","address":"7, AYODELE STREET, IKORODU, LAGOS"},{"no":19,"name":"SALISU MUBARAK","adm":"BCC/018/22","dob":"2012-03-25","guardian":"MR & MRS SALISU","phone":"08029758419","address":"10, TITILAYO STREET, IKORODU, LAGOS"},{"no":20,"name":"YEGUNLE ALAMIN","adm":"BCC/152/25","dob":"2012-11-28","guardian":"MR & MRS YEGUNLE","phone":"08161812956","address":"14, PRINCE ADEWALE OGUNLEYE STREET, IKORODU, LAGOS"},{"no":22,"name":"RUKU ALOMIDE","adm":"BCC/1/26","dob":"2011-01-08","guardian":"MR & MRS RUKU","phone":"08084918009","address":""}];
+function renderBulkRows(){
+  const box=document.getElementById("bulkRows");
+  box.innerHTML=BULK_DATA.map((s,i)=>`<div class="bulk-row">
+    <div class="bulk-no">${s.no}</div>
+    <div><b>${esc(s.name)}</b></div>
+    <div class="bulk-adm">${esc(s.adm)}</div>
+    <div><select class="bulk-dept" data-index="${i}">
+      <option value="">Select Department</option>
+      <option value="Science">Science</option>
+      <option value="Arts">Arts</option>
+      <option value="Commercial">Commercial</option>
+    </select></div>
+  </div>`).join("");
+}
+document.getElementById("bulkToggle").onclick=()=>{
+  const p=document.getElementById("bulkPanel");
+  const show=p.style.display!=="block";
+  p.style.display=show?"block":"none";
+  document.getElementById("bulkToggle").textContent=show?"Hide Bulk Add":"Open Bulk Add";
+  if(show) renderBulkRows();
+};
+document.getElementById("bulkCloseBtn").onclick=()=>{
+  document.getElementById("bulkPanel").style.display="none";
+  document.getElementById("bulkToggle").textContent="Open Bulk Add";
+};
+document.getElementById("bulkCreateBtn").onclick=async()=>{
+  const btn=document.getElementById("bulkCreateBtn");
+  const status=document.getElementById("bulkStatus");
+  const selects=[...document.querySelectorAll(".bulk-dept")];
+  const missing=selects.filter(x=>!x.value);
+  if(missing.length){status.textContent="Please select a department for every student before creating.";return}
+  if(!/^\s*SS\s*[123]\s*$/i.test(className)){status.textContent="Bulk SS2 creation is only available for SS1–SS3.";return}
+  btn.disabled=true;
+  status.textContent="Checking existing students…";
+  try{
+    const listed=await worker("list_students",{school,className});
+    const existing=new Set((listed.students||[]).map(s=>String(s.admissionNumber||"").trim().toUpperCase()).filter(Boolean));
+    const created=[], skipped=[], failed=[];
+    for(let i=0;i<BULK_DATA.length;i++){
+      const s=BULK_DATA[i], department=selects[i].value;
+      if(s.adm && existing.has(s.adm.toUpperCase())){skipped.push(`${s.no}. ${s.name} — already exists`);continue}
+      try{
+        const d=await worker("create_student",{school,className,student:{
+          school,className,studentName:s.name,admissionNumber:s.adm,gender:"",
+          dateOfBirth:s.dob,guardianName:s.guardian,guardianPhone:s.phone,address:s.address,department
+        }});
+        created.push(`${s.no}. ${s.name}`);
+        if(s.adm) existing.add(s.adm.toUpperCase());
+      }catch(err){failed.push(`${s.no}. ${s.name} — ${err.message}`)}
+    }
+    status.textContent=
+      `Created: ${created.length}\n`+
+      (created.length?created.join("\n"):"None")+
+      `\n\nSkipped: ${skipped.length}\n`+
+      (skipped.length?skipped.join("\n"):"None")+
+      `\n\nFailed: ${failed.length}\n`+
+      (failed.length?failed.join("\n"):"None");
+    await list();
+  }catch(err){status.textContent=`Bulk creation stopped: ${err.message}`}
+  finally{btn.disabled=false}
+};
+
 document.getElementById("refreshBtn").onclick=list; onAuthStateChanged(auth,()=>{}); load();
 </script></body></html>

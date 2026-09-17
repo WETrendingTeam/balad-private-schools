@@ -6764,34 +6764,7 @@ async function printStudentIdCard(id){
     w=window.open("about:blank","_blank","width=850,height=700");
     if(!w){toast("Safari blocked the ID-card window. Allow pop-ups for this site and try again.");return;}
     w.document.open();
-    w.document.write("<!doctype html><html><head><title>BALAD Student ID Card</title></head><body style=\"font-family:Arial,sans-serif;padding:30px\"><p>Generating student ID card…</p>
-<div class="modal-backdrop" id="studentEditModal">
-<div class="modal">
-<div class="modal-head"><h2>Manage Student</h2><button class="modal-close" onclick="closeModal('studentEditModal')">×</button></div>
-<div class="modal-body">
-<input type="hidden" id="editStudentId"/>
-<div class="form-grid">
-<div class="field"><label>Full Name</label><input class="input" id="editStudentName"/></div>
-<div class="field"><label>Admission Number</label><input class="input" id="editStudentAdmission"/></div>
-<div class="field"><label>Class</label><select class="select" id="editStudentClass"></select></div>
-<div class="field"><label>Arm</label><select class="select" id="editStudentArm"><option value="">Not applicable</option><option value="A">A</option><option value="B">B</option></select></div>
-<div class="field"><label>Department</label><select class="select" id="editStudentDepartment"><option value="">Not applicable</option><option value="Science">Science</option><option value="Arts">Arts</option><option value="Commercial">Commercial</option></select></div>
-<div class="field"><label>Gender</label><select class="select" id="editStudentGender"><option value="">Select gender</option><option value="Male">Male</option><option value="Female">Female</option></select></div>
-<div class="field"><label>Date of Birth</label><input class="input" id="editStudentDob" type="date"/></div>
-<div class="field"><label>Guardian Name</label><input class="input" id="editGuardianName"/></div>
-<div class="field"><label>Guardian Phone</label><input class="input" id="editGuardianPhone"/></div>
-<div class="field"><label>Guardian WhatsApp</label><input class="input" id="editGuardianWhatsapp"/></div>
-<div class="field"><label>Guardian Email</label><input class="input" id="editGuardianEmail"/></div>
-<div class="field full"><label>Address</label><input class="input" id="editStudentAddress"/></div>
-<div class="field full"><label>Result Access Code</label><div style="display:flex;gap:8px"><input class="input" id="editResultAccessCode" readonly/><button type="button" class="btn btn-small" onclick="resetControlResultCode()">Reset Code</button></div></div>
-</div>
-<div id="studentEditStatus" class="control-muted" style="margin-top:12px"></div>
-</div>
-<div class="modal-foot"><button class="btn" onclick="closeModal('studentEditModal')">Cancel</button><button class="btn btn-primary" id="saveStudentEditBtn" onclick="saveStudentEdit()">Save Changes</button></div>
-</div>
-</div>
-
-</body></html>");
+    w.document.write("<!doctype html><html><head><title>BALAD Student ID Card</title></head><body style=\"font-family:Arial,sans-serif;padding:30px\"><p>Generating student ID card…</p></body></html>");
     w.document.close();
 
     const d=await worker("get_student_id_card",{studentId:id});

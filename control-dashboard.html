@@ -1557,8 +1557,8 @@ Nursery &amp; Primary:
 College:
 <strong>COL001 – COL050</strong>.
 
-<strong>COL001 – COL004</strong> are Management access IDs.
-<strong>COL005 – COL050</strong> are College staff IDs.
+<strong>COL001 – COL050</strong> are College staff IDs.
+There is no separate College Management staff ID group; management access is through <strong>CONTROL001</strong>.
 
 Nursery &amp; Primary uses <strong>PRI001 – PRI050</strong>; there is no separate Primary Management group.
 
@@ -2172,9 +2172,6 @@ Teacher
 <option value="class_teacher">
 Class Teacher
 </option>
-<option value="management">
-Management
-</option>
 <option value="other">
 Other Staff
 </option>
@@ -2291,12 +2288,6 @@ A
 </option>
 <option value="B">
 B
-</option>
-<option value="C">
-C
-</option>
-<option value="D">
-D
 </option>
 </select>
 </div>
@@ -2472,11 +2463,6 @@ from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import {
  getFirestore, collection, getDocs, doc, setDoc, deleteDoc, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-import {
- getStorage, ref, uploadBytes, getDownloadURL
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
-
-
 /*
 ==================================================
 EXISTING AUTH / WORKER CONFIG
@@ -2499,7 +2485,6 @@ const firebaseConfig={
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
-const storage=getStorage(app);
 
 
 /*
@@ -2554,43 +2539,23 @@ OTHER = CUSTOM SUBJECT
 */
 
 const PRIMARY_SUBJECTS=[
- "English Language",
- "Mathematics",
- "Basic Science",
- "Basic Technology",
- "Social Studies",
- "Civic Education",
- "Computer Studies",
- "Agricultural Science",
- "Home Economics",
- "Religious Studies",
- "Physical & Health Education",
- "French",
- "Creative Arts",
- "Other"
+ "National Value Education","Arabic","Basic Science and Technology",
+ "Cultural and Creative Art","Diction","English Language","French",
+ "Handwriting","History and Geography","ICT","Islamic Religious Studies",
+ "Mathematics","Prevocational Studies","Quran","Yoruba","Other"
 ];
 
 const COLLEGE_SUBJECTS=[
- "English Language",
- "Mathematics",
- "Further Mathematics",
- "Physics",
- "Chemistry",
- "Biology",
- "Agricultural Science",
- "Economics",
- "Government",
- "Commerce",
- "Accounting",
- "Geography",
- "Literature in English",
- "Civic Education",
- "Computer Studies",
- "Data Processing",
- "Christian Religious Studies",
- "Islamic Religious Studies",
- "French",
- "Other"
+ "English Language","Mathematics","Basic Science","Basic Technology",
+ "Social Studies","Civic Education","ICT","Agricultural Science",
+ "Home Economics","Physical & Health Education","Islamic Religious Studies",
+ "French","Arabic","Business Studies","Cultural & Creative Arts",
+ "Security Education","Yoruba","History","Further Mathematics","Biology",
+ "Chemistry","Physics","Economics","Government","Literature in English",
+ "Commerce","Financial Accounting","Geography","Christian Religious Studies",
+ "Computer Science","Data Processing","Accounting","Marketing","Diction",
+ "Garment Making","Foods & Nutrition","Creative & Cultural Arts (CCA)",
+ "Islamic Religious Studies (IRS)","Other"
 ];
 
 
@@ -2601,24 +2566,8 @@ CLASS OPTIONS
 */
 
 const PRIMARY_CLASSES=[
- "Crèche",
- "Nursery 1",
- "Nursery 2",
- "Primary 1",
- "Primary 2",
- "Primary 3",
- "Primary 4",
- "Primary 5",
- "Primary 6",
- "Playground",
- "KG",
- "Nursery",
- "Basic 1",
- "Basic 2",
- "Basic 3",
- "Basic 4",
- "Basic 5A",
- "Basic 5B"
+ "Playground", "KG", "Nursery 1", "Nursery 2",
+ "Basic 1", "Basic 2", "Basic 3", "Basic 4", "Basic 5A", "Basic 5B"
 ];
 
 const COLLEGE_CLASSES=[
@@ -2969,21 +2918,16 @@ onAuthStateChanged(
      const me=(d.staff||[]).find(s=>String(s.uid||s.id||"")===String(user.uid));
      const role=String(me?.role||"").toLowerCase();
 
-     if(!["control","management"].includes(role)){
+     if(role!=="control"){
        window.location.href="staff/staff-dashboard.html";
        return;
      }
 
      document.getElementById("controlCodeLabel").textContent=me?.loginCode||"CONTROL001";
      const title=document.querySelector(".brand span");
-     if(title) title.textContent=role==="management"?"Management Administration":"Control Administration";
+     if(title) title.textContent="Control Administration";
 
-     if(role==="management"){
-       ["content","audit","settings"].forEach(section=>{
-         document.querySelector(`.nav-btn[data-section="${section}"]`)?.classList.add("hidden");
-       });
-     }
-
+     
      loadSummary();
    }catch(e){
      console.error(e);
@@ -3399,7 +3343,7 @@ async function(){
 
      name:"",
 
-     role:(selectedSchool==="secondary" && i<4)?"management":"teacher",
+     role:"teacher",
 
      home:"",
 
@@ -3536,7 +3480,7 @@ window.applyPrimary2026Setup=async function(){
  const setup=[
   ["PRI001","Mrs Suleiman","Playground"],
   ["PRI002","Mrs AbdulSalam","KG"],
-  ["PRI003","Mrs Abe","Nursery"],
+  ["PRI003","Mrs Abe","Nursery 1"],
   ["PRI004","Mrs Olaniyan","Nursery 2"],
   ["PRI005","Mrs Adebayo","Basic 1"],
   ["PRI006","Mrs Babalola","Basic 2"],
@@ -3619,10 +3563,10 @@ window.applyCollege2026Setup=async function(){
  if(!ok)return;
 
  const setup=[
-  {loginCode:"COL001",school:"secondary",name:"Mr Usman",role:"management",homeroom:"",assignedClasses:["SS2","SS3","SS3","JSS3"],assignedSubjects:["Economics","Accounting","Mathematics"]},
-  {loginCode:"COL002",school:"secondary",name:"Mr Folorunsho",role:"management",homeroom:"",assignedClasses:["SS1","SS3","SS1","SS1","SS1","SS2"],assignedSubjects:["Economics","Marketing","Government","Commerce"]},
-  {loginCode:"COL003",school:"secondary",name:"Mrs Ayorinde",role:"management",homeroom:"",assignedClasses:["JSS2","JSS3","SS1","SS2","SS3","SS2","SS3"],assignedSubjects:["Agricultural Science","Biology"]},
-  {loginCode:"COL004",school:"secondary",name:"Mrs Aremu",role:"management",homeroom:"",assignedClasses:["SS1","SS2","SS3","SS1","JSS2","JSS3"],assignedSubjects:["Chemistry","Biology","Basic Science"]},
+  {loginCode:"COL001",school:"secondary",name:"Mr Usman",role:"teacher",homeroom:"",assignedClasses:["SS2","SS3","SS3","JSS3"],assignedSubjects:["Economics","Accounting","Mathematics"]},
+  {loginCode:"COL002",school:"secondary",name:"Mr Folorunsho",role:"teacher",homeroom:"",assignedClasses:["SS1","SS3","SS1","SS1","SS1","SS2"],assignedSubjects:["Economics","Marketing","Government","Commerce"]},
+  {loginCode:"COL003",school:"secondary",name:"Mrs Ayorinde",role:"teacher",homeroom:"",assignedClasses:["JSS2","JSS3","SS1","SS2","SS3","SS2","SS3"],assignedSubjects:["Agricultural Science","Biology"]},
+  {loginCode:"COL004",school:"secondary",name:"Mrs Aremu",role:"teacher",homeroom:"",assignedClasses:["SS1","SS2","SS3","SS1","JSS2","JSS3"],assignedSubjects:["Chemistry","Biology","Basic Science"]},
   {loginCode:"COL005",school:"secondary",name:"Mrs Owolowo",role:"teacher",homeroom:"",assignedClasses:["JSS1","JSS2","JSS3","SS1","SS2","SS3"],assignedSubjects:["Garment Making","Home Economics","Foods & Nutrition"]},
   {loginCode:"COL006",school:"secondary",name:"Mrs Kehinde",role:"teacher",homeroom:"",assignedClasses:["SS1","SS2","SS2","SS3","JSS1","JSS2","JSS3"],assignedSubjects:["Government","Civic Education","History"]},
   {loginCode:"COL007",school:"secondary",name:"Mrs Adedeji",role:"class_teacher",homeroom:"JSS3",assignedClasses:["JSS3","SS1","SS2","JSS1","JSS2","SS3"],assignedSubjects:["Accounting","Business Studies","Commerce"]},
@@ -3644,7 +3588,7 @@ window.applyCollege2026Setup=async function(){
  ];
 
  try{
-   await worker("reset_college_staff_setup",{});
+   await worker("reset_staff_setup",{});
 
    // Cloudflare Workers have a per-invocation subrequest limit.
    // Create the approved College list in small batches so the setup
@@ -3785,12 +3729,6 @@ Teacher
 value="class_teacher"
 ${r.role==="class_teacher"?"selected":""}>
 Class Teacher
-</option>
-
-<option
-value="management"
-${r.role==="management"?"selected":""}>
-Management
 </option>
 
 <option
@@ -4303,7 +4241,7 @@ async function(index){
      await worker(
        "set_staff_active",
        {
-         studentId:r.uid,
+         uid:r.uid,
          active:next
        }
      );
@@ -6466,7 +6404,7 @@ msg=>{
 let studentClassSelection={className:"",placement:""};
 let pendingStudentImport=[];
 
-const BALAD_PRIMARY_CLASSES=["Crèche","Nursery 1","Nursery 2","Primary 1","Primary 2","Primary 3","Primary 4","Primary 5","Primary 6","Playground","KG","Basic 1","Basic 2","Basic 3","Basic 4","Basic 5A","Basic 5B"];
+const BALAD_PRIMARY_CLASSES=["Playground","KG","Nursery 1","Nursery 2","Basic 1","Basic 2","Basic 3","Basic 4","Basic 5A","Basic 5B"];
 const BALAD_COLLEGE_JUNIOR=["JSS 1","JSS 2","JSS 3"];
 const BALAD_COLLEGE_SENIOR=["SS 1","SS 2","SS 3"];
 const BALAD_PRIMARY_ARMS=["A","B"];

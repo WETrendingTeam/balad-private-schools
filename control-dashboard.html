@@ -1557,8 +1557,8 @@ Nursery &amp; Primary:
 College:
 <strong>COL001 – COL050</strong>.
 
-<strong>COL001 – COL050</strong> are College staff IDs.
-There is no separate College Management staff ID group; management access is through <strong>CONTROL001</strong>.
+<strong>COL001 – COL004</strong> are Management access IDs.
+<strong>COL005 – COL050</strong> are College staff IDs.
 
 Nursery &amp; Primary uses <strong>PRI001 – PRI050</strong>; there is no separate Primary Management group.
 
@@ -2172,6 +2172,9 @@ Teacher
 <option value="class_teacher">
 Class Teacher
 </option>
+<option value="management">
+Management
+</option>
 <option value="other">
 Other Staff
 </option>
@@ -2288,6 +2291,12 @@ A
 </option>
 <option value="B">
 B
+</option>
+<option value="C">
+C
+</option>
+<option value="D">
+D
 </option>
 </select>
 </div>
@@ -2463,6 +2472,7 @@ from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import {
  getFirestore, collection, getDocs, doc, setDoc, deleteDoc, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
 /*
 ==================================================
 EXISTING AUTH / WORKER CONFIG
@@ -2485,6 +2495,15 @@ const firebaseConfig={
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
+let storage;
+async function getCmsStorage(){
+  if(!storage){
+    const mod=await import("https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js");
+    storage=mod.getStorage(app);
+    window.__BALAD_CMS_STORAGE__=storage;
+  }
+  return storage;
+}
 
 
 /*
@@ -2539,23 +2558,43 @@ OTHER = CUSTOM SUBJECT
 */
 
 const PRIMARY_SUBJECTS=[
- "National Value Education","Arabic","Basic Science and Technology",
- "Cultural and Creative Art","Diction","English Language","French",
- "Handwriting","History and Geography","ICT","Islamic Religious Studies",
- "Mathematics","Prevocational Studies","Quran","Yoruba","Other"
+ "English Language",
+ "Mathematics",
+ "Basic Science",
+ "Basic Technology",
+ "Social Studies",
+ "Civic Education",
+ "Computer Studies",
+ "Agricultural Science",
+ "Home Economics",
+ "Religious Studies",
+ "Physical & Health Education",
+ "French",
+ "Creative Arts",
+ "Other"
 ];
 
 const COLLEGE_SUBJECTS=[
- "English Language","Mathematics","Basic Science","Basic Technology",
- "Social Studies","Civic Education","ICT","Agricultural Science",
- "Home Economics","Physical & Health Education","Islamic Religious Studies",
- "French","Arabic","Business Studies","Cultural & Creative Arts",
- "Security Education","Yoruba","History","Further Mathematics","Biology",
- "Chemistry","Physics","Economics","Government","Literature in English",
- "Commerce","Financial Accounting","Geography","Christian Religious Studies",
- "Computer Science","Data Processing","Accounting","Marketing","Diction",
- "Garment Making","Foods & Nutrition","Creative & Cultural Arts (CCA)",
- "Islamic Religious Studies (IRS)","Other"
+ "English Language",
+ "Mathematics",
+ "Further Mathematics",
+ "Physics",
+ "Chemistry",
+ "Biology",
+ "Agricultural Science",
+ "Economics",
+ "Government",
+ "Commerce",
+ "Accounting",
+ "Geography",
+ "Literature in English",
+ "Civic Education",
+ "Computer Studies",
+ "Data Processing",
+ "Christian Religious Studies",
+ "Islamic Religious Studies",
+ "French",
+ "Other"
 ];
 
 
@@ -2680,16 +2719,12 @@ document
 });
 
 
-document
-.getElementById("menuToggle")
-.addEventListener(
- "click",
- ()=>{
-   document
-   .getElementById("sidebar")
-   .classList.toggle("open");
- }
-);
+const menuToggle=document.getElementById("menuToggle");
+const sidebar=document.getElementById("sidebar");
+if(menuToggle && sidebar && !menuToggle.dataset.bound){
+  menuToggle.dataset.bound="1";
+  menuToggle.addEventListener("click",()=>sidebar.classList.toggle("open"));
+}
 
 
 /*
@@ -2927,7 +2962,6 @@ onAuthStateChanged(
      const title=document.querySelector(".brand span");
      if(title) title.textContent="Control Administration";
 
-     
      loadSummary();
    }catch(e){
      console.error(e);
@@ -2944,7 +2978,7 @@ document
  "click",
  async()=>{
    await signOut(auth);
-   window.location.href="staff-login.html";
+   window.location.href="control-login.html";
  }
 );
 
@@ -3588,7 +3622,7 @@ window.applyCollege2026Setup=async function(){
  ];
 
  try{
-   await worker("reset_staff_setup",{});
+   await worker("reset_college_staff_setup",{});
 
    // Cloudflare Workers have a per-invocation subrequest limit.
    // Create the approved College list in small batches so the setup
@@ -3828,7 +3862,7 @@ accessOtherSubjectChange(
 <td>
 
 <strong>${r.secret||"—"}</strong>
-<div class="assignment-note">Management / Control only</div>
+<div class="assignment-note">Control only</div>
 
 </td>
 
@@ -6853,9 +6887,11 @@ async function cmsUpload(file,path){
   if(!file) throw new Error("Choose a file first.");
   if(file.size>80*1024*1024) throw new Error("File is too large. Maximum 80 MB.");
   const clean=String(path).replace(/[^a-zA-Z0-9._/-]/g,"-");
-  const r=ref(storage,clean);
-  await uploadBytes(r,file,{contentType:file.type||undefined});
-  return getDownloadURL(r);
+  const store=await getCmsStorage();
+  const mod=await import("https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js");
+  const r=mod.ref(store,clean);
+  await mod.uploadBytes(r,file,{contentType:file.type||undefined});
+  return mod.getDownloadURL(r);
 }
 function cmsPick(kind){
   const map={staffCamera:"cmsStaffCamera",staffPhotos:"cmsStaffPhotos",staffFiles:"cmsStaffFiles",

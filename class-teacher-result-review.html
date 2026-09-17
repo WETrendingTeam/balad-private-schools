@@ -711,17 +711,17 @@ async function loadAssignedClass(){
     }
     document.getElementById("teacherName").textContent=
       session?.name||session?.staffName||sessionStorage.getItem("baladStaffName")||
-      (role==="control"?"Control":role==="management"?"Management":"Class Teacher");
+      (role==="control"?"Control":"Class Teacher");
 
-    if(!["control","management","class_teacher"].includes(role)){
+    if(!["control","class_teacher"].includes(role)){
       throw new Error("This result review is available to Control, Management and Class Teachers.");
     }
 
     const select=document.getElementById("classSelect");
     select.innerHTML="";
 
-    if(role==="control" || role==="management") {
-      const school=requestedSchool || (role==="management"?"college":"");
+    if(role==="control") {
+      const school=requestedSchool || "";
       const data=await worker("list_classes",school?{school}:{});
       const classes=data.classes||[];
       classes.forEach(item=>{

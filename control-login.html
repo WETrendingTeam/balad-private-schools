@@ -550,7 +550,7 @@ button:disabled{
 
 
       if(
-        !["control","management","teacher","class_teacher","other"].includes(role)
+        !["control","teacher","class_teacher","other"].includes(role)
       ){
         throw new Error(
           "This staff account is not authorized to use the BALAD dashboard."

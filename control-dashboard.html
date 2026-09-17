@@ -6471,6 +6471,15 @@ const BALAD_COLLEGE_SENIOR=["SS 1","SS 2","SS 3"];
 const BALAD_PRIMARY_ARMS=["A","B"];
 const BALAD_SENIOR_DEPARTMENTS=["Science","Arts","Commercial"];
 
+
+function canonStudentClass(value) {
+  const raw = String(value || "").trim();
+  const upper = raw.toUpperCase();
+  if (/^JSS\s*[123]$/.test(upper)) return upper.replace(/^JSS\s*/, "JSS ");
+  if (/^SS\s*[123]$/.test(upper)) return upper.replace(/^SS\s*/, "SS ");
+  return raw;
+}
+
 function studentClassList(){
   return selectedSchool==="secondary" ? [...BALAD_COLLEGE_JUNIOR,...BALAD_COLLEGE_SENIOR] : BALAD_PRIMARY_CLASSES;
 }
@@ -6485,7 +6494,7 @@ function studentPlacementLabel(className, placement){
 }
 function studentMatchesPlacement(s){
   if(!s) return false;
-  if(String(s.className||"").trim().toLowerCase()!==String(studentClassSelection.className||"").trim().toLowerCase()) return false;
+  if(canonStudentClass(s.className||s.class).toLowerCase()!==canonStudentClass(studentClassSelection.className).toLowerCase()) return false;
   if(!studentClassSelection.placement || studentClassSelection.placement==="Whole class") return true;
   return String(s.arm||s.department||"").trim().toLowerCase()===String(studentClassSelection.placement).trim().toLowerCase();
 }
@@ -6502,7 +6511,7 @@ window.loadStudents=async function(){
 
 window.renderStudentClassCards=function(){
   const makeCard=(name)=>{
-    const rows=studentData.filter(s=>String(s.className||"").trim().toLowerCase()===name.toLowerCase());
+    const rows=studentData.filter(s=>canonStudentClass(s.className||s.class).toLowerCase()===canonStudentClass(name).toLowerCase());
     const placements=studentPlacementList(name);
     const chips=placements.map(p=>{
       const n=p==="Whole class"?rows.length:rows.filter(s=>String(s.arm||s.department||"").toLowerCase()===p.toLowerCase()).length;
@@ -6578,7 +6587,7 @@ window.openAllStudentsDirectory=function(){
 
 window.downloadStudentTemplate=function(){
   if(!selectedSchool){toast("Choose Nursery & Primary or College first.");showSection("school");return;}
-  const cls=studentClassSelection.className||"";
+  const cls=canonStudentClass(studentClassSelection.className||"");
   const placement=studentClassSelection.placement||"";
   const rows=[{
     "Student Full Name":"",
@@ -6644,14 +6653,15 @@ function validateStudentImportRows(raw){
     const email=rowValue(row,["Guardian Email","Parent Email","Email"]);
     const address=rowValue(row,["Address","Home Address"]);
     const photo=rowValue(row,["Passport Photo URL","Photo URL","Passport URL"]);
-    const cls=rowValue(row,["Class","Class Name"])||studentClassSelection.className;
+    const cls=canonStudentClass(rowValue(row,["Class","Class Name"])||studentClassSelection.className);
     const arm=rowValue(row,["Arm"])||((selectedSchool!=="secondary"&&studentClassSelection.placement!=="Whole class")?studentClassSelection.placement:"");
     const dept=rowValue(row,["Department"])||((selectedSchool==="secondary"&&/^SS [123]$/i.test(cls)&&studentClassSelection.placement!=="Whole class")?studentClassSelection.placement:"");
     const errors=[];
     if(!name)errors.push("Student name missing");
     if(!admission)errors.push("Admission number missing");
-    const expectedClasses=studentClassList().map(x=>x.toLowerCase());
-    if(!expectedClasses.includes(cls.toLowerCase()))errors.push("Invalid class");
+    const expectedClasses=studentClassList().map(x=>canonStudentClass(x).toLowerCase());
+    const normalizedCls=canonStudentClass(cls);
+    if(!expectedClasses.includes(normalizedCls.toLowerCase()))errors.push("Invalid class");
     if(selectedSchool!=="secondary"){
       if(!["A","B"].includes(arm.toUpperCase()))errors.push("Primary students must use Arm A or B");
       if(dept)errors.push("Department is not used in Nursery & Primary");
@@ -6664,7 +6674,7 @@ function validateStudentImportRows(raw){
     const key=admission.toLowerCase();
     if(key&&(existingAdmissions.has(key)||batchAdmissions.has(key)))errors.push("Duplicate admission number");
     if(key)batchAdmissions.add(key);
-    return {row:i+2,name,admission,gender,dob,guardian,phone,whatsapp,email,address,photo,school:selectedSchool,className:cls,arm:arm.toUpperCase(),department:dept,errors};
+    return {row:i+2,name,admission,gender,dob,guardian,phone,whatsapp,email,address,photo,school:selectedSchool,className:normalizedCls,arm:arm.toUpperCase(),department:dept,errors};
   });
 }
 
@@ -7496,7 +7506,7 @@ window.cmsStudentSchoolChanged=function(){
 window.loadCmsStudentPhotos=async function(){
   const school=val("cmsStudentSchool"), cls=val("cmsStudentClass"); if(!cls)return;
   try{
-    const d=await worker("list_students",{school}); cmsStudentCache=(d.students||[]).filter(s=>String(s.className||s.class||"").toLowerCase()===cls.toLowerCase());
+    const d=await worker("list_students",{school}); cmsStudentCache=(d.students||[]).filter(s=>canonStudentClass(s.className||s.class).toLowerCase()===canonStudentClass(cls).toLowerCase());
     const body=document.getElementById("cmsStudentTable");
     body.innerHTML=cmsStudentCache.map(s=>`<tr>
       <td>${s.passportUrl?`<img class="cms-thumb" src="${cmsEsc(s.passportUrl)}" alt="">`:`<div class="cms-thumb" style="display:flex;align-items:center;justify-content:center;background:#f1f4f2">No photo</div>`}</td>

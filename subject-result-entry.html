@@ -322,7 +322,16 @@ function setStatus(message, error = false) {
   statusBox.textContent = message;
 }
 
-async function loadStudents() {
+async 
+function canonClassName(value) {
+  const raw = String(value || "").trim();
+  const upper = raw.toUpperCase();
+  if (/^JSS\s*[123]$/.test(upper)) return upper.replace(/^JSS\s*/, "JSS ");
+  if (/^SS\s*[123]$/.test(upper)) return upper.replace(/^SS\s*/, "SS ");
+  return raw;
+}
+
+function loadStudents() {
   if (!school.value || !className.value) {
     body.innerHTML =
       "<tr><td colspan='6'>Choose the school and class first.</td></tr>";
@@ -339,10 +348,8 @@ async function loadStudents() {
     const students =
       (data.students || []).filter(
         student =>
-          String(student.className || "")
-            .trim()
-            .toLowerCase() ===
-          className.value.trim().toLowerCase()
+          canonClassName(student.className || student.class).toLowerCase() ===
+          canonClassName(className.value).toLowerCase()
       );
 
     if (!students.length) {
@@ -472,14 +479,14 @@ function applyTeacherAssignments() {
   const assignedClasses =
     Array.isArray(session?.assignedClasses)
       ? session.assignedClasses.map(
-          x => String(x).trim().toLowerCase()
+          x => canonClassName(x).toLowerCase()
         )
       : [];
 
   const assignedSubjects =
     Array.isArray(session?.assignedSubjects)
       ? session.assignedSubjects.map(
-          x => String(x).trim().toLowerCase()
+          x => canonClassName(x).toLowerCase()
         )
       : [];
 
@@ -489,7 +496,7 @@ function applyTeacherAssignments() {
     option.hidden =
       assignedClasses.length > 0 &&
       !assignedClasses.includes(
-        option.value.trim().toLowerCase()
+        canonClassName(option.value).toLowerCase()
       );
   });
 

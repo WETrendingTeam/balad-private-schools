@@ -728,7 +728,7 @@ async function loadAssignedClass(){
         const name=typeof item==="string"?item:(item.name||item.className||"");
         if(!name)return;
         const option=document.createElement("option");
-        option.value=canonReviewClass(name); option.textContent=name; select.appendChild(option);
+        option.value=canonReviewClass(name); option.textContent=canonReviewClass(name); select.appendChild(option);
       });
       if(!select.options.length) throw new Error("No classes are available for this school section yet.");
     } else {
@@ -741,7 +741,7 @@ async function loadAssignedClass(){
         const name=typeof item==="string"?item:(item.className||item.class||item.name||"");
         if(!name)return;
         const option=document.createElement("option");
-        option.value=canonReviewClass(name); option.textContent=name; select.appendChild(option);
+        option.value=canonReviewClass(name); option.textContent=canonReviewClass(name); select.appendChild(option);
       });
       if(!select.options.length) throw new Error("No Class Teacher class assignment was found in your staff session.");
     }
@@ -759,6 +759,7 @@ function canonReviewClass(value) {
   const upper = raw.toUpperCase();
   if (/^JSS\s*[123]$/.test(upper)) return upper.replace(/^JSS\s*/, "JSS ");
   if (/^SS\s*[123]$/.test(upper)) return upper.replace(/^SS\s*/, "SS ");
+  if (/^NURSERY$/.test(upper) || /^NURSERY\s*1$/.test(upper)) return "Nursery 1";
   return raw;
 }
 

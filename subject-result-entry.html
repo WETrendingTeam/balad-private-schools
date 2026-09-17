@@ -169,7 +169,7 @@ const schoolData = {
   primary: {
     title: "BALAD NURSERY AND PRIMARY SCHOOLS",
     subtitle: "Primary grading: A++ / A+ / A / B / C / D / F",
-    classes: ["Crèche","Nursery 1","Nursery 2","Primary 1","Primary 2","Primary 3","Primary 4","Primary 5","Primary 6","Playground","KG","Nursery","Basic 1","Basic 2","Basic 3","Basic 4","Basic 5A","Basic 5B"],
+    classes: ["Crèche","Nursery 1","Nursery 2","Primary 1","Primary 2","Primary 3","Primary 4","Primary 5","Primary 6","Playground","KG","Basic 1","Basic 2","Basic 3","Basic 4","Basic 5A","Basic 5B"],
     subjects: [
       "National Value Education","Arabic","Basic Science and Technology",
       "Cultural and Creative Art","Diction","English Language","French",
@@ -322,16 +322,16 @@ function setStatus(message, error = false) {
   statusBox.textContent = message;
 }
 
-async 
 function canonClassName(value) {
   const raw = String(value || "").trim();
   const upper = raw.toUpperCase();
   if (/^JSS\s*[123]$/.test(upper)) return upper.replace(/^JSS\s*/, "JSS ");
   if (/^SS\s*[123]$/.test(upper)) return upper.replace(/^SS\s*/, "SS ");
+  if (/^NURSERY$/.test(upper) || /^NURSERY\s*1$/.test(upper)) return "Nursery 1";
   return raw;
 }
 
-function loadStudents() {
+async function loadStudents() {
   if (!school.value || !className.value) {
     body.innerHTML =
       "<tr><td colspan='6'>Choose the school and class first.</td></tr>";
@@ -479,7 +479,7 @@ function applyTeacherAssignments() {
   const assignedClasses =
     Array.isArray(session?.assignedClasses)
       ? session.assignedClasses.map(
-          x => canonClassName(x).toLowerCase()
+          x => String(x).trim().toLowerCase()
         )
       : [];
 

@@ -1864,6 +1864,7 @@ Refresh
 <th>Student ID</th>
 <th>Result Access Code</th>
 <th>Status</th>
+<th>Manage</th>
 </tr>
 </thead>
 <tbody id="classStudentTable"></tbody>
@@ -6465,7 +6466,7 @@ msg=>{
 let studentClassSelection={className:"",placement:""};
 let pendingStudentImport=[];
 
-const BALAD_PRIMARY_CLASSES=["Crèche","Nursery 1","Nursery 2","Primary 1","Primary 2","Primary 3","Primary 4","Primary 5","Primary 6","Playground","KG","Nursery","Basic 1","Basic 2","Basic 3","Basic 4","Basic 5A","Basic 5B"];
+const BALAD_PRIMARY_CLASSES=["Crèche","Nursery 1","Nursery 2","Primary 1","Primary 2","Primary 3","Primary 4","Primary 5","Primary 6","Playground","KG","Basic 1","Basic 2","Basic 3","Basic 4","Basic 5A","Basic 5B"];
 const BALAD_COLLEGE_JUNIOR=["JSS 1","JSS 2","JSS 3"];
 const BALAD_COLLEGE_SENIOR=["SS 1","SS 2","SS 3"];
 const BALAD_PRIMARY_ARMS=["A","B"];
@@ -6477,6 +6478,7 @@ function canonStudentClass(value) {
   const upper = raw.toUpperCase();
   if (/^JSS\s*[123]$/.test(upper)) return upper.replace(/^JSS\s*/, "JSS ");
   if (/^SS\s*[123]$/.test(upper)) return upper.replace(/^SS\s*/, "SS ");
+  if (/^NURSERY$/.test(upper) || /^NURSERY\s*1$/.test(upper)) return "Nursery 1";
   return raw;
 }
 
@@ -6568,7 +6570,7 @@ window.renderClassStudents=function(){
   const q=(document.getElementById("studentClassSearch")?.value||"").toLowerCase().trim();
   const rows=studentData.filter(studentMatchesPlacement).filter(s=>`${s.studentName||""} ${s.admissionNumber||""} ${s.guardianName||""} ${s.guardianPhone||""}`.toLowerCase().includes(q));
   document.getElementById("studentClassCount").textContent=`${rows.length} Student${rows.length===1?"":"s"}`;
-  document.getElementById("classStudentTable").innerHTML=rows.map(s=>`<tr><td><strong>${esc(s.studentName||"")}</strong><br><small>${esc(s.gender||"")}</small></td><td>${esc(s.admissionNumber||"—")}</td><td>${esc(s.guardianName||"—")}</td><td>${esc(s.guardianPhone||"—")}</td><td><span class="badge">${esc(s.studentId||"—")}</span></td><td><span class="badge">${esc(s.resultAccessCode||"—")}</span></td><td><span class="badge ${s.active===false?"red":"green"}">${s.active===false?"Inactive":"Active"}</span></td></tr>`).join("")||emptyRow(7,"No students in this class/placement yet. Import the Excel list to begin.");
+  document.getElementById("classStudentTable").innerHTML=rows.map(s=>`<tr><td><strong>${esc(s.studentName||"")}</strong><br><small>${esc(s.gender||"")}</small></td><td>${esc(s.admissionNumber||"—")}</td><td>${esc(s.guardianName||"—")}</td><td>${esc(s.guardianPhone||"—")}</td><td><span class="badge">${esc(s.studentId||"—")}</span></td><td><span class="badge">${esc(s.resultAccessCode||"—")}</span></td><td><span class="badge ${s.active===false?"red":"green"}">${s.active===false?"Inactive":"Active"}</span></td><td><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-small" onclick='openStudentEditorById("${escAttr(s.studentId||"")}")'>Edit</button><button class="btn btn-small" style="background:#fff;border:1px solid #e32629;color:#e32629" onclick='deleteControlStudent("${escAttr(s.studentId||"")}")'>Delete</button></div></td></tr>`).join("")||emptyRow(8,"No students in this class/placement yet. Import the Excel list to begin.");
 };
 
 window.openAllStudentsDirectory=function(){
@@ -6582,7 +6584,7 @@ window.openAllStudentsDirectory=function(){
   document.getElementById("studentPlacementBar").innerHTML="";
   const rows=studentData;
   document.getElementById("studentClassCount").textContent=`${rows.length} Student${rows.length===1?"":"s"}`;
-  document.getElementById("classStudentTable").innerHTML=rows.map(s=>`<tr><td><strong>${esc(s.studentName||"")}</strong><br><small>${esc(s.className||"")}</small></td><td>${esc(s.admissionNumber||"—")}</td><td>${esc(s.guardianName||"—")}</td><td>${esc(s.guardianPhone||"—")}</td><td><span class="badge">${esc(s.studentId||"—")}</span></td><td><span class="badge">${esc(s.resultAccessCode||"—")}</span></td><td><span class="badge ${s.active===false?"red":"green"}">${s.active===false?"Inactive":"Active"}</span></td></tr>`).join("")||emptyRow(7,"No students found.");
+  document.getElementById("classStudentTable").innerHTML=rows.map(s=>`<tr><td><strong>${esc(s.studentName||"")}</strong><br><small>${esc(s.className||"")}</small></td><td>${esc(s.admissionNumber||"—")}</td><td>${esc(s.guardianName||"—")}</td><td>${esc(s.guardianPhone||"—")}</td><td><span class="badge">${esc(s.studentId||"—")}</span></td><td><span class="badge">${esc(s.resultAccessCode||"—")}</span></td><td><span class="badge ${s.active===false?"red":"green"}">${s.active===false?"Inactive":"Active"}</span></td><td><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-small" onclick='openStudentEditorById("${escAttr(s.studentId||"")}")'>Edit</button><button class="btn btn-small" style="background:#fff;border:1px solid #e32629;color:#e32629" onclick='deleteControlStudent("${escAttr(s.studentId||"")}")'>Delete</button></div></td></tr>`).join("")||emptyRow(8,"No students found.");
 };
 
 window.downloadStudentTemplate=function(){
@@ -6790,7 +6792,34 @@ async function printStudentIdCard(id){
     w=window.open("about:blank","_blank","width=850,height=700");
     if(!w){toast("Safari blocked the ID-card window. Allow pop-ups for this site and try again.");return;}
     w.document.open();
-    w.document.write("<!doctype html><html><head><title>BALAD Student ID Card</title></head><body style=\"font-family:Arial,sans-serif;padding:30px\"><p>Generating student ID card…</p></body></html>");
+    w.document.write("<!doctype html><html><head><title>BALAD Student ID Card</title></head><body style=\"font-family:Arial,sans-serif;padding:30px\"><p>Generating student ID card…</p>
+<div class="modal-backdrop" id="studentEditModal">
+<div class="modal">
+<div class="modal-head"><h2>Manage Student</h2><button class="modal-close" onclick="closeModal('studentEditModal')">×</button></div>
+<div class="modal-body">
+<input type="hidden" id="editStudentId"/>
+<div class="form-grid">
+<div class="field"><label>Full Name</label><input class="input" id="editStudentName"/></div>
+<div class="field"><label>Admission Number</label><input class="input" id="editStudentAdmission"/></div>
+<div class="field"><label>Class</label><select class="select" id="editStudentClass"></select></div>
+<div class="field"><label>Arm</label><select class="select" id="editStudentArm"><option value="">Not applicable</option><option value="A">A</option><option value="B">B</option></select></div>
+<div class="field"><label>Department</label><select class="select" id="editStudentDepartment"><option value="">Not applicable</option><option value="Science">Science</option><option value="Arts">Arts</option><option value="Commercial">Commercial</option></select></div>
+<div class="field"><label>Gender</label><select class="select" id="editStudentGender"><option value="">Select gender</option><option value="Male">Male</option><option value="Female">Female</option></select></div>
+<div class="field"><label>Date of Birth</label><input class="input" id="editStudentDob" type="date"/></div>
+<div class="field"><label>Guardian Name</label><input class="input" id="editGuardianName"/></div>
+<div class="field"><label>Guardian Phone</label><input class="input" id="editGuardianPhone"/></div>
+<div class="field"><label>Guardian WhatsApp</label><input class="input" id="editGuardianWhatsapp"/></div>
+<div class="field"><label>Guardian Email</label><input class="input" id="editGuardianEmail"/></div>
+<div class="field full"><label>Address</label><input class="input" id="editStudentAddress"/></div>
+<div class="field full"><label>Result Access Code</label><div style="display:flex;gap:8px"><input class="input" id="editResultAccessCode" readonly/><button type="button" class="btn btn-small" onclick="resetControlResultCode()">Reset Code</button></div></div>
+</div>
+<div id="studentEditStatus" class="control-muted" style="margin-top:12px"></div>
+</div>
+<div class="modal-foot"><button class="btn" onclick="closeModal('studentEditModal')">Cancel</button><button class="btn btn-primary" id="saveStudentEditBtn" onclick="saveStudentEdit()">Save Changes</button></div>
+</div>
+</div>
+
+</body></html>");
     w.document.close();
 
     const d=await worker("get_student_id_card",{studentId:id});
@@ -7819,6 +7848,133 @@ if(createCmsAlbumButton){
 }
 
 /* Make upload pickers available in staff modal after it is created. */
+
+
+/* =========================================================
+   CONTROL STUDENT MANAGEMENT — EDIT / DELETE / ACCESS CODE
+========================================================= */
+let controlEditingStudent=null;
+
+function populateControlEditClasses(selected){
+  const el=document.getElementById("editStudentClass");
+  if(!el)return;
+  const school=controlEditingStudent?.school||selectedSchool;
+  const classes=school==="secondary"
+    ? [...BALAD_COLLEGE_JUNIOR,...BALAD_COLLEGE_SENIOR]
+    : BALAD_PRIMARY_CLASSES;
+  const wanted=canonStudentClass(selected||"");
+  el.innerHTML='<option value="">Select class</option>'+
+    classes.map(c=>`<option value="${esc(canonStudentClass(c))}">${esc(canonStudentClass(c))}</option>`).join("");
+  el.value=wanted;
+}
+
+function refreshControlEditPlacement(){
+  const cls=canonStudentClass(document.getElementById("editStudentClass")?.value||"");
+  const school=controlEditingStudent?.school||selectedSchool;
+  const arm=document.getElementById("editStudentArm");
+  const dept=document.getElementById("editStudentDepartment");
+  if(!arm||!dept)return;
+  if(school!=="secondary"){
+    arm.closest(".field").style.display="";
+    dept.closest(".field").style.display="none";
+    arm.value=controlEditingStudent?.arm||"";
+  }else if(/^SS [123]$/i.test(cls)){
+    arm.closest(".field").style.display="none";
+    dept.closest(".field").style.display="";
+    dept.value=controlEditingStudent?.department||"";
+  }else{
+    arm.closest(".field").style.display="none";
+    dept.closest(".field").style.display="none";
+    arm.value=""; dept.value="";
+  }
+}
+
+window.openStudentEditorById=function(id){
+  const student=studentData.find(x=>String(x.studentId||x.id||"")===String(id||""));
+  if(!student){toast("Student record not found. Refresh the list and try again.");return;}
+  window.openStudentEditor(student);
+};
+window.openStudentEditor=function(student){
+  controlEditingStudent=student||null;
+  if(!student?.studentId){toast("Student ID is missing.");return;}
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v==null?"":String(v)};
+  set("editStudentId",student.studentId);
+  set("editStudentName",student.studentName);
+  set("editStudentAdmission",student.admissionNumber);
+  set("editStudentGender",student.gender);
+  set("editStudentDob",student.dateOfBirth);
+  set("editGuardianName",student.guardianName);
+  set("editGuardianPhone",student.guardianPhone);
+  set("editGuardianWhatsapp",student.guardianWhatsApp);
+  set("editGuardianEmail",student.guardianEmail);
+  set("editStudentAddress",student.address);
+  set("editResultAccessCode",student.resultAccessCode);
+  populateControlEditClasses(student.className||student.class);
+  refreshControlEditPlacement();
+  document.getElementById("editStudentClass").onchange=refreshControlEditPlacement;
+  document.getElementById("studentEditStatus").textContent="";
+  document.getElementById("studentEditModal").classList.add("open");
+};
+
+window.saveStudentEdit=async function(){
+  const id=val("editStudentId");
+  if(!id){toast("Student ID is missing.");return;}
+  const btn=document.getElementById("saveStudentEditBtn");
+  const status=document.getElementById("studentEditStatus");
+  try{
+    btn.disabled=true; status.textContent="Saving changes…";
+    const school=controlEditingStudent?.school||selectedSchool;
+    const cls=canonStudentClass(val("editStudentClass"));
+    if(!cls)throw new Error("Class is required.");
+    const updates={
+      studentName:val("editStudentName"),
+      admissionNumber:val("editStudentAdmission"),
+      className:cls,
+      gender:val("editStudentGender"),
+      dateOfBirth:val("editStudentDob"),
+      guardianName:val("editGuardianName"),
+      guardianPhone:val("editGuardianPhone"),
+      guardianWhatsApp:val("editGuardianWhatsapp"),
+      guardianEmail:val("editGuardianEmail"),
+      address:val("editStudentAddress"),
+      school,
+      arm:school==="secondary"?"":val("editStudentArm"),
+      department:school==="secondary"&&/^SS [123]$/i.test(cls)?val("editStudentDepartment"):""
+    };
+    await worker("update_student",{studentId:id,updates});
+    toast("Student updated successfully.");
+    closeModal("studentEditModal");
+    await loadStudents(); loadSummary();
+    if(studentClassSelection.className) renderClassStudents();
+  }catch(e){
+    status.textContent=e?.message||"Unable to save student.";
+    toast(status.textContent);
+  }finally{btn.disabled=false;}
+};
+
+window.resetControlResultCode=async function(){
+  const id=val("editStudentId");
+  if(!id)return;
+  if(!confirm("Reset this student's Result Access Code? The old code will stop working."))return;
+  try{
+    const d=await worker("reset_result_access_code",{studentId:id});
+    const code=d?.result?.resultAccessCode||d?.result?.accessCode||d?.resultAccessCode||"";
+    if(code)document.getElementById("editResultAccessCode").value=code;
+    toast(code?`New Result Access Code: ${code}`:"Result Access Code reset.");
+    await loadStudents(); loadSummary();
+  }catch(e){toast(e?.message||"Unable to reset Result Access Code.");}
+};
+
+window.deleteControlStudent=async function(id){
+  if(!id)return;
+  if(!confirm("Delete this student permanently? This cannot be undone."))return;
+  try{
+    await worker("delete_student",{studentId:id});
+    toast("Student deleted.");
+    await loadStudents(); loadSummary();
+    if(studentClassSelection.className)renderClassStudents();
+  }catch(e){toast(e?.message||"Unable to delete student.");}
+};
 
 </script>
   </body>

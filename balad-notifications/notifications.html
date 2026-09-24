@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#075c46">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="BALAD">
+  <link rel="apple-touch-icon" href="/icons/balad-logo-180.png">
+  <title>BALAD Notifications</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f5f7f5; color:#17352d; display:flex; align-items:center; justify-content:center; padding:24px; }
+    .card { width:min(520px,100%); background:#fff; border-radius:22px; padding:28px; box-shadow:0 12px 35px rgba(0,0,0,.08); text-align:center; }
+    .logo { width:86px; height:86px; object-fit:contain; margin-bottom:12px; }
+    h1 { margin:0 0 8px; font-size:25px; }
+    p { line-height:1.55; color:#5a6b65; }
+    button { border:0; border-radius:12px; padding:14px 20px; background:#075c46; color:#fff; font-size:16px; font-weight:700; cursor:pointer; width:100%; margin-top:10px; }
+    button:disabled { opacity:.6; cursor:default; }
+    #notificationStatus { padding:12px; border-radius:10px; background:#f1f5f3; font-size:14px; margin:18px 0 0; }
+    #notificationStatus[data-type="success"] { background:#e8f6ed; color:#1d6b3e; }
+    #notificationStatus[data-type="error"] { background:#fff0f0; color:#9b2d2d; }
+    #tokenBox { width:100%; min-height:110px; margin-top:16px; border:1px solid #dfe7e3; border-radius:10px; padding:10px; font-size:11px; resize:vertical; }
+    .small { font-size:12px; margin-top:18px; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <img class="logo" src="/icons/balad-logo-192.png" alt="BALAD Private Schools">
+    <h1>BALAD Notifications</h1>
+    <p>Enable notifications to receive important school announcements, reminders and updates from BALAD Private Schools.</p>
+    <button id="enableNotifications" type="button">Enable Notifications</button>
+    <div id="notificationStatus" data-type="info">Checking notification setup…</div>
+    <textarea id="tokenBox" hidden readonly aria-label="Notification registration token"></textarea>
+    <p class="small">On iPhone, open BALAD from the Home Screen after adding it to the Home Screen, then allow notifications when prompted.</p>
+  </main>
+  <script src="./balad-notification-config.js"></script>
+  <script type="module" src="./balad-notifications.js"></script>
+</body>
+</html>

@@ -1,20 +1,12 @@
-/* BALAD NOTIFICATIONS — CONFIGURATION
- *
- * This file is intentionally separate from the existing BALAD Firebase files.
- * Create a NEW Firebase project for BALAD notifications and paste that Web App
- * config below. Do NOT paste the WETrending/ProjectB Firebase config here.
- */
-
+/* BALAD NOTIFICATIONS — Firebase configuration */
 window.BALAD_NOTIFICATION_CONFIG = {
   firebaseConfig: {
-    apiKey: "PASTE_BALAD_FIREBASE_API_KEY",
-    authDomain: "PASTE_BALAD_PROJECT_ID.firebaseapp.com",
-    projectId: "PASTE_BALAD_PROJECT_ID",
-    storageBucket: "PASTE_BALAD_STORAGE_BUCKET",
-    messagingSenderId: "PASTE_BALAD_MESSAGING_SENDER_ID",
-    appId: "PASTE_BALAD_APP_ID"
+    apiKey: "AIzaSyCLU7CdFlCrLxGzRo0Z0PQOQ-6Y91ccj-M",
+    authDomain: "projectb-wetrending-space.firebaseapp.com",
+    projectId: "projectb-wetrending-space",
+    storageBucket: "projectb-wetrending-space.firebasestorage.app",
+    messagingSenderId: "106348539335",
+    appId: "1:106348539335:web:50ec676ce6d424a82c3de2"
   },
-
-  // Firebase Console > Project settings > Cloud Messaging > Web Push certificates
-  vapidKey: "PASTE_BALAD_PUBLIC_VAPID_KEY"
+  vapidKey: "BJfvfW_8emmvOoU0SEiCYQq2hR_AsEg7GlnBRlf8y3yZLrdsCiSYU73p5A949sAqyUOqM5CbRgqH3FIehsrr13s"
 };

@@ -59,7 +59,7 @@ async function enableNotifications() {
     }
 
     const registration = await navigator.serviceWorker.register(
-      "/sw.js",
+      "/firebase-messaging-sw.js",
       { scope: "/" }
     );
 
@@ -99,7 +99,7 @@ async function start() {
 
   if ("serviceWorker" in navigator && isConfigured()) {
     try {
-      await navigator.serviceWorker.register("/sw.js", { scope: "/" });
+      await navigator.serviceWorker.register("/firebase-messaging-sw.js", { scope: "/" });
     } catch (error) {
       console.warn("BALAD service worker registration failed:", error);
     }

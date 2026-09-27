@@ -1273,6 +1273,10 @@ Subjects
 <button class="nav-btn" data-section="results">
 Results
 </button>
+<div class="nav-label">COMMUNICATION</div>
+<button class="nav-btn" data-section="notifications">
+Parent Notifications
+</button>
 <div class="nav-label">SYSTEM</div>
 <button class="nav-btn" data-section="audit">
 Audit Logs
@@ -1386,6 +1390,69 @@ classes, departments, subjects and results.
 Open College →
 </div>
 </button>
+</div>
+</div>
+</section>
+
+<section class="page-section" id="section-notifications">
+<div class="section-head">
+<div>
+<h1>Parent Notifications</h1>
+<p>Send an important school announcement to every parent device that has notifications enabled.</p>
+</div>
+<button class="btn" type="button" onclick="loadParentNotifications()">Refresh</button>
+</div>
+
+<div class="grid stats" style="margin-bottom:20px">
+<div class="card stat">
+<div class="stat-label">REGISTERED DEVICES</div>
+<div class="stat-value" id="parentNotificationRegistered">—</div>
+<div class="stat-note">Devices registered for BALAD notifications</div>
+</div>
+<div class="card stat">
+<div class="stat-label">ACTIVE DEVICES</div>
+<div class="stat-value" id="parentNotificationActive">—</div>
+<div class="stat-note">Currently eligible to receive messages</div>
+</div>
+<div class="card stat">
+<div class="stat-label">INACTIVE DEVICES</div>
+<div class="stat-value" id="parentNotificationInactive">—</div>
+<div class="stat-note">Removed after an invalid registration response</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head">
+<h3>Send to All Parents</h3>
+</div>
+<div class="card-body">
+<div class="notice" style="margin-bottom:18px">
+<strong>Parent notification.</strong>
+This sends a push notification to all currently active devices that have enabled BALAD notifications. It does not send SMS or WhatsApp messages.
+</div>
+
+<div class="form-grid">
+<div class="field full">
+<label for="parentNotificationTitle">Notification Title</label>
+<input class="input" id="parentNotificationTitle" maxlength="120" placeholder="e.g. Important School Announcement">
+</div>
+<div class="field full">
+<label for="parentNotificationMessage">Message</label>
+<textarea class="input" id="parentNotificationMessage" maxlength="1000" rows="6" placeholder="Write the announcement parents should receive..."></textarea>
+</div>
+<div class="field full">
+<label for="parentNotificationLink">When opened, go to</label>
+<input class="input" id="parentNotificationLink" value="/index.html" placeholder="/index.html">
+<small style="color:#69746e">Use a BALAD page path such as /news.html or /admissions.html.</small>
+</div>
+</div>
+
+<div class="actions" style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+<button class="btn btn-primary" id="sendParentNotificationBtn" type="button" onclick="sendParentNotification()">Send to All Parents</button>
+<button class="btn" type="button" onclick="clearParentNotificationForm()">Clear</button>
+</div>
+
+<div id="parentNotificationResult" class="notice hidden" style="margin-top:18px"></div>
 </div>
 </div>
 </section>
@@ -2641,6 +2708,7 @@ const titles={
  classes:"Classes",
  subjects:"Subjects",
  results:"Result Management",
+ notifications:"Parent Notifications",
  audit:"Audit Logs",
  settings:"Control Settings",
  content:"Content Management"
@@ -2702,6 +2770,10 @@ window.showSection=function(section){
 
  if(section==="subjects"){
    loadSubjects();
+ }
+
+ if(section==="notifications"){
+   loadParentNotifications();
  }
 
  if(section==="audit"){
@@ -3024,6 +3096,111 @@ async function loadSummary(){
 
 }
 
+
+
+/*
+==================================================
+PARENT NOTIFICATIONS
+==================================================
+*/
+
+async function loadParentNotifications(){
+  const registered=document.getElementById("parentNotificationRegistered");
+  const active=document.getElementById("parentNotificationActive");
+  const inactive=document.getElementById("parentNotificationInactive");
+  if(!registered || !active || !inactive) return;
+
+  try{
+    const d=await worker("notification_summary");
+    const n=d.notifications||{};
+    registered.textContent=Number(n.registered||0);
+    active.textContent=Number(n.active||0);
+    inactive.textContent=Number(n.inactive||0);
+  }catch(e){
+    registered.textContent="—";
+    active.textContent="—";
+    inactive.textContent="—";
+    toast(e.message||"Unable to load parent notification status.");
+  }
+}
+
+window.clearParentNotificationForm=function(){
+  const title=document.getElementById("parentNotificationTitle");
+  const message=document.getElementById("parentNotificationMessage");
+  const link=document.getElementById("parentNotificationLink");
+  const result=document.getElementById("parentNotificationResult");
+  if(title) title.value="";
+  if(message) message.value="";
+  if(link) link.value="/index.html";
+  if(result){
+    result.classList.add("hidden");
+    result.textContent="";
+  }
+};
+
+window.sendParentNotification=async function(){
+  const title=document.getElementById("parentNotificationTitle")?.value.trim()||"";
+  const message=document.getElementById("parentNotificationMessage")?.value.trim()||"";
+  const link=document.getElementById("parentNotificationLink")?.value.trim()||"/index.html";
+  const button=document.getElementById("sendParentNotificationBtn");
+  const result=document.getElementById("parentNotificationResult");
+
+  if(!title){
+    toast("Enter a notification title.");
+    return;
+  }
+  if(!message){
+    toast("Enter a notification message.");
+    return;
+  }
+
+  const confirmation=
+    `Send this notification to ALL active parent devices?\n\n${title}\n\n${message}`;
+  if(!window.confirm(confirmation)) return;
+
+  try{
+    if(button){
+      button.disabled=true;
+      button.textContent="Sending...";
+    }
+    if(result){
+      result.classList.remove("hidden");
+      result.textContent="Sending notification...";
+    }
+
+    const d=await worker("send_parent_notification",{
+      title,
+      message,
+      link
+    });
+
+    if(result){
+      result.classList.remove("hidden");
+      result.innerHTML=
+        `<strong>Notification sent.</strong> `+
+        `${Number(d.sent||0)} delivered, `+
+        `${Number(d.failed||0)} failed, `+
+        `${Number(d.invalid||0)} inactive registrations removed.`;
+    }
+
+    toast(
+      `Notification processed: ${Number(d.sent||0)} delivered.`
+    );
+
+    await loadParentNotifications();
+  }catch(e){
+    if(result){
+      result.classList.remove("hidden");
+      result.textContent=e.message||"Notification sending failed.";
+    }
+    toast(e.message||"Notification sending failed.");
+  }finally{
+    if(button){
+      button.disabled=false;
+      button.textContent="Send to All Parents";
+    }
+  }
+};
 
 /*
 ==================================================

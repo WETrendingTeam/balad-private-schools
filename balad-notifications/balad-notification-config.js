@@ -8,5 +8,6 @@ window.BALAD_NOTIFICATION_CONFIG = {
     messagingSenderId: "106348539335",
     appId: "1:106348539335:web:50ec676ce6d424a82c3de2"
   },
-  vapidKey: "BJfvfW_8emmvOoU0SEiCYQq2hR_AsEg7GlnBRlf8y3yZLrdsCiSYU73p5A949sAqyUOqM5CbRgqH3FIehsrr13s"
+  vapidKey: "BJfvfW_8emmvOoU0SEiCYQq2hR_AsEg7GlnBRlf8y3yZLrdsCiSYU73p5A949sAqyUOqM5CbRgqH3FIehsrr13s",
+  workerUrl: "https://balad-staff-auth.6s9257wftb.workers.dev"
 };

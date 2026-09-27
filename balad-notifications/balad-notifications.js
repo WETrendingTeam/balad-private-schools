@@ -29,6 +29,36 @@ function isConfigured() {
   );
 }
 
+
+async function registerTokenWithBalad(token) {
+  const workerUrl = String(config?.workerUrl || "").replace(/\/+$/, "");
+  if (!workerUrl) {
+    throw new Error("BALAD notification server is not configured.");
+  }
+
+  const response = await fetch(workerUrl + "/notifications/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      token,
+      platform: "iphone-web-push",
+      userAgent: navigator.userAgent
+    })
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok || data.success === false) {
+    throw new Error(
+      data.error || `Notification registration failed (${response.status}).`
+    );
+  }
+
+  return data;
+}
+
 async function enableNotifications() {
   if (!window.isSecureContext) {
     setStatus("BALAD notifications require HTTPS. Deploy the site over HTTPS first.", "error");
@@ -76,6 +106,8 @@ async function enableNotifications() {
       return;
     }
 
+    await registerTokenWithBalad(token);
+
     localStorage.setItem("baladNotificationEnabled", "true");
     localStorage.setItem("baladNotificationToken", token);
 
@@ -109,6 +141,35 @@ async function start() {
     try {
       const app = initializeApp(config.firebaseConfig, "BALADNotifications");
       const messaging = getMessaging(app);
+
+      if (
+        Notification.permission === "granted" &&
+        localStorage.getItem("baladNotificationToken")
+      ) {
+        try {
+          const registration = await navigator.serviceWorker.register(
+            "/firebase-messaging-sw.js",
+            { scope: "/" }
+          );
+          const currentToken = await getToken(messaging, {
+            vapidKey: config.vapidKey,
+            serviceWorkerRegistration: registration
+          });
+
+          if (currentToken) {
+            await registerTokenWithBalad(currentToken);
+            localStorage.setItem("baladNotificationToken", currentToken);
+            tokenBox.value = currentToken;
+            tokenBox.hidden = false;
+            setStatus("Notifications are enabled on this device.", "success");
+            enableBtn.textContent = "Notifications Enabled";
+            enableBtn.disabled = true;
+          }
+        } catch (error) {
+          console.warn("BALAD existing notification registration refresh failed:", error);
+        }
+      }
+
       onMessage(messaging, (payload) => {
         const title = payload?.notification?.title || "BALAD Private Schools";
         const body = payload?.notification?.body || "You have a new BALAD notification.";

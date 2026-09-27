@@ -59,7 +59,7 @@ async function enableNotifications() {
     }
 
     const registration = await navigator.serviceWorker.register(
-      "/firebase-messaging-sw.js",
+      "/sw.js",
       { scope: "/" }
     );
 
@@ -99,7 +99,7 @@ async function start() {
 
   if ("serviceWorker" in navigator && isConfigured()) {
     try {
-      await navigator.serviceWorker.register("/firebase-messaging-sw.js", { scope: "/" });
+      await navigator.serviceWorker.register("/sw.js", { scope: "/" });
     } catch (error) {
       console.warn("BALAD service worker registration failed:", error);
     }
@@ -113,7 +113,7 @@ async function start() {
         const title = payload?.notification?.title || "BALAD Private Schools";
         const body = payload?.notification?.body || "You have a new BALAD notification.";
         if (Notification.permission === "granted") {
-          new Notification(title, { body, icon: "/icons/balad-logo-192.png" });
+          new Notification(title, { body, icon: "/icon-192.png" });
         }
       });
     } catch (error) {

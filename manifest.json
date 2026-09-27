@@ -1,11 +1,13 @@
 {
   "name": "BALAD Private Schools",
   "short_name": "BALAD",
+  "description": "BALAD Private Schools",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#075c46",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/icon-192.png",

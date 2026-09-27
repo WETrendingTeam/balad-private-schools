@@ -58,12 +58,12 @@ try {
   importScripts("https://www.gstatic.com/firebasejs/12.1.0/firebase-app-compat.js");
   importScripts("https://www.gstatic.com/firebasejs/12.1.0/firebase-messaging-compat.js");
   firebase.initializeApp({
-    apiKey: "PASTE_BALAD_FIREBASE_API_KEY",
-    authDomain: "PASTE_BALAD_PROJECT_ID.firebaseapp.com",
-    projectId: "PASTE_BALAD_PROJECT_ID",
-    storageBucket: "PASTE_BALAD_STORAGE_BUCKET",
-    messagingSenderId: "PASTE_BALAD_MESSAGING_SENDER_ID",
-    appId: "PASTE_BALAD_APP_ID"
+    apiKey: "AIzaSyCLU7CdFlCrLxGzRo0Z0PQOQ-6Y91ccj-M",
+    authDomain: "projectb-wetrending-space.firebaseapp.com",
+    projectId: "projectb-wetrending-space",
+    storageBucket: "projectb-wetrending-space.firebasestorage.app",
+    messagingSenderId: "106348539335",
+    appId: "1:106348539335:web:50ec676ce6d424a82c3de2"
   });
   const messaging = firebase.messaging();
   messaging.onBackgroundMessage(payload => {

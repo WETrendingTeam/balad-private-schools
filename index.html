@@ -1229,5 +1229,13 @@
 })();
 </script>
 
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/firebase-messaging-sw.js", { scope: "/" })
+      .catch(err => console.warn("BALAD service worker registration failed:", err));
+  });
+}
+</script>
 </body>
 </html>

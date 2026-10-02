@@ -1,1 +1,0 @@
-IMPORTANT: upload the entire videos/ folder and all .mp4 files to the same hosting/repository as gallery.html. Do not put MP4 files in images/. The Gallery page references videos by relative paths: videos/<filename>.mp4

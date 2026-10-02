@@ -1,58 +1,1229 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Healing Body & Soul — holistic wellness, natural therapies and personalized care."><meta name="theme-color" content="#2E8B57"><title>Healing Body & Soul | Holistic Wellness</title>
-<link rel="icon" href="images/logo.png" type="image/png"><link rel="apple-touch-icon" href="images/logo.png"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><link rel="stylesheet" href="css/style.css"></head><body>
-<header class="header"><div class="container"><a class="logo" href="index.html"><img src="images/logo.png" alt="Healing Body & Soul"></a><button class="menu-btn" id="menuBtn" aria-label="Open menu">MENU</button></div></header>
-<div class="nav-overlay" id="navOverlay"><button class="close-menu" id="closeMenu" aria-label="Close menu">&times;</button><nav class="nav-menu"><ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About Us</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="treatments.html">Treatments</a></li>
-<li><a href="facility.html">Facility</a></li>
-<li><a href="health-charts.html">Health Charts</a></li>
-<li><a href="gallery.html">Gallery</a></li>
-<li><a href="appointment.html">Appointment</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul></nav></div>
-<main>
-<section class="hero"><div class="hero-image"><img src="images/hero.jpg" alt="Botanical wellness preparations"></div><div class="hero-overlay"></div></section>
-<section class="welcome-card"><div class="container"><div class="welcome-content reveal"><span class="welcome-tag">HOLISTIC WELLNESS</span><h1>Healing Body &amp; Soul</h1><p>Experience professional holistic wellness through botanical therapies, natural healing and personalized care designed to restore balance to your body, mind and spirit.</p><div class="welcome-buttons"><a href="appointment.html" class="btn btn-primary">Book Appointment</a><a href="services.html" class="btn btn-outline">Explore Services</a></div></div></div></section>
-<section class="stats-bar"><div class="container"><div class="stats-wrapper reveal"><div class="stat-item"><h3>15+</h3><p>Years Experience</p></div><div class="stat-item"><h3>5,000+</h3><p>Happy Clients</p></div><div class="stat-item"><h3>Certified</h3><p>Therapists</p></div><div class="stat-item"><h3>100%</h3><p>Natural Treatments</p></div></div></div></section>
-<section class="explore"><div class="container"><div class="explore-head reveal"><span class="eyebrow">Explore the practice</span><h2 class="section-title">Choose what you want to discover</h2><p class="section-intro" style="margin:auto">The home page gives you a simple starting point. Use the sections below to go directly to the information that matters to you.</p></div><div class="explore-grid">
-<a class="explore-card reveal" href="about.html"><div class="explore-icon"><i class="fa-solid fa-leaf"></i></div><h3>About Us</h3><p>Learn about our philosophy, approach and commitment to natural wellness.</p><span class="text-link">Read our story <i class="fa-solid fa-arrow-right"></i></span></a>
-<a class="explore-card reveal" href="services.html"><div class="explore-icon"><i class="fa-solid fa-spa"></i></div><h3>Our Services</h3><p>Explore the wellness services available and find the right place to begin.</p><span class="text-link">View services <i class="fa-solid fa-arrow-right"></i></span></a>
-<a class="explore-card reveal" href="treatments.html"><div class="explore-icon"><i class="fa-solid fa-seedling"></i></div><h3>Treatments</h3><p>See our natural treatment approach and what a personalized session involves.</p><span class="text-link">Explore treatments <i class="fa-solid fa-arrow-right"></i></span></a>
-<a class="explore-card reveal" href="appointment.html"><div class="explore-icon"><i class="fa-regular fa-calendar-check"></i></div><h3>Appointment</h3><p>Ready to begin? Send an appointment request and take your next step.</p><span class="text-link">Book a visit <i class="fa-solid fa-arrow-right"></i></span></a>
-</div></div></section>
-<section class="preview section-soft"><div class="container"><div class="preview-grid"><div class="preview-image reveal"><img src="images/about.jpg" alt="Natural wellness consultation"></div><div class="preview-copy reveal"><span class="eyebrow">A balanced approach</span><h2 class="section-title">Wellness that considers the whole you.</h2><p>Healing Body &amp; Soul brings together natural therapies, thoughtful guidance and individualized care. Our goal is to help you make informed wellness choices in a calm, supportive environment.</p><ul class="check-list"><li><i class="fa-solid fa-check"></i><span>Personalized wellness guidance</span></li><li><i class="fa-solid fa-check"></i><span>Natural and botanical-focused care</span></li><li><i class="fa-solid fa-check"></i><span>Comfortable, client-centered experience</span></li></ul><a href="about.html" class="btn btn-outline">Learn More About Us</a></div></div></div></section>
-<section class="facility-overview-home section-soft" id="facility-overview">
-<div class="container">
-  <div class="facility-overview-head reveal">
-    <span class="eyebrow">Take a Look Inside</span>
-    <h2 class="section-title">Healing Body &amp; Soul</h2>
-    <p class="section-intro">Take a visual tour of our wellness center, treatment rooms, equipment and the spaces where your care takes place.</p>
-  </div>
-  <div class="facility-overview-card reveal">
-    <div class="facility-overview-frame">
-      <video controls preload="metadata" playsinline poster="images/facility-overview.jpg">
-        <source src="videos/facility-overview.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-      </video>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BALAD Private Schools</title>
+<link rel="stylesheet" href="style.css?v=8">
+<script defer src="script.js?v=5"></script>
+<script defer src="content-loader.js" type="module"></script>
+
+<style>
+/* =========================================================
+   BALAD PRIVATE SCHOOLS — UPDATED HOME / INDEX
+   Real school media • compact layout • light visual treatment
+========================================================= */
+
+:root{
+  --balad-green:#075c46;
+  --balad-green-2:#0b7658;
+  --balad-red:#c5222d;
+  --balad-cream:#f6efe3;
+  --balad-soft:#f3f8f5;
+  --balad-ink:#17231f;
+  --balad-muted:#66736e;
+  --balad-line:#e0e9e4;
+}
+
+.home-page{
+  background:#fff;
+  color:var(--balad-ink);
+}
+
+/* ---------- HERO ---------- */
+
+.home-page .home-hero{
+  position:relative;
+  min-height:clamp(500px,58vw,700px);
+  margin:0 auto;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(7,92,70,.48),rgba(7,92,70,.14) 55%,rgba(0,0,0,.02)),
+    url("images/Competition%20(1).JPG") center/cover no-repeat;
+}
+
+.home-page .home-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.34),transparent 58%);
+  pointer-events:none;
+}
+
+.home-page .hero-inner{
+  position:relative;
+  z-index:2;
+  min-height:inherit;
+  display:flex;
+  align-items:center;
+  max-width:1180px;
+  margin:auto;
+  padding:60px 5%;
+}
+
+.home-page .hero-copy{
+  width:min(690px,100%);
+  color:#fff;
+}
+
+.home-page .hero-kicker{
+  margin:0 0 8px;
+  color:#fff;
+  font-weight:800;
+  letter-spacing:.16em;
+  font-size:.78rem;
+}
+
+.home-page .hero-copy h1{
+  margin:0;
+  font-size:clamp(2.35rem,6vw,5.2rem);
+  line-height:.96;
+  letter-spacing:-.04em;
+  color:#fff;
+  text-shadow:0 3px 18px rgba(0,0,0,.2);
+}
+
+.home-page .hero-copy p{
+  max-width:620px;
+  margin:18px 0 0;
+  font-size:clamp(1rem,1.7vw,1.25rem);
+  line-height:1.55;
+  color:rgba(255,255,255,.96);
+}
+
+.home-page .hero-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:24px;
+}
+
+.home-page .hero-buttons a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:11px 18px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:800;
+  background:#fff;
+  color:var(--balad-green);
+}
+
+.home-page .hero-buttons a.secondary{
+  background:rgba(255,255,255,.16);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.7);
+  backdrop-filter:blur(5px);
+}
+
+.home-page .hero-media-strip{
+  position:absolute;
+  z-index:3;
+  right:4%;
+  bottom:25px;
+  display:grid;
+  grid-template-columns:repeat(3,100px);
+  gap:8px;
+}
+
+.home-page .hero-media-strip img{
+  width:100px;
+  height:68px;
+  object-fit:cover;
+  border-radius:10px;
+  border:2px solid rgba(255,255,255,.8);
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+/* ---------- COMPACT STATS ---------- */
+
+.home-page .home-stats{
+  max-width:1180px;
+  margin:-22px auto 0;
+  position:relative;
+  z-index:5;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:0 5%;
+}
+
+.home-page .home-stat{
+  background:#fff;
+  border:1px solid var(--balad-line);
+  border-radius:13px;
+  padding:18px 16px;
+  box-shadow:0 10px 28px rgba(16,58,45,.08);
+}
+
+.home-page .home-stat strong{
+  display:block;
+  color:var(--balad-green);
+  font-size:1.6rem;
+}
+
+.home-page .home-stat span{
+  color:var(--balad-muted);
+  font-size:.82rem;
+}
+
+/* ---------- SHARED ---------- */
+
+.home-page .home-section{
+  padding:48px 5%;
+}
+
+.home-page .home-container{
+  max-width:1180px;
+  margin:auto;
+}
+
+.home-page .section-heading{
+  max-width:760px;
+  margin:0 auto 24px;
+  text-align:center;
+}
+
+.home-page .section-heading h2{
+  margin:0 0 7px;
+  color:var(--balad-green);
+  font-size:clamp(1.65rem,3vw,2.45rem);
+}
+
+.home-page .section-heading p{
+  margin:0;
+  color:var(--balad-muted);
+  line-height:1.55;
+}
+
+/* ---------- VISION / MISSION ---------- */
+
+.home-page .vision-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.home-page .vision-card{
+  border:1px solid var(--balad-line);
+  border-radius:16px;
+  padding:22px;
+  background:#fff;
+}
+
+.home-page .vision-card h3{
+  margin:0 0 8px;
+  color:var(--balad-green);
+}
+
+.home-page .vision-card p{
+  margin:0;
+  color:var(--balad-muted);
+  line-height:1.55;
+}
+
+/* ---------- FOUR HIGHLIGHTS ---------- */
+
+.home-page .highlight-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.home-page .highlight-card{
+  min-height:235px;
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+  background:#dfece6;
+  box-shadow:0 9px 24px rgba(16,58,45,.09);
+}
+
+.home-page .highlight-card img,
+.home-page .highlight-card video{
+  width:100%;
+  height:100%;
+  min-height:235px;
+  object-fit:cover;
+  display:block;
+}
+
+.home-page .highlight-card .highlight-copy{
+  position:absolute;
+  inset:auto 0 0;
+  padding:18px;
+  color:#fff;
+  background:linear-gradient(transparent,rgba(3,40,30,.72));
+}
+
+.home-page .highlight-card h3{
+  margin:0 0 4px;
+  color:#fff;
+  font-size:1.12rem;
+}
+
+.home-page .highlight-card p{
+  margin:0;
+  color:rgba(255,255,255,.92);
+  font-size:.8rem;
+  line-height:1.4;
+}
+
+/* ---------- WHY CHOOSE ---------- */
+
+.home-page .why-section{
+  background:var(--balad-soft);
+}
+
+.home-page .why-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+
+.home-page .why-card{
+  padding:18px 14px;
+  background:#fff;
+  border:1px solid var(--balad-line);
+  border-radius:13px;
+  text-align:center;
+}
+
+.home-page .why-card h3{
+  margin:0;
+  color:var(--balad-green);
+  font-size:.95rem;
+}
+
+/* ---------- PROGRAMMES ---------- */
+
+.home-page .programme-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.home-page .programme-card{
+  border:1px solid var(--balad-line);
+  border-radius:14px;
+  padding:20px;
+  background:#fff;
+  transition:.2s ease;
+}
+
+.home-page .programme-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(16,58,45,.08);
+}
+
+.home-page .programme-card h3{
+  margin:0;
+  color:var(--balad-green);
+  font-size:1rem;
+}
+
+/* ---------- ANNOUNCEMENTS ---------- */
+
+.home-page .announcement-section{
+  background:#faf8f2;
+}
+
+.home-page .announcement-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.home-page .announcement-card{
+  background:#fff;
+  border:1px solid var(--balad-line);
+  border-radius:14px;
+  padding:19px;
+}
+
+.home-page .announcement-card h3{
+  margin:0 0 8px;
+  color:var(--balad-green);
+  font-size:1rem;
+}
+
+.home-page .announcement-card p{
+  margin:0 0 14px;
+  color:var(--balad-muted);
+  line-height:1.45;
+  font-size:.83rem;
+}
+
+.home-page .announcement-card a{
+  display:inline-block;
+  color:var(--balad-red);
+  text-decoration:none;
+  font-weight:800;
+  font-size:.82rem;
+}
+
+/* ---------- TALENT ---------- */
+
+.home-page .talent-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.home-page .talent-card{
+  overflow:hidden;
+  border-radius:18px;
+  border:1px solid var(--balad-line);
+  background:#fff;
+  box-shadow:0 10px 25px rgba(16,58,45,.08);
+}
+
+.home-page .talent-card video{
+  width:100%;
+  height:270px;
+  display:block;
+  object-fit:cover;
+  background:#eaf3ef;
+}
+
+.home-page .talent-card .talent-label{
+  padding:13px 16px;
+}
+
+.home-page .talent-card strong{
+  color:var(--balad-green);
+}
+
+.home-page .talent-card span{
+  display:block;
+  margin-top:3px;
+  color:var(--balad-muted);
+  font-size:.78rem;
+}
+
+/* ---------- LIFE AT BALAD ---------- */
+
+.home-page .life-section{
+  background:linear-gradient(180deg,#f7f3e7,#fff);
+}
+
+.home-page .life-grid{
+  display:grid;
+  grid-template-columns:1.3fr 1fr 1fr;
+  grid-auto-rows:180px;
+  gap:12px;
+}
+
+.home-page .life-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:16px;
+  background:#eaf3ef;
+}
+
+.home-page .life-card:first-child{
+  grid-row:span 2;
+}
+
+.home-page .life-card:nth-child(4){
+  grid-column:span 2;
+}
+
+.home-page .life-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:.3s ease;
+}
+
+.home-page .life-card:hover img{
+  transform:scale(1.035);
+}
+
+.home-page .life-card::after{
+  content:"";
+  position:absolute;
+  inset:42% 0 0;
+  background:linear-gradient(transparent,rgba(3,38,29,.7));
+}
+
+.home-page .life-card span{
+  position:absolute;
+  z-index:2;
+  left:14px;
+  bottom:12px;
+  right:14px;
+  color:#fff;
+  font-weight:800;
+  font-size:.9rem;
+}
+
+/* ---------- WAEC / SCHOOLS ---------- */
+
+.home-page .waec-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:25px;
+  border-radius:18px;
+  background:var(--balad-green);
+  color:#fff;
+}
+
+.home-page .waec-box h2{
+  margin:0 0 6px;
+  color:#fff;
+}
+
+.home-page .waec-box p{
+  margin:0;
+  color:rgba(255,255,255,.88);
+}
+
+.home-page .waec-box a{
+  flex:0 0 auto;
+  background:#fff;
+  color:var(--balad-green);
+  text-decoration:none;
+  padding:11px 16px;
+  border-radius:9px;
+  font-weight:800;
+}
+
+.home-page .school-choice{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.home-page .school-choice article{
+  padding:22px;
+  border:1px solid var(--balad-line);
+  border-radius:16px;
+  background:#fff;
+}
+
+.home-page .school-choice h3{
+  margin:0 0 7px;
+  color:var(--balad-green);
+}
+
+.home-page .school-choice p{
+  color:var(--balad-muted);
+  margin:0 0 14px;
+}
+
+.home-page .school-choice a{
+  color:var(--balad-red);
+  font-weight:800;
+  text-decoration:none;
+}
+
+
+/* ---------- HOMEPAGE FEATURE MODULES ---------- */
+.home-page .homepage-feature-section{background:#fff}
+.home-page .spotlight-card{display:grid;grid-template-columns:minmax(240px,380px) 1fr;gap:22px;align-items:stretch;border:1px solid var(--balad-line);border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 12px 30px rgba(16,58,45,.08)}
+.home-page .spotlight-media{min-height:260px;background:linear-gradient(135deg,#eaf4ef,#f7f1e4);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.home-page .spotlight-media img,.home-page .spotlight-media video{width:100%;height:100%;min-height:260px;object-fit:cover;display:block}
+.home-page .spotlight-placeholder{padding:30px;text-align:center;color:var(--balad-muted)}
+.home-page .spotlight-copy{padding:28px;display:flex;flex-direction:column;justify-content:center}
+.home-page .spotlight-kicker{margin:0 0 7px;color:var(--balad-red);font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.home-page .spotlight-copy h3{margin:0 0 10px;color:var(--balad-green);font-size:clamp(1.35rem,3vw,2rem)}
+.home-page .spotlight-copy p{margin:0;color:var(--balad-muted);line-height:1.6}
+.home-page .week-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.home-page .week-card{min-height:210px;border:1px solid var(--balad-line);border-radius:17px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.home-page .week-media{height:145px;background:linear-gradient(135deg,#edf6f1,#f7f1e4);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.home-page .week-media img,.home-page .week-media video{width:100%;height:100%;object-fit:cover;display:block}
+.home-page .week-placeholder{padding:20px;text-align:center;color:var(--balad-muted);font-size:.84rem;line-height:1.45}
+.home-page .week-copy{padding:13px 15px}
+.home-page .week-copy h3{margin:0;color:var(--balad-green);font-size:1rem}
+.home-page .week-copy p{margin:5px 0 0;color:var(--balad-muted);font-size:.8rem;line-height:1.45}
+.home-page [hidden]{display:none !important}
+.home-page .back-school-overlay{position:fixed;inset:0;z-index:9999;background:rgba(7,40,31,.64);display:flex;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(5px)}
+.home-page .back-school-modal{width:min(760px,100%);max-height:min(92vh,780px);overflow:auto;background:#fff;border-radius:24px;box-shadow:0 25px 80px rgba(0,0,0,.28);position:relative;border:1px solid rgba(7,92,70,.16)}
+.home-page .back-school-close{position:absolute;right:13px;top:13px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.92);color:var(--balad-green);font-size:24px;font-weight:900;z-index:3;cursor:pointer}
+.home-page .back-school-head{padding:30px 30px 18px;text-align:center;background:linear-gradient(135deg,#edf7f2,#f8f0e2)}
+.home-page .back-school-head .kicker{margin:0 0 5px;color:var(--balad-red);font-size:.75rem;font-weight:900;letter-spacing:.14em}
+.home-page .back-school-head h2{margin:0;color:var(--balad-green);font-size:clamp(1.8rem,5vw,3rem)}
+.home-page .back-school-head p{margin:8px auto 0;color:var(--balad-muted);max-width:560px;line-height:1.5}
+.home-page .back-school-gallery{display:grid;grid-template-columns:1fr;gap:8px;padding:18px 22px 0}
+.home-page .back-school-gallery figure{margin:0;border-radius:15px;overflow:hidden;background:#eaf3ef;min-height:230px}
+.home-page .back-school-gallery img,.home-page .back-school-gallery video{width:100%;height:100%;min-height:230px;max-height:430px;object-fit:cover;display:block}
+.home-page .back-school-empty{min-height:230px;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;color:var(--balad-muted)}
+.home-page .back-school-body{padding:18px 30px 28px;text-align:center}
+.home-page .back-school-body p{margin:0;color:var(--balad-muted);line-height:1.55}
+.home-page .back-school-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:17px}
+.home-page .back-school-actions button{border:0;border-radius:10px;padding:11px 17px;font-weight:800;cursor:pointer;background:var(--balad-green);color:#fff}
+.home-page .back-school-actions button.secondary{background:#eef5f1;color:var(--balad-green)}
+@media(max-width:700px){.home-page .spotlight-card{grid-template-columns:1fr}.home-page .spotlight-media{min-height:220px}.home-page .spotlight-media img,.home-page .spotlight-media video{min-height:220px}.home-page .week-grid{grid-template-columns:1fr 1fr}.home-page .back-school-head{padding:27px 22px 16px}.home-page .back-school-body{padding:16px 22px 24px}}
+@media(max-width:480px){.home-page .week-grid{grid-template-columns:1fr}.home-page .week-card{min-height:190px}.home-page .back-school-gallery{padding:14px 14px 0}.home-page .back-school-gallery figure,.home-page .back-school-gallery img,.home-page .back-school-gallery video{min-height:190px}}
+
+/* ---------- MOBILE ---------- */
+
+
+/* ---------- BALAD HERO SLIDESHOW + GREEN/WHITE VISUAL SYSTEM ---------- */
+.home-page .home-hero{
+  background:#dfeee8;
+  border-bottom:5px solid #075c46;
+}
+.home-page .hero-slides{position:absolute;inset:0;z-index:0}
+.home-page .hero-slide{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center top;
+  background-repeat:no-repeat;
+  opacity:0;transform:scale(1.01);
+  transform-origin:center top;
+  transition:opacity 1s ease,transform 5.5s ease;
+}
+.home-page .hero-slide::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(4,75,56,.38),rgba(4,75,56,.08) 60%,rgba(0,0,0,.02));
+}
+.home-page .hero-slide.is-active{opacity:1;transform:scale(1)}
+.home-page .hero-dots{
+  position:absolute;z-index:4;left:5%;bottom:22px;
+  display:flex;gap:7px;
+}
+.home-page .hero-dot{
+  width:9px;height:9px;padding:0;border:0;border-radius:50%;
+  background:rgba(255,255,255,.62);cursor:pointer;
+}
+.home-page .hero-dot.is-active{width:25px;border-radius:8px;background:#fff}
+
+.home-page .home-section:nth-of-type(even){
+  background:linear-gradient(135deg,#f3f9f6 0%,#ffffff 72%);
+}
+.home-page .home-section:nth-of-type(odd){
+  background:linear-gradient(135deg,#fff 0%,#f8f1e4 100%);
+}
+.home-page .why-section{
+  background:linear-gradient(135deg,#075c46 0%,#0a7658 100%) !important;
+}
+.home-page .why-section .section-heading h2,
+.home-page .why-section .section-heading p{color:#fff}
+.home-page .why-card{
+  background:rgba(255,255,255,.97);
+  border-color:rgba(255,255,255,.55);
+}
+.home-page .announcement-section{
+  background:linear-gradient(135deg,#f7f1e4,#eef7f3) !important;
+}
+.home-page .life-section{
+  background:linear-gradient(135deg,#f7f1e4 0%,#eef7f3 100%) !important;
+}
+.home-page .vision-card,
+.home-page .programme-card,
+.home-page .announcement-card,
+.home-page .school-choice article{
+  background:rgba(255,255,255,.92);
+}
+.home-page .talent-card{background:#f4faf7}
+
+@media(max-width:900px){
+  .home-page .highlight-grid{grid-template-columns:repeat(2,1fr)}
+  .home-page .why-grid{grid-template-columns:repeat(3,1fr)}
+  .home-page .announcement-grid{grid-template-columns:repeat(2,1fr)}
+  .home-page .hero-media-strip{display:none}
+}
+
+@media(max-width:680px){
+  .home-page .home-hero{
+    min-height:500px;
+    border-radius:0 0 20px 20px;
+  }
+  .home-page .hero-inner{padding:42px 6% 55px;align-items:flex-end}
+  .home-page .hero-copy h1{font-size:2.65rem}
+  .home-page .home-stats{
+    grid-template-columns:repeat(2,1fr);
+    margin-top:-15px;
+    padding:0 4%;
+  }
+  .home-page .home-stat{padding:14px}
+  .home-page .vision-grid,
+  .home-page .talent-grid,
+  .home-page .school-choice{grid-template-columns:1fr}
+  .home-page .highlight-grid{grid-template-columns:1fr 1fr}
+  .home-page .highlight-card,
+  .home-page .highlight-card img,
+  .home-page .highlight-card video{min-height:190px}
+  .home-page .why-grid{grid-template-columns:1fr 1fr}
+  .home-page .programme-grid{grid-template-columns:1fr 1fr}
+  .home-page .announcement-grid{grid-template-columns:1fr 1fr}
+  .home-page .life-grid{
+    grid-template-columns:1fr 1fr;
+    grid-auto-rows:135px;
+  }
+  .home-page .life-card:first-child{
+    grid-column:span 2;
+    grid-row:span 2;
+  }
+  .home-page .life-card:nth-child(4){grid-column:span 1}
+  .home-page .talent-card video{height:220px}
+  .home-page .waec-box{display:block}
+  .home-page .waec-box a{display:inline-block;margin-top:15px}
+}
+
+@media(max-width:430px){
+  .home-page .programme-grid{grid-template-columns:1fr}
+  .home-page .announcement-grid{grid-template-columns:1fr}
+  .home-page .highlight-grid{gap:8px}
+  .home-page .section-heading{margin-bottom:18px}
+  .home-page .home-section{padding:38px 5%}
+}
+
+/* ---------- GREEN + WHITE VISUAL BALANCE ---------- */
+.home-page .programme-card:nth-child(1),
+.home-page .programme-card:nth-child(4),
+.home-page .programme-card:nth-child(6){
+  background:var(--balad-green);
+  border-color:var(--balad-green);
+}
+.home-page .programme-card:nth-child(1) h3,
+.home-page .programme-card:nth-child(4) h3,
+.home-page .programme-card:nth-child(6) h3{color:#fff}
+.home-page .announcement-card:nth-child(1),
+.home-page .announcement-card:nth-child(4){
+  background:var(--balad-green);
+  border-color:var(--balad-green);
+}
+.home-page .announcement-card:nth-child(1) h3,
+.home-page .announcement-card:nth-child(4) h3,
+.home-page .announcement-card:nth-child(1) p,
+.home-page .announcement-card:nth-child(4) p{color:#fff}
+.home-page .announcement-card:nth-child(1) a,
+.home-page .announcement-card:nth-child(4) a{color:#fff;text-decoration:underline}
+.home-page .talent-card .talent-label{background:#f0f7f3}
+.home-page .life-section{background:linear-gradient(180deg,#edf6f1 0%,#f8f3e7 100%)}
+.home-page .home-section:nth-of-type(odd){background:#f7fbf8}
+.home-page .home-section:nth-of-type(even){background:#fff}
+.home-page .home-stats .home-stat:nth-child(2){background:var(--balad-green);border-color:var(--balad-green)}
+.home-page .home-stats .home-stat:nth-child(2) strong,
+.home-page .home-stats .home-stat:nth-child(2) span{color:#fff}
+
+/* ---------- DEVELOPER DROPDOWN ---------- */
+.site-footer-developer{
+  margin-top:8px;
+}
+.site-footer-developer details{
+  display:inline-block;
+}
+.site-footer-developer summary{
+  list-style:none;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:inherit;
+  font-weight:800;
+}
+.site-footer-developer summary::-webkit-details-marker{display:none}
+.site-footer-developer summary::after{content:'▾';font-size:.72em;transition:transform .18s ease}
+.site-footer-developer details[open] summary::after{transform:rotate(180deg)}
+.site-footer-developer .developer-panel{
+  margin:8px auto 0;
+  padding:9px 13px;
+  width:max-content;
+  max-width:90vw;
+  border-radius:10px;
+  background:var(--balad-green,#075c46);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(7,92,70,.18);
+  font-size:.84rem;
+}
+.site-footer-developer .developer-panel a{color:#fff!important;text-decoration:none!important;font-weight:900}
+
+
+/* HOMEPAGE CARD COLOR CORRECTION — STYLE ONLY */
+.home-page .home-stat:nth-child(4){
+  background:var(--balad-green);
+  border-color:var(--balad-green);
+}
+.home-page .home-stat:nth-child(4) strong,
+.home-page .home-stat:nth-child(4) span{
+  color:#fff;
+}
+
+/* Educational programmes: all six cards green with readable white text. */
+.home-page .programme-grid .programme-card{
+  background:var(--balad-green);
+  border-color:var(--balad-green);
+}
+.home-page .programme-grid .programme-card h3{
+  color:#fff;
+}
+
+/* Latest announcements: green / white / green / white. */
+.home-page .announcement-grid .announcement-card:nth-child(odd){
+  background:var(--balad-green);
+  border-color:var(--balad-green);
+}
+.home-page .announcement-grid .announcement-card:nth-child(even){
+  background:#fff;
+  border-color:var(--balad-line);
+}
+.home-page .announcement-grid .announcement-card:nth-child(odd) h3,
+.home-page .announcement-grid .announcement-card:nth-child(odd) p{
+  color:#fff;
+}
+.home-page .announcement-grid .announcement-card:nth-child(even) h3{
+  color:var(--balad-green);
+}
+.home-page .announcement-grid .announcement-card:nth-child(even) p{
+  color:var(--balad-muted);
+}
+
+/* Announcement links are actions: red only on the action control. */
+.home-page .announcement-grid .announcement-card a{
+  color:var(--balad-red);
+}
+.home-page .announcement-grid .announcement-card:nth-child(odd) a{
+  color:#fff;
+  background:var(--balad-red);
+  border-radius:8px;
+  padding:7px 10px;
+}
+
+/* TARGETED HOMEPAGE POLISH — SPOTLIGHT, COMING SOON & SCHOOL CHOICE ONLY */
+.home-page #balad-spotlight-section .spotlight-card{
+  background:linear-gradient(135deg,#075c46 0%,#0b765a 100%);
+  border-color:#075c46;
+  box-shadow:0 14px 32px rgba(7,92,70,.14);
+}
+.home-page #balad-spotlight-section .spotlight-media{
+  background:linear-gradient(135deg,#eaf4ef 0%,#f7f1e4 100%);
+  min-height:220px;
+}
+.home-page #balad-spotlight-section .spotlight-placeholder{
+  padding:14px 22px;
+  border-radius:12px;
+  background:#075c46;
+  color:#fff;
+  font-weight:900;
+  letter-spacing:.02em;
+  box-shadow:0 8px 18px rgba(7,92,70,.15);
+}
+.home-page #balad-spotlight-section .spotlight-copy{
+  background:#075c46;
+  color:#fff;
+  padding:24px;
+}
+.home-page #balad-spotlight-section .spotlight-copy .spotlight-kicker{
+  color:#dceee7;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+.home-page #balad-spotlight-section .spotlight-copy h3{
+  color:#fff;
+}
+.home-page #balad-spotlight-section .spotlight-copy p{
+  color:#f3faf7;
+}
+
+/* Keep the Coming Soon week cards styled instead of plain white. */
+.home-page #balad-week-section .week-card{
+  background:#fff;
+  border-color:var(--balad-line);
+  box-shadow:0 10px 24px rgba(16,58,45,.07);
+}
+.home-page #balad-week-section .week-media{
+  background:linear-gradient(135deg,#eaf4ef 0%,#f7f1e4 100%) !important;
+}
+.home-page #balad-week-section .week-placeholder{
+  padding:10px 16px;
+  border-radius:10px;
+  background:#075c46;
+  color:#fff;
+  font-weight:800;
+}
+.home-page #balad-week-section .week-copy{
+  background:#fff !important;
+}
+.home-page #balad-week-section .week-copy h3{
+  color:#075c46;
+}
+
+/* Compact school-choice cards with white readable copy. */
+.home-page .school-choice{
+  gap:12px;
+}
+.home-page .school-choice article{
+  padding:16px 18px;
+  border-color:#075c46;
+  border-radius:14px;
+  background:#075c46;
+  box-shadow:0 8px 20px rgba(7,92,70,.10);
+}
+.home-page .school-choice h3,
+.home-page .school-choice p{
+  color:#fff;
+}
+.home-page .school-choice h3{
+  margin-bottom:6px;
+}
+.home-page .school-choice p{
+  margin-bottom:10px;
+  font-size:.9rem;
+}
+.home-page .school-choice a{
+  display:inline-block;
+  padding:7px 10px;
+  border-radius:8px;
+  background:var(--balad-red);
+  color:#fff;
+  font-size:.82rem;
+  font-weight:800;
+}
+@media (max-width:700px){
+  .home-page .school-choice article{
+    padding:14px 15px;
+  }
+  .home-page #balad-spotlight-section .spotlight-copy{
+    padding:20px;
+  }
+}
+
+</style>
+</head>
+
+<body class="home-page" data-cms-page="index">
+
+<header>
+  <div class="logo">
+    <img src="images/logo.png" alt="BALAD Private Schools Logo" data-media-key="index-image-1">
+    <div class="school-name">
+      <h2>BALAD PRIVATE SCHOOLS</h2>
+      <p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
+      <small>"Nothing but Success"</small>
+      <em class="school-status">Government Approved School • Member of NAPPS</em>
     </div>
-    <div class="facility-overview-action">
-      <a href="facility.html" class="btn btn-outline">Explore Our Facility <span>→</span></a>
+  </div>
+
+  <input class="menu-toggle" id="balad-menu-toggle" type="checkbox">
+  <label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle">
+    <span class="menu-icon-open">☰</span>
+    <span class="menu-icon-close">×</span>
+  </label>
+
+  <nav id="balad-main-nav">
+    <a class="active" href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <details class="academic-nav school-nav">
+      <summary>Schools</summary>
+      <div class="academic-submenu">
+        <a href="nursery-primary.html">Balad Nursery &amp; Primary</a>
+        <a href="comprehensive-college.html">Balad Comprehensive College</a>
+      </div>
+    </details>
+    <a href="cbt-centre.html">CBT Centre</a>
+    <a href="admissions.html">Admissions</a>
+    <details class="academic-nav">
+      <summary>Academics</summary>
+      <div class="academic-submenu">
+        <a href="curriculum.html">Curriculum</a>
+        <a href="stem.html">STEM</a>
+        <a href="results.html">Result Portal</a>
+      </div>
+    </details>
+    <a href="team.html">Meet Our Team</a>
+    <a href="facilities.html">Facilities</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="news.html">News &amp; Events</a>
+    <a href="alumni.html">Alumni</a>
+    <div class="nav-action-boxes"><a class="nav-login-button" href="login.html">LOGIN</a><a class="nav-contact-button" href="contact.html">CONTACT US</a></div>
+  </nav>
+</header>
+
+<main>
+
+<div id="backSchoolOverlay" class="back-school-overlay" hidden aria-modal="true" role="dialog" aria-labelledby="backSchoolTitle">
+  <div class="back-school-modal">
+    <button class="back-school-close" type="button" aria-label="Close Back-to-School welcome" id="backSchoolClose">×</button>
+    <div class="back-school-head">
+      <img class="back-school-logo" src="images/logo.png" alt="BALAD Private Schools Logo">
+      <p class="kicker">BALAD PRIVATE SCHOOLS</p>
+      <h2 id="backSchoolTitle">WELCOME TO THE 2026/2027 SCHOOL YEAR</h2>
+      <p id="backSchoolSubtitle">2026/2027 Academic Session</p>
+    </div>
+    <div id="backSchoolGallery" class="back-school-gallery">
+      <div class="back-school-empty" aria-hidden="true"></div>
+    </div>
+    <div class="back-school-body">
+      <p id="backSchoolBody">A new session. New goals. New possibilities. Welcome back to our students, parents and staff.</p>
+      <div class="back-school-actions">
+        <button type="button" class="secondary" id="backSchoolGalleryBtn" hidden>View</button>
+        <button type="button" id="backSchoolEnterBtn">Back to Website</button>
+      </div>
     </div>
   </div>
 </div>
+
+<div class="announcement-bar">
+  <div class="announcement-track">
+    Admissions for the 2026/2027 Academic Session are now open. • School resumes on Monday, 14 September 2026. • Contact us for enquiries.
+  </div>
+</div>
+
+<section class="home-hero balad-rotating-hero" aria-label="BALAD Private Schools highlights">
+  <div class="hero-slides" aria-hidden="true">
+    <div class="hero-slide is-active" style="background-image:url('images/balad-hero-slide-1.png')"></div>
+    <div class="hero-slide" style="background-image:url('images/Graduation%281%29.JPG')"></div>
+    <div class="hero-slide" style="background-image:url('images/Competition%20%281%29.JPG')"></div>
+    <div class="hero-slide" style="background-image:url('images/Inter%20house%20sport%20%281%29.JPG')"></div>
+    <div class="hero-slide" style="background-image:url('images/school-building1.jpg')"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="hero-kicker">WELCOME TO</p>
+      <h1>BALAD PRIVATE SCHOOLS</h1>
+      <p>Inspiring excellence, building character and shaping future leaders.</p>
+      <div class="hero-buttons">
+        <a href="admissions.html">Apply for Admission</a>
+        <a class="secondary" href="about.html">Explore Our School</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-dots" aria-label="Hero slideshow controls">
+    <button class="hero-dot is-active" type="button" aria-label="BALAD School"></button>
+    <button class="hero-dot" type="button" aria-label="Graduation"></button>
+    <button class="hero-dot" type="button" aria-label="Academic competition"></button>
+    <button class="hero-dot" type="button" aria-label="Inter-house sports"></button>
+    <button class="hero-dot" type="button" aria-label="School building"></button>
+  </div>
 </section>
 
-<section class="cta"><div class="container"><div class="cta-box reveal"><h2>Ready to begin your wellness journey?</h2><p>Take the first step toward a more balanced approach to wellbeing.</p><a href="appointment.html" class="btn btn-light">Book an Appointment</a></div></div></section>
-
-<section class="compact-grid" style="max-width:760px;margin:18px auto;padding:0 12px">
-<a class="compact-card" href="facility.html" style="text-decoration:none;background:#f3f7f4;color:#2f6f55;text-align:center;font-weight:700">Our Facility →</a>
-<a class="compact-card" href="health-charts.html" style="text-decoration:none;background:#f3f7f4;color:#2f6f55;text-align:center;font-weight:700">Health Charts →</a>
+<section class="home-stats">
+  <article class="home-stat"><strong>10+</strong><span>Years of Excellence</span></article>
+  <article class="home-stat"><strong>350+</strong><span>Students</span></article>
+  <article class="home-stat"><strong>50+</strong><span>Qualified Teachers</span></article>
+  <article class="home-stat"><strong>100%</strong><span>Commitment to Success</span></article>
 </section>
+
+<section class="home-section">
+  <div class="home-container">
+    <div class="vision-grid">
+      <article class="vision-card">
+        <h3>Our Vision</h3>
+        <p>Balad Private Schools shall be a centre of excellence for raising every Muslim Child, Educationally and Morally.</p>
+      </article>
+      <article class="vision-card">
+        <h3>Our Mission</h3>
+        <p>Balad Private Schools aims to support students in acquiring knowledge, skills, and attitudes to build an industrious, just and peaceful Nigerian society, while guaranteeing success in all exams.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Life at BALAD</h2>
+      <p>Learning, creativity, achievement and experiences that help students grow beyond the classroom.</p>
+    </div>
+
+    <div class="highlight-grid">
+      <article class="highlight-card">
+        <img src="images/Competition%20(1).JPG" alt="Students receiving competition awards" data-media-key="index-image-2">
+        <div class="highlight-copy"><h3>Excellence in Learning</h3><p>Celebrating academic effort, achievement and a culture of excellence.</p></div>
+      </article>
+
+      <article class="highlight-card">
+        <img src="images/science-lab1.jpg" alt="Students learning through practical science" data-media-key="index-image-11">
+        <div class="highlight-copy"><h3>Learning Through Innovation</h3><p>Practical creativity and skills that make learning active.</p></div>
+      </article>
+
+      <article class="highlight-card">
+        <img src="images/sports1.jpg" alt="Students taking part in school sports" data-media-key="index-image-3">
+        <div class="highlight-copy"><h3>Growing Beyond the Classroom</h3><p>Building confidence, teamwork, discipline and character.</p></div>
+      </article>
+
+      <article class="highlight-card">
+        <img src="images/club-activities3.jpg" alt="Students celebrating achievement" data-media-key="index-image-4">
+        <div class="highlight-copy"><h3>A Place to Learn and Grow</h3><p>Memorable milestones and a supportive school community.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="home-section why-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Why Choose BALAD Private Schools?</h2>
+      <p>We combine academic excellence, character development, a supportive environment and modern learning.</p>
+    </div>
+    <div class="why-grid">
+      <article class="why-card"><h3>Quality Education</h3></article>
+      <article class="why-card"><h3>Conducive Environment</h3></article>
+      <article class="why-card"><h3>Modern Learning</h3></article>
+      <article class="why-card"><h3>Excellence &amp; Discipline</h3></article>
+      <article class="why-card"><h3>Latest Announcements</h3></article>
+    </div>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Our Educational Programmes</h2>
+      <p>Learning opportunities for every stage of the child's educational journey.</p>
+    </div>
+    <div class="programme-grid">
+      <article class="programme-card"><h3>Pre-Crèche &amp; Crèche</h3></article>
+      <article class="programme-card"><h3>Nursery School</h3></article>
+      <article class="programme-card"><h3>Primary School</h3></article>
+      <article class="programme-card"><h3>College</h3></article>
+      <article class="programme-card"><h3>CBT Centre</h3></article>
+      <article class="programme-card"><h3>Arabic &amp; Tahfiz Classes</h3></article>
+    </div>
+  </div>
+</section>
+<section class="home-section homepage-feature-section" id="balad-week-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>This Week at BALAD</h2>
+      <p>A simple place to share the week's activities, moments and achievements.</p>
+    </div>
+    <div id="baladWeekGrid" class="week-grid">
+      <article class="week-card"><div class="week-media"><div class="week-placeholder">Coming Soon</div></div><div class="week-copy"><h3>Coming Soon</h3><p></p></div></article>
+      <article class="week-card"><div class="week-media"><div class="week-placeholder">Coming Soon</div></div><div class="week-copy"><h3>Coming Soon</h3><p></p></div></article>
+      <article class="week-card"><div class="week-media"><div class="week-placeholder">Coming Soon</div></div><div class="week-copy"><h3>Coming Soon</h3><p></p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Student Talent Showcase</h2>
+      <p>A space to showcase the creativity, skills and talents of our students.</p>
+    </div>
+    <div class="talent-grid">
+      <article class="talent-card">
+        <video src="media/BALAD_Art_Clip_Second_Student_6sec.mp4" poster="images/Career.JPG" data-media-key="index-video-1" muted playsinline controls preload="metadata"></video>
+        <div class="talent-label"><strong>Creative Art</strong><span>Students expressing ideas through practical art.</span></div>
+      </article>
+      <article class="talent-card">
+        <video src="media/BALAD_Talent_Show_Clip.mp4" poster="images/club-activities4.jpg" data-media-key="index-video-2" muted playsinline controls preload="metadata"></video>
+        <div class="talent-label"><strong>Talent Show</strong><span>Celebrating confidence, creativity and student talent.</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="home-section life-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Life at BALAD Private Schools</h2>
+      <p>Take a glimpse into our school events, achievements and student activities.</p>
+    </div>
+
+    <div class="life-grid">
+      <article class="life-card"><img src="images/career-day1.jpg" alt="Career Day" data-media-key="index-image-5"><span>Career Day</span></article>
+      <article class="life-card"><img src="images/career-day2.jpg" alt="Career Day activity" data-media-key="index-image-6"><span>Career Exploration</span></article>
+      <article class="life-card"><img src="images/sports4.jpg" alt="Sports activity" data-media-key="index-image-7"><span>Sports &amp; Games</span></article>
+      <article class="life-card"><img src="images/prize-giving3.jpg" alt="Competition achievement" data-media-key="index-image-8"><span>Academic Competition</span></article>
+      <article class="life-card"><img src="images/teachers-day1.jpg" alt="Teachers and students during Teachers Day" data-media-key="index-image-9"><span>Teachers’ Day</span></article>
+      <article class="life-card"><img src="images/gallery3.jpg" alt="Students at a graduation ceremony" data-media-key="index-image-10"><span>Graduation</span></article>
+    </div>
+
+    <div style="text-align:center;margin-top:20px">
+      <a href="gallery.html" style="display:inline-block;padding:11px 17px;border-radius:9px;background:#075c46;color:#fff;text-decoration:none;font-weight:800">View Full Gallery</a>
+    </div>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="home-container">
+    <div class="waec-box">
+      <div>
+        <h2>See How Our Students Performed in WAEC</h2>
+        <p>Explore our students’ examination performance, achievements and WAEC results.</p>
+      </div>
+      <a href="waec-results.html">View WAEC Results</a>
+    </div>
+  </div>
+</section>
+
+<section class="home-section" style="background:#f7fbf8">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Our Schools</h2>
+      <p>Explore each school and its dedicated information.</p>
+    </div>
+    <div class="school-choice">
+      <article>
+        <h3>Balad Nursery &amp; Primary</h3>
+        <p>School information, leadership welcome and facilities.</p>
+        <a href="nursery-primary.html">Explore School</a>
+      </article>
+      <article>
+        <h3>Balad Comprehensive College</h3>
+        <p>College information, leadership welcome and facilities.</p>
+        <a href="comprehensive-college.html">Explore College</a>
+      </article>
+    </div>
+  </div>
+</section>
+<section class="home-section homepage-feature-section" id="balad-spotlight-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>BALAD Spotlight</h2>
+      <p>Celebrating the people, achievements, talents and stories that make BALAD special.</p>
+    </div>
+    <div id="baladSpotlight" class="spotlight-card">
+      <div class="spotlight-media"><div class="spotlight-placeholder"><strong>Coming Soon</strong></div></div>
+      <div class="spotlight-copy"><p class="spotlight-kicker">BALAD SPOTLIGHT</p><h3>Coming Soon</h3><p></p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="home-section announcement-section">
+  <div class="home-container">
+    <div class="section-heading">
+      <h2>Latest Announcements</h2>
+      <p>Stay updated with important information and upcoming activities at BALAD Private Schools.</p>
+    </div>
+    <div class="announcement-grid">
+      <article class="announcement-card"><h3>Admission Now Open</h3><p>Admission into Pre-Crèche, Crèche, Nursery, Primary and College is now in progress.</p><a href="admissions.html">Apply Now</a></article>
+      <article class="announcement-card"><h3>School Resumption</h3><p>Parents and guardians are advised to prepare students for the new academic session.</p><a href="news.html">Learn More</a></article>
+      <article class="announcement-card"><h3>Admission Criteria</h3><p>Check the requirements for admission into our school programmes.</p><a href="admissions.html">View Criteria</a></article>
+      <article class="announcement-card"><h3>CBT Centre Update</h3><p>Modern computer-based testing facilities are available for students and public training.</p><a href="contact.html">Enquire</a></article>
+    </div>
+  </div>
+</section>
+
 </main>
-<footer class="footer"><div class="container"><div class="footer-grid"><div><img class="footer-logo" src="images/logo.png" alt="Healing Body & Soul"><p>A calm, natural approach to wellness, centered around personalized care and whole-person wellbeing.</p></div><div><h3>Explore</h3><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="services.html">Services</a><a href="treatments.html">Treatments</a><a href="facility.html">Facility</a><a href="health-charts.html">Health Charts</a><a href="gallery.html">Gallery</a><a href="appointment.html">Appointment</a><a href="contact.html">Contact</a></div></div><div><h3>Connect</h3><p>We look forward to helping you take your next step toward wellness.</p></div></div><div class="footer-bottom"><p>&copy; 2026 Healing Body &amp; Soul. All Rights Reserved.</p><div class="lade-developer">Web Developer: <a href="https://wa.me/2349164435249" target="_blank" rel="noopener">Lade</a></div></div></div></footer>
-<script src="js/scripts.js"></script><button class="lade-top" id="ladeTop" aria-label="Back to top">↑</button>
-<script>(function(){const b=document.getElementById("ladeTop");const t=()=>b.classList.toggle("show",scrollY>260);addEventListener("scroll",t,{passive:true});b.onclick=()=>scrollTo({top:0,behavior:"smooth"});t()})();</script>
-</body></html>
+
+<div class="graduation-nav" style="display:flex;justify-content:center;margin:24px auto;"><a class="btn btn-red graduation-nav-btn" href="gallery.html#graduation-2025-2026">2025/2026 Graduation</a></div>
+<footer>
+  <div class="footer-bottom">
+    © <span data-year></span> BALAD Private Schools. All Rights Reserved.
+    <div class="site-footer-developer">Web developer: <a href="https://wa.me/2349164435249" target="_blank" rel="noopener noreferrer">Lade</a></div>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  const hero=document.querySelector('.balad-rotating-hero');
+  if(!hero)return;
+  const slides=[...hero.querySelectorAll('.hero-slide')];
+  const dots=[...hero.querySelectorAll('.hero-dot')];
+  let i=0,timer;
+  function show(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach((s,k)=>s.classList.toggle('is-active',k===i));
+    dots.forEach((d,k)=>d.classList.toggle('is-active',k===i));
+  }
+  function start(){clearInterval(timer);timer=setInterval(()=>show(i+1),5000);}
+  dots.forEach((d,k)=>d.addEventListener('click',()=>{show(k);start();}));
+  show(0);start();
+})();
+</script>
+
+</body>
+</html>

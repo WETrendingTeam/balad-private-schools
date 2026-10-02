@@ -1,210 +1,186 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Gallery | Balad Private Schools</title>
-<link href="style.css" rel="stylesheet"/>
-<script defer="" src="script.js?v=7"></script>
-<script defer="" src="content-loader.js" type="module"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A visual gallery of treatments and treatment equipment at Healing Body & Soul.">
+<meta name="theme-color" content="#2E8B57">
+<title>Treatment Videos | Healing Body &amp; Soul</title>
+<link rel="icon" href="images/logo.png" type="image/png">
+<link rel="apple-touch-icon" href="images/logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body class="gallery-page" data-cms-page="gallery">
-<header>
-<div class="logo">
-<img alt="Balad Private Schools Logo" data-media-key="gallery-image-1" src="logo.png"/>
-<div class="school-name">
-<h2>BALAD PRIVATE SCHOOLS</h2>
-<p>Pre-Crèche • Crèche • Nursery • Primary • College • CBT Centre</p>
-<small>"Nothing but Success"</small>
-</div>
-</div>
-<input class="menu-toggle" id="balad-menu-toggle" type="checkbox"/>
-<label aria-label="Open menu" class="menu-btn" for="balad-menu-toggle">
-<span class="menu-icon-open">☰</span><span class="menu-icon-close">×</span>
-</label>
-<nav id="balad-main-nav">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<details class="academic-nav school-nav">
-<summary>Schools</summary>
-<div class="academic-submenu">
-<a href="nursery-primary.html">Balad Nursery &amp; Primary</a>
-<a href="comprehensive-college.html">Balad Comprehensive College</a>
-</div>
-</details>
-<a href="cbt-centre.html">CBT Centre</a>
-<a href="admissions.html">Admissions</a>
-<details class="academic-nav">
-<summary>Academics</summary>
-<div class="academic-submenu">
-<a href="curriculum.html">Curriculum</a>
-<a href="stem.html">STEM</a>
-<a href="results.html">Result Portal</a>
-</div>
-</details>
-<a href="team.html">Meet Our Team</a>
-<a href="facilities.html">Facilities</a>
-<a class="active" href="gallery.html">Gallery</a>
-<a href="news.html">News &amp; Events</a>
-<a href="alumni.html">Alumni</a>
-<a class="nav-login-button" href="control-login.html">LOGIN</a>
-<a class="nav-contact-button" href="contact.html">CONTACT US</a>
-</nav>
+<body>
+<header class="header">
+  <div class="container">
+    <a class="logo" href="index.html"><img src="images/logo.png" alt="Healing Body &amp; Soul"></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">MENU</button>
+  </div>
 </header>
-<section class="gallery-album-hero">
-<div class="container">
-<p class="eyebrow">BALAD PRIVATE SCHOOLS</p>
-<h1>School Gallery</h1>
-<p data-text-key="gallery-intro">Browse our school memories as albums of learning, activities, achievements and special moments.</p>
-<div class="gallery-search-wrap">
-<span>⌕</span>
-<input id="gallerySearch" placeholder="Search by album, activity or event" type="search"/>
-</div>
-</div>
-</section>
-<main class="gallery-album-main">
-<div class="container">
-<div class="album-toolbar">
-<div><strong id="albumCount">6 albums</strong><span> • Balad memories</span></div>
-<button class="album-reset" id="albumReset" type="button">All Albums</button>
-</div>
-<section aria-label="Photo albums" class="album-grid" data-local-gallery="true" id="albumGrid"></section>
-</div>
-</main>
-<div class="album-modal" hidden="" id="albumModal">
-<div class="album-modal-backdrop" data-close-album=""></div>
-<section aria-labelledby="albumModalTitle" aria-modal="true" class="album-modal-panel" role="dialog">
-<button aria-label="Close album" class="album-modal-close" data-close-album="" type="button">×</button>
-<span class="album-location" id="albumModalLocation">BALAD PRIVATE SCHOOLS</span>
-<h2 id="albumModalTitle">Album</h2>
-<p id="albumModalDescription"></p>
-<div class="album-photo-grid" id="albumPhotos"></div>
-</section>
-</div>
-<script>
-const modal = document.getElementById("albumModal");
-const photoGrid = document.getElementById("albumPhotos");
-const modalTitle = document.getElementById("albumModalTitle");
-const modalLocation = document.getElementById("albumModalLocation");
-const modalDescription = document.getElementById("albumModalDescription");
-const albumGrid = document.getElementById("albumGrid");
-const count = document.getElementById("albumCount");
-let albums = {};
 
-const esc = value => String(value).replace(/[&<>"']/g, c => ({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-}[c]));
+<div class="nav-overlay" id="navOverlay">
+  <button class="close-menu" id="closeMenu" aria-label="Close menu">&times;</button>
+  <nav class="nav-menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="treatments.html">Treatments</a></li>
+      <li><a href="facility.html">Facility</a></li>
+      <li><a href="health-charts.html">Health Charts</a></li>
+      <li><a class="active" href="gallery.html">Gallery</a></li>
+      <li><a href="appointment.html">Appointment</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</div>
 
-function renderAlbums() {
-  albumGrid.innerHTML = Object.entries(albums).map(([key, album]) => `
-    <article class="album-card" data-search="${esc((album.title + " " + album.description).toLowerCase())}">
-      <button class="album-cover" data-local-album="${esc(key)}" type="button">
-        <div class="album-stack" data-cover-stack="${esc(key)}"></div>
-      </button>
-      <div class="album-meta">
-        <span class="album-location">${esc(album.location)}</span>
-        <h2>${esc(album.title)}</h2>
-        <p>${esc(album.description)}</p>
-        <span class="album-count">${album.items.length} item${album.items.length === 1 ? "" : "s"}</span>
+<main>
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Our practice</span>
+    <h1>Gallery</h1>
+    <p>See selected treatment sessions and equipment used at Healing Body &amp; Soul.</p>
+  </div>
+</section>
+
+<section class="treatment-gallery">
+  <div class="container">
+    <div class="treatment-gallery-intro">
+      <span class="eyebrow">Visual gallery</span>
+      <h2 class="section-title">Explore our treatment methods</h2>
+      <p class="section-intro" style="margin:auto">These videos show the treatments and equipment as they are used in the Healing Body &amp; Soul setting.</p>
+    </div>
+
+    <article class="treatment-album">
+      <div class="treatment-album-head">
+        <div>
+          <span class="eyebrow">Treatment</span>
+          <h2>Abdominal Acupuncture</h2>
+          <p>Abdominal and scalp acupuncture treatment sessions.</p>
+        </div>
       </div>
-    </article>`).join("");
+      <div class="video-grid">
+        <article class="video-card">
+          <video controls preload="metadata" poster="images/acupuncture-therapy-1.jpg" playsinline>
+            <source src="videos/acupuncture-therapy-1.mp4" type="video/mp4">
+          </video>
+          <div class="video-card-body"><h3>Abdominal Acupuncture</h3><p>Acupuncture treatment session.</p></div>
+        </article>
+        <article class="video-card">
+          <video controls preload="metadata" poster="images/acupuncture-therapy-2.jpg" playsinline>
+            <source src="videos/acupuncture-therapy-2.mp4" type="video/mp4">
+          </video>
+          <div class="video-card-body"><h3>Scalp Acupuncture</h3><p>Acupuncture treatment session.</p></div>
+        </article>
+      </div>
+      <figure class="chart-feature">
+        <img src="images/acupuncture-points.jpg" alt="Acupuncture points chart" loading="lazy">
+        <figcaption>Acupuncture Points — educational reference chart.</figcaption>
+      </figure>
+    </article>
 
-  document.querySelectorAll("[data-local-album]").forEach(button => {
-    button.addEventListener("click", () => openLocalAlbum(button.dataset.localAlbum));
-  });
+    <article class="treatment-album">
+      <div class="treatment-album-head">
+        <div>
+          <span class="eyebrow">Treatment</span>
+          <h2>Cupping Therapy</h2>
+          <p>Visual example of cupping therapy.</p>
+        </div>
+      </div>
+      <div class="video-grid">
+        <article class="video-card">
+          <video controls preload="metadata" poster="images/cupping-therapy.jpg" playsinline>
+            <source src="videos/cupping-therapy.mp4" type="video/mp4">
+          </video>
+          <div class="video-card-body"><h3>Cupping Therapy</h3><p>Cupping treatment session.</p></div>
+        </article>
+      </div>
+    </article>
 
-  buildAlbumCovers();
-  updateCount();
-}
+    <article class="treatment-album">
+      <div class="treatment-album-head">
+        <div>
+          <span class="eyebrow">Treatment</span>
+          <h2>Vibration Therapy</h2>
+          <p>Visual example of vibration-based treatment equipment in use.</p>
+        </div>
+      </div>
+      <div class="video-grid">
+        <article class="video-card">
+          <video controls preload="metadata" poster="images/vibration-therapy.jpg" playsinline>
+            <source src="videos/vibration-therapy.mp4" type="video/mp4">
+          </video>
+          <div class="video-card-body"><h3>Vibration Therapy</h3><p>Vibration-based treatment session.</p></div>
+        </article>
+      </div>
+    </article>
 
-function openLocalAlbum(key) {
-  const album = albums[key];
-  if (!album) return;
+    <article class="treatment-album">
+      <div class="treatment-album-head">
+        <div>
+          <span class="eyebrow">Equipment</span>
+          <h2>Treatment Equipment</h2>
+          <p>A closer look at equipment used in the treatment setting.</p>
+        </div>
+      </div>
+      <div class="video-grid">
+        <article class="video-card">
+          <video controls preload="metadata" poster="images/treatment-equipment.jpg" playsinline>
+            <source src="videos/treatment-equipment.mp4" type="video/mp4">
+          </video>
+          <div class="video-card-body"><h3>Treatment Equipment</h3><p>Equipment used in the treatment setting.</p></div>
+        </article>
+      </div>
+    </article>
+  </div>
+</section>
+</main>
 
-  modalTitle.textContent = album.title;
-  modalLocation.textContent = album.location;
-  modalDescription.textContent = album.description;
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="images/logo.png" alt="Healing Body &amp; Soul">
+        <p>A calm, natural approach to wellness, centered around personalized care and whole-person wellbeing.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="services.html">Services</a>
+          <a href="treatments.html">Treatments</a>
+          <a href="facility.html">Facility</a>
+          <a href="health-charts.html">Health Charts</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="appointment.html">Appointment</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h3>Connect</h3>
+        <p>We look forward to helping you take your next step toward wellness.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Healing Body &amp; Soul. All Rights Reserved.</p>
+      <div class="lade-developer">Web Developer: <a href="https://wa.me/2349164435249" target="_blank" rel="noopener">Lade</a></div>
+    </div>
+  </div>
+</footer>
 
-  photoGrid.innerHTML = album.items.map((item, i) => `
-    <figure>
-      <img loading="lazy" src="${encodeURI(item.url)}"
-           alt="${esc(item.caption || album.title + " " + (i + 1))}">
-      <figcaption>${String(i + 1).padStart(2, "0")}</figcaption>
-    </figure>`).join("");
-
-  modal.hidden = false;
-  document.body.classList.add("album-open");
-}
-
-document.querySelectorAll("[data-close-album]").forEach(el => {
-  el.addEventListener("click", () => {
-    modal.hidden = true;
-    document.body.classList.remove("album-open");
-  });
-});
-
-function imageLoads(url) {
-  return new Promise(resolve => {
-    const img = new Image();
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-    img.src = encodeURI(url);
-  });
-}
-
-async function buildAlbumCovers() {
-  for (const [key, album] of Object.entries(albums)) {
-    const stack = document.querySelector(`[data-cover-stack="${CSS.escape(key)}"]`);
-    if (!stack) continue;
-
-    const usable = [];
-    for (const item of album.items) {
-      if (await imageLoads(item.url)) {
-        usable.push(item);
-        if (usable.length === 3) break;
-      }
-    }
-
-    stack.innerHTML = usable.length
-      ? usable.map(item => `<img alt="${esc(album.title)}" src="${encodeURI(item.url)}">`).join("")
-      : `<div class="album-cover-fallback">${esc(album.title)}</div>`;
-  }
-}
-
-function updateCount() {
-  const visible = [...document.querySelectorAll(".album-card")].filter(x => !x.hidden).length;
-  count.textContent = `${visible} album${visible === 1 ? "" : "s"}`;
-}
-
-document.getElementById("gallerySearch").addEventListener("input", e => {
-  const term = e.target.value.trim().toLowerCase();
-  document.querySelectorAll(".album-card").forEach(card => {
-    card.hidden = !!term && !card.dataset.search.includes(term);
-  });
-  updateCount();
-});
-
-document.getElementById("albumReset").addEventListener("click", () => {
-  document.getElementById("gallerySearch").value = "";
-  document.querySelectorAll(".album-card").forEach(card => card.hidden = false);
-  updateCount();
-});
-
-fetch("gallery-manifest.json", {cache:"no-store"})
-  .then(r => {
-    if (!r.ok) throw new Error("Gallery manifest unavailable");
-    return r.json();
-  })
-  .then(data => {
-    albums = data;
-    renderAlbums();
-  })
-  .catch(err => {
-    console.error(err);
-    albumGrid.innerHTML = '<p class="gallery-error">Gallery could not be loaded.</p>';
-  });
+<script src="js/scripts.js"></script>
+<button class="lade-top" id="ladeTop" aria-label="Back to top">↑</button>
+<script>
+(function(){
+  const b=document.getElementById("ladeTop");
+  const t=()=>b.classList.toggle("show",scrollY>260);
+  addEventListener("scroll",t,{passive:true});
+  b.onclick=()=>scrollTo({top:0,behavior:"smooth"});
+  t();
+})();
 </script>
-<section class="cms-public-content-wrap"><div class="cms-public-content" data-cms-page="gallery" id="cms-page-content"></div></section><footer><div class="footer-bottom">© <span data-year=""></span> Balad Private Schools. All Rights Reserved. <span class="footer-developer">Developer Control · @lade</span></div></footer>
 </body>
 </html>

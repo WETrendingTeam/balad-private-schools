@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Facility | Healing Body &amp; Soul</title>
+<meta name="description" content="A visual tour of the Healing Body & Soul wellness space.">
+<meta name="theme-color" content="#2E8B57">
+<link rel="icon" href="images/logo.png" type="image/png">
+<link rel="apple-touch-icon" href="images/logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <a class="logo" href="index.html"><img src="images/logo.png" alt="Healing Body &amp; Soul"></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">MENU</button>
+  </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+  <button class="close-menu" id="closeMenu" aria-label="Close menu">&times;</button>
+  <nav class="nav-menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="treatments.html">Treatments</a></li>
+      <li><a class="active" href="facility.html">Facility</a></li>
+      <li><a href="health-charts.html">Health Charts</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="appointment.html">Appointment</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</div>
+
+<main class="content facility-page">
+
+<header class="facility-intro">
+  <span class="facility-eyebrow">HEALING BODY &amp; SOUL</span>
+  <h1>Our Facility</h1>
+  <p>A quiet visual tour of our wellness space.</p>
+</header>
+
+<section class="premium-album" aria-label="Facility photo album">
+  <button class="album-item album-feature" type="button" data-full="images/image6.jpg" aria-label="Open facility photo">
+    <img src="images/image6.jpg" alt="Healing Body &amp; Soul facility" loading="eager">
+    <span class="album-overlay"><span>View</span> ↗</span>
+  </button>
+
+  <button class="album-item" type="button" data-full="images/reception 2.jpg" aria-label="Open facility photo">
+    <img src="images/reception 2.jpg" alt="Healing Body &amp; Soul facility" loading="lazy">
+    <span class="album-overlay"><span>View</span> ↗</span>
+  </button>
+
+  <button class="album-item" type="button" data-full="images/image4.jpg" aria-label="Open facility photo">
+    <img src="images/image4.jpg" alt="Healing Body &amp; Soul facility" loading="lazy">
+    <span class="album-overlay"><span>View</span> ↗</span>
+  </button>
+
+  <button class="album-item" type="button" data-full="images/image1.jpg" aria-label="Open facility photo">
+    <img src="images/image1.jpg" alt="Healing Body &amp; Soul facility" loading="lazy">
+    <span class="album-overlay"><span>View</span> ↗</span>
+  </button>
+
+  <button class="album-item" type="button" data-full="images/image5.jpg" aria-label="Open facility photo">
+    <img src="images/image5.jpg" alt="Healing Body &amp; Soul facility" loading="lazy">
+    <span class="album-overlay"><span>View</span> ↗</span>
+  </button>
+
+  <button class="album-item" type="button" data-full="images/image2.jpg" aria-label="Open facility photo">
+    <img src="images/image2.jpg" alt="Healing Body &amp; Soul facility" loading="lazy">
+    <span class="album-overlay"><span>View</span> ↗</span>
+  </button>
+
+  <button class="album-item" type="button" data-full="images/image3.jpg" aria-label="Open facility photo">
+    <img src="images/image3.jpg" alt="Healing Body &amp; Soul facility" loading="lazy">
+    <span class="album-overlay"><span>View</span> ↗</span>
+  </button>
+
+
+
+  <button class="album-item" type="button" data-full="images/production room.jpg" aria-label="Open facility photo">
+    <img src="images/production room.jpg" alt="Healing Body &amp; Soul facility" loading="lazy">
+    <span class="album-overlay"><span>View</span> ↗</span>
+  </button>
+</section>
+
+<section class="facility-next">
+  <div>
+    <h2>Health Education</h2>
+    <p>Learn from our visual body and wellness charts.</p>
+  </div>
+  <a class="lade-btn" href="health-charts.html">Explore Charts →</a>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="images/logo.png" alt="Healing Body &amp; Soul">
+        <p>A calm, natural approach to wellness, centered around personalized care and whole-person wellbeing.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="services.html">Services</a>
+          <a href="treatments.html">Treatments</a>
+          <a href="facility.html">Facility</a>
+          <a href="health-charts.html">Health Charts</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="appointment.html">Appointment</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h3>Connect</h3>
+        <p>We look forward to helping you take your next step toward wellness.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Healing Body &amp; Soul. All Rights Reserved.</p>
+      <div class="lade-developer">Web Developer: <a href="https://wa.me/2349164435249" target="_blank" rel="noopener">Lade</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/scripts.js"></script>
+<script>
+(function(){
+  const items = Array.from(document.querySelectorAll('.album-item'));
+  const lightbox = document.getElementById('albumLightbox');
+  const image = document.getElementById('lightboxImage');
+  const count = document.getElementById('lightboxCount');
+  const close = document.getElementById('lightboxClose');
+  const prev = document.getElementById('lightboxPrev');
+  const next = document.getElementById('lightboxNext');
+  let current = 0;
+
+  function show(index){
+    current = (index + items.length) % items.length;
+    image.src = items[current].dataset.full;
+    count.textContent = (current + 1) + ' / ' + items.length;
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden','false');
+    document.body.classList.add('album-open');
+  }
+  function hide(){
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden','true');
+    document.body.classList.remove('album-open');
+    image.src = '';
+  }
+
+  items.forEach((item,index)=>item.addEventListener('click',()=>show(index)));
+  close.addEventListener('click',hide);
+  prev.addEventListener('click',()=>show(current-1));
+  next.addEventListener('click',()=>show(current+1));
+  lightbox.addEventListener('click',e=>{ if(e.target===lightbox) hide(); });
+
+  document.addEventListener('keydown',e=>{
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key==='Escape') hide();
+    if(e.key==='ArrowLeft') show(current-1);
+    if(e.key==='ArrowRight') show(current+1);
+  });
+
+  let startX=0;
+  lightbox.addEventListener('touchstart',e=>{startX=e.changedTouches[0].screenX},{passive:true});
+  lightbox.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].screenX-startX;
+    if(Math.abs(dx)>45) show(current+(dx<0?1:-1));
+  },{passive:true});
+
+  const top=document.getElementById('ladeTop');
+  const toggle=()=>top.classList.toggle('show',window.scrollY>260);
+  window.addEventListener('scroll',toggle,{passive:true});
+  top.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  toggle();
+})();
+</script>
+</body>
+</html>
